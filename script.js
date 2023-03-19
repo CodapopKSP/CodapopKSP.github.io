@@ -38,7 +38,7 @@ function updateTotalPrice() {
       totalPrice += price
     })
   })
-  priceDisplay2.innerText = `Total Price: $${parseInt(totalPrice.toFixed(2))}`
+  priceDisplay2.innerText = `Price: $${parseInt(totalPrice.toFixed(2))}`
 }
 
 draggables.forEach(draggable => {
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if ((type === 'type1') && (draggable)) {
                     const price = parseFloat(draggable.dataset.price)
                     const priceDisplay = document.getElementById('price-display2')
-                    priceDisplay.innerText = `Total Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
+                    priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
                 }
                 container.appendChild(draggable)
                 draggable.classList.remove('dragging');
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (type === 'type1') {
                 const price = parseFloat(draggable.dataset.price)
                 const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Total Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
+                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
               }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (type === 'type1') {
                 const price = parseFloat(draggable.dataset.price)
                 const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Total Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
+                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
               }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
@@ -378,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (type === 'type1') {
                 const price = parseFloat(draggable.dataset.price)
                 const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Total Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
+                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
               }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (type === 'type1') {
                 const price = parseFloat(draggable.dataset.price)
                 const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Total Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
+                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
               }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
