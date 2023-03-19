@@ -10,8 +10,8 @@ body {
 
 .container {
     background: #333;
-    width: 200px;
-    height: 200px;
+    width: 15vh;
+    height: 15vh;
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -27,8 +27,8 @@ body {
     background-color: aliceblue;
     border: 1px black;
     cursor: move;
-    width: 200px;
-    height: 200px;
+    width: 15vh;
+    height: 15vh;
     text-align: center;
     position: absolute;
     z-index: 100;
@@ -49,13 +49,13 @@ body {
 
 #page-wrapper {
     position: relative;
-    border: 5px solid black;
+    border: 1vh solid black;
     width: 60%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 87vh;
+    height: 82vh;
     overflow: hidden;
 }
 
@@ -63,21 +63,21 @@ body {
 
 .container-wrapper2 {
     position: absolute;
-    top: 10%;
+    top: 4%;
     right: 81%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-gap: 0.75vh;
     justify-items: end;
 }
 
 .container-wrapper3 {
     position: absolute;
-    top: 10%;
+    top: 4%;
     left: 81%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-gap: 0.75vh;
     justify-items: end;
 }
 
@@ -88,7 +88,7 @@ body {
     color: black;
     font-size: 2rem;
     font-weight: bold;
-    padding: 10px;
+    padding: 0.75vh;
     left: 0;
 }
 
@@ -98,7 +98,7 @@ body {
     color: black;
     font-size: 2rem;
     font-weight: bold;
-    padding: 10px;
+    padding: 0.75vh;
     right: 0;
 }
 
@@ -125,58 +125,58 @@ body {
 }
 
 .two-four {
-    border: 15px solid black;
-    border-top: 25px solid black;
-    width: 808;
-    height: 404;
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
+    width: 60.88vh;
+    height: 30.4vh;
     overflow: hidden;
     max-width: 100%;
-    min-width: 808px;
-    min-height: 404px;
+    min-width: 60.6vh;
+    min-height: 30.3vh;
 }
 
 .two-three {
-    border: 15px solid black;
-    border-top: 25px solid black;
-    width: 606;
-    height: 404;
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
+    width: 45.7vh;
+    height: 30.3vh;
     overflow: hidden;
     max-width: 100%;
-    min-width: 606px;
-    min-height: 404px;
+    min-width: 45.45vh;
+    min-height: 30.3vh;
 }
 
 .two-two {
-    border: 15px solid black;
-    border-top: 25px solid black;
-    width: 404;
-    height: 404;
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
+    width: 30.435vh;
+    height: 30.3vh;
     overflow: hidden;
     max-width: 100%;
-    min-width: 404px;
-    min-height: 404px;
+    min-width: 30.3vh;
+    min-height: 30.3vh;
 }
 
 .one-two {
-    border: 15px solid black;
-    border-top: 25px solid black;
-    width: 404;
-    height: 202;
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
+    width: 30.435vh;
+    height: 15.15vh;
     overflow: hidden;
     max-width: 100%;
-    min-width: 404px;
-    min-height: 202px;
+    min-width: 30.3vh;
+    min-height: 15.15vh;
 }
 
 .three-one {
-    border: 15px solid black;
-    border-top: 25px solid black;
-    width: 101;
-    height: 303;
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
+    width: 15.2175vh;
+    height: 45.45vh;
     overflow: hidden;
     max-width: 100%;
-    min-width: 101px;
-    min-height: 303px;
+    min-width: 7.575vh;
+    min-height: 22.725vh;
 }
   
 #page-wrapper {
@@ -204,14 +204,14 @@ body {
     flex-wrap: wrap;
     flex-direction: row;
     overflow: visible;
-    margin-top: 20px;
+    margin-top: 1.5vh;
     justify-content: center;
 }
   
 .container2 {
     /*background: #333;*/
-    width: 200px;
-    height: 200px;
+    width: 15vh;
+    height: 15vh;
     border: 1px solid black;
     display: flex;
     justify-content: space-between;;
@@ -220,81 +220,81 @@ body {
 }
 
 .container2.has-24child {
-    margin: 10px;
+    margin: 0.75vh;
 }
 .container2.has-23child {
-    margin: 10px;
+    margin: 0.75vh;
 }
 .container2.has-22child {
-    margin: 10px;
+    margin: 0.75vh;
 }
 .container2.has-12child {
-    margin: 10px;
+    margin: 0.75vh;
 }
 .container2.has-31child {
-    transform: translateY(101px);
-    margin: 10px;
+    transform: translateY(7.575vh);
+    margin: 0.75vh;
 }
 
 
 #add-2x4 {
     content: "";
     display: block;
-    width: 200px;
-    height: 105px;
+    width: 15vh;
+    height: 7.875vh;
     background-image: url('containers/2x4.png');
     background-size: cover;
     position: absolute;
     right: 0px;
-    bottom: 100px;
+    bottom: 7.5vh;
 }
 
 #add-2x3 {
     content: "";
     display: block;
-    width: 150px;
-    height: 104px;
+    width: 11.25vh;
+    height: 7.8vh;
     background-image: url('containers/2x3.png');
     background-size: cover;
     position: absolute;
     right: 0px;
-    bottom: -10px;
+    bottom: -0.75vh;
 }
 
 #add-2x2 {
     content: "";
     display: block;
-    width: 100px;
-    height: 103px;
+    width: 7.5vh;
+    height: 7.725vh;
     background-image: url('containers/2x2.png');
     background-size: cover;
     position: absolute;
     right: 0px;
-    bottom: -120px;
+    bottom: -9vh;
 }
 
 #add-1x2 {
     content: "";
     display: block;
-    width: 100px;
-    height: 55px;
+    width: 7.5vh;
+    height: 4.125vh;
     background-image: url('containers/1x2.png');
     background-size: cover;
     position: absolute;
     right: 0px;
-    bottom: -180px;
+    bottom: -13.5vh;
 }
 
 #add-3x1 {
     content: "";
     display: block;
-    width: 50px;
-    height: 143px;
+    width: 3.75vh;
+    height: 10.725vh;
     background-image: url('containers/3x1.png');
     background-size: cover;
     position: absolute;
-    right: 120px;
-    bottom: -180px;
+    right: 9vh;
+    bottom: -13.5vh;
 }
 
 #delete-container {
@@ -302,9 +302,9 @@ body {
     display: block;
     background-image: url('trash.png');
     background-size: cover;
-    width: 100px;
-    height: 100px;
+    width: 7.5vh;
+    height: 7.5vh;
     position: absolute;
-    right: 20px;
-    bottom: 20px;
+    right: 1.5vh;
+    bottom: 1.5vh;
   }
