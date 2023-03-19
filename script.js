@@ -156,11 +156,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.target.classList.add('dragging2');
                     const id = event.target.id;
                     event.dataTransfer.setData('text/plain', id);
+                    const containers = document.querySelectorAll('.container2')
+                    containers.forEach(container => {
+                        container.classList.add('has-drag');
+                    })
                 }
             });
               
                 containerBox.addEventListener('dragend', (event) => {
                 event.target.classList.remove('dragging2');
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.remove('has-drag');
+                })
             });
         });
 
@@ -226,11 +234,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.target.classList.add('dragging2');
                     const id = event.target.id;
                     event.dataTransfer.setData('text/plain', id);
+                    const containers = document.querySelectorAll('.container2')
+                    containers.forEach(container => {
+                        container.classList.add('has-drag');
+                    })
                 }
             });
               
                 containerBox.addEventListener('dragend', (event) => {
                 event.target.classList.remove('dragging2');
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.remove('has-drag');
+                })
             });
         });
 
@@ -294,11 +310,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.target.classList.add('dragging2');
                     const id = event.target.id;
                     event.dataTransfer.setData('text/plain', id);
+                    const containers = document.querySelectorAll('.container2')
+                    containers.forEach(container => {
+                        container.classList.add('has-drag');
+                    })
                 }
             });
               
                 containerBox.addEventListener('dragend', (event) => {
                 event.target.classList.remove('dragging2');
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.remove('has-drag');
+                })
             });
         });
 
@@ -358,11 +382,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.target.classList.add('dragging2');
                     const id = event.target.id;
                     event.dataTransfer.setData('text/plain', id);
+                    const containers = document.querySelectorAll('.container2')
+                    containers.forEach(container => {
+                        container.classList.add('has-drag');
+                    })
                 }
             });
               
                 containerBox.addEventListener('dragend', (event) => {
                 event.target.classList.remove('dragging2');
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.remove('has-drag');
+                })
             });
         });
 
@@ -427,11 +459,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.target.classList.add('dragging2');
                     const id = event.target.id;
                     event.dataTransfer.setData('text/plain', id);
+                    const containers = document.querySelectorAll('.container2')
+                    containers.forEach(container => {
+                        container.classList.add('has-drag');
+                    })
                 }
             });
               
                 containerBox.addEventListener('dragend', (event) => {
                 event.target.classList.remove('dragging2');
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.remove('has-drag');
+                })
             });
         });
 

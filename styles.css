@@ -212,11 +212,14 @@ body {
     /*background: #333;*/
     width: 15vh;
     height: 15vh;
-    border: 1px solid black;
     display: flex;
     justify-content: space-between;;
     align-items: center;
     flex-shrink: 0;
+}
+
+.container2.has-drag {
+    border: 1px solid black;
 }
 
 .container2.has-24child {
@@ -232,7 +235,7 @@ body {
     margin: 0.75vh;
 }
 .container2.has-31child {
-    transform: translateY(7.575vh);
+    transform: translateY(7.5vh);
     margin: 0.75vh;
 }
 
