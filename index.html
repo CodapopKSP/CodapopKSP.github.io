@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="eng">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UACompatible" content="ie=edge">
+		<link rel="stylesheet" href="styles.css">
+		<title>Untitled Space Craft | CAB
+		</title>
+		<style>
+			body {
+				background: #f0f0f0;
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div style="text-align: center;">
+			<h1 style="font-size: 36px;">Welcome to the Untitled Space Craft Controller Assembly Building!</h1>
+		<h2>Drag and drop the modules to build your own controller.</h2>
+		</div>
+		
+		<div id="page-wrapper">
+			<h1><div id="price-display">Last Module: $0</div>
+				<div id="price-display2">Total Price: $0</div>
+			</h1>
+			<div class="container-grid">
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+			</div>
+			<div class="container-grid2">
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+				<div class="container2"></div>
+			</div>
+			<div id="delete-container"></div>
+		</div>
+
+		<div class="container-wrapper2">
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-1" data-price="60" draggable="true">
+					<img src="modules/abort.png">
+					<span class="price">$60</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-2" data-price="60" draggable="true">
+					<img src="modules/stage.png">
+					<span class="price">$60</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-3" data-price="60" draggable="true">
+					<img src="modules/exec1.png">
+					<span class="price">$60</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-4" data-price="70" draggable="true">
+					<img src="modules/exec2.png">
+					<span class="price">$70</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-5" data-price="70" draggable="true">
+					<img src="modules/exec3.png">
+					<span class="price">$70</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-6" data-price="80" draggable="true">
+					<img src="modules/time.png">
+					<span class="price">$80</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-7" data-price="70" draggable="true">
+					<img src="modules/nav1.png">
+					<span class="price">$70</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-8" data-price="80" draggable="true">
+					<img src="modules/nav2.png">
+					<span class="price">$80</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-9" data-price="90" draggable="true">
+					<img src="modules/control.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-10" data-price="90" draggable="true">
+					<img src="modules/ag1.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-11" data-price="90" draggable="true">
+					<img src="modules/ag2.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-12" data-price="90" draggable="true">
+					<img src="modules/ag3.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+		</div>
+
+
+		<div class="container-wrapper3">
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-13" data-price="90" draggable="true">
+					<img src="modules/analog1.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-14" data-price="90" draggable="true">
+					<img src="modules/analog2.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-15" data-price="90" draggable="true">
+					<img src="modules/rot1.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-16" data-price="90" draggable="true">
+					<img src="modules/rot2.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-17" data-price="90" draggable="true">
+					<img src="modules/trans.png">
+					<span class="price">$90</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-18" data-price="60" draggable="true">
+					<img src="modules/throt.png">
+					<span class="price">$60</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-19" data-price="70" draggable="true">
+					<img src="modules/camera.png">
+					<span class="price">$70</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-20" data-price="80" draggable="true">
+					<img src="modules/eva.png">
+					<span class="price">$80</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable" id="module-21" data-price="80" draggable="true">
+					<img src="modules/telem.png">
+					<span class="price">$80</span>
+				</p>
+			</div>
+			<button id="add-2x4"></button>
+			<button id="add-2x3"></button>
+			<button id="add-2x2"></button>
+			<button id="add-1x2"></button>
+			<button id="add-3x1"></button>
+		</div>
+		<script src="script.js" defer></script>
+	</body>
+	
+</html>
+
+

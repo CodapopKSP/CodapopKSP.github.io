@@ -1,0 +1,310 @@
+body {
+    margin: 0;
+}
+
+.container-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.container {
+    background: #333;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container img {
+    width: 100%;
+    height: 100%;
+}
+
+.draggable {
+    background-color: aliceblue;
+    border: 1px black;
+    cursor: move;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    position: absolute;
+    z-index: 100;
+}
+
+.draggable.dragging {
+    opacity: .5;
+}
+
+.draggable img {
+    width: 100%;
+    height: 100%;
+}
+
+.draggable .price {
+    display: none;
+}
+
+#page-wrapper {
+    position: relative;
+    border: 5px solid black;
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+    overflow: hidden;
+}
+
+
+
+.container-wrapper2 {
+    position: absolute;
+    top: 10%;
+    right: 81%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    justify-items: end;
+}
+
+.container-wrapper3 {
+    position: absolute;
+    top: 10%;
+    left: 81%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    justify-items: end;
+}
+
+
+#price-display {
+    position: absolute;
+    top: 0;
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px;
+    left: 0;
+}
+
+#price-display2 {
+    position: absolute;
+    top: 0;
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px;
+    right: 0;
+}
+
+
+
+
+#two-four-box {
+    position: absolute;
+}
+
+#two-three-box {
+    position: absolute;
+}
+#two-two-box {
+    position: absolute;
+}
+
+#one-two-box {
+    position: absolute;
+}
+
+#three-one-box {
+    position: absolute;
+}
+
+.two-four {
+    border: 15px solid black;
+    border-top: 25px solid black;
+    width: 808;
+    height: 404;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 808px;
+    min-height: 404px;
+}
+
+.two-three {
+    border: 15px solid black;
+    border-top: 25px solid black;
+    width: 606;
+    height: 404;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 606px;
+    min-height: 404px;
+}
+
+.two-two {
+    border: 15px solid black;
+    border-top: 25px solid black;
+    width: 404;
+    height: 404;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 404px;
+    min-height: 404px;
+}
+
+.one-two {
+    border: 15px solid black;
+    border-top: 25px solid black;
+    width: 404;
+    height: 202;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 404px;
+    min-height: 202px;
+}
+
+.three-one {
+    border: 15px solid black;
+    border-top: 25px solid black;
+    width: 101;
+    height: 303;
+    overflow: hidden;
+    max-width: 100%;
+    min-width: 101px;
+    min-height: 303px;
+}
+  
+#page-wrapper {
+    position: relative;
+}
+
+.container-grid {
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: visible;
+    justify-content: center;
+}
+
+.container-grid2 {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: visible;
+    margin-top: 20px;
+    justify-content: center;
+}
+  
+.container2 {
+    /*background: #333;*/
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.container2.has-24child {
+    margin: 10px;
+}
+.container2.has-23child {
+    margin: 10px;
+}
+.container2.has-22child {
+    margin: 10px;
+}
+.container2.has-12child {
+    margin: 10px;
+}
+.container2.has-31child {
+    transform: translateY(101px);
+    margin: 10px;
+}
+
+
+#add-2x4 {
+    content: "";
+    display: block;
+    width: 200px;
+    height: 105px;
+    background-image: url('containers/2x4.png');
+    background-size: cover;
+    position: absolute;
+    right: 0px;
+    bottom: 100px;
+}
+
+#add-2x3 {
+    content: "";
+    display: block;
+    width: 150px;
+    height: 104px;
+    background-image: url('containers/2x3.png');
+    background-size: cover;
+    position: absolute;
+    right: 0px;
+    bottom: -10px;
+}
+
+#add-2x2 {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 103px;
+    background-image: url('containers/2x2.png');
+    background-size: cover;
+    position: absolute;
+    right: 0px;
+    bottom: -120px;
+}
+
+#add-1x2 {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 55px;
+    background-image: url('containers/1x2.png');
+    background-size: cover;
+    position: absolute;
+    right: 0px;
+    bottom: -180px;
+}
+
+#add-3x1 {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 143px;
+    background-image: url('containers/3x1.png');
+    background-size: cover;
+    position: absolute;
+    right: 120px;
+    bottom: -180px;
+}
+
+#delete-container {
+    content: "";
+    display: block;
+    background-image: url('trash.png');
+    background-size: cover;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
