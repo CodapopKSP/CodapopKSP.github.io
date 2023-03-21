@@ -86,6 +86,7 @@ draggables.forEach(draggable => {
     console.log("Current z-index: " + draggable.style.zIndex);
   });
 
+    /*
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
     // Prevent the default behavior to avoid scrolling while dragging
@@ -110,7 +111,7 @@ draggables.forEach(draggable => {
   draggable.addEventListener('touchend', () => {
     draggable.classList.remove('dragging')
     updateTotalPrice()
-  })
+  })*/
 })
 
 
