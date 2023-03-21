@@ -47,9 +47,6 @@ function updateTotalPrice() {
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging')
-    const price = this.dataset.price
-    const priceDisplay = document.getElementById('price-display')
-    priceDisplay.innerText = `Last Module: $${price}`
     event.dataTransfer.setData('text/plain', this.id);
   })
 
@@ -333,10 +330,6 @@ document.addEventListener('DOMContentLoaded', () => {
         containerBoxElement.innerHTML = containerBoxHTML.trim();
         const containerBox = containerBoxElement.firstChild;
         pageWrapper.appendChild(containerBox);
-
-        const price = containerBox.dataset.price
-        const priceDisplay = document.getElementById('price-display')
-        priceDisplay.innerText = `Last Module: $${price}`
         updateTotalPrice()
 
 
@@ -374,11 +367,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.addEventListener('drop', () => {
               const draggable = document.querySelector('.dragging')
               const type = container.dataset.type
-              if (type === 'type1') {
-                const price = parseFloat(draggable.dataset.price)
-                const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
-              }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
               updateTotalPrice()
@@ -408,10 +396,6 @@ document.addEventListener('DOMContentLoaded', () => {
         containerBoxElement.innerHTML = containerBoxHTML.trim();
         const containerBox = containerBoxElement.firstChild;
         pageWrapper.appendChild(containerBox);
-
-        const price = containerBox.dataset.price
-        const priceDisplay = document.getElementById('price-display')
-        priceDisplay.innerText = `Last Module: $${price}`
         updateTotalPrice()
 
 
@@ -449,11 +433,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.addEventListener('drop', () => {
               const draggable = document.querySelector('.dragging')
               const type = container.dataset.type
-              if (type === 'type1') {
-                const price = parseFloat(draggable.dataset.price)
-                const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
-              }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
               updateTotalPrice()
@@ -488,10 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
         containerBoxElement.innerHTML = containerBoxHTML.trim();
         const containerBox = containerBoxElement.firstChild;
         pageWrapper.appendChild(containerBox);
-
-        const price = containerBox.dataset.price
-        const priceDisplay = document.getElementById('price-display')
-        priceDisplay.innerText = `Last Module: $${price}`
         updateTotalPrice()
 
 
@@ -529,11 +504,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.addEventListener('drop', () => {
               const draggable = document.querySelector('.dragging')
               const type = container.dataset.type
-              if (type === 'type1') {
-                const price = parseFloat(draggable.dataset.price)
-                const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
-              }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
               updateTotalPrice()

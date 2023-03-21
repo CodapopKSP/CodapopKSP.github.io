@@ -9,7 +9,7 @@
 		</title>
 		<style>
 			body {
-				background: #f0f0f0;
+				background: #d4d4d4;
 			}
 		</style>
 		
@@ -21,7 +21,6 @@
 	</header>
 	<body>
 		<div id="page-wrapper">
-			<h1><div id="price-display" style="font-size: 3vh;">Last Module: $0</div>
 				<div id="price-display2" style="font-size: 3vh;">Total: $0</div>
 			</h1>
 			<div class="container-grid">
@@ -46,7 +45,7 @@
 			</div>
 			<div id="delete-container"></div>
 			<div id="light-switch" style="font-size: 1.15vh;">
-				<p>Lights</p>
+				<p><strong style="font-size: 1em;">Lights</strong></p>
 			</div>
 			<button id="add-2x4">
 				<span class="tooltip">
@@ -158,53 +157,41 @@
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-9" data-price="90" draggable="true">
-					<img src="modules/control.png" class="image-1">
-					<img src="modules/light/control_l.png" class="image-2 hidden">
+				<p class="draggable light" id="module-21" data-price="80" draggable="true">
+					<img src="modules/telem.png" class="image-1">
+					<img src="modules/light/telem_l.png" class="image-2 hidden">
 					<span class="tooltip">
-						<strong style="font-size: 1.2em;">Control Systems Module</strong>
-						<span style="font-size: 1.1em;"><br>$90</br></span>
-						The Control Systems module manages the SAS and RCS of the ship. Two toggle switches activate the SAS and RCS, and 10 buttons, each with an LED indicator, select the active SAS mode. The buttons come with stickers to denote which mode they activate.
+						<strong style="font-size: 1.2em;">Telemetry Module</strong>
+						<span style="font-size: 1.1em;"><br>$80</br></span>
+						The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.
 						<br></br>
 					</span>
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-10" data-price="90" draggable="true">
-					<img src="modules/ag1.png" class="image-1">
-					<img src="modules/light/ag1_l.png" class="image-2 hidden">
+				<p class="draggable light" id="module-20" data-price="80" draggable="true">
+					<img src="modules/eva.png" class="image-1">
+					<img src="modules/light/eva_l.png" class="image-2 hidden">
 					<span class="tooltip">
-						<strong style="font-size: 1.2em;">Action Groups Module</strong>
-						<span style="font-size: 1.1em;"><br>$90</br></span>
-						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. This module also comes in 11-20 and 21-30 variants, though there are some issues updating the LED indicators when switching between craft with groups larger than the 10 vanilla action groups.
+						<strong style="font-size: 1.2em;">EVA Module</strong>
+						<span style="font-size: 1.1em;"><br>$80</br></span>
+						The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.
 						<br></br>
 					</span>
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-11" data-price="90" draggable="true">
-					<img src="modules/ag2.png" class="image-1">
-					<img src="modules/light/ag2_l.png" class="image-2 hidden">
+				<p class="draggable" id="module-19" data-price="70" draggable="true">
+					<img src="modules/camera.png">
 					<span class="tooltip">
-						<strong style="font-size: 1.2em;">Action Groups Module (11-21)</strong>
-						<span style="font-size: 1.1em;"><br>$90</br></span>
-						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. This module also comes in 11-20 and 21-30 variants, though there are some issues updating the LED indicators when switching between craft with groups larger than the 10 vanilla action groups.
+						<strong style="font-size: 1.2em;">Camera Module</strong>
+						<span style="font-size: 1.1em;"><br>$70</br></span>
+						The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, change to IVA view, and cycle the camera modes. Note: This module is only available for Windows.
 						<br></br>
 					</span>
 				</p>
 			</div>
-			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-12" data-price="90" draggable="true">
-					<img src="modules/ag3.png" class="image-1">
-					<img src="modules/light/ag3_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.2em;">Action Groups Module (21-30)</strong>
-						<span style="font-size: 1.1em;"><br>$90</br></span>
-						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. This module also comes in 11-20 and 21-30 variants, though there are some issues updating the LED indicators when switching between craft with groups larger than the 10 vanilla action groups.
-						<br></br>
-					</span>
-				</p>
-			</div>
+			
 		</div>
 
 
@@ -276,46 +263,58 @@
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable" id="module-19" data-price="70" draggable="true">
-					<img src="modules/camera.png">
+				<p class="draggable light" id="module-9" data-price="90" draggable="true">
+					<img src="modules/control.png" class="image-1">
+					<img src="modules/light/control_l.png" class="image-2 hidden">
 					<span class="tooltip">
-						<strong style="font-size: 1.2em;">Camera Module</strong>
-						<span style="font-size: 1.1em;"><br>$70</br></span>
-						The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, change to IVA view, and cycle the camera modes. Note: This module is only available for Windows.
+						<strong style="font-size: 1.2em;">Control Systems Module</strong>
+						<span style="font-size: 1.1em;"><br>$90</br></span>
+						The Control Systems module manages the SAS and RCS of the ship. Two toggle switches activate the SAS and RCS, and 10 buttons, each with an LED indicator, select the active SAS mode. The buttons come with stickers to denote which mode they activate.
 						<br></br>
 					</span>
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-20" data-price="80" draggable="true">
-					<img src="modules/eva.png" class="image-1">
-					<img src="modules/light/eva_l.png" class="image-2 hidden">
+				<p class="draggable light" id="module-10" data-price="90" draggable="true">
+					<img src="modules/ag1.png" class="image-1">
+					<img src="modules/light/ag1_l.png" class="image-2 hidden">
 					<span class="tooltip">
-						<strong style="font-size: 1.2em;">EVA Module</strong>
-						<span style="font-size: 1.1em;"><br>$80</br></span>
-						The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.
+						<strong style="font-size: 1.2em;">Action Groups Module</strong>
+						<span style="font-size: 1.1em;"><br>$90</br></span>
+						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. This module also comes in 11-20 and 21-30 variants, though there are some issues updating the LED indicators when switching between craft with groups larger than the 10 vanilla action groups.
 						<br></br>
 					</span>
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-21" data-price="80" draggable="true">
-					<img src="modules/telem.png" class="image-1">
-					<img src="modules/light/telem_l.png" class="image-2 hidden">
+				<p class="draggable light" id="module-11" data-price="90" draggable="true">
+					<img src="modules/ag2.png" class="image-1">
+					<img src="modules/light/ag2_l.png" class="image-2 hidden">
 					<span class="tooltip">
-						<strong style="font-size: 1.2em;">Telemetry Module</strong>
-						<span style="font-size: 1.1em;"><br>$80</br></span>
-						The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.
+						<strong style="font-size: 1.2em;">Action Groups Module (11-21)</strong>
+						<span style="font-size: 1.1em;"><br>$90</br></span>
+						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. This module also comes in 11-20 and 21-30 variants, though there are some issues updating the LED indicators when switching between craft with groups larger than the 10 vanilla action groups.
+						<br></br>
+					</span>
+				</p>
+			</div>
+			<div class="container" data-type="type2">
+				<p class="draggable light" id="module-12" data-price="90" draggable="true">
+					<img src="modules/ag3.png" class="image-1">
+					<img src="modules/light/ag3_l.png" class="image-2 hidden">
+					<span class="tooltip">
+						<strong style="font-size: 1.2em;">Action Groups Module (21-30)</strong>
+						<span style="font-size: 1.1em;"><br>$90</br></span>
+						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. This module also comes in 11-20 and 21-30 variants, though there are some issues updating the LED indicators when switching between craft with groups larger than the 10 vanilla action groups.
 						<br></br>
 					</span>
 				</p>
 			</div>
 			
+			
 		</div>
 		<script src="script.js" defer></script>
 	</body>
-	<a href="https://www.flaticon.com/free-icons/on-off" title="on off icons">On off icons created by Pixel perfect - Flaticon</a>
-	<a href="https://www.flaticon.com/free-icons/off" title="off icons">Off icons created by Pixel perfect - Flaticon</a>
 </html>
 
 

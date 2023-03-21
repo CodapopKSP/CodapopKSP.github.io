@@ -16,7 +16,7 @@ body {
     background: #333;
     width: 15vh;
     height: 15vh;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +29,7 @@ body {
 
 .draggable {
     background-color: aliceblue;
-    border: 1px black;
+    /*border: 1px black;*/
     cursor: move;
     width: 15vh;
     height: 15vh;
@@ -39,7 +39,7 @@ body {
 }
 
 .draggable.dragging {
-    opacity: .5;
+    opacity: 1;
 }
 
 .draggable img {
@@ -64,7 +64,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 82vh;
+    height: 90vh;
     overflow: hidden;
     border-radius: 2vh;
 }
@@ -137,56 +137,56 @@ body {
 .two-four {
     border: 1.125vh solid black;
     border-top: 1.875vh solid black;
-    width: 60.88vh;
-    height: 30.4vh;
+    width: 60vh;
+    height: 30vh;
     overflow: visible;
     max-width: 100%;
-    min-width: 60.6vh;
-    min-height: 30.3vh;
+    min-width: 60vh;
+    min-height: 30vh;
 }
 
 .two-three {
     border: 1.125vh solid black;
     border-top: 1.875vh solid black;
-    width: 45.7vh;
-    height: 30.3vh;
+    width: 45vh;
+    height: 30vh;
     overflow: visible;
     max-width: 100%;
-    min-width: 45.45vh;
-    min-height: 30.3vh;
+    min-width: 45vh;
+    min-height: 30vh;
 }
 
 .two-two {
     border: 1.125vh solid black;
     border-top: 1.875vh solid black;
-    width: 30.435vh;
-    height: 30.3vh;
+    width: 30vh;
+    height: 30vh;
     overflow: visible;
     max-width: 100%;
-    min-width: 30.3vh;
-    min-height: 30.3vh;
+    min-width: 30vh;
+    min-height: 30vh;
 }
 
 .one-two {
     border: 1.125vh solid black;
     border-top: 1.875vh solid black;
-    width: 30.435vh;
-    height: 15.15vh;
+    width: 30vh;
+    height: 15vh;
     overflow: visible;
     max-width: 100%;
-    min-width: 30.3vh;
-    min-height: 15.15vh;
+    min-width: 30vh;
+    min-height: 15vh;
 }
 
 .three-one {
     border: 1.125vh solid black;
     border-top: 1.875vh solid black;
-    width: 15.2175vh;
-    height: 45.45vh;
+    width: 15vh;
+    height: 45vh;
     overflow: visible;
     max-width: 100%;
-    min-width: 7.575vh;
-    min-height: 22.725vh;
+    min-width: 7vh;
+    min-height: 22vh;
 }
   
 #page-wrapper {
@@ -195,7 +195,7 @@ body {
 
 .container-grid {
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 0;
     width: 100%;
     display: flex;
@@ -207,7 +207,7 @@ body {
 
 .container-grid2 {
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 0;
     width: 100%;
     display: flex;
@@ -233,19 +233,23 @@ body {
 }
 
 .container2.has-24child {
+    transform: translate(-15vh, 7.5vh);
     margin: 0.75vh;
 }
 .container2.has-23child {
+    transform: translate(-15vh, 7.5vh);
     margin: 0.75vh;
 }
 .container2.has-22child {
+    transform: translateY(7.5vh);
     margin: 0.75vh;
 }
 .container2.has-12child {
+    transform: translateY(0vh);
     margin: 0.75vh;
 }
 .container2.has-31child {
-    transform: translateY(7.5vh);
+    transform: translateY(15vh);
     margin: 0.75vh;
 }
 
@@ -258,7 +262,7 @@ body {
     background-image: url('containers/2x4.png');
     background-size: cover;
     position: absolute;
-    left: 20vh;
+    left: 23%;
     bottom: 1vh;
 }
 
@@ -270,7 +274,7 @@ body {
     background-image: url('containers/2x3.png');
     background-size: cover;
     position: absolute;
-    left: 40vh;
+    left: 41%;
     bottom: 1vh;
 }
 
@@ -282,7 +286,7 @@ body {
     background-image: url('containers/2x2.png');
     background-size: cover;
     position: absolute;
-    left: 55vh;
+    left: 55%;
     bottom: 1vh;
 }
 
@@ -294,7 +298,7 @@ body {
     background-image: url('containers/1x2.png');
     background-size: cover;
     position: absolute;
-    left: 65vh;
+    left: 65%;
     bottom: 1vh;
 }
 
@@ -306,7 +310,7 @@ body {
     background-image: url('containers/3x1.png');
     background-size: cover;
     position: absolute;
-    left: 75vh;
+    left: 75%;
     bottom: 1vh;
 }
 
@@ -350,7 +354,8 @@ body {
 .tooltip {
     display: none;
     position: absolute;
-    background-color: #f0f0f0;
+    background-color: #cacecf;
+    color: rgb(0, 0, 0);
 }
 
 .tooltip.left {
@@ -371,9 +376,10 @@ body {
   
 .draggable:hover .tooltip {
     display: block;
-    width: 19vh;
+    width: 25vh;
     z-index: 999;
-    border: 5px solid rgba(0, 0, 0, 0.597);
+    border: 5px solid #9a9a9a;
     border-radius: 2vh;
-    opacity: 0.85;
+    opacity: 0.9;
+    font-size: 1em;
 }
