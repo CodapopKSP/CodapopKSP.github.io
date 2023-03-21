@@ -93,22 +93,25 @@ draggables.forEach(draggable => {
     draggable.classList.add('dragging');
     const touch = event.touches[0];
     event.dataTransfer.setData('text/plain', this.id);
-    // Set the position of the draggable element to the position of the touch
-    draggable.style.left = touch.clientX + 'px';
-    draggable.style.top = touch.clientY + 'px';
+    // Save the initial touch position for later use
+    draggable.dataset.touchStartX = touch.clientX;
+    draggable.dataset.touchStartY = touch.clientY;
   });
-
+  
   draggable.addEventListener('touchmove', (event) => {
     // Prevent the default behavior to avoid scrolling while dragging
     event.preventDefault();
     const touch = event.touches[0];
-    // Move the draggable element to the position of the touch
-    draggable.style.left = touch.clientX + 'px';
-    draggable.style.top = touch.clientY + 'px';
+    // Calculate the distance traveled since the touch started
+    const deltaX = touch.clientX - draggable.dataset.touchStartX;
+    const deltaY = touch.clientY - draggable.dataset.touchStartY;
+    // Move the draggable element using CSS transforms
+    draggable.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
   });
-
+  
   draggable.addEventListener('touchend', () => {
     draggable.classList.remove('dragging')
+    draggable.style.transform = ''; // Clear the CSS transform
     updateTotalPrice()
   })
 })
