@@ -48,10 +48,6 @@ draggables.forEach(draggable => {
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging')
-    const priceDisplay = document.querySelector('.price-display')
-    if (priceDisplay) {
-      priceDisplay.remove()
-    }
     updateTotalPrice()
   })
 
@@ -89,6 +85,32 @@ draggables.forEach(draggable => {
     draggable.classList.remove("mouseover");
     console.log("Current z-index: " + draggable.style.zIndex);
   });
+
+  // Touch events
+  draggable.addEventListener('touchstart', (event) => {
+    // Prevent the default behavior to avoid scrolling while dragging
+    event.preventDefault();
+    draggable.classList.add('dragging');
+    const touch = event.touches[0];
+    event.dataTransfer.setData('text/plain', this.id);
+    // Set the position of the draggable element to the position of the touch
+    draggable.style.left = touch.clientX + 'px';
+    draggable.style.top = touch.clientY + 'px';
+  });
+
+  draggable.addEventListener('touchmove', (event) => {
+    // Prevent the default behavior to avoid scrolling while dragging
+    event.preventDefault();
+    const touch = event.touches[0];
+    // Move the draggable element to the position of the touch
+    draggable.style.left = touch.clientX + 'px';
+    draggable.style.top = touch.clientY + 'px';
+  });
+
+  draggable.addEventListener('touchend', () => {
+    draggable.classList.remove('dragging')
+    updateTotalPrice()
+  })
 })
 
 
