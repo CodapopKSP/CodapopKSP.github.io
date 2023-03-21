@@ -1,10 +1,6 @@
 const draggables = document.querySelectorAll('.draggable')
 const priceDisplay2 = document.getElementById('price-display2')
 
-
-
-
-
 function updateTotalPrice() {
   let totalPrice = 0
   const containerBoxes = document.querySelectorAll('.two-four');
