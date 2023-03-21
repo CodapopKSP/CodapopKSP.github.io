@@ -371,12 +371,24 @@ body {
 }
 
 .tooltip.bottom {
-    top: -10vh;;
+    top: -10vh;
 }
   
 .draggable:hover .tooltip {
     display: block;
     width: 25vh;
+    z-index: 999;
+    border: 5px solid #9a9a9a;
+    border-radius: 2vh;
+    opacity: 0.9;
+    font-size: 1em;
+}
+
+.buttonStart:hover .tooltip {
+    display: block;
+    width: 25vh;
+    top: -10vh;
+    right: -5vh;
     z-index: 999;
     border: 5px solid #9a9a9a;
     border-radius: 2vh;

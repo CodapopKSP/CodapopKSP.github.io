@@ -131,6 +131,7 @@ containerGrids.forEach(containerGrid => {
 
     if (dropContainer && draggable) {
         dropContainer.appendChild(draggable);
+        draggable.classList.add('dropped-box');
         if (draggable.classList.contains('two-four')) {
             dropContainer.classList.add('has-24child');
         }
@@ -168,22 +169,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
   
     addButton.addEventListener('click', () => {
+      const existingBoxes = document.querySelectorAll('.dropped-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
-        <div id="two-four-box" class="two-four" data-price="120" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div id="two-four-box" class="two-four" data-price="120" draggable="true">
+            <div class="container-wrapper">
+              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            </div>
+            <div class="container-wrapper">
+              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            </div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-          </div>
-        </div>
-      `;
+        `;
       
         const containerBoxElement = document.createElement('div');
         containerBoxElement.innerHTML = containerBoxHTML.trim();
@@ -233,6 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+    
+      }
     });
 });
 
@@ -241,6 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
   
     addButton.addEventListener('click', () => {
+      const existingBoxes = document.querySelectorAll('.dropped-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="two-three-box" class="two-three" data-price="90" draggable="true">
           <div class="container-wrapper">
@@ -305,6 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      }
     });
 });
 
@@ -313,6 +323,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
   
     addButton.addEventListener('click', () => {
+      const existingBoxes = document.querySelectorAll('.dropped-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="two-two-box" class="two-two" data-price="70" draggable="true">
           <div class="container-wrapper">
@@ -375,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      }
     });
 });
 
@@ -383,6 +397,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
   
     addButton.addEventListener('click', () => {
+      const existingBoxes = document.querySelectorAll('.dropped-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="one-two-box" class="one-two" data-price="50" draggable="true">
           <div class="container-wrapper">
@@ -441,6 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      }
     });
 });
 
@@ -449,6 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.getElementById('page-wrapper');
   
     addButton.addEventListener('click', () => {
+      const existingBoxes = document.querySelectorAll('.dropped-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="three-one-box" class="three-one" data-price="60" draggable="true">
           <div class="container-wrapper">
@@ -512,6 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      }
     });
 });
 
