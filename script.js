@@ -1,6 +1,8 @@
 const draggables = document.querySelectorAll('.draggable')
-
 const priceDisplay2 = document.getElementById('price-display2')
+
+
+
 
 
 function updateTotalPrice() {
@@ -41,6 +43,7 @@ function updateTotalPrice() {
   priceDisplay2.innerText = `Price: $${parseInt(totalPrice.toFixed(2))}`
 }
 
+
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging')
@@ -57,6 +60,55 @@ draggables.forEach(draggable => {
       priceDisplay.remove()
     }
     updateTotalPrice()
+  })
+
+  draggable.addEventListener('mouseover', () => {
+    var tooltip = draggable.querySelector(".tooltip");
+    draggable.classList.add("mouseover");
+    tooltip.style.display = 'block';
+    console.log("Current z-index: " + draggable.style.zIndex);
+
+    const rect = event.target.getBoundingClientRect();
+    const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
+  
+    if (position < window.innerWidth / 2) {
+      tooltip.classList.remove('right');
+      tooltip.classList.add('left');
+    } else {
+      tooltip.classList.remove('left');
+      tooltip.classList.add('right');
+    }
+
+    const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
+
+    if (positionv < window.innerHeight / 2) {
+      tooltip.classList.remove('bottom');
+      tooltip.classList.add('top');
+    } else {
+      tooltip.classList.remove('top');
+      tooltip.classList.add('bottom');
+    }
+  });
+  
+  draggable.addEventListener('mouseout', () => {
+    var tooltip = draggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
+    draggable.classList.remove("mouseover");
+    console.log("Current z-index: " + draggable.style.zIndex);
+  });
+})
+
+
+const lightSwitch = document.getElementById('light-switch')
+
+lightSwitch.addEventListener('click', function() {
+  this.classList.toggle('light')
+  const modules_with_lights = document.querySelectorAll('.draggable.light')
+  modules_with_lights.forEach(module => {
+    const image1 = module.querySelector('.image-1');
+    const image2 = module.querySelector('.image-2');
+    image1.classList.toggle('hidden');
+    image2.classList.toggle('hidden');
   })
 })
 
@@ -140,11 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
         containerBoxElement.innerHTML = containerBoxHTML.trim();
         const containerBox = containerBoxElement.firstChild;
         pageWrapper.appendChild(containerBox);
-
-
-        const price = containerBox.dataset.price
-        const priceDisplay = document.getElementById('price-display')
-        priceDisplay.innerText = `Last Module: $${price}`
         updateTotalPrice()
 
         
@@ -181,16 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
             container.addEventListener('drop', () => {
                 const draggable = document.querySelector('.dragging')
                 const type = container.dataset.type
-                if ((type === 'type1') && (draggable)) {
-                    const price = parseFloat(draggable.dataset.price)
-                    const priceDisplay = document.getElementById('price-display2')
-                    priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
-                }
                 container.appendChild(draggable)
                 draggable.classList.remove('dragging');
                 updateTotalPrice()
             })
         })
+
+        var messageElement = document.getElementById("welcome-message");
+        messageElement.style.display = "none";
     });
 });
 
@@ -218,10 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         containerBoxElement.innerHTML = containerBoxHTML.trim();
         const containerBox = containerBoxElement.firstChild;
         pageWrapper.appendChild(containerBox);
-
-        const price = containerBox.dataset.price
-        const priceDisplay = document.getElementById('price-display')
-        priceDisplay.innerText = `Last Module: $${price}`
         updateTotalPrice()
 
 
@@ -259,16 +300,14 @@ document.addEventListener('DOMContentLoaded', () => {
             container.addEventListener('drop', () => {
               const draggable = document.querySelector('.dragging')
               const type = container.dataset.type
-              if (type === 'type1') {
-                const price = parseFloat(draggable.dataset.price)
-                const priceDisplay = document.getElementById('price-display2')
-                priceDisplay.innerText = `Price: $${(price + parseInt(parseFloat(priceDisplay2.innerText.slice(1))).toFixed(2))}`
-              }
               container.appendChild(draggable)
               draggable.classList.remove('dragging');
               updateTotalPrice()
             })
         })
+
+        var messageElement = document.getElementById("welcome-message");
+        messageElement.style.display = "none";
     });
 });
 
@@ -345,6 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
               updateTotalPrice()
             })
         })
+
+        var messageElement = document.getElementById("welcome-message");
+        messageElement.style.display = "none";
     });
 });
 
@@ -417,6 +459,9 @@ document.addEventListener('DOMContentLoaded', () => {
               updateTotalPrice()
             })
         })
+
+        var messageElement = document.getElementById("welcome-message");
+        messageElement.style.display = "none";
     });
 });
 
@@ -494,6 +539,9 @@ document.addEventListener('DOMContentLoaded', () => {
               updateTotalPrice()
             })
         })
+
+        var messageElement = document.getElementById("welcome-message");
+        messageElement.style.display = "none";
     });
 });
 

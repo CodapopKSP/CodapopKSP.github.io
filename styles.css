@@ -2,6 +2,10 @@ body {
     margin: 0;
 }
 
+.hidden {
+    display: none;
+}
+
 .container-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -43,20 +47,26 @@ body {
     height: 100%;
 }
 
-.draggable .price {
+.draggable.price {
     display: none;
 }
+
+.draggable.mouseover {
+    z-index: 999;
+}
+
 
 #page-wrapper {
     position: relative;
     border: 1vh solid black;
-    width: 60%;
+    width: 110vh;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 82vh;
     overflow: hidden;
+    border-radius: 2vh;
 }
 
 
@@ -129,7 +139,7 @@ body {
     border-top: 1.875vh solid black;
     width: 60.88vh;
     height: 30.4vh;
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
     min-width: 60.6vh;
     min-height: 30.3vh;
@@ -140,7 +150,7 @@ body {
     border-top: 1.875vh solid black;
     width: 45.7vh;
     height: 30.3vh;
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
     min-width: 45.45vh;
     min-height: 30.3vh;
@@ -151,7 +161,7 @@ body {
     border-top: 1.875vh solid black;
     width: 30.435vh;
     height: 30.3vh;
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
     min-width: 30.3vh;
     min-height: 30.3vh;
@@ -162,7 +172,7 @@ body {
     border-top: 1.875vh solid black;
     width: 30.435vh;
     height: 15.15vh;
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
     min-width: 30.3vh;
     min-height: 15.15vh;
@@ -173,7 +183,7 @@ body {
     border-top: 1.875vh solid black;
     width: 15.2175vh;
     height: 45.45vh;
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
     min-width: 7.575vh;
     min-height: 22.725vh;
@@ -248,8 +258,8 @@ body {
     background-image: url('containers/2x4.png');
     background-size: cover;
     position: absolute;
-    right: 0px;
-    bottom: 7.5vh;
+    left: 20vh;
+    bottom: 1vh;
 }
 
 #add-2x3 {
@@ -260,8 +270,8 @@ body {
     background-image: url('containers/2x3.png');
     background-size: cover;
     position: absolute;
-    right: 0px;
-    bottom: -0.75vh;
+    left: 40vh;
+    bottom: 1vh;
 }
 
 #add-2x2 {
@@ -272,8 +282,8 @@ body {
     background-image: url('containers/2x2.png');
     background-size: cover;
     position: absolute;
-    right: 0px;
-    bottom: -9vh;
+    left: 55vh;
+    bottom: 1vh;
 }
 
 #add-1x2 {
@@ -284,8 +294,8 @@ body {
     background-image: url('containers/1x2.png');
     background-size: cover;
     position: absolute;
-    right: 0px;
-    bottom: -13.5vh;
+    left: 65vh;
+    bottom: 1vh;
 }
 
 #add-3x1 {
@@ -296,8 +306,8 @@ body {
     background-image: url('containers/3x1.png');
     background-size: cover;
     position: absolute;
-    right: 9vh;
-    bottom: -13.5vh;
+    left: 75vh;
+    bottom: 1vh;
 }
 
 #delete-container {
@@ -310,4 +320,60 @@ body {
     position: absolute;
     right: 1.5vh;
     bottom: 1.5vh;
-  }
+}
+
+#light-switch {
+    content: "";
+    display: block;
+    background-image: url('switch-off.png');
+    background-size: cover;
+    width: 7.5vh;
+    height: 7.5vh;
+    position: absolute;
+    left: 1.5vh;
+    bottom: 1.5vh;
+}
+
+#light-switch.light {
+    background-image: url('switch-on.png');
+}
+
+#light-switch p {
+    position: absolute;
+    bottom: -0.5em; /* adjust this value as needed */
+    left: 0.35em;
+    width: 100%;
+    margin: 0;
+    font-size: 2em; /* adjust this value as needed */
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #f0f0f0;
+}
+
+.tooltip.left {
+    left: 10vh;
+}
+
+.tooltip.right {
+    right: 10vh;
+}
+
+.tooltip.top {
+    top: 10vh;
+}
+
+.tooltip.bottom {
+    top: -10vh;;
+}
+  
+.draggable:hover .tooltip {
+    display: block;
+    width: 19vh;
+    z-index: 999;
+    border: 5px solid rgba(0, 0, 0, 0.597);
+    border-radius: 2vh;
+    opacity: 0.85;
+}
