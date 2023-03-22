@@ -36,7 +36,7 @@ function updateTotalPrice() {
       totalPrice += price
     })
   })
-  priceDisplay2.innerText = `Price: $${parseInt(totalPrice.toFixed(2))}`
+  priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`
 }
 
 
