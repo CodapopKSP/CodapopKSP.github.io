@@ -92,7 +92,7 @@ draggables.forEach(draggable => {
     draggable.classList.add('dragging');
     const touch = event.touches[0];
     event.dataTransfer.setData('text/plain', this.id);
-    /*
+    
     // Set the position of the draggable element to the position of the touch
     const rect = draggable.getBoundingClientRect();
     const offsetX = touch.clientX - rect.left;
