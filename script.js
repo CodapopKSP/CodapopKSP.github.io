@@ -95,10 +95,11 @@ draggables.forEach(draggable => {
     const rect = draggable.getBoundingClientRect();
     const offsetX = touch.clientX - rect.left;
     const offsetY = touch.clientY - rect.top;
+    /*
     draggable.style.left = (touch.clientX - offsetX) + 'px';
-    draggable.style.top = (touch.clientY - offsetY) + 'px';
+    draggable.style.top = (touch.clientY - offsetY) + 'px';*/
   });
-  /*
+  
   draggable.addEventListener('touchmove', (event) => {
     // Prevent the default behavior to avoid scrolling while dragging
     event.preventDefault();
@@ -106,7 +107,7 @@ draggables.forEach(draggable => {
     // Move the draggable element to the position of the touch
     draggable.style.left = touch.clientX + 'px';
     draggable.style.top = touch.clientY + 'px';
-  });*/
+  });
 
   draggable.addEventListener('touchend', () => {
     draggable.classList.remove('dragging');
