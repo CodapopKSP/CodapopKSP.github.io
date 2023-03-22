@@ -44,6 +44,8 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
+    event.dataTransfer.setData('dragged', event.target.id);
+    event.target.classList.add('dragging2');
   });
 
   draggable.addEventListener('dragend', () => {
