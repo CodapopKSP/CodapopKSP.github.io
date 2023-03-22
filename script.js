@@ -44,7 +44,6 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
-    //event.dataTransfer.setData('dragged', event.target.id);
   });
 
   draggable.addEventListener('dragend', () => {
@@ -53,9 +52,9 @@ draggables.forEach(draggable => {
   });
   
   draggable.addEventListener('mouseover', () => {
-    //var tooltip = draggable.querySelector(".tooltip");
+    var tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
-    /*
+    
     tooltip.style.display = 'block';
 
     const rect = event.target.getBoundingClientRect();
@@ -77,12 +76,12 @@ draggables.forEach(draggable => {
     } else {
       tooltip.classList.remove('top');
       tooltip.classList.add('bottom');
-    }*/
+    }
   });
   
   draggable.addEventListener('mouseout', () => {
-    //var tooltip = draggable.querySelector(".tooltip");
-    //tooltip.style.display = 'none';
+    var tooltip = draggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
   });
   /*
