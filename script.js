@@ -94,8 +94,8 @@ draggables.forEach(draggable => {
     const touch = event.touches[0];
     event.dataTransfer.setData('text/plain', this.id);
     // Set the position of the draggable element to the position of the touch
-    draggable.style.left = touch.clientX + 'vh';
-    draggable.style.top = touch.clientY + 'vh';
+    draggable.style.left = touch.clientX;
+    draggable.style.top = touch.clientY;
   });
 
   draggable.addEventListener('touchmove', (event) => {
