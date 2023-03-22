@@ -51,10 +51,11 @@ draggables.forEach(draggable => {
     draggable.classList.remove('dragging');
     updateTotalPrice();
   });
-  /*
+  
   draggable.addEventListener('mouseover', () => {
-    var tooltip = draggable.querySelector(".tooltip");
+    //var tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
+    /*
     tooltip.style.display = 'block';
 
     const rect = event.target.getBoundingClientRect();
@@ -76,12 +77,12 @@ draggables.forEach(draggable => {
     } else {
       tooltip.classList.remove('top');
       tooltip.classList.add('bottom');
-    }
+    }*/
   });
   
   draggable.addEventListener('mouseout', () => {
-    var tooltip = draggable.querySelector(".tooltip");
-    tooltip.style.display = 'none';
+    //var tooltip = draggable.querySelector(".tooltip");
+    //tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
   });
   /*
