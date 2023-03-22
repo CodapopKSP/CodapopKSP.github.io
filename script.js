@@ -83,7 +83,7 @@ draggables.forEach(draggable => {
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
   });
-
+  /*
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
     event.preventDefault();
@@ -105,15 +105,15 @@ draggables.forEach(draggable => {
     event.preventDefault();
     const touch = event.touches[0];
     // Move the draggable element to the position of the touch
-    /*
+    
     draggable.style.left = touch.clientX + 'px';
-    draggable.style.top = touch.clientY + 'px';*/
+    draggable.style.top = touch.clientY + 'px';
   });
 
   draggable.addEventListener('touchend', () => {
     draggable.classList.remove('dragging');
     updateTotalPrice();
-  });
+  });*/
 });
 
 
