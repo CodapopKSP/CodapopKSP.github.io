@@ -356,6 +356,7 @@ body {
     position: absolute;
     background-color: #cacecf;
     color: rgb(0, 0, 0);
+    pointer-events: none;
 }
 
 .tooltip.left {
