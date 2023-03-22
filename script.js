@@ -94,8 +94,8 @@ draggables.forEach(draggable => {
     const touch = event.touches[0];
     event.dataTransfer.setData('text/plain', this.id);
     // Save the initial touch position for later use
-    draggable.dataset.touchStartX = touch.clientX - draggable.offsetLeft;
-    draggable.dataset.touchStartY = touch.clientY - draggable.offsetTop;
+    draggable.dataset.touchStartX = touch.clientX
+    draggable.dataset.touchStartY = touch.clientY
   });
   
   draggable.addEventListener('touchmove', (event) => {
