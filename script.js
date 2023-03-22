@@ -28,34 +28,33 @@ function updateTotalPrice() {
     const price = parseFloat(containerBox.dataset.price);
     totalPrice += price;
   });
-  const type1Containers = document.querySelectorAll('.container[data-type="type1"]')
+  const type1Containers = document.querySelectorAll('.container[data-type="type1"]');
   type1Containers.forEach(container => {
-    const draggablesInContainer = container.querySelectorAll('.draggable')
+    const draggablesInContainer = container.querySelectorAll('.draggable');
     draggablesInContainer.forEach(draggable => {
-      const price = parseFloat(draggable.dataset.price)
-      totalPrice += price
-    })
-  })
-  priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`
-}
+      const price = parseFloat(draggable.dataset.price);
+      totalPrice += price;
+    });
+  });
+  priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
+};
 
 
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
-    draggable.classList.add('dragging')
+    draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
-  })
+  });
 
   draggable.addEventListener('dragend', () => {
-    draggable.classList.remove('dragging')
-    updateTotalPrice()
-  })
+    draggable.classList.remove('dragging');
+    updateTotalPrice();
+  });
 
   draggable.addEventListener('mouseover', () => {
     var tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
     tooltip.style.display = 'block';
-    console.log("Current z-index: " + draggable.style.zIndex);
 
     const rect = event.target.getBoundingClientRect();
     const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
@@ -83,7 +82,6 @@ draggables.forEach(draggable => {
     var tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
-    console.log("Current z-index: " + draggable.style.zIndex);
   });
 
   // Touch events
@@ -111,24 +109,24 @@ draggables.forEach(draggable => {
   });
 
   draggable.addEventListener('touchend', () => {
-    draggable.classList.remove('dragging')
-    updateTotalPrice()
-  })
-})
+    draggable.classList.remove('dragging');
+    updateTotalPrice();
+  });
+});
 
 
 const lightSwitch = document.getElementById('light-switch')
 
 lightSwitch.addEventListener('click', function() {
-  this.classList.toggle('light')
-  const modules_with_lights = document.querySelectorAll('.draggable.light')
+  this.classList.toggle('light');
+  const modules_with_lights = document.querySelectorAll('.draggable.light');
   modules_with_lights.forEach(module => {
     const image1 = module.querySelector('.image-1');
     const image2 = module.querySelector('.image-2');
     image1.classList.toggle('hidden');
     image2.classList.toggle('hidden');
-  })
-})
+  });
+});
 
 
 
