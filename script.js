@@ -52,7 +52,7 @@ draggables.forEach(draggable => {
     draggable.classList.remove('dragging');
     updateTotalPrice();
   });
-
+  /*
   draggable.addEventListener('mouseover', () => {
     var tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
