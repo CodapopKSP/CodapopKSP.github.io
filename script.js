@@ -101,7 +101,7 @@ draggables.forEach(draggable => {
     alert(`touchstart: ${touch.clientX}, ${touch.clientY}, ${rect.left}, ${rect.top}`);
     alert(`touchmove: ${touch.clientX}, ${touch.clientY}, ${draggable.style.left}, ${draggable.style.top}`);
   });
-
+  /*
   draggable.addEventListener('touchmove', (event) => {
     // Prevent the default behavior to avoid scrolling while dragging
     event.preventDefault();
@@ -109,7 +109,7 @@ draggables.forEach(draggable => {
     // Move the draggable element to the position of the touch
     draggable.style.left = touch.clientX + 'px';
     draggable.style.top = touch.clientY + 'px';
-  });
+  });*/
 
   draggable.addEventListener('touchend', () => {
     draggable.classList.remove('dragging')
