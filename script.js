@@ -88,14 +88,16 @@ draggables.forEach(draggable => {
 
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
-    // Prevent the default behavior to avoid scrolling while dragging
     event.preventDefault();
     draggable.classList.add('dragging');
     const touch = event.touches[0];
     event.dataTransfer.setData('text/plain', this.id);
     // Set the position of the draggable element to the position of the touch
-    draggable.style.left = touch.clientX;
-    draggable.style.top = touch.clientY;
+    const rect = draggable.getBoundingClientRect();
+    const offsetX = touch.clientX - rect.left;
+    const offsetY = touch.clientY - rect.top;
+    draggable.style.left = (touch.clientX - offsetX) + 'px';
+    draggable.style.top = (touch.clientY - offsetY) + 'px';
   });
 
   draggable.addEventListener('touchmove', (event) => {
