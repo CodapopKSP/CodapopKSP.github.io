@@ -88,16 +88,16 @@ draggables.forEach(draggable => {
   draggable.addEventListener('touchstart', (event) => {
     event.preventDefault();
     draggable.classList.add('dragging');
-    const touch = event.touches[0];
     event.dataTransfer.setData('text/plain', this.id);
     
     // Set the position of the draggable element to the position of the touch
+    const touch = event.touches[0];
     const rect = draggable.getBoundingClientRect();
     const offsetX = touch.clientX - rect.left;
     const offsetY = touch.clientY - rect.top;
-    /*
+    
     draggable.style.left = (touch.clientX - offsetX) + 'px';
-    draggable.style.top = (touch.clientY - offsetY) + 'px';*/
+    draggable.style.top = (touch.clientY - offsetY) + 'px';
   });
   
   draggable.addEventListener('touchmove', (event) => {
