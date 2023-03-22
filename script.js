@@ -100,7 +100,7 @@ draggables.forEach(draggable => {
     draggable.style.left = (touch.clientX - offsetX) + 'px';
     draggable.style.top = (touch.clientY - offsetY) + 'px';
     alert(`touchstart: ${touch.clientX}, ${touch.clientY}, ${rect.left}, ${rect.top}`);
-    alert(`touchmove: ${touch.clientX}, ${touch.clientY}, ${draggable.style.left}, ${draggable.style.top}`);*/
+    alert(`touchmove: ${touch.clientX}, ${touch.clientY}, ${draggable.style.left}, ${draggable.style.top}`);
   });
   /*
   draggable.addEventListener('touchmove', (event) => {
