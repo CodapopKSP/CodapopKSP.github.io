@@ -86,12 +86,13 @@ draggables.forEach(draggable => {
   });
   
   // Touch events
-  draggable.addEventListener('touchstart', (event) => {
-    //event.preventDefault();
+  draggable.addEventListener('touchstart', () => {
     const touched_modules = document.querySelectorAll('.draggable.touched');
-    touched_modules.forEach(module => {
-      module.classList.remove("touched");
-    })
+    if (touched_modules) {
+      touched_modules.forEach(module => {
+        module.classList.remove("touched");
+      })
+    }
     draggable.classList.add("touched");
   });
 });
@@ -238,12 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
               if (touched_modules) {
                 event.preventDefault();
                 touched_modules.forEach(module => {
-                  container.appendChild(module)
+                  container.appendChild(module);
                   module.classList.remove("touched");
-                })
+                });
               }
             });
-        })
+        });
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
