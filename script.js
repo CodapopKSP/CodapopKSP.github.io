@@ -87,7 +87,7 @@ draggables.forEach(draggable => {
   
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
-    event.preventDefault();
+    //event.preventDefault();
     const touched_modules = document.querySelectorAll('.draggable.touched');
     touched_modules.forEach(module => {
       module.classList.remove("touched");
@@ -228,19 +228,20 @@ document.addEventListener('DOMContentLoaded', () => {
           
             container.addEventListener('drop', () => {
                 const draggable = document.querySelector('.dragging')
-                const type = container.dataset.type
                 container.appendChild(draggable)
                 draggable.classList.remove('dragging');
                 updateTotalPrice()
             })
 
             container.addEventListener('touchstart', (event) => {
-              event.preventDefault();
               const touched_modules = document.querySelectorAll('.draggable.touched');
-              touched_modules.forEach(module => {
-                container.appendChild(module)
-                module.classList.remove("touched");
-              })
+              if (touched_modules) {
+                event.preventDefault();
+                touched_modules.forEach(module => {
+                  container.appendChild(module)
+                  module.classList.remove("touched");
+                })
+              }
             });
         })
 
