@@ -1,6 +1,8 @@
 const draggables = document.querySelectorAll('.draggable')
 const priceDisplay2 = document.getElementById('price-display2')
 
+var touched = [];
+
 function updateTotalPrice() {
   let totalPrice = 0
   const containerBoxes = document.querySelectorAll('.two-four');
@@ -45,7 +47,6 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
-    //event.dataTransfer.setData('dragged', event.target.id);
   });
 
   draggable.addEventListener('dragend', () => {
@@ -88,33 +89,10 @@ draggables.forEach(draggable => {
   
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
+    //var lastItem = myList.lastElementChild;
+    //myList.removeChild(lastItem);
     event.preventDefault();
-    draggable.classList.add('dragging');
-    event.dataTransfer.setData('text/plain', this.id);
-    
-    // Set the position of the draggable element to the position of the touch
-    const touch = event.touches[0];
-    const rect = draggable.getBoundingClientRect();
-    const offsetX = touch.clientX - rect.left;
-    const offsetY = touch.clientY - rect.top;
-    
-    draggable.style.left = (touch.clientX - offsetX) + 'px';
-    draggable.style.top = (touch.clientY - offsetY) + 'px';
-  });
-  
-  draggable.addEventListener('touchmove', (event) => {
-    // Prevent the default behavior to avoid scrolling while dragging
-    event.preventDefault();
-    const touch = event.touches[0];
-    // Move the draggable element to the position of the touch
-    
-    draggable.style.left = touch.clientX + 'px';
-    draggable.style.top = touch.clientY + 'px';
-  });
-
-  draggable.addEventListener('touchend', () => {
-    draggable.classList.remove('dragging');
-    updateTotalPrice();
+    touched.appendChild(draggable);
   });
 });
 
@@ -181,7 +159,6 @@ containerGrids.forEach(containerGrid => {
         container.classList.remove('has-22child');
         container.classList.remove('has-12child');
         container.classList.remove('has-31child');
-
       }
     });
   });
@@ -256,6 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 draggable.classList.remove('dragging');
                 updateTotalPrice()
             })
+
+            container.addEventListener('touchstart', (event) => {
+              var lastItem = touched.lastElementChild;
+              if (lastItem) {
+                event.preventDefault();
+                container.appendChild(lastItem)
+                touched.removeChild(lastItem);
+              }
+            });
         })
 
         var messageElement = document.getElementById("welcome-message");
