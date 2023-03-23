@@ -16,7 +16,6 @@ body {
     background: #333;
     width: 15vh;
     height: 15vh;
-    /*border: 1px solid black;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +28,6 @@ body {
 
 .draggable {
     background-color: aliceblue;
-    /*border: 1px black;*/
     cursor: move;
     width: 15vh;
     height: 15vh;
@@ -38,23 +36,15 @@ body {
     z-index: 100;
 }
 
-.draggable.dragging {
-    opacity: 1;
-}
 
 .draggable img {
     width: 100%;
     height: 100%;
 }
 
-.draggable.price {
-    display: none;
-}
-
 .draggable.mouseover {
     z-index: 999;
 }
-
 
 #page-wrapper {
     position: relative;
@@ -68,8 +58,6 @@ body {
     overflow: hidden;
     border-radius: 2vh;
 }
-
-
 
 .container-wrapper2 {
     position: absolute;

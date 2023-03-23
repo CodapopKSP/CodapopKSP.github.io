@@ -46,6 +46,16 @@ window.onload = function() {
   /* listen to the touchmove event,
   every time it fires, grab the location
   of touch and assign it to box */
+
+  box.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    //box.dataTransfer.setData('text/plain', this.id);
+    
+    // Set the position of the draggable element to the position of the touch
+    const touch = e.targetTouches[0];
+    box.style.left = touch.clientX + 'px';
+    box.style.top = touch.clientY  + 'px';
+  });
   
   box.addEventListener('touchmove', function(e) {
     // grab the location of touch
