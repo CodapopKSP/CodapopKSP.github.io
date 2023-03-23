@@ -367,6 +367,7 @@ body {
     background-color: #cacecf;
     color: rgb(0, 0, 0);
     pointer-events: none;
+    width: 25vh;
 }
 
 .tooltip.left {
@@ -387,7 +388,6 @@ body {
   
 .draggable:hover .tooltip {
     display: block;
-    width: 25vh;
     z-index: 999;
     border: 5px solid #9a9a9a;
     border-radius: 2vh;
