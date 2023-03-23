@@ -39,39 +39,6 @@ function updateTotalPrice() {
   priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
 
-window.onload = function() {
-  // find the element that you want to drag.
-  var box = document.getElementById('module-1');
-  
-  /* listen to the touchmove event,
-  every time it fires, grab the location
-  of touch and assign it to box */
-
-  box.addEventListener('touchstart', function(e) {
-    e.preventDefault();
-    //box.dataTransfer.setData('text/plain', this.id);
-    
-    // Set the position of the draggable element to the position of the touch
-    const touch = e.targetTouches[0];
-    box.style.left = touch.clientX + 'px';
-    box.style.top = touch.clientY  + 'px';
-  });
-  
-  box.addEventListener('touchmove', function(e) {
-    // grab the location of touch
-    var touchLocation = e.targetTouches[0];
-    
-    // assign box new coordinates based on the touch.
-    box.style.left = touchLocation.pageX + 'px';
-    box.style.top = touchLocation.pageY + 'px';
-  })
-
-  box.addEventListener('touchend', function(e) {
-    // current box position.
-    var x = parseInt(box.style.left);
-    var y = parseInt(box.style.top);
-  })
-}
 
 
 draggables.forEach(draggable => {
@@ -118,11 +85,11 @@ draggables.forEach(draggable => {
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
   });
-  /*
+  
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
     event.preventDefault();
-    draggable.classList.add('dragging');
+    //draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
     
     // Set the position of the draggable element to the position of the touch
@@ -148,7 +115,7 @@ draggables.forEach(draggable => {
   draggable.addEventListener('touchend', () => {
     draggable.classList.remove('dragging');
     updateTotalPrice();
-  });*/
+  });
 });
 
 
