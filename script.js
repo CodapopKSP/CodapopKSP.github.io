@@ -89,7 +89,7 @@ draggables.forEach(draggable => {
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
     event.preventDefault();
-    //draggable.classList.add('dragging');
+    draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
     
     // Set the position of the draggable element to the position of the touch
