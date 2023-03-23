@@ -90,7 +90,7 @@ draggables.forEach(draggable => {
     event.preventDefault();
     const touched_modules = document.querySelectorAll('.draggable.touched');
     touched_modules.forEach(module => {
-      module.classList.remove("mouseover");
+      module.classList.remove("touched");
     })
     draggable.classList.add("touched");
   });
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
               const touched_modules = document.querySelectorAll('.draggable.touched');
               touched_modules.forEach(module => {
                 container.appendChild(module)
-                module.classList.remove("mouseover");
+                module.classList.remove("touched");
               })
             });
         })
