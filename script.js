@@ -260,6 +260,8 @@ document.addEventListener('DOMContentLoaded', () => {
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
     
+      } else {
+        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
       }
     });
 });
@@ -336,6 +338,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      } else {
+        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
       }
     });
 });
@@ -410,6 +414,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      } else {
+        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
       }
     });
 });
@@ -480,6 +486,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      } else {
+        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
       }
     });
 });
@@ -555,6 +563,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         var messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
+      } else {
+        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
       }
     });
 });
