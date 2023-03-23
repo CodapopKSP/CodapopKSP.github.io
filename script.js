@@ -1,8 +1,6 @@
 const draggables = document.querySelectorAll('.draggable')
 const priceDisplay2 = document.getElementById('price-display2')
 
-var touched = [];
-
 function updateTotalPrice() {
   let totalPrice = 0
   const containerBoxes = document.querySelectorAll('.two-four');
@@ -89,10 +87,12 @@ draggables.forEach(draggable => {
   
   // Touch events
   draggable.addEventListener('touchstart', (event) => {
-    //var lastItem = myList.lastElementChild;
-    //myList.removeChild(lastItem);
     event.preventDefault();
-    touched.appendChild(draggable);
+    const touched_modules = document.querySelectorAll('.draggable.touched');
+    touched_modules.forEach(module => {
+      module.classList.remove("mouseover");
+    })
+    draggable.classList.add("touched");
   });
 });
 
@@ -235,12 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
             })
 
             container.addEventListener('touchstart', (event) => {
-              var lastItem = touched.lastElementChild;
-              if (lastItem) {
-                event.preventDefault();
-                container.appendChild(lastItem)
-                touched.removeChild(lastItem);
-              }
+              event.preventDefault();
+              const touched_modules = document.querySelectorAll('.draggable.touched');
+              touched_modules.forEach(module => {
+                container.appendChild(module)
+                module.classList.remove("mouseover");
+              })
             });
         })
 
