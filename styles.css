@@ -114,6 +114,10 @@ body {
     position: absolute;
 }
 
+#two-one-box {
+    position: absolute;
+}
+
 #one-two-box {
     position: absolute;
 }
@@ -170,6 +174,19 @@ body {
     max-width: 100%;
     min-width: 30vh;
     min-height: 15vh;
+    background-color: rgb(0, 0, 0);
+    background-size: cover;
+}
+
+.two-one {
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
+    width: 15vh;
+    height: 30vh;
+    overflow: visible;
+    max-width: 100%;
+    min-width: 15vh;
+    min-height: 30vh;
     background-color: rgb(0, 0, 0);
     background-size: cover;
 }
@@ -242,6 +259,10 @@ body {
     transform: translateY(7.5vh);
     margin: 0.75vh;
 }
+.container2.has-21child {
+    transform: translateY(7.5vh);
+    margin: 0.75vh;
+}
 .container2.has-12child {
     transform: translateY(0vh);
     margin: 0.75vh;
@@ -260,7 +281,7 @@ body {
     background-image: url('containers/2x4.png');
     background-size: cover;
     position: absolute;
-    right: 23%;
+    right: 19%;
     bottom: 1vh;
 }
 
@@ -272,7 +293,7 @@ body {
     background-image: url('containers/2x3.png');
     background-size: cover;
     position: absolute;
-    right: 40%;
+    right: 36%;
     bottom: 1vh;
 }
 
@@ -284,7 +305,7 @@ body {
     background-image: url('containers/2x2.png');
     background-size: cover;
     position: absolute;
-    right: 54%;
+    right: 49%;
     bottom: 1vh;
 }
 
@@ -296,7 +317,19 @@ body {
     background-image: url('containers/3x1.png');
     background-size: cover;
     position: absolute;
-    right: 64%;
+    right: 59%;
+    bottom: 1vh;
+}
+
+#add-2x1 {
+    content: "";
+    display: block;
+    width: 3.75vh;
+    height: 7.5vh;
+    background-image: url('containers/2x1.png');
+    background-size: cover;
+    position: absolute;
+    right: 65.7%;
     bottom: 1vh;
 }
 
@@ -308,9 +341,11 @@ body {
     background-image: url('containers/1x2.png');
     background-size: cover;
     position: absolute;
-    right: 71%;
+    right: 73%;
     bottom: 4vh;
 }
+
+
 
 #delete-container {
     content: "";

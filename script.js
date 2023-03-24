@@ -28,6 +28,11 @@ function updateTotalPrice() {
     const price = parseFloat(containerBox.dataset.price);
     totalPrice += price;
   });
+  const containerBoxes6 = document.querySelectorAll('.two-one');
+  containerBoxes6.forEach(containerBox => {
+    const price = parseFloat(containerBox.dataset.price);
+    totalPrice += price;
+  });
   const type1Containers = document.querySelectorAll('.container[data-type="type1"]');
   type1Containers.forEach(container => {
     const draggablesInContainer = container.querySelectorAll('.draggable');
@@ -149,6 +154,9 @@ containerGrids.forEach(containerGrid => {
         if (draggable.classList.contains('three-one')) {
             dropContainer.classList.add('has-31child');
         }
+        if (draggable.classList.contains('two-one')) {
+          dropContainer.classList.add('has-21child');
+        }
     }
 
     const containers = document.querySelectorAll('.container2');
@@ -171,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
       if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
           <div id="two-four-box" class="two-four" data-price="120" draggable="true">
@@ -261,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
       if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="two-three-box" class="two-three" data-price="90" draggable="true">
@@ -339,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
       if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="two-two-box" class="two-two" data-price="70" draggable="true">
@@ -415,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
       if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="one-two-box" class="one-two" data-price="50" draggable="true">
@@ -487,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box');
+      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
       if (existingBoxes.length === requiredBoxes.length) {
         const containerBoxHTML = `
         <div id="three-one-box" class="three-one" data-price="60" draggable="true">
@@ -558,6 +566,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x1');
+  const pageWrapper = document.getElementById('page-wrapper');
+
+  addButton.addEventListener('click', () => {
+    const existingBoxes = document.querySelectorAll('.dropped-box');
+    const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+    if (existingBoxes.length === requiredBoxes.length) {
+      const containerBoxHTML = `
+      <div id="two-one-box" class="two-one" data-price="50" draggable="true">
+        <div class="container-wrapper">
+          <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+        </div>
+        <div class="container-wrapper">
+          <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+        </div>
+      </div>
+      `;
+    
+      const containerBoxElement = document.createElement('div');
+      containerBoxElement.innerHTML = containerBoxHTML.trim();
+      const containerBox = containerBoxElement.firstChild;
+      pageWrapper.appendChild(containerBox);
+      updateTotalPrice()
+
+
+
+      const containerBoxes = document.querySelectorAll('.two-one');
+      containerBoxes.forEach(containerBox => {
+          containerBox.addEventListener('dragstart', (event) => {
+              if (event.target.id === "two-one-box") {
+                  event.dataTransfer.setData('dragged', event.target.id);
+                  event.target.classList.add('dragging2');
+                  const id = event.target.id;
+                  event.dataTransfer.setData('text/plain', id);
+                  const containers = document.querySelectorAll('.container2')
+                  containers.forEach(container => {
+                      container.classList.add('has-drag');
+                  })
+              }
+          });
+            
+              containerBox.addEventListener('dragend', (event) => {
+              event.target.classList.remove('dragging2');
+              const containers = document.querySelectorAll('.container2')
+              containers.forEach(container => {
+                  container.classList.remove('has-drag');
+              })
+          });
+      });
+
+      const containers = document.querySelectorAll('.container')
+      containers.forEach(container => {
+          container.addEventListener('dragover', e => {
+            e.preventDefault()
+          })
+        
+          container.addEventListener('drop', () => {
+            const draggable = document.querySelector('.dragging')
+            const type = container.dataset.type
+            container.appendChild(draggable)
+            draggable.classList.remove('dragging');
+            updateTotalPrice()
+          })
+      })
+
+      var messageElement = document.getElementById("welcome-message");
+      messageElement.style.display = "none";
+    } else {
+      alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
+    }
+  });
+});
+
 
 
 
@@ -573,7 +655,7 @@ deleteContainer.addEventListener('drop', (event) => {
     const id = event.dataTransfer.getData('text/plain');
     const elementToDelete = document.getElementById(id);
   
-    if (elementToDelete && (elementToDelete.classList.contains('two-three') || elementToDelete.classList.contains('two-four') || elementToDelete.classList.contains('two-two') || elementToDelete.classList.contains('one-two') || elementToDelete.classList.contains('three-one'))) {
+    if (elementToDelete && (elementToDelete.classList.contains('two-three') || elementToDelete.classList.contains('two-four') || elementToDelete.classList.contains('two-two') || elementToDelete.classList.contains('one-two') || elementToDelete.classList.contains('three-one') || elementToDelete.classList.contains('two-one'))) {
         elementToDelete.remove();
         const containers = document.querySelectorAll('.container[data-type="type2"]');
         const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
@@ -608,6 +690,7 @@ deleteContainer.addEventListener('drop', (event) => {
         container.classList.remove('has-22child');
         container.classList.remove('has-12child');
         container.classList.remove('has-31child');
+        container.classList.remove('has-21child');
 
       }
     });
