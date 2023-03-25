@@ -26,11 +26,27 @@ draggables.forEach(draggable => {
     event.dataTransfer.setData('text/plain', this.id);
     var tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
+    var parentContainer = draggable.parentNode;
+    var parentContainerType = parentContainer.getAttribute("data-type");
+    if (parentContainerType === "type1") {
+      var parentContainer2 = parentContainer.parentNode;
+      var parentContainer3 = parentContainer2.parentNode;
+      var parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
   });
 
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging');
     updateTotalPrice();
+    var parentContainer = draggable.parentNode;
+    var parentContainerType = parentContainer.getAttribute("data-type");
+    if (parentContainerType === "type1") {
+      var parentContainer2 = parentContainer.parentNode;
+      var parentContainer3 = parentContainer2.parentNode;
+      var parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
   });
   
   draggable.addEventListener('mouseover', (event) => {
@@ -58,12 +74,29 @@ draggables.forEach(draggable => {
       tooltip.classList.remove('top');
       tooltip.classList.add('bottom');
     }
+
+    var parentContainer = draggable.parentNode;
+    var parentContainerType = parentContainer.getAttribute("data-type");
+    if (parentContainerType === "type1") {
+      var parentContainer2 = parentContainer.parentNode;
+      var parentContainer3 = parentContainer2.parentNode;
+      var parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = 70;
+    }
   });
   
   draggable.addEventListener('mouseout', () => {
     var tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
+    var parentContainer = draggable.parentNode;
+    var parentContainerType = parentContainer.getAttribute("data-type");
+    if (parentContainerType === "type1") {
+      var parentContainer2 = parentContainer.parentNode;
+      var parentContainer3 = parentContainer2.parentNode;
+      var parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
   });
 });
 
@@ -262,16 +295,6 @@ function addContainer(containerData, type) {
                   container.classList.remove('has-drag');
               })
               deleteContainer.classList.remove('highlight');
-            }
-          });
-          containerBox.addEventListener('mouseover', (event) => {
-            if (containerBox.contains(event.target)) {
-              containerBox.style.zIndex = 998;
-            }
-          });
-          containerBox.addEventListener('mouseout', (event) => {
-            if (event.target.id === counter) {
-              containerBox.style.zIndex = 99;
             }
           });
         });

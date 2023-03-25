@@ -102,6 +102,7 @@ body {
 
 .box {
     position: absolute;
+    z-index: 50;
 }
 
 .two-four {
