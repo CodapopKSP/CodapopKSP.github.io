@@ -20,8 +20,6 @@ function updateTotalPrice() {
   priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
 
-
-
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
@@ -69,7 +67,6 @@ draggables.forEach(draggable => {
   });
 });
 
-
 const lightSwitch = document.getElementById('light-switch')
 
 lightSwitch.addEventListener('click', function() {
@@ -83,13 +80,6 @@ lightSwitch.addEventListener('click', function() {
   });
 });
 
-
-
-
-// Get the container-box element
-
-
-// Get the container-grid element
 const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 
 containerGrids.forEach(containerGrid => {
@@ -142,552 +132,45 @@ containerGrids.forEach(containerGrid => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-2x4');
-    const pageWrapper = document.getElementById('page-wrapper');
-  
     addButton.addEventListener('click', () => {
-      const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('.box');
-      if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString();
-        const containerBoxHTML = `
-        <div id="${counter}" class="two-four box" data-price="120" draggable="true">
-            <div class="container-wrapper">
-              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-              <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            </div>
-            <div class="container-wrapper">
-              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-              <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            </div>
-          </div>
-        `;
-      
-        const containerBoxElement = document.createElement('div');
-        containerBoxElement.innerHTML = containerBoxHTML.trim();
-        const containerBox = containerBoxElement.firstChild;
-        pageWrapper.appendChild(containerBox);
-        updateTotalPrice()
-
-        
-        const containerBoxes = document.querySelectorAll('.two-four');
-        containerBoxes.forEach(containerBox => {
-            containerBox.addEventListener('dragstart', (event) => {
-                if (event.target.id === counter) {
-                    event.dataTransfer.setData('dragged', event.target.id);
-                    event.target.classList.add('dragging2');
-                    const id = event.target.id;
-                    event.dataTransfer.setData('text/plain', id);
-                    const containers = document.querySelectorAll('.container2')
-                    containers.forEach(container => {
-                        container.classList.add('has-drag');
-                    })
-                    deleteContainer.classList.add('highlight');
-                }
-            });
-            containerBox.addEventListener('dragend', (event) => {
-              if (event.target.id === counter) {
-                event.target.classList.remove('dragging2');
-                const containers = document.querySelectorAll('.container2')
-                containers.forEach(container => {
-                    container.classList.remove('has-drag');
-                })
-                deleteContainer.classList.remove('highlight');
-              }
-            });
-            containerBox.addEventListener('mouseover', (event) => {
-              if (event.target.id === counter) {
-                containerBox.classList.add("mouseover");
-              }
-            })
-            containerBox.addEventListener('mouseout', () => {
-              if (event.target.id === counter) {
-                containerBox.classList.remove("mouseover");
-              }
-            });
-        });
-
-        const containers = document.querySelectorAll('.container')
-        containers.forEach(container => {
-            container.addEventListener('dragover', e => {
-              e.preventDefault()
-            })
-          
-            container.addEventListener('drop', () => {
-                const draggable = document.querySelector('.dragging')
-                container.appendChild(draggable)
-                draggable.classList.remove('dragging');
-                updateTotalPrice()
-            })
-        });
-
-        var messageElement = document.getElementById("welcome-message");
-        messageElement.style.display = "none";
-    
-      } else {
-        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
-      }
+      addContainer(MarkV, '.two-four');
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-2x3');
-    const pageWrapper = document.getElementById('page-wrapper');
-  
     addButton.addEventListener('click', () => {
-      const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('.box');
-      if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString();
-        const containerBoxHTML = `
-        <div id="${counter}" class="two-three box" data-price="90" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-          </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-          </div>
-        </div>
-        `;
-      
-        const containerBoxElement = document.createElement('div');
-        containerBoxElement.innerHTML = containerBoxHTML.trim();
-        const containerBox = containerBoxElement.firstChild;
-        pageWrapper.appendChild(containerBox);
-        updateTotalPrice()
-
-
-
-        const containerBoxes = document.querySelectorAll('.two-three');
-        containerBoxes.forEach(containerBox => {
-          containerBox.addEventListener('dragstart', (event) => {
-              if (event.target.id === counter) {
-                  event.dataTransfer.setData('dragged', event.target.id);
-                  event.target.classList.add('dragging2');
-                  const id = event.target.id;
-                  event.dataTransfer.setData('text/plain', id);
-                  const containers = document.querySelectorAll('.container2')
-                  containers.forEach(container => {
-                      container.classList.add('has-drag');
-                  })
-                  deleteContainer.classList.add('highlight');
-              }
-          });
-          containerBox.addEventListener('dragend', (event) => {
-            if (event.target.id === counter) {
-              event.target.classList.remove('dragging2');
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.remove('has-drag');
-              })
-              deleteContainer.classList.remove('highlight');
-            }
-          });
-          containerBox.addEventListener('mouseover', (event) => {
-            if (event.target.id === counter) {
-              containerBox.classList.add("mouseover");
-            }
-          })
-          containerBox.addEventListener('mouseout', () => {
-            if (event.target.id === counter) {
-              containerBox.classList.remove("mouseover");
-            }
-          });
-        });
-
-        const containers = document.querySelectorAll('.container')
-        containers.forEach(container => {
-            container.addEventListener('dragover', e => {
-              e.preventDefault()
-            })
-          
-            container.addEventListener('drop', () => {
-              const draggable = document.querySelector('.dragging')
-              const type = container.dataset.type
-              container.appendChild(draggable)
-              draggable.classList.remove('dragging');
-              updateTotalPrice()
-            })
-        })
-
-        var messageElement = document.getElementById("welcome-message");
-        messageElement.style.display = "none";
-      } else {
-        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
-      }
+      addContainer(MarkIV, '.two-three');
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-2x2');
-    const pageWrapper = document.getElementById('page-wrapper');
-  
     addButton.addEventListener('click', () => {
-      const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('.box');
-      if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString();
-        const containerBoxHTML = `
-        <div id="${counter}" class="two-two box" data-price="70" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-          </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-          </div>
-        </div>
-        `;
-      
-        const containerBoxElement = document.createElement('div');
-        containerBoxElement.innerHTML = containerBoxHTML.trim();
-        const containerBox = containerBoxElement.firstChild;
-        pageWrapper.appendChild(containerBox);
-        updateTotalPrice()
-
-
-
-        const containerBoxes = document.querySelectorAll('.two-two');
-        containerBoxes.forEach(containerBox => {
-          containerBox.addEventListener('dragstart', (event) => {
-              if (event.target.id === counter) {
-                  event.dataTransfer.setData('dragged', event.target.id);
-                  event.target.classList.add('dragging2');
-                  const id = event.target.id;
-                  event.dataTransfer.setData('text/plain', id);
-                  const containers = document.querySelectorAll('.container2')
-                  containers.forEach(container => {
-                      container.classList.add('has-drag');
-                  })
-                  deleteContainer.classList.add('highlight');
-              }
-          });
-          containerBox.addEventListener('dragend', (event) => {
-            if (event.target.id === counter) {
-              event.target.classList.remove('dragging2');
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.remove('has-drag');
-              })
-              deleteContainer.classList.remove('highlight');
-            }
-          });
-          containerBox.addEventListener('mouseover', (event) => {
-            if (event.target.id === counter) {
-              containerBox.classList.add("mouseover");
-            }
-          })
-          containerBox.addEventListener('mouseout', () => {
-            if (event.target.id === counter) {
-              containerBox.classList.remove("mouseover");
-            }
-          });
-        });
-
-        const containers = document.querySelectorAll('.container')
-        containers.forEach(container => {
-            container.addEventListener('dragover', e => {
-              e.preventDefault()
-            })
-          
-            container.addEventListener('drop', () => {
-              const draggable = document.querySelector('.dragging')
-              const type = container.dataset.type
-              container.appendChild(draggable)
-              draggable.classList.remove('dragging');
-              updateTotalPrice()
-            })
-        })
-
-        var messageElement = document.getElementById("welcome-message");
-        messageElement.style.display = "none";
-      } else {
-        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
-      }
+      addContainer(MarkIII, '.two-two');
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-1x2');
-    const pageWrapper = document.getElementById('page-wrapper');
-  
     addButton.addEventListener('click', () => {
-      const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('.box');
-      if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString();
-        const containerBoxHTML = `
-        <div id="${counter}" class="one-two box" data-price="50" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-          </div>
-        </div>
-        `;
-      
-        const containerBoxElement = document.createElement('div');
-        containerBoxElement.innerHTML = containerBoxHTML.trim();
-        const containerBox = containerBoxElement.firstChild;
-        pageWrapper.appendChild(containerBox);
-        updateTotalPrice()
-
-
-
-        const containerBoxes = document.querySelectorAll('.one-two');
-        containerBoxes.forEach(containerBox => {
-          containerBox.addEventListener('dragstart', (event) => {
-              if (event.target.id === counter) {
-                  event.dataTransfer.setData('dragged', event.target.id);
-                  event.target.classList.add('dragging2');
-                  const id = event.target.id;
-                  event.dataTransfer.setData('text/plain', id);
-                  const containers = document.querySelectorAll('.container2')
-                  containers.forEach(container => {
-                      container.classList.add('has-drag');
-                  })
-                  deleteContainer.classList.add('highlight');
-              }
-          });
-          containerBox.addEventListener('dragend', (event) => {
-            if (event.target.id === counter) {
-              event.target.classList.remove('dragging2');
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.remove('has-drag');
-              })
-              deleteContainer.classList.remove('highlight');
-            }
-          });
-          containerBox.addEventListener('mouseover', (event) => {
-            if (event.target.id === counter) {
-              containerBox.classList.add("mouseover");
-            }
-          })
-          containerBox.addEventListener('mouseout', () => {
-            if (event.target.id === counter) {
-              containerBox.classList.remove("mouseover");
-            }
-          });
-        });
-
-        const containers = document.querySelectorAll('.container')
-        containers.forEach(container => {
-            container.addEventListener('dragover', e => {
-              e.preventDefault()
-            })
-          
-            container.addEventListener('drop', () => {
-              const draggable = document.querySelector('.dragging')
-              const type = container.dataset.type
-              container.appendChild(draggable)
-              draggable.classList.remove('dragging');
-              updateTotalPrice()
-            })
-        })
-
-        var messageElement = document.getElementById("welcome-message");
-        messageElement.style.display = "none";
-      } else {
-        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
-      }
+      addContainer(MarkIhoriz, '.one-two');
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-3x1');
-    const pageWrapper = document.getElementById('page-wrapper');
-  
     addButton.addEventListener('click', () => {
-      const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('.box');
-      if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString();
-        const containerBoxHTML = `
-        <div id="${counter}" class="three-one box" data-price="60" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-          </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-          </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-          </div>
-        </div>
-        `;
-      
-        const containerBoxElement = document.createElement('div');
-        containerBoxElement.innerHTML = containerBoxHTML.trim();
-        const containerBox = containerBoxElement.firstChild;
-        pageWrapper.appendChild(containerBox);
-        updateTotalPrice()
-
-
-
-        const containerBoxes = document.querySelectorAll('.three-one');
-        containerBoxes.forEach(containerBox => {
-          containerBox.addEventListener('dragstart', (event) => {
-              if (event.target.id === counter) {
-                  event.dataTransfer.setData('dragged', event.target.id);
-                  event.target.classList.add('dragging2');
-                  const id = event.target.id;
-                  event.dataTransfer.setData('text/plain', id);
-                  const containers = document.querySelectorAll('.container2')
-                  containers.forEach(container => {
-                      container.classList.add('has-drag');
-                  })
-                  deleteContainer.classList.add('highlight');
-              }
-          });
-          containerBox.addEventListener('dragend', (event) => {
-            if (event.target.id === counter) {
-              event.target.classList.remove('dragging2');
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.remove('has-drag');
-              })
-              deleteContainer.classList.remove('highlight');
-            }
-          });
-          containerBox.addEventListener('mouseover', (event) => {
-            if (event.target.id === counter) {
-              containerBox.classList.add("mouseover");
-            }
-          })
-          containerBox.addEventListener('mouseout', () => {
-            if (event.target.id === counter) {
-              containerBox.classList.remove("mouseover");
-            }
-          });
-        });
-
-        const containers = document.querySelectorAll('.container')
-        containers.forEach(container => {
-            container.addEventListener('dragover', e => {
-              e.preventDefault()
-            })
-          
-            container.addEventListener('drop', () => {
-              const draggable = document.querySelector('.dragging')
-              const type = container.dataset.type
-              container.appendChild(draggable)
-              draggable.classList.remove('dragging');
-              updateTotalPrice()
-            })
-        })
-
-        var messageElement = document.getElementById("welcome-message");
-        messageElement.style.display = "none";
-      } else {
-        alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
-      }
+      addContainer(MarkII, '.three-one');
     });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   const addButton = document.getElementById('add-2x1');
-  const pageWrapper = document.getElementById('page-wrapper');
-
   addButton.addEventListener('click', () => {
-    const existingBoxes = document.querySelectorAll('.dropped-box');
-    const requiredBoxes = document.querySelectorAll('.box');
-    if (existingBoxes.length === requiredBoxes.length) {
-      const counter = Math.floor(Math.random() * 10000).toString();
-        const containerBoxHTML = `
-        <div id="${counter}" class="two-one box" data-price="50" draggable="true">
-        <div class="container-wrapper">
-          <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-        </div>
-        <div class="container-wrapper">
-          <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-        </div>
-      </div>
-      `;
-    
-      const containerBoxElement = document.createElement('div');
-      containerBoxElement.innerHTML = containerBoxHTML.trim();
-      const containerBox = containerBoxElement.firstChild;
-      pageWrapper.appendChild(containerBox);
-      updateTotalPrice()
-
-
-
-      const containerBoxes = document.querySelectorAll('.two-one');
-      containerBoxes.forEach(containerBox => {
-        containerBox.addEventListener('dragstart', (event) => {
-            if (event.target.id === counter) {
-                event.dataTransfer.setData('dragged', event.target.id);
-                event.target.classList.add('dragging2');
-                const id = event.target.id;
-                event.dataTransfer.setData('text/plain', id);
-                const containers = document.querySelectorAll('.container2')
-                containers.forEach(container => {
-                    container.classList.add('has-drag');
-                })
-                deleteContainer.classList.add('highlight');
-            }
-        });
-        containerBox.addEventListener('dragend', (event) => {
-          if (event.target.id === counter) {
-            event.target.classList.remove('dragging2');
-            const containers = document.querySelectorAll('.container2')
-            containers.forEach(container => {
-                container.classList.remove('has-drag');
-            })
-            deleteContainer.classList.remove('highlight');
-          }
-        });
-        containerBox.addEventListener('mouseover', (event) => {
-          if (event.target.id === counter) {
-            containerBox.classList.add("mouseover");
-          }
-        })
-        containerBox.addEventListener('mouseout', () => {
-          if (event.target.id === counter) {
-            containerBox.classList.remove("mouseover");
-          }
-        });
-      });
-
-      
-
-      const containers = document.querySelectorAll('.container')
-      containers.forEach(container => {
-          container.addEventListener('dragover', e => {
-            e.preventDefault()
-          });
-        
-          container.addEventListener('drop', () => {
-            const draggable = document.querySelector('.dragging')
-            const type = container.dataset.type
-            container.appendChild(draggable)
-            draggable.classList.remove('dragging');
-            updateTotalPrice()
-          });
-      });
-
-      var messageElement = document.getElementById("welcome-message");
-      messageElement.style.display = "none";
-    } else {
-      alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
-    }
+    addContainer(MarkIvert, '.two-one');
   });
 });
-
-
-
-
-
-
-
 
 deleteContainer.addEventListener('dragover', (event) => {
   event.preventDefault();
@@ -741,3 +224,147 @@ deleteContainer.addEventListener('drop', (event) => {
     });
     updateTotalPrice()
 });
+
+function addContainer(containerData, type) {
+    const existingBoxes = document.querySelectorAll('.dropped-box');
+    const requiredBoxes = document.querySelectorAll('.box');
+      if (existingBoxes.length === requiredBoxes.length) {
+        const counter = Math.floor(Math.random() * 10000).toString();
+        const containerBoxHTML = `<div id="${counter}" ${containerData}`;
+      
+        const containerBoxElement = document.createElement('div');
+        containerBoxElement.innerHTML = containerBoxHTML.trim();
+        const containerBox = containerBoxElement.firstChild;
+        const pageWrapper = document.getElementById('page-wrapper');
+        pageWrapper.appendChild(containerBox);
+        updateTotalPrice()
+
+        const containerBoxes = document.querySelectorAll(type);
+        containerBoxes.forEach(containerBox => {
+          containerBox.addEventListener('dragstart', (event) => {
+              if (event.target.id === counter) {
+                  event.dataTransfer.setData('dragged', event.target.id);
+                  event.target.classList.add('dragging2');
+                  const id = event.target.id;
+                  event.dataTransfer.setData('text/plain', id);
+                  const containers = document.querySelectorAll('.container2')
+                  containers.forEach(container => {
+                      container.classList.add('has-drag');
+                  })
+                  deleteContainer.classList.add('highlight');
+              }
+          });
+          containerBox.addEventListener('dragend', (event) => {
+            if (event.target.id === counter) {
+              event.target.classList.remove('dragging2');
+              const containers = document.querySelectorAll('.container2')
+              containers.forEach(container => {
+                  container.classList.remove('has-drag');
+              })
+              deleteContainer.classList.remove('highlight');
+            }
+          });
+        });
+
+        const containers = document.querySelectorAll('.container')
+        containers.forEach(container => {
+            container.addEventListener('dragover', e => {
+              e.preventDefault()
+            })
+          
+            container.addEventListener('drop', () => {
+              const draggable = document.querySelector('.dragging')
+              if (draggable) {
+                container.appendChild(draggable);
+                draggable.classList.remove('dragging');
+              }
+              updateTotalPrice();
+            })
+        })
+
+        var messageElement = document.getElementById("welcome-message");
+        messageElement.style.display = "none";
+  } else {
+    alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
+  }
+}
+
+
+const MarkIhoriz = `
+        class="one-two box" data-price="50" draggable="true">
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          </div>
+        </div>
+        `;
+
+const MarkIvert = `
+        class="two-one box" data-price="50" draggable="true">
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          </div>
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          </div>
+        </div>
+        `;
+
+const MarkII = `
+        class="three-one box" data-price="60" draggable="true">
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          </div>
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          </div>
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          </div>
+        </div>
+        `;
+
+const MarkIII = `
+        class="two-two box" data-price="70" draggable="true">
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          </div>
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          </div>
+        </div>
+        `;
+
+const MarkIV = `
+        class="two-three box" data-price="90" draggable="true">
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          </div>
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          </div>
+        </div>
+        `;
+
+const MarkV = `
+        class="two-four box" data-price="120" draggable="true">
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          </div>
+          <div class="container-wrapper">
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          </div>
+        </div>
+        `;
