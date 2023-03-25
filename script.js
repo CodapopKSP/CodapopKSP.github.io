@@ -1,35 +1,11 @@
 const draggables = document.querySelectorAll('.draggable')
 const priceDisplay2 = document.getElementById('price-display2')
+const deleteContainer = document.getElementById('delete-container');
 
 function updateTotalPrice() {
   let totalPrice = 0
-  const containerBoxes = document.querySelectorAll('.two-four');
+  const containerBoxes = document.querySelectorAll('.box');
   containerBoxes.forEach(containerBox => {
-    const price = parseFloat(containerBox.dataset.price);
-    totalPrice += price;
-  });
-  const containerBoxes2 = document.querySelectorAll('.two-three');
-  containerBoxes2.forEach(containerBox => {
-    const price = parseFloat(containerBox.dataset.price);
-    totalPrice += price;
-  });
-  const containerBoxes3 = document.querySelectorAll('.two-two');
-  containerBoxes3.forEach(containerBox => {
-    const price = parseFloat(containerBox.dataset.price);
-    totalPrice += price;
-  });
-  const containerBoxes4 = document.querySelectorAll('.one-two');
-  containerBoxes4.forEach(containerBox => {
-    const price = parseFloat(containerBox.dataset.price);
-    totalPrice += price;
-  });
-  const containerBoxes5 = document.querySelectorAll('.three-one');
-  containerBoxes5.forEach(containerBox => {
-    const price = parseFloat(containerBox.dataset.price);
-    totalPrice += price;
-  });
-  const containerBoxes6 = document.querySelectorAll('.two-one');
-  containerBoxes6.forEach(containerBox => {
     const price = parseFloat(containerBox.dataset.price);
     totalPrice += price;
   });
@@ -50,6 +26,8 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
+    var tooltip = draggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
   });
 
   draggable.addEventListener('dragend', () => {
@@ -57,14 +35,14 @@ draggables.forEach(draggable => {
     updateTotalPrice();
   });
   
-  draggable.addEventListener('mouseover', () => {
-    var tooltip = draggable.querySelector(".tooltip");
+  draggable.addEventListener('mouseover', (event) => {
+    const tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
     tooltip.style.display = 'block';
-
+  
     const rect = event.target.getBoundingClientRect();
     const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
-  
+    
     if (position < window.innerWidth / 2) {
       tooltip.classList.remove('right');
       tooltip.classList.add('left');
@@ -72,9 +50,9 @@ draggables.forEach(draggable => {
       tooltip.classList.remove('left');
       tooltip.classList.add('right');
     }
-
+  
     const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
-
+  
     if (positionv < window.innerHeight / 2) {
       tooltip.classList.remove('bottom');
       tooltip.classList.add('top');
@@ -88,17 +66,6 @@ draggables.forEach(draggable => {
     var tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
-  });
-  
-  // Touch events
-  draggable.addEventListener('touchstart', () => {
-    const touched_modules = document.querySelectorAll('.draggable.touched');
-    if (touched_modules) {
-      touched_modules.forEach(module => {
-        module.classList.remove("touched");
-      })
-    }
-    draggable.classList.add("touched");
   });
 });
 
@@ -179,10 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+      const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
+        const counter = Math.floor(Math.random() * 10000).toString();
         const containerBoxHTML = `
-          <div id="two-four-box" class="two-four" data-price="120" draggable="true">
+        <div id="${counter}" class="two-four box" data-price="120" draggable="true">
             <div class="container-wrapper">
               <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
               <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -208,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const containerBoxes = document.querySelectorAll('.two-four');
         containerBoxes.forEach(containerBox => {
             containerBox.addEventListener('dragstart', (event) => {
-                if (event.target.id === "two-four-box") {
+                if (event.target.id === counter) {
                     event.dataTransfer.setData('dragged', event.target.id);
                     event.target.classList.add('dragging2');
                     const id = event.target.id;
@@ -217,15 +185,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     containers.forEach(container => {
                         container.classList.add('has-drag');
                     })
+                    deleteContainer.classList.add('highlight');
                 }
             });
-              
-                containerBox.addEventListener('dragend', (event) => {
+            containerBox.addEventListener('dragend', (event) => {
+              if (event.target.id === counter) {
                 event.target.classList.remove('dragging2');
                 const containers = document.querySelectorAll('.container2')
                 containers.forEach(container => {
                     container.classList.remove('has-drag');
                 })
+                deleteContainer.classList.remove('highlight');
+              }
+            });
+            containerBox.addEventListener('mouseover', (event) => {
+              if (event.target.id === counter) {
+                containerBox.classList.add("mouseover");
+              }
+            })
+            containerBox.addEventListener('mouseout', () => {
+              if (event.target.id === counter) {
+                containerBox.classList.remove("mouseover");
+              }
             });
         });
 
@@ -241,17 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 draggable.classList.remove('dragging');
                 updateTotalPrice()
             })
-
-            container.addEventListener('touchstart', (event) => {
-              const touched_modules = document.querySelectorAll('.draggable.touched');
-              if (touched_modules) {
-                event.preventDefault();
-                touched_modules.forEach(module => {
-                  container.appendChild(module);
-                  module.classList.remove("touched");
-                });
-              }
-            });
         });
 
         var messageElement = document.getElementById("welcome-message");
@@ -269,10 +239,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+      const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
+        const counter = Math.floor(Math.random() * 10000).toString();
         const containerBoxHTML = `
-        <div id="two-three-box" class="two-three" data-price="90" draggable="true">
+        <div id="${counter}" class="two-three box" data-price="90" draggable="true">
           <div class="container-wrapper">
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -296,26 +267,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const containerBoxes = document.querySelectorAll('.two-three');
         containerBoxes.forEach(containerBox => {
-            containerBox.addEventListener('dragstart', (event) => {
-                if (event.target.id === "two-three-box") {
-                    event.dataTransfer.setData('dragged', event.target.id);
-                    event.target.classList.add('dragging2');
-                    const id = event.target.id;
-                    event.dataTransfer.setData('text/plain', id);
-                    const containers = document.querySelectorAll('.container2')
-                    containers.forEach(container => {
-                        container.classList.add('has-drag');
-                    })
-                }
-            });
-              
-                containerBox.addEventListener('dragend', (event) => {
-                event.target.classList.remove('dragging2');
-                const containers = document.querySelectorAll('.container2')
-                containers.forEach(container => {
-                    container.classList.remove('has-drag');
-                })
-            });
+          containerBox.addEventListener('dragstart', (event) => {
+              if (event.target.id === counter) {
+                  event.dataTransfer.setData('dragged', event.target.id);
+                  event.target.classList.add('dragging2');
+                  const id = event.target.id;
+                  event.dataTransfer.setData('text/plain', id);
+                  const containers = document.querySelectorAll('.container2')
+                  containers.forEach(container => {
+                      container.classList.add('has-drag');
+                  })
+                  deleteContainer.classList.add('highlight');
+              }
+          });
+          containerBox.addEventListener('dragend', (event) => {
+            if (event.target.id === counter) {
+              event.target.classList.remove('dragging2');
+              const containers = document.querySelectorAll('.container2')
+              containers.forEach(container => {
+                  container.classList.remove('has-drag');
+              })
+              deleteContainer.classList.remove('highlight');
+            }
+          });
+          containerBox.addEventListener('mouseover', (event) => {
+            if (event.target.id === counter) {
+              containerBox.classList.add("mouseover");
+            }
+          })
+          containerBox.addEventListener('mouseout', () => {
+            if (event.target.id === counter) {
+              containerBox.classList.remove("mouseover");
+            }
+          });
         });
 
         const containers = document.querySelectorAll('.container')
@@ -347,10 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+      const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
+        const counter = Math.floor(Math.random() * 10000).toString();
         const containerBoxHTML = `
-        <div id="two-two-box" class="two-two" data-price="70" draggable="true">
+        <div id="${counter}" class="two-two box" data-price="70" draggable="true">
           <div class="container-wrapper">
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -372,26 +357,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const containerBoxes = document.querySelectorAll('.two-two');
         containerBoxes.forEach(containerBox => {
-            containerBox.addEventListener('dragstart', (event) => {
-                if (event.target.id === "two-two-box") {
-                    event.dataTransfer.setData('dragged', event.target.id);
-                    event.target.classList.add('dragging2');
-                    const id = event.target.id;
-                    event.dataTransfer.setData('text/plain', id);
-                    const containers = document.querySelectorAll('.container2')
-                    containers.forEach(container => {
-                        container.classList.add('has-drag');
-                    })
-                }
-            });
-              
-                containerBox.addEventListener('dragend', (event) => {
-                event.target.classList.remove('dragging2');
-                const containers = document.querySelectorAll('.container2')
-                containers.forEach(container => {
-                    container.classList.remove('has-drag');
-                })
-            });
+          containerBox.addEventListener('dragstart', (event) => {
+              if (event.target.id === counter) {
+                  event.dataTransfer.setData('dragged', event.target.id);
+                  event.target.classList.add('dragging2');
+                  const id = event.target.id;
+                  event.dataTransfer.setData('text/plain', id);
+                  const containers = document.querySelectorAll('.container2')
+                  containers.forEach(container => {
+                      container.classList.add('has-drag');
+                  })
+                  deleteContainer.classList.add('highlight');
+              }
+          });
+          containerBox.addEventListener('dragend', (event) => {
+            if (event.target.id === counter) {
+              event.target.classList.remove('dragging2');
+              const containers = document.querySelectorAll('.container2')
+              containers.forEach(container => {
+                  container.classList.remove('has-drag');
+              })
+              deleteContainer.classList.remove('highlight');
+            }
+          });
+          containerBox.addEventListener('mouseover', (event) => {
+            if (event.target.id === counter) {
+              containerBox.classList.add("mouseover");
+            }
+          })
+          containerBox.addEventListener('mouseout', () => {
+            if (event.target.id === counter) {
+              containerBox.classList.remove("mouseover");
+            }
+          });
         });
 
         const containers = document.querySelectorAll('.container')
@@ -423,10 +421,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+      const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
+        const counter = Math.floor(Math.random() * 10000).toString();
         const containerBoxHTML = `
-        <div id="one-two-box" class="one-two" data-price="50" draggable="true">
+        <div id="${counter}" class="one-two box" data-price="50" draggable="true">
           <div class="container-wrapper">
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -444,26 +443,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const containerBoxes = document.querySelectorAll('.one-two');
         containerBoxes.forEach(containerBox => {
-            containerBox.addEventListener('dragstart', (event) => {
-                if (event.target.id === "one-two-box") {
-                    event.dataTransfer.setData('dragged', event.target.id);
-                    event.target.classList.add('dragging2');
-                    const id = event.target.id;
-                    event.dataTransfer.setData('text/plain', id);
-                    const containers = document.querySelectorAll('.container2')
-                    containers.forEach(container => {
-                        container.classList.add('has-drag');
-                    })
-                }
-            });
-              
-                containerBox.addEventListener('dragend', (event) => {
-                event.target.classList.remove('dragging2');
-                const containers = document.querySelectorAll('.container2')
-                containers.forEach(container => {
-                    container.classList.remove('has-drag');
-                })
-            });
+          containerBox.addEventListener('dragstart', (event) => {
+              if (event.target.id === counter) {
+                  event.dataTransfer.setData('dragged', event.target.id);
+                  event.target.classList.add('dragging2');
+                  const id = event.target.id;
+                  event.dataTransfer.setData('text/plain', id);
+                  const containers = document.querySelectorAll('.container2')
+                  containers.forEach(container => {
+                      container.classList.add('has-drag');
+                  })
+                  deleteContainer.classList.add('highlight');
+              }
+          });
+          containerBox.addEventListener('dragend', (event) => {
+            if (event.target.id === counter) {
+              event.target.classList.remove('dragging2');
+              const containers = document.querySelectorAll('.container2')
+              containers.forEach(container => {
+                  container.classList.remove('has-drag');
+              })
+              deleteContainer.classList.remove('highlight');
+            }
+          });
+          containerBox.addEventListener('mouseover', (event) => {
+            if (event.target.id === counter) {
+              containerBox.classList.add("mouseover");
+            }
+          })
+          containerBox.addEventListener('mouseout', () => {
+            if (event.target.id === counter) {
+              containerBox.classList.remove("mouseover");
+            }
+          });
         });
 
         const containers = document.querySelectorAll('.container')
@@ -495,10 +507,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
     addButton.addEventListener('click', () => {
       const existingBoxes = document.querySelectorAll('.dropped-box');
-      const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+      const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
+        const counter = Math.floor(Math.random() * 10000).toString();
         const containerBoxHTML = `
-        <div id="three-one-box" class="three-one" data-price="60" draggable="true">
+        <div id="${counter}" class="three-one box" data-price="60" draggable="true">
           <div class="container-wrapper">
             <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
@@ -521,26 +534,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const containerBoxes = document.querySelectorAll('.three-one');
         containerBoxes.forEach(containerBox => {
-            containerBox.addEventListener('dragstart', (event) => {
-                if (event.target.id === "three-one-box") {
-                    event.dataTransfer.setData('dragged', event.target.id);
-                    event.target.classList.add('dragging2');
-                    const id = event.target.id;
-                    event.dataTransfer.setData('text/plain', id);
-                    const containers = document.querySelectorAll('.container2')
-                    containers.forEach(container => {
-                        container.classList.add('has-drag');
-                    })
-                }
-            });
-              
-                containerBox.addEventListener('dragend', (event) => {
-                event.target.classList.remove('dragging2');
-                const containers = document.querySelectorAll('.container2')
-                containers.forEach(container => {
-                    container.classList.remove('has-drag');
-                })
-            });
+          containerBox.addEventListener('dragstart', (event) => {
+              if (event.target.id === counter) {
+                  event.dataTransfer.setData('dragged', event.target.id);
+                  event.target.classList.add('dragging2');
+                  const id = event.target.id;
+                  event.dataTransfer.setData('text/plain', id);
+                  const containers = document.querySelectorAll('.container2')
+                  containers.forEach(container => {
+                      container.classList.add('has-drag');
+                  })
+                  deleteContainer.classList.add('highlight');
+              }
+          });
+          containerBox.addEventListener('dragend', (event) => {
+            if (event.target.id === counter) {
+              event.target.classList.remove('dragging2');
+              const containers = document.querySelectorAll('.container2')
+              containers.forEach(container => {
+                  container.classList.remove('has-drag');
+              })
+              deleteContainer.classList.remove('highlight');
+            }
+          });
+          containerBox.addEventListener('mouseover', (event) => {
+            if (event.target.id === counter) {
+              containerBox.classList.add("mouseover");
+            }
+          })
+          containerBox.addEventListener('mouseout', () => {
+            if (event.target.id === counter) {
+              containerBox.classList.remove("mouseover");
+            }
+          });
         });
 
         const containers = document.querySelectorAll('.container')
@@ -572,10 +598,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   addButton.addEventListener('click', () => {
     const existingBoxes = document.querySelectorAll('.dropped-box');
-    const requiredBoxes = document.querySelectorAll('#two-four-box, #two-three-box, #two-two-box, #one-two-box, #three-one-box, #two-one-box');
+    const requiredBoxes = document.querySelectorAll('.box');
     if (existingBoxes.length === requiredBoxes.length) {
-      const containerBoxHTML = `
-      <div id="two-one-box" class="two-one" data-price="50" draggable="true">
+      const counter = Math.floor(Math.random() * 10000).toString();
+        const containerBoxHTML = `
+        <div id="${counter}" class="two-one box" data-price="50" draggable="true">
         <div class="container-wrapper">
           <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
         </div>
@@ -595,33 +622,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const containerBoxes = document.querySelectorAll('.two-one');
       containerBoxes.forEach(containerBox => {
-          containerBox.addEventListener('dragstart', (event) => {
-              if (event.target.id === "two-one-box") {
-                  event.dataTransfer.setData('dragged', event.target.id);
-                  event.target.classList.add('dragging2');
-                  const id = event.target.id;
-                  event.dataTransfer.setData('text/plain', id);
-                  const containers = document.querySelectorAll('.container2')
-                  containers.forEach(container => {
-                      container.classList.add('has-drag');
-                  })
-              }
-          });
-            
-              containerBox.addEventListener('dragend', (event) => {
-              event.target.classList.remove('dragging2');
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.remove('has-drag');
-              })
-          });
+        containerBox.addEventListener('dragstart', (event) => {
+            if (event.target.id === counter) {
+                event.dataTransfer.setData('dragged', event.target.id);
+                event.target.classList.add('dragging2');
+                const id = event.target.id;
+                event.dataTransfer.setData('text/plain', id);
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.add('has-drag');
+                })
+                deleteContainer.classList.add('highlight');
+            }
+        });
+        containerBox.addEventListener('dragend', (event) => {
+          if (event.target.id === counter) {
+            event.target.classList.remove('dragging2');
+            const containers = document.querySelectorAll('.container2')
+            containers.forEach(container => {
+                container.classList.remove('has-drag');
+            })
+            deleteContainer.classList.remove('highlight');
+          }
+        });
+        containerBox.addEventListener('mouseover', (event) => {
+          if (event.target.id === counter) {
+            containerBox.classList.add("mouseover");
+          }
+        })
+        containerBox.addEventListener('mouseout', () => {
+          if (event.target.id === counter) {
+            containerBox.classList.remove("mouseover");
+          }
+        });
       });
+
+      
 
       const containers = document.querySelectorAll('.container')
       containers.forEach(container => {
           container.addEventListener('dragover', e => {
             e.preventDefault()
-          })
+          });
         
           container.addEventListener('drop', () => {
             const draggable = document.querySelector('.dragging')
@@ -629,8 +671,8 @@ document.addEventListener('DOMContentLoaded', () => {
             container.appendChild(draggable)
             draggable.classList.remove('dragging');
             updateTotalPrice()
-          })
-      })
+          });
+      });
 
       var messageElement = document.getElementById("welcome-message");
       messageElement.style.display = "none";
@@ -646,7 +688,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-const deleteContainer = document.getElementById('delete-container');
+
 deleteContainer.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
@@ -655,7 +697,7 @@ deleteContainer.addEventListener('drop', (event) => {
     const id = event.dataTransfer.getData('text/plain');
     const elementToDelete = document.getElementById(id);
   
-    if (elementToDelete && (elementToDelete.classList.contains('two-three') || elementToDelete.classList.contains('two-four') || elementToDelete.classList.contains('two-two') || elementToDelete.classList.contains('one-two') || elementToDelete.classList.contains('three-one') || elementToDelete.classList.contains('two-one'))) {
+    if (elementToDelete && (elementToDelete.classList.contains('box'))) {
         elementToDelete.remove();
         const containers = document.querySelectorAll('.container[data-type="type2"]');
         const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
@@ -676,6 +718,9 @@ deleteContainer.addEventListener('drop', (event) => {
           const emptySlots = container.querySelectorAll('.draggable').length < 1;
             if (emptySlots) {
                 container.appendChild(elementToDelete);
+                elementToDelete.classList.remove("mouseover");
+                var tooltip = elementToDelete.querySelector(".tooltip");
+                tooltip.style.display = 'none';
                 droppedIntoContainer = true;
                 break;
             }
