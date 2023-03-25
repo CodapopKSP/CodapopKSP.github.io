@@ -264,6 +264,16 @@ function addContainer(containerData, type) {
               deleteContainer.classList.remove('highlight');
             }
           });
+          containerBox.addEventListener('mouseover', (event) => {
+            if (containerBox.contains(event.target)) {
+              containerBox.style.zIndex = 998;
+            }
+          });
+          containerBox.addEventListener('mouseout', (event) => {
+            if (event.target.id === counter) {
+              containerBox.style.zIndex = 99;
+            }
+          });
         });
 
         const containers = document.querySelectorAll('.container')

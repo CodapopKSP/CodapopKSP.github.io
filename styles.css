@@ -102,7 +102,6 @@ body {
 
 .box {
     position: absolute;
-    z-index: 1;
 }
 
 .two-four {
@@ -181,10 +180,6 @@ body {
     min-height: 22vh;
     background-color: rgb(0, 0, 0);
     background-size: cover;
-}
-
-.box.mouseover {
-    z-index: 999;
 }
   
 #page-wrapper {
