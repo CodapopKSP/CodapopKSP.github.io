@@ -25,110 +25,113 @@ const load = document.getElementById('load')
 load.addEventListener('click', function() {
   const inputBox = document.getElementById('input-box');
   if (inputBox.value.startsWith('z')) {
-    var importConfig = inputBox.value;
-    let startIndex = 0;
-    let objectArray = [];
-
-    while (true) {
-      const nextZIndex = importConfig.indexOf('z', startIndex + 1);
-      if (nextZIndex === -1) {
-        objectArray.push(importConfig.substring(startIndex));
-        break;
-      }
-      objectArray.push(importConfig.substring(startIndex, nextZIndex));
-      startIndex = nextZIndex;
-    }
-
-    for (const object of objectArray) {
-      const first5Chars = object.substring(0, 5);
-      const containerAddress = first5Chars.substring(1);
-      const modules = [];
-      for (let i = 5; i < object.length; i += 2) {
-        modules.push(object.substring(i, i + 2));
-      }
-      var containerType = '';
-      if (containerAddress.startsWith('12')) {
-          containerType = '.one-two'
-          addContainer(MarkIhoriz, containerType);
-      }
-      if (containerAddress.startsWith('21')) {
-        containerType = '.two-one'
-        addContainer(MarkIvert, containerType);
-      }
-      if (containerAddress.startsWith('31')) {
-        containerType = '.three-one'
-        addContainer(MarkII, containerType);
-      }
-      if (containerAddress.startsWith('22')) {
-        containerType = '.two-two'
-        addContainer(MarkIII, containerType);
-      }
-      if (containerAddress.startsWith('23')) {
-        containerType = '.two-three'
-        addContainer(MarkIV, containerType);
-      }
-      if (containerAddress.startsWith('24')) {
-        containerType = '.two-four'
-        addContainer(MarkV, containerType);
-      }
-
-
-      
-      const targetContainerId = containerAddress.slice(2);
-      const boxes = document.querySelectorAll(containerType);
-      boxes.forEach(box => {
-        var parentContainer = box.parentNode;
-        if (parentContainer.id.includes('page-wrapper')) {
-          box.classList.add('dropped-box');
-          if (targetContainerId!=='00') {
-            const targetContainer = document.getElementById(targetContainerId);
-            targetContainer.insertAdjacentElement('beforeend', box);
-          }
-          // Step 1: Get all the draggables that match the ids in the pairs array
-          const draggables = modules.map(pair => document.getElementById(pair));
-
-          // Step 2: Get all the containers within the box that matches the data-type value in the pairs array
-          const containers = box.querySelectorAll(`.container[data-type="type1"]`);
-
-          // Step 3: Loop through the pairs array and move the draggables into the corresponding containers based on their index
-          for (let i = 0; i < modules.length; i++) {
-            const draggable = draggables[i];
-            const container = containers[i];
-            if (draggable) {
-              container.appendChild(draggable);
-            }
-          }
+    const boxes = document.querySelectorAll('.box');
+    if (boxes.length===0) {
+      var importConfig = inputBox.value;
+      let startIndex = 0;
+      let objectArray = [];
+      while (true) {
+        const nextZIndex = importConfig.indexOf('z', startIndex + 1);
+        if (nextZIndex === -1) {
+          objectArray.push(importConfig.substring(startIndex));
+          break;
         }
-      })
-
-      const containers = document.querySelectorAll('.container2');
-      containers.forEach(container => {
-        const containerChildren = Array.from(container.children);
-        if (containerChildren) {
-          containerChildren.forEach(child => {
-            if (child.classList.contains('two-four')) {
-              container.classList.add('has-24child');
-            }
-            if (child.classList.contains('two-three')) {
-              container.classList.add('has-23child');
-            }
-            if (child.classList.contains('two-two')) {
-              container.classList.add('has-22child');
-            }
-            if (child.classList.contains('one-two')) {
-              container.classList.add('has-12child');
-            }
-            if (child.classList.contains('three-one')) {
-              container.classList.add('has-31child');
-            }
-            if (child.classList.contains('two-one')) {
-              container.classList.add('has-21child');
-            }
-          })
+        objectArray.push(importConfig.substring(startIndex, nextZIndex));
+        startIndex = nextZIndex;
+      }
+      for (const object of objectArray) {
+        const first5Chars = object.substring(0, 5);
+        const containerAddress = first5Chars.substring(1);
+        const modules = [];
+        for (let i = 5; i < object.length; i += 2) {
+          modules.push(object.substring(i, i + 2));
         }
-      })
+        var containerType = '';
+        if (containerAddress.startsWith('12')) {
+            containerType = '.one-two'
+            addContainer(MarkIhoriz, containerType);
+        }
+        if (containerAddress.startsWith('21')) {
+          containerType = '.two-one'
+          addContainer(MarkIvert, containerType);
+        }
+        if (containerAddress.startsWith('31')) {
+          containerType = '.three-one'
+          addContainer(MarkII, containerType);
+        }
+        if (containerAddress.startsWith('22')) {
+          containerType = '.two-two'
+          addContainer(MarkIII, containerType);
+        }
+        if (containerAddress.startsWith('23')) {
+          containerType = '.two-three'
+          addContainer(MarkIV, containerType);
+        }
+        if (containerAddress.startsWith('24')) {
+          containerType = '.two-four'
+          addContainer(MarkV, containerType);
+        }
+
+
+        
+        const targetContainerId = containerAddress.slice(2);
+        const boxes = document.querySelectorAll(containerType);
+        boxes.forEach(box => {
+          var parentContainer = box.parentNode;
+          if (parentContainer.id.includes('page-wrapper')) {
+            box.classList.add('dropped-box');
+            if (targetContainerId!=='00') {
+              const targetContainer = document.getElementById(targetContainerId);
+              targetContainer.insertAdjacentElement('beforeend', box);
+            }
+            // Step 1: Get all the draggables that match the ids in the pairs array
+            const draggables = modules.map(pair => document.getElementById(pair));
+
+            // Step 2: Get all the containers within the box that matches the data-type value in the pairs array
+            const containers = box.querySelectorAll(`.container[data-type="type1"]`);
+
+            // Step 3: Loop through the pairs array and move the draggables into the corresponding containers based on their index
+            for (let i = 0; i < modules.length; i++) {
+              const draggable = draggables[i];
+              const container = containers[i];
+              if (draggable) {
+                container.appendChild(draggable);
+              }
+            }
+          }
+        })
+
+        const containers = document.querySelectorAll('.container2');
+        containers.forEach(container => {
+          const containerChildren = Array.from(container.children);
+          if (containerChildren) {
+            containerChildren.forEach(child => {
+              if (child.classList.contains('two-four')) {
+                container.classList.add('has-24child');
+              }
+              if (child.classList.contains('two-three')) {
+                container.classList.add('has-23child');
+              }
+              if (child.classList.contains('two-two')) {
+                container.classList.add('has-22child');
+              }
+              if (child.classList.contains('one-two')) {
+                container.classList.add('has-12child');
+              }
+              if (child.classList.contains('three-one')) {
+                container.classList.add('has-31child');
+              }
+              if (child.classList.contains('two-one')) {
+                container.classList.add('has-21child');
+              }
+            })
+          }
+        })
+      }
+      updateTotalPrice()
+    } else {
+      alert('Please clear the canvas by dragging all active containers to the trash.');
     }
-    updateTotalPrice()
   } else {
     alert('Please enter a valid controller configuration into the text box.');
   }
