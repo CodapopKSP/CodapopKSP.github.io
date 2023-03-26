@@ -158,6 +158,7 @@ containerGrids.forEach(containerGrid => {
         container.classList.remove('has-22child');
         container.classList.remove('has-12child');
         container.classList.remove('has-31child');
+        container.classList.remove('has-21child');
       }
     });
   });
