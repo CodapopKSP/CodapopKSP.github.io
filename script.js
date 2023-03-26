@@ -1,6 +1,6 @@
 const draggables = document.querySelectorAll('.draggable')
 const priceDisplay2 = document.getElementById('price-display2')
-const deleteContainer = document.getElementById('delete-container');
+const deleteContainer = document.getElementById('delete-container')
 
 function updateTotalPrice() {
   let totalPrice = 0
@@ -19,6 +19,159 @@ function updateTotalPrice() {
   });
   priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
+
+
+const load = document.getElementById('load')
+load.addEventListener('click', function() {
+  const inputBox = document.getElementById('input-box');
+  if (inputBox.value.startsWith('z')) {
+    var importConfig = inputBox.value;
+    let startIndex = 0;
+    let objectArray = [];
+
+    while (true) {
+      const nextZIndex = importConfig.indexOf('z', startIndex + 1);
+      if (nextZIndex === -1) {
+        objectArray.push(importConfig.substring(startIndex));
+        break;
+      }
+      objectArray.push(importConfig.substring(startIndex, nextZIndex));
+      startIndex = nextZIndex;
+    }
+
+    for (const object of objectArray) {
+      const first5Chars = object.substring(0, 5);
+      const containerAddress = first5Chars.substring(1);
+      const modules = [];
+      for (let i = 5; i < object.length; i += 2) {
+        modules.push(object.substring(i, i + 2));
+      }
+      var containerType = '';
+      if (containerAddress.startsWith('12')) {
+          containerType = '.one-two'
+          addContainer(MarkIhoriz, containerType);
+      }
+      if (containerAddress.startsWith('21')) {
+        containerType = '.two-one'
+        addContainer(MarkIvert, containerType);
+      }
+      if (containerAddress.startsWith('31')) {
+        containerType = '.three-one'
+        addContainer(MarkII, containerType);
+      }
+      if (containerAddress.startsWith('22')) {
+        containerType = '.two-two'
+        addContainer(MarkIII, containerType);
+      }
+      if (containerAddress.startsWith('23')) {
+        containerType = '.two-three'
+        addContainer(MarkIV, containerType);
+      }
+      if (containerAddress.startsWith('24')) {
+        containerType = '.two-four'
+        addContainer(MarkV, containerType);
+      }
+
+
+      
+      const targetContainerId = containerAddress.slice(2);
+      const boxes = document.querySelectorAll(containerType);
+      boxes.forEach(box => {
+        var parentContainer = box.parentNode;
+        if (parentContainer.id.includes('page-wrapper')) {
+          box.classList.add('dropped-box');
+          if (targetContainerId!=='00') {
+            const targetContainer = document.getElementById(targetContainerId);
+            targetContainer.insertAdjacentElement('beforeend', box);
+          }
+          // Step 1: Get all the draggables that match the ids in the pairs array
+          const draggables = modules.map(pair => document.getElementById(pair));
+
+          // Step 2: Get all the containers within the box that matches the data-type value in the pairs array
+          const containers = box.querySelectorAll(`.container[data-type="type1"]`);
+
+          // Step 3: Loop through the pairs array and move the draggables into the corresponding containers based on their index
+          for (let i = 0; i < modules.length; i++) {
+            const draggable = draggables[i];
+            const container = containers[i];
+            if (draggable) {
+              container.appendChild(draggable);
+            }
+          }
+        }
+      })
+
+      const containers = document.querySelectorAll('.container2');
+      containers.forEach(container => {
+        const containerChildren = Array.from(container.children);
+        if (containerChildren) {
+          containerChildren.forEach(child => {
+            if (child.classList.contains('two-four')) {
+              container.classList.add('has-24child');
+            }
+            if (child.classList.contains('two-three')) {
+              container.classList.add('has-23child');
+            }
+            if (child.classList.contains('two-two')) {
+              container.classList.add('has-22child');
+            }
+            if (child.classList.contains('one-two')) {
+              container.classList.add('has-12child');
+            }
+            if (child.classList.contains('three-one')) {
+              container.classList.add('has-31child');
+            }
+            if (child.classList.contains('two-one')) {
+              container.classList.add('has-21child');
+            }
+          })
+        }
+      })
+    }
+    updateTotalPrice()
+  } else {
+    alert('Please enter a valid controller configuration into the text box.');
+  }
+});
+
+
+
+const save = document.getElementById('save')
+save.addEventListener('click', function() {
+  const draggableIds = [];
+  const boxes = document.querySelectorAll('.box');
+  boxes.forEach(box => {
+    if (box.id.includes('one-two')) {
+      draggableIds.push('z12');
+    }
+    if (box.id.includes('two-one')) {
+      draggableIds.push('z21');
+    }
+    if (box.id.includes('three-one')) {
+      draggableIds.push('z31');
+    }
+    if (box.id.includes('two-two')) {
+      draggableIds.push('z22');
+    }
+    if (box.id.includes('two-three')) {
+      draggableIds.push('z23');
+    }
+    if (box.id.includes('two-four')) {
+      draggableIds.push('z24');
+    }
+    var parentContainer = box.parentNode;
+    if (parentContainer.id.includes('page-wrapper')) {
+      draggableIds.push('00');
+    } else {
+      draggableIds.push(parentContainer.id);
+    }
+    const draggables = box.querySelectorAll('.draggable');
+    draggables.forEach(draggable => {
+      draggableIds.push(draggable.id);
+    });
+  })
+  alert("Copy your configuration below: \n\n" + draggableIds.join(''));
+});
 
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
@@ -253,7 +406,6 @@ deleteContainer.addEventListener('drop', (event) => {
         container.classList.remove('has-12child');
         container.classList.remove('has-31child');
         container.classList.remove('has-21child');
-
       }
     });
     updateTotalPrice()
@@ -263,7 +415,7 @@ function addContainer(containerData, type) {
     const existingBoxes = document.querySelectorAll('.dropped-box');
     const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString();
+        const counter = Math.floor(Math.random() * 10000).toString() + type;
         const containerBoxHTML = `<div id="${counter}" ${containerData}`;
       
         const containerBoxElement = document.createElement('div');

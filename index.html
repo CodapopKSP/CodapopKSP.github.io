@@ -6,7 +6,6 @@
 		<meta http-equiv="X-UACompatible" content="ie=edge">
 		<link rel="stylesheet" href="styles.css">
 		<title>Untitled Space Craft | CAB</title>
-		<!--<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">-->
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 		<style>
 			body {
@@ -22,15 +21,18 @@
 	</header>
 	<body>
 		<div id="page-wrapper">
+				<button id="save", class="buttonStart">Save</button>
+				<button id="load", class="buttonStart">Load</button>
+				<input type="text" id="input-box">
 				<div id="price-display2" style="font-size: 3vh;">Total: $0</div>
 			</h1>
 			<div class="container-grid">
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
+				<div id="11" class="container2"></div>
+				<div id="12" class="container2"></div>
+				<div id="13" class="container2"></div>
+				<div id="14" class="container2"></div>
+				<div id="15" class="container2"></div>
+				<div id="16" class="container2"></div>
 			</div>
 			<div id="welcome-message" style="text-align: center; font-size: 1vh;">
 				<h1>Click a container on the bottom to begin.<br></br></h1>
@@ -40,12 +42,12 @@
 				<h1>Drag them to the trash to remove them.</h1>
 			</div>
 			<div class="container-grid2">
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
-				<div class="container2"></div>
+				<div id="21" class="container2"></div>
+				<div id="22" class="container2"></div>
+				<div id="23" class="container2"></div>
+				<div id="24" class="container2"></div>
+				<div id="25" class="container2"></div>
+				<div id="26" class="container2"></div>
 			</div>
 			<div id="delete-container"></div>
 			<div id="light-switch" style="font-size: 1.15vh;">
@@ -91,7 +93,7 @@
 
 		<div class="container-wrapper2">
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-1" data-price="60" draggable="true">
+				<div class="draggable light" id="a1" data-price="60" draggable="true">
 					<img src="modules/abort.png" class="image-1">
 					<img src="modules/light/abort_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -103,7 +105,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-2" data-price="60" draggable="true">
+				<div class="draggable light" id="a2" data-price="60" draggable="true">
 					<img src="modules/stage.png" class="image-1">
 					<img src="modules/light/stage_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -115,7 +117,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-3" data-price="60" draggable="true">
+				<div class="draggable light" id="a3" data-price="60" draggable="true">
 					<img src="modules/exec1.png" class="image-1">
 					<img src="modules/light/exec1_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -127,7 +129,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-4" data-price="80" draggable="true">
+				<div class="draggable light" id="a4" data-price="80" draggable="true">
 					<img src="modules/exec2.png" class="image-1">
 					<img src="modules/light/exec2_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -139,7 +141,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-5" data-price="80" draggable="true">
+				<div class="draggable light" id="a5" data-price="80" draggable="true">
 					<img src="modules/exec3.png" class="image-1">
 					<img src="modules/light/exec3_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -151,7 +153,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-6" data-price="80" draggable="true">
+				<div class="draggable light" id="b1" data-price="80" draggable="true">
 					<img src="modules/time.png" class="image-1">
 					<img src="modules/light/time_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -163,7 +165,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-7" data-price="70" draggable="true">
+				<div class="draggable light" id="b2" data-price="70" draggable="true">
 					<img src="modules/nav1.png" class="image-1">
 					<img src="modules/light/nav1_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -175,7 +177,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-8" data-price="80" draggable="true">
+				<div class="draggable light" id="b3" data-price="80" draggable="true">
 					<img src="modules/nav2.png" class="image-1">
 					<img src="modules/light/nav2_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -186,7 +188,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-21" data-price="80" draggable="true">
+				<div class="draggable light" id="c1" data-price="80" draggable="true">
 					<img src="modules/telem.png" class="image-1">
 					<img src="modules/light/telem_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -198,7 +200,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<p class="draggable light" id="module-20" data-price="80" draggable="true">
+				<p class="draggable light" id="d1" data-price="80" draggable="true">
 					<img src="modules/eva.png" class="image-1">
 					<img src="modules/light/eva_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -210,7 +212,7 @@
 				</p>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-19" data-price="70" draggable="true">
+				<div class="draggable" id="e1" data-price="70" draggable="true">
 					<img src="modules/camera.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Camera Module</strong>
@@ -224,7 +226,7 @@
 
 		<div class="container-wrapper3">
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-14" data-price="90" draggable="true">
+				<div class="draggable" id="f1" data-price="90" draggable="true">
 					<img src="modules/analog2.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Analog Controls Module</strong>
@@ -235,7 +237,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-13" data-price="90" draggable="true">
+				<div class="draggable" id="f2" data-price="90" draggable="true">
 					<img src="modules/analog1.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Analog Controls Module (Throttle)</strong>
@@ -246,7 +248,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-16" data-price="90" draggable="true">
+				<div class="draggable" id="f3" data-price="90" draggable="true">
 					<img src="modules/rot2.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Rotation Controls Module</strong>
@@ -257,7 +259,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-15" data-price="90" draggable="true">
+				<div class="draggable" id="f4" data-price="90" draggable="true">
 					<img src="modules/rot1.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Rotation Controls Module (Throttle)</strong>
@@ -268,7 +270,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-17" data-price="90" draggable="true">
+				<div class="draggable" id="f5" data-price="90" draggable="true">
 					<img src="modules/trans.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Translation Controls Module</strong>
@@ -279,7 +281,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable" id="module-18" data-price="60" draggable="true">
+				<div class="draggable" id="f6" data-price="60" draggable="true">
 					<img src="modules/throt.png">
 					<span class="tooltip">
 						<strong style="font-size: 1.8vh;">Throttle Module</strong>
@@ -290,7 +292,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-9" data-price="90" draggable="true">
+				<div class="draggable light" id="g1" data-price="90" draggable="true">
 					<img src="modules/control.png" class="image-1">
 					<img src="modules/light/control_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -302,7 +304,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-10" data-price="90" draggable="true">
+				<div class="draggable light" id="h1" data-price="90" draggable="true">
 					<img src="modules/ag1.png" class="image-1">
 					<img src="modules/light/ag1_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -314,7 +316,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-11" data-price="90" draggable="true">
+				<div class="draggable light" id="h2" data-price="90" draggable="true">
 					<img src="modules/ag2.png" class="image-1">
 					<img src="modules/light/ag2_l.png" class="image-2 hidden">
 					<span class="tooltip">
@@ -326,7 +328,7 @@
 				</div>
 			</div>
 			<div class="container" data-type="type2">
-				<div class="draggable light" id="module-12" data-price="90" draggable="true">
+				<div class="draggable light" id="h3" data-price="90" draggable="true">
 					<img src="modules/ag3.png" class="image-1">
 					<img src="modules/light/ag3_l.png" class="image-2 hidden">
 					<span class="tooltip">

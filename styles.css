@@ -80,15 +80,6 @@ body {
 }
 
 
-#price-display {
-    position: absolute;
-    top: 0;
-    color: black;
-    font-size: 2rem;
-    font-weight: bold;
-    padding: 0.75vh;
-    left: 0;
-}
 
 #price-display2 {
     position: absolute;
@@ -411,4 +402,34 @@ body {
     border-radius: 2vh;
     opacity: 0.9;
     font-size: 1.6vh;
+}
+
+#save {
+    position: absolute;
+    top: 0;
+    color: black;
+    font-size: 3vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    left: 0.5vh;
+}
+
+#load {
+    position: absolute;
+    top: 0;
+    color: black;
+    font-size: 3vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    left: 10vh;
+}
+
+#input-box {
+    position: absolute;
+    top: 1vh;
+    color: black;
+    font-size: 1vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    left: 19.5vh;
 }
