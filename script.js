@@ -27,7 +27,7 @@ load.addEventListener('click', function() {
   if (inputBox.value.startsWith('z')) {
     const boxes = document.querySelectorAll('.box');
     if (boxes.length===0) {
-      var importConfig = inputBox.value;
+      let importConfig = inputBox.value;
       let startIndex = 0;
       let objectArray = [];
       while (true) {
@@ -46,7 +46,7 @@ load.addEventListener('click', function() {
         for (let i = 5; i < object.length; i += 2) {
           modules.push(object.substring(i, i + 2));
         }
-        var containerType = '';
+        let containerType = '';
         if (containerAddress.startsWith('12')) {
             containerType = '.one-two'
             addContainer(MarkIhoriz, containerType);
@@ -77,7 +77,7 @@ load.addEventListener('click', function() {
         const targetContainerId = containerAddress.slice(2);
         const boxes = document.querySelectorAll(containerType);
         boxes.forEach(box => {
-          var parentContainer = box.parentNode;
+          let parentContainer = box.parentNode;
           if (parentContainer.id.includes('page-wrapper')) {
             box.classList.add('dropped-box');
             if (targetContainerId!=='00') {
@@ -162,7 +162,7 @@ save.addEventListener('click', function() {
     if (box.id.includes('two-four')) {
       draggableIds.push('z24');
     }
-    var parentContainer = box.parentNode;
+    let parentContainer = box.parentNode;
     if (parentContainer.id.includes('page-wrapper')) {
       draggableIds.push('00');
     } else {
@@ -180,14 +180,14 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
-    var tooltip = draggable.querySelector(".tooltip");
+    let tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
-    var parentContainer = draggable.parentNode;
-    var parentContainerType = parentContainer.getAttribute("data-type");
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
     if (parentContainerType === "type1") {
-      var parentContainer2 = parentContainer.parentNode;
-      var parentContainer3 = parentContainer2.parentNode;
-      var parentContainer4 = parentContainer3.parentNode;
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
   });
@@ -195,12 +195,12 @@ draggables.forEach(draggable => {
   draggable.addEventListener('dragend', () => {
     draggable.classList.remove('dragging');
     updateTotalPrice();
-    var parentContainer = draggable.parentNode;
-    var parentContainerType = parentContainer.getAttribute("data-type");
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
     if (parentContainerType === "type1") {
-      var parentContainer2 = parentContainer.parentNode;
-      var parentContainer3 = parentContainer2.parentNode;
-      var parentContainer4 = parentContainer3.parentNode;
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
   });
@@ -231,26 +231,26 @@ draggables.forEach(draggable => {
       tooltip.classList.add('bottom');
     }
 
-    var parentContainer = draggable.parentNode;
-    var parentContainerType = parentContainer.getAttribute("data-type");
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
     if (parentContainerType === "type1") {
-      var parentContainer2 = parentContainer.parentNode;
-      var parentContainer3 = parentContainer2.parentNode;
-      var parentContainer4 = parentContainer3.parentNode;
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = 70;
     }
   });
   
   draggable.addEventListener('mouseout', () => {
-    var tooltip = draggable.querySelector(".tooltip");
+    let tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
-    var parentContainer = draggable.parentNode;
-    var parentContainerType = parentContainer.getAttribute("data-type");
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
     if (parentContainerType === "type1") {
-      var parentContainer2 = parentContainer.parentNode;
-      var parentContainer3 = parentContainer2.parentNode;
-      var parentContainer4 = parentContainer3.parentNode;
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
   });
@@ -392,7 +392,7 @@ deleteContainer.addEventListener('drop', (event) => {
             if (emptySlots) {
                 container.appendChild(elementToDelete);
                 elementToDelete.classList.remove("mouseover");
-                var tooltip = elementToDelete.querySelector(".tooltip");
+                let tooltip = elementToDelete.querySelector(".tooltip");
                 tooltip.style.display = 'none';
                 droppedIntoContainer = true;
                 break;
@@ -471,7 +471,7 @@ function addContainer(containerData, type) {
             })
         })
 
-        var messageElement = document.getElementById("welcome-message");
+        let messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
   } else {
     alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
