@@ -20,12 +20,12 @@
 		</div>
 	</header>
 	<body>
-		<div id="page">
-			<div id="page-wrapper">
+		<div id="page-wrapper">
+			<div id="canvas">
 					<button style="font-family: 'Orbitron', sans-serif;" id="save", class="buttonStart">Save</button>
 					<button style="font-family: 'Orbitron', sans-serif;" id="load", class="buttonStart">Load</button>
 					<input type="text" id="input-box">
-					<div style="font-family: 'Orbitron', sans-serif;" id="price-display2">Total: $0</div>
+					<div style="font-family: 'Orbitron', sans-serif;" id="price-display">Total: $0</div>
 				</h1>
 				<div class="container-grid">
 					<div id="11" class="container2"></div>
@@ -92,8 +92,8 @@
 				</button>
 			</div>
 
-			<div class="container-wrapper2">
-				<div class="container" data-type="type2">
+			<div class="left-module-array">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a1" data-price="60" draggable="true">
 						<img src="modules/abort.png" class="image-1">
 						<img src="modules/light/abort_l.png" class="image-2 hidden">
@@ -105,7 +105,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a2" data-price="60" draggable="true">
 						<img src="modules/stage.png" class="image-1">
 						<img src="modules/light/stage_l.png" class="image-2 hidden">
@@ -117,7 +117,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a3" data-price="60" draggable="true">
 						<img src="modules/exec1.png" class="image-1">
 						<img src="modules/light/exec1_l.png" class="image-2 hidden">
@@ -129,7 +129,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a4" data-price="80" draggable="true">
 						<img src="modules/exec2.png" class="image-1">
 						<img src="modules/light/exec2_l.png" class="image-2 hidden">
@@ -141,7 +141,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a5" data-price="80" draggable="true">
 						<img src="modules/exec3.png" class="image-1">
 						<img src="modules/light/exec3_l.png" class="image-2 hidden">
@@ -153,7 +153,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="b1" data-price="80" draggable="true">
 						<img src="modules/time.png" class="image-1">
 						<img src="modules/light/time_l.png" class="image-2 hidden">
@@ -165,7 +165,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="b2" data-price="70" draggable="true">
 						<img src="modules/nav1.png" class="image-1">
 						<img src="modules/light/nav1_l.png" class="image-2 hidden">
@@ -177,7 +177,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="b3" data-price="80" draggable="true">
 						<img src="modules/nav2.png" class="image-1">
 						<img src="modules/light/nav2_l.png" class="image-2 hidden">
@@ -188,7 +188,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="c1" data-price="80" draggable="true">
 						<img src="modules/telem.png" class="image-1">
 						<img src="modules/light/telem_l.png" class="image-2 hidden">
@@ -200,7 +200,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<p class="draggable light" id="d1" data-price="80" draggable="true">
 						<img src="modules/eva.png" class="image-1">
 						<img src="modules/light/eva_l.png" class="image-2 hidden">
@@ -212,7 +212,7 @@
 						</span>
 					</p>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="e1" data-price="70" draggable="true">
 						<img src="modules/camera.png">
 						<span class="tooltip">
@@ -225,8 +225,8 @@
 				</div>
 			</div>
 
-			<div class="container-wrapper3">
-				<div class="container" data-type="type2">
+			<div class="right-module-array">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f1" data-price="90" draggable="true">
 						<img src="modules/analog2.png">
 						<span class="tooltip">
@@ -237,7 +237,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f2" data-price="90" draggable="true">
 						<img src="modules/analog1.png">
 						<span class="tooltip">
@@ -248,7 +248,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f3" data-price="90" draggable="true">
 						<img src="modules/rot2.png">
 						<span class="tooltip">
@@ -259,7 +259,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f4" data-price="90" draggable="true">
 						<img src="modules/rot1.png">
 						<span class="tooltip">
@@ -270,7 +270,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f5" data-price="90" draggable="true">
 						<img src="modules/trans.png">
 						<span class="tooltip">
@@ -281,7 +281,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f6" data-price="60" draggable="true">
 						<img src="modules/throt.png">
 						<span class="tooltip">
@@ -292,7 +292,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="g1" data-price="90" draggable="true">
 						<img src="modules/control.png" class="image-1">
 						<img src="modules/light/control_l.png" class="image-2 hidden">
@@ -304,7 +304,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="h1" data-price="90" draggable="true">
 						<img src="modules/ag1.png" class="image-1">
 						<img src="modules/light/ag1_l.png" class="image-2 hidden">
@@ -316,7 +316,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="h2" data-price="90" draggable="true">
 						<img src="modules/ag2.png" class="image-1">
 						<img src="modules/light/ag2_l.png" class="image-2 hidden">
@@ -328,7 +328,7 @@
 						</span>
 					</div>
 				</div>
-				<div class="container" data-type="type2">
+				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="h3" data-price="90" draggable="true">
 						<img src="modules/ag3.png" class="image-1">
 						<img src="modules/light/ag3_l.png" class="image-2 hidden">
@@ -340,8 +340,6 @@
 						</span>
 					</div>
 				</div>
-				
-				
 			</div>
 		</div>
 		<script src="script.js" defer></script>

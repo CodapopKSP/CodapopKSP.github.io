@@ -1,7 +1,7 @@
-const draggables = document.querySelectorAll('.draggable')
-const priceDisplay2 = document.getElementById('price-display2')
 const deleteContainer = document.getElementById('delete-container')
 
+//Function for updating the price to reflect the current canvas items
+const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
   let totalPrice = 0
   const containerBoxes = document.querySelectorAll('.box');
@@ -9,7 +9,7 @@ function updateTotalPrice() {
     const price = parseFloat(containerBox.dataset.price);
     totalPrice += price;
   });
-  const type1Containers = document.querySelectorAll('.container[data-type="type1"]');
+  const type1Containers = document.querySelectorAll('.module-dock[data-type="type1"]');
   type1Containers.forEach(container => {
     const draggablesInContainer = container.querySelectorAll('.draggable');
     draggablesInContainer.forEach(draggable => {
@@ -17,10 +17,10 @@ function updateTotalPrice() {
       totalPrice += price;
     });
   });
-  priceDisplay2.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
+  priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
 
-
+// Load Button
 const load = document.getElementById('load')
 load.addEventListener('click', function() {
   const inputBox = document.getElementById('input-box');
@@ -30,6 +30,7 @@ load.addEventListener('click', function() {
       let importConfig = inputBox.value;
       let startIndex = 0;
       let objectArray = [];
+      // Extract all containers from the string
       while (true) {
         const nextZIndex = importConfig.indexOf('z', startIndex + 1);
         if (nextZIndex === -1) {
@@ -39,6 +40,7 @@ load.addEventListener('click', function() {
         objectArray.push(importConfig.substring(startIndex, nextZIndex));
         startIndex = nextZIndex;
       }
+      // Parse the data from the container strings and determine the container type
       for (const object of objectArray) {
         const first5Chars = object.substring(0, 5);
         const containerAddress = first5Chars.substring(1);
@@ -71,26 +73,20 @@ load.addEventListener('click', function() {
           containerType = '.two-four'
           addContainer(MarkV, containerType);
         }
-
-
-        
         const targetContainerId = containerAddress.slice(2);
         const boxes = document.querySelectorAll(containerType);
+        // Determine the container address
         boxes.forEach(box => {
           let parentContainer = box.parentNode;
-          if (parentContainer.id.includes('page-wrapper')) {
+          if (parentContainer.id.includes('canvas')) {
             box.classList.add('dropped-box');
             if (targetContainerId!=='00') {
               const targetContainer = document.getElementById(targetContainerId);
               targetContainer.insertAdjacentElement('beforeend', box);
             }
-            // Step 1: Get all the draggables that match the ids in the pairs array
             const draggables = modules.map(pair => document.getElementById(pair));
-
-            // Step 2: Get all the containers within the box that matches the data-type value in the pairs array
-            const containers = box.querySelectorAll(`.container[data-type="type1"]`);
-
-            // Step 3: Loop through the pairs array and move the draggables into the corresponding containers based on their index
+            const containers = box.querySelectorAll(`.module-dock[data-type="type1"]`);
+            // Get all modules and add them to the containers
             for (let i = 0; i < modules.length; i++) {
               const draggable = draggables[i];
               const container = containers[i];
@@ -100,7 +96,7 @@ load.addEventListener('click', function() {
             }
           }
         })
-
+        // Update the canvas elements as if someone dragged and dropped the containers and modules
         const containers = document.querySelectorAll('.container2');
         containers.forEach(container => {
           const containerChildren = Array.from(container.children);
@@ -137,8 +133,7 @@ load.addEventListener('click', function() {
   }
 });
 
-
-
+// Save Button
 const save = document.getElementById('save')
 save.addEventListener('click', function() {
   const draggableIds = [];
@@ -163,7 +158,7 @@ save.addEventListener('click', function() {
       draggableIds.push('z24');
     }
     let parentContainer = box.parentNode;
-    if (parentContainer.id.includes('page-wrapper')) {
+    if (parentContainer.id.includes('canvas')) {
       draggableIds.push('00');
     } else {
       draggableIds.push(parentContainer.id);
@@ -176,6 +171,9 @@ save.addEventListener('click', function() {
   alert("Copy your configuration below: \n\n" + draggableIds.join(''));
 });
 
+
+// Handle drag, drop, and mouse over for modules
+const draggables = document.querySelectorAll('.draggable')
 draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
@@ -184,6 +182,21 @@ draggables.forEach(draggable => {
     tooltip.style.display = 'none';
     let parentContainer = draggable.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
+    // Release container slot from forcing the tooltip to be on top
+    if (parentContainerType === "type1") {
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
+  });
+  
+  draggable.addEventListener('dragend', () => {
+    draggable.classList.remove('dragging');
+    updateTotalPrice();
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
+    // Release container slot from forcing the tooltip to be on top
     if (parentContainerType === "type1") {
       let parentContainer2 = parentContainer.parentNode;
       let parentContainer3 = parentContainer2.parentNode;
@@ -192,27 +205,13 @@ draggables.forEach(draggable => {
     }
   });
 
-  draggable.addEventListener('dragend', () => {
-    draggable.classList.remove('dragging');
-    updateTotalPrice();
-    let parentContainer = draggable.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = '';
-    }
-  });
-  
+  // Show tooltip and determine where to display the tooltip
   draggable.addEventListener('mouseover', (event) => {
     const tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
     tooltip.style.display = 'block';
-  
     const rect = event.target.getBoundingClientRect();
     const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
-    
     if (position < window.innerWidth / 2) {
       tooltip.classList.remove('right');
       tooltip.classList.add('left');
@@ -220,9 +219,7 @@ draggables.forEach(draggable => {
       tooltip.classList.remove('left');
       tooltip.classList.add('right');
     }
-  
     const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
-  
     if (positionv < window.innerHeight / 2) {
       tooltip.classList.remove('bottom');
       tooltip.classList.add('top');
@@ -230,7 +227,6 @@ draggables.forEach(draggable => {
       tooltip.classList.remove('top');
       tooltip.classList.add('bottom');
     }
-
     let parentContainer = draggable.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
     if (parentContainerType === "type1") {
@@ -247,6 +243,7 @@ draggables.forEach(draggable => {
     draggable.classList.remove("mouseover");
     let parentContainer = draggable.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
+    // Release container slot from forcing the tooltip to be on top
     if (parentContainerType === "type1") {
       let parentContainer2 = parentContainer.parentNode;
       let parentContainer3 = parentContainer2.parentNode;
@@ -256,8 +253,8 @@ draggables.forEach(draggable => {
   });
 });
 
+// Light Switch
 const lightSwitch = document.getElementById('light-switch')
-
 lightSwitch.addEventListener('click', function() {
   this.classList.toggle('light');
   const modules_with_lights = document.querySelectorAll('.draggable.light');
@@ -269,42 +266,42 @@ lightSwitch.addEventListener('click', function() {
   });
 });
 
-const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 
+const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 containerGrids.forEach(containerGrid => {
   containerGrid.addEventListener('dragover', (event) => {
     event.preventDefault();
   });
 
+  // Determine the type of container and prepare the grid for resizing
   containerGrid.addEventListener('drop', (event) => {
     event.preventDefault();
-
     const draggable = document.querySelector('.dragging2');
     const dropContainer = event.target.closest('.container2');
-
     if (dropContainer && draggable) {
-        dropContainer.appendChild(draggable);
-        draggable.classList.add('dropped-box');
-        if (draggable.classList.contains('two-four')) {
-            dropContainer.classList.add('has-24child');
-        }
-        if (draggable.classList.contains('two-three')) {
-            dropContainer.classList.add('has-23child');
-        }
-        if (draggable.classList.contains('two-two')) {
-            dropContainer.classList.add('has-22child');
-        }
-        if (draggable.classList.contains('one-two')) {
-            dropContainer.classList.add('has-12child');
-        }
-        if (draggable.classList.contains('three-one')) {
-            dropContainer.classList.add('has-31child');
-        }
-        if (draggable.classList.contains('two-one')) {
-          dropContainer.classList.add('has-21child');
-        }
+      dropContainer.appendChild(draggable);
+      draggable.classList.add('dropped-box');
+      if (draggable.classList.contains('two-four')) {
+          dropContainer.classList.add('has-24child');
+      }
+      if (draggable.classList.contains('two-three')) {
+          dropContainer.classList.add('has-23child');
+      }
+      if (draggable.classList.contains('two-two')) {
+          dropContainer.classList.add('has-22child');
+      }
+      if (draggable.classList.contains('one-two')) {
+          dropContainer.classList.add('has-12child');
+      }
+      if (draggable.classList.contains('three-one')) {
+          dropContainer.classList.add('has-31child');
+      }
+      if (draggable.classList.contains('two-one')) {
+        dropContainer.classList.add('has-21child');
+      }
     }
 
+    // Reset grids
     const containers = document.querySelectorAll('.container2');
     containers.forEach(container => {
       const containerChildren = container.children;
@@ -320,41 +317,37 @@ containerGrids.forEach(containerGrid => {
   });
 });
 
+// Buttons for adding new containers
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-2x4');
     addButton.addEventListener('click', () => {
       addContainer(MarkV, '.two-four');
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-2x3');
     addButton.addEventListener('click', () => {
       addContainer(MarkIV, '.two-three');
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-2x2');
     addButton.addEventListener('click', () => {
       addContainer(MarkIII, '.two-two');
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-1x2');
     addButton.addEventListener('click', () => {
       addContainer(MarkIhoriz, '.one-two');
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-3x1');
     addButton.addEventListener('click', () => {
       addContainer(MarkII, '.three-one');
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
   const addButton = document.getElementById('add-2x1');
   addButton.addEventListener('click', () => {
@@ -362,17 +355,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+// Delete Box
 deleteContainer.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
-
 deleteContainer.addEventListener('drop', (event) => {
     const id = event.dataTransfer.getData('text/plain');
     const elementToDelete = document.getElementById(id);
   
     if (elementToDelete && (elementToDelete.classList.contains('box'))) {
         elementToDelete.remove();
-        const containers = document.querySelectorAll('.container[data-type="type2"]');
+        const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
         const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
         for (const module of droppedModules) {
             for (const container of containers) {
@@ -384,8 +378,9 @@ deleteContainer.addEventListener('drop', (event) => {
             }
         }
         elementToDelete.remove();
+    // Move modules back to 
     } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
-        const containers = document.querySelectorAll('.container[data-type="type2"]');
+        const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
         let droppedIntoContainer = false;
         for (const container of containers) {
           const emptySlots = container.querySelectorAll('.draggable').length < 1;
@@ -399,6 +394,7 @@ deleteContainer.addEventListener('drop', (event) => {
             }
         }
     }
+    // Reset grids
     const containers = document.querySelectorAll('.container2');
     containers.forEach(container => {
       const containerChildren = container.children;
@@ -414,20 +410,22 @@ deleteContainer.addEventListener('drop', (event) => {
     updateTotalPrice()
 });
 
+// Add a container of a specific size
 function addContainer(containerData, type) {
     const existingBoxes = document.querySelectorAll('.dropped-box');
     const requiredBoxes = document.querySelectorAll('.box');
       if (existingBoxes.length === requiredBoxes.length) {
         const counter = Math.floor(Math.random() * 10000).toString() + type;
+        // Choose a random ID
         const containerBoxHTML = `<div id="${counter}" ${containerData}`;
-      
         const containerBoxElement = document.createElement('div');
         containerBoxElement.innerHTML = containerBoxHTML.trim();
         const containerBox = containerBoxElement.firstChild;
-        const pageWrapper = document.getElementById('page-wrapper');
+        const pageWrapper = document.getElementById('canvas');
         pageWrapper.appendChild(containerBox);
         updateTotalPrice()
 
+        // Handle picking up the container
         const containerBoxes = document.querySelectorAll(type);
         containerBoxes.forEach(containerBox => {
           containerBox.addEventListener('dragstart', (event) => {
@@ -443,6 +441,8 @@ function addContainer(containerData, type) {
                   deleteContainer.classList.add('highlight');
               }
           });
+
+          // Drop the container
           containerBox.addEventListener('dragend', (event) => {
             if (event.target.id === counter) {
               event.target.classList.remove('dragging2');
@@ -455,12 +455,12 @@ function addContainer(containerData, type) {
           });
         });
 
-        const containers = document.querySelectorAll('.container')
+        // Handle module docks on containers
+        const containers = document.querySelectorAll('.module-dock')
         containers.forEach(container => {
             container.addEventListener('dragover', e => {
               e.preventDefault()
             })
-          
             container.addEventListener('drop', () => {
               const draggable = document.querySelector('.dragging')
               if (draggable) {
@@ -471,6 +471,7 @@ function addContainer(containerData, type) {
             })
         })
 
+        // Remove welcome message
         let messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
   } else {
@@ -478,82 +479,77 @@ function addContainer(containerData, type) {
   }
 }
 
-
+// Container Data
 const MarkIhoriz = `
         class="one-two box" data-price="50" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
         </div>
         `;
-
 const MarkIvert = `
         class="two-one box" data-price="50" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
           </div>
         </div>
         `;
-
 const MarkII = `
         class="three-one box" data-price="60" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
           </div>
         </div>
         `;
-
 const MarkIII = `
         class="two-two box" data-price="70" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
           </div>
         </div>
         `;
-
 const MarkIV = `
         class="two-three box" data-price="90" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
           </div>
         </div>
         `;
-
 const MarkV = `
         class="two-four box" data-price="120" draggable="true">
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
-          <div class="container-wrapper">
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-            <div class="container" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+          <div class="container-slot-row">
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
+            <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
           </div>
         </div>
         `;

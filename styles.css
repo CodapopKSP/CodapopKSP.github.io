@@ -1,3 +1,9 @@
+/*
+|=================|
+|  Page Elements  |
+|=================|
+*/
+
 body {
     margin: 0;
 }
@@ -6,47 +12,18 @@ body {
     display: none;
 }
 
-.container-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
-
-.container {
-    background: #252525;
-    width: 15vh;
-    height: 15vh;
+#page-wrapper {
+    position: relative;
+    width: 190vh;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 92vh;
+    overflow: visible;
 }
 
-.container img {
-    width: 100%;
-    height: 100%;
-}
-
-.draggable {
-    background-color: aliceblue;
-    cursor: move;
-    width: 15vh;
-    height: 15vh;
-    text-align: center;
-    position: absolute;
-    z-index: 100;
-}
-
-
-.draggable img {
-    width: 100%;
-    height: 100%;
-}
-
-.draggable.mouseover {
-    z-index: 999;
-}
-
-#page-wrapper {
+#canvas {
     position: relative;
     border: 1vh solid black;
     width: 110vh;
@@ -60,7 +37,7 @@ body {
     background: #d4d4d4;
 }
 
-.container-wrapper2 {
+.left-module-array {
     position: absolute;
     top: -2.5%;
     right: 81%;
@@ -70,7 +47,7 @@ body {
     justify-items: end;
 }
 
-.container-wrapper3 {
+.right-module-array {
     position: absolute;
     top: -2.5%;
     left: 81%;
@@ -80,16 +57,94 @@ body {
     justify-items: end;
 }
 
+.module-dock {
+    background: #252525;
+    width: 15vh;
+    height: 15vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.container2 {
+    width: 15vh;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;;
+    align-items: center;
+    flex-shrink: 0;
+}
 
-#price-display2 {
+.container2.has-drag {
+    border: 1px solid black;
+}
+
+.container2.has-24child {
+    transform: translate(-15vh, 7.5vh);
+    margin: 0.75vh;
+}
+.container2.has-23child {
+    transform: translate(-15vh, 7.5vh);
+    margin: 0.75vh;
+}
+.container2.has-22child {
+    transform: translateY(7.5vh);
+    margin: 0.75vh;
+}
+.container2.has-21child {
+    transform: translateY(7.5vh);
+    margin: 0.75vh;
+}
+.container2.has-12child {
+    transform: translateY(0vh);
+    margin: 0.75vh;
+}
+.container2.has-31child {
+    transform: translateY(15vh);
+    margin: 0.75vh;
+}
+
+.container-grid {
     position: absolute;
-    top: 0;
-    color: black;
-    font-size: 3vh;
-    font-weight: bold;
-    padding: 0.75vh;
-    right: 0;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: visible;
+    justify-content: center;
+}
+
+.container-grid2 {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: visible;
+    margin-top: 1.5vh;
+    justify-content: center;
+}
+
+
+/*
+|======================|
+|  Container Elements  |
+|======================|
+*/
+
+.container-slot-row {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.container img {
+    width: 100%;
+    height: 100%;
 }
 
 .box {
@@ -174,74 +229,102 @@ body {
     background-color: rgb(0, 0, 0);
     background-size: cover;
 }
-  
-#page-wrapper {
-    position: relative;
-}
 
-.container-grid {
-    position: absolute;
-    top: 10%;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    overflow: visible;
-    justify-content: center;
-}
 
-.container-grid2 {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    overflow: visible;
-    margin-top: 1.5vh;
-    justify-content: center;
-}
-  
-.container2 {
+/*
+|===================|
+|  Module Elements  |
+|===================|
+*/
+
+.draggable {
+    background-color: aliceblue;
+    cursor: move;
     width: 15vh;
     height: 15vh;
-    display: flex;
-    justify-content: space-between;;
-    align-items: center;
-    flex-shrink: 0;
+    text-align: center;
+    position: absolute;
+    z-index: 100;
 }
 
-.container2.has-drag {
-    border: 1px solid black;
+.draggable img {
+    width: 100%;
+    height: 100%;
 }
 
-.container2.has-24child {
-    transform: translate(-15vh, 7.5vh);
-    margin: 0.75vh;
-}
-.container2.has-23child {
-    transform: translate(-15vh, 7.5vh);
-    margin: 0.75vh;
-}
-.container2.has-22child {
-    transform: translateY(7.5vh);
-    margin: 0.75vh;
-}
-.container2.has-21child {
-    transform: translateY(7.5vh);
-    margin: 0.75vh;
-}
-.container2.has-12child {
-    transform: translateY(0vh);
-    margin: 0.75vh;
-}
-.container2.has-31child {
-    transform: translateY(15vh);
-    margin: 0.75vh;
+.draggable.mouseover {
+    z-index: 999;
 }
 
+
+/*
+|============|
+|  Tooltips  |
+|============|
+*/
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #cacecf;
+    color: rgb(0, 0, 0);
+    pointer-events: none;
+    width: 25vh;
+    z-index: 999;
+}
+
+.tooltip.left {
+    left: 10vh;
+}
+
+.tooltip.right {
+    right: 10vh;
+}
+
+.tooltip.top {
+    top: 10vh;
+}
+
+.tooltip.bottom {
+    top: -10vh;
+}
+  
+.draggable:hover .tooltip {
+    display: block;
+    border: 0.4vh solid #9a9a9a;
+    border-radius: 2vh;
+    opacity: 0.9;
+    font-size: 1.6vh;
+}
+
+.buttonStart:hover .tooltip {
+    display: block;
+    width: 24vh;
+    top: -10vh;
+    right: -5vh;
+    z-index: 999;
+    border: 0.4vh solid #9a9a9a;
+    border-radius: 2vh;
+    opacity: 0.9;
+    font-size: 1.6vh;
+}
+
+
+/*
+|======================|
+|  Buttons and Labels  |
+|======================|
+*/
+
+#price-display {
+    position: absolute;
+    top: 0;
+    color: black;
+    font-size: 3vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    right: 0;
+}
 
 #add-2x4 {
     content: "";
@@ -315,8 +398,6 @@ body {
     bottom: 4vh;
 }
 
-
-
 #delete-container {
     content: "";
     display: block;
@@ -359,52 +440,6 @@ body {
     font-size: 2em; /* adjust this value as needed */
 }
 
-.tooltip {
-    display: none;
-    position: absolute;
-    background-color: #cacecf;
-    color: rgb(0, 0, 0);
-    pointer-events: none;
-    width: 25vh;
-    z-index: 999;
-}
-
-.tooltip.left {
-    left: 10vh;
-}
-
-.tooltip.right {
-    right: 10vh;
-}
-
-.tooltip.top {
-    top: 10vh;
-}
-
-.tooltip.bottom {
-    top: -10vh;
-}
-  
-.draggable:hover .tooltip {
-    display: block;
-    border: 0.4vh solid #9a9a9a;
-    border-radius: 2vh;
-    opacity: 0.9;
-    font-size: 1.6vh;
-}
-
-.buttonStart:hover .tooltip {
-    display: block;
-    width: 24vh;
-    top: -10vh;
-    right: -5vh;
-    z-index: 999;
-    border: 0.4vh solid #9a9a9a;
-    border-radius: 2vh;
-    opacity: 0.9;
-    font-size: 1.6vh;
-}
-
 #save {
     position: absolute;
     top: 0.5vh;
@@ -441,15 +476,4 @@ body {
     left: 19.1vh;
     border: 0.4vh solid #3d3d3d;
     border-radius: 2vh;
-}
-
-#page {
-    position: relative;
-    width: 190vh;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 92vh;
-    overflow: visible;
 }
