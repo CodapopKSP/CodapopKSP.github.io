@@ -453,6 +453,10 @@ body {
     border-radius: 1.5vh;
 }
 
+#save:active {
+    background-color: #555555;
+}
+
 #load {
     position: absolute;
     top: 0.5vh;
@@ -464,6 +468,10 @@ body {
     left: 10vh;
     border: 0.4vh solid #3d3d3d;
     border-radius: 1.5vh;
+}
+
+#load:active {
+    background-color: #555555;
 }
 
 #input-box {
