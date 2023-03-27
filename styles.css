@@ -57,11 +57,12 @@ body {
     height: 90vh;
     overflow: hidden;
     border-radius: 2vh;
+    background: #d4d4d4;
 }
 
 .container-wrapper2 {
     position: absolute;
-    top: 4%;
+    top: -2%;
     right: 81%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -71,7 +72,7 @@ body {
 
 .container-wrapper3 {
     position: absolute;
-    top: 4%;
+    top: -2%;
     left: 81%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -85,7 +86,7 @@ body {
     position: absolute;
     top: 0;
     color: black;
-    font-size: 2rem;
+    font-size: 3vh;
     font-weight: bold;
     padding: 0.75vh;
     right: 0;
@@ -386,7 +387,7 @@ body {
   
 .draggable:hover .tooltip {
     display: block;
-    border: 5px solid #9a9a9a;
+    border: 0.4vh solid #9a9a9a;
     border-radius: 2vh;
     opacity: 0.9;
     font-size: 1.6vh;
@@ -398,7 +399,7 @@ body {
     top: -10vh;
     right: -5vh;
     z-index: 999;
-    border: 5px solid #9a9a9a;
+    border: 0.4vh solid #9a9a9a;
     border-radius: 2vh;
     opacity: 0.9;
     font-size: 1.6vh;
@@ -406,30 +407,49 @@ body {
 
 #save {
     position: absolute;
-    top: 0;
-    color: black;
-    font-size: 3vh;
+    top: 0.5vh;
+    color: rgb(255, 255, 255);
+    background-color: #686868;
+    font-size: 2.5vh;
     font-weight: bold;
     padding: 0.75vh;
     left: 0.5vh;
+    border: 0.4vh solid #3d3d3d;
+    border-radius: 1.5vh;
 }
 
 #load {
     position: absolute;
-    top: 0;
-    color: black;
-    font-size: 3vh;
+    top: 0.5vh;
+    color: rgb(255, 255, 255);
+    background-color: #686868;
+    font-size: 2.5vh;
     font-weight: bold;
     padding: 0.75vh;
-    left: 10vh;
+    left: 9.5vh;
+    border: 0.4vh solid #3d3d3d;
+    border-radius: 1.5vh;
 }
 
 #input-box {
     position: absolute;
-    top: 1vh;
+    top: 1.5vh;
     color: black;
     font-size: 1vh;
     font-weight: bold;
     padding: 0.75vh;
-    left: 19.5vh;
+    left: 18.5vh;
+    border: 0.4vh solid #3d3d3d;
+    border-radius: 2vh;
+}
+
+#page {
+    position: relative;
+    width: 190vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92vh;
+    overflow: visible;
 }

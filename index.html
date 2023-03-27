@@ -5,342 +5,344 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, orientation=landscape">
 		<meta http-equiv="X-UACompatible" content="ie=edge">
 		<link rel="stylesheet" href="styles.css">
-		<title>Untitled Space Craft | CAB</title>
+		<title style="">Untitled Space Craft | CAB</title>
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 		<style>
 			body {
-				background: #d4d4d4;
+				background: #3d3d3d;
 			}
 		</style>
-		
+		<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 	</head>
 	<header>
 		<div style="text-align: center;">
-			<h1 style="font-size: 2.7vh;">Untitled Space Craft | Controller Assembly Building</h1>
+			<h1 style="font-size: 2.7vh; color: rgb(255, 255, 255); font-family: 'Orbitron', sans-serif;">Untitled Space Craft | Controller Assembly Building</h1>
 		</div>
 	</header>
 	<body>
-		<div id="page-wrapper">
-				<button id="save", class="buttonStart">Save</button>
-				<button id="load", class="buttonStart">Load</button>
-				<input type="text" id="input-box">
-				<div id="price-display2" style="font-size: 3vh;">Total: $0</div>
-			</h1>
-			<div class="container-grid">
-				<div id="11" class="container2"></div>
-				<div id="12" class="container2"></div>
-				<div id="13" class="container2"></div>
-				<div id="14" class="container2"></div>
-				<div id="15" class="container2"></div>
-				<div id="16" class="container2"></div>
-			</div>
-			<div id="welcome-message" style="text-align: center; font-size: 1vh;">
-				<h1>Click a container on the bottom to begin.<br></br></h1>
-					
-				<h1>After that, containers can be dragged and dropped.</h1>
-				<h1>Drag a container to a spot on the canvas grid to add more than one container.</h1>
-				<h1>Drag them to the trash to remove them.</h1>
-			</div>
-			<div class="container-grid2">
-				<div id="21" class="container2"></div>
-				<div id="22" class="container2"></div>
-				<div id="23" class="container2"></div>
-				<div id="24" class="container2"></div>
-				<div id="25" class="container2"></div>
-				<div id="26" class="container2"></div>
-			</div>
-			<div id="delete-container"></div>
-			<div id="light-switch" style="font-size: 1.15vh;">
-				<p><strong style="font-size: 2.3vh;">Lights</strong></p>
-			</div>
-			<button id="add-2x4", class="buttonStart">
-				<span class="tooltip">
-					<strong style="font-size: 1.8vh;">Mark V Container</strong>
-					<span style="font-size: 1.7vh;"><br>$120</br></span>
-				</span>
-			</button>
-			<button id="add-2x3", class="buttonStart">
-				<span class="tooltip">
-					<strong style="font-size: 1.8vh;">Mark IV Container</strong>
-					<span style="font-size: 1.7vh;"><br>$90</br></span>
-				</span>
-			</button>
-			<button id="add-2x2", class="buttonStart">
-				<span class="tooltip">
-					<strong style="font-size: 1.8vh;">Mark III Container</strong>
-					<span style="font-size: 1.7vh;"><br>$70</br></span>
-				</span>
-			</button>
-			<button id="add-3x1", class="buttonStart">
-				<span class="tooltip">
-					<strong style="font-size: 1.8vh;">Mark II Container</strong>
-					<span style="font-size: 1.7vh;"><br>$60</br></span>
-				</span>
-			</button>
-			<button id="add-1x2", class="buttonStart">
-				<span class="tooltip">
-					<strong style="font-size: 1.8vh;">Mark I Container (Horizontal)</strong>
-					<span style="font-size: 1.7vh;"><br>$50</br></span>
-				</span>
-			</button>
-			<button id="add-2x1", class="buttonStart">
-				<span class="tooltip">
-					<strong style="font-size: 1.8vh;">Mark I Container (Vertical)</strong>
-					<span style="font-size: 1.7vh;"><br>$50</br></span>
-				</span>
-			</button>
-		</div>
-
-		<div class="container-wrapper2">
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="a1" data-price="60" draggable="true">
-					<img src="modules/abort.png" class="image-1">
-					<img src="modules/light/abort_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Abort Module</strong>
-						<span style="font-size: 1.7vh;"><br>$60</br></span>
-						The Abort module has a single button, an LED indicator, and an activation safety switch. The button remains inactive unless the safety switch is flipped on. The LED indicates the state of the safety switch. Pressing the button will activate the Abort action group.
-						<br></br>
-					</span>
+		<div id="page">
+			<div id="page-wrapper">
+					<button id="save", class="buttonStart">Save</button>
+					<button id="load", class="buttonStart">Load</button>
+					<input type="text" id="input-box">
+					<div id="price-display2">Total: $0</div>
+				</h1>
+				<div class="container-grid">
+					<div id="11" class="container2"></div>
+					<div id="12" class="container2"></div>
+					<div id="13" class="container2"></div>
+					<div id="14" class="container2"></div>
+					<div id="15" class="container2"></div>
+					<div id="16" class="container2"></div>
 				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="a2" data-price="60" draggable="true">
-					<img src="modules/stage.png" class="image-1">
-					<img src="modules/light/stage_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Stage Module</strong>
-						<span style="font-size: 1.7vh;"><br>$60</br></span>
-						The Stage module has a single button, an LED indicator, and an activation safety switch. The button remains inactive unless the safety switch is flipped on. The LED indicates the state of the safety switch. Pressing the button will activate the Stage action group.
-						<br></br>
-					</span>
+				<div id="welcome-message" style="text-align: center; font-size: 1vh;">
+					<h1>Click a container on the bottom to begin.<br></br></h1>
+						
+					<h1>After that, containers can be dragged and dropped.</h1>
+					<h1>Drag a container to a spot on the canvas grid to add more than one container.</h1>
+					<h1>Drag them to the trash to remove them.</h1>
 				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="a3" data-price="60" draggable="true">
-					<img src="modules/exec1.png" class="image-1">
-					<img src="modules/light/exec1_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Executive Actions Module</strong>
-						<span style="font-size: 1.7vh;"><br>$60</br></span>
-						The Executive Actions module combines the functions of the Stage and Abort modules into one. It features two LED indicators (one built into the Abort button) and an arming switch that requires the user to insert and turn a key to activate. The Abort button is covered by a plastic safety cover.
-						<br></br>
-					</span>
+				<div class="container-grid2">
+					<div id="21" class="container2"></div>
+					<div id="22" class="container2"></div>
+					<div id="23" class="container2"></div>
+					<div id="24" class="container2"></div>
+					<div id="25" class="container2"></div>
+					<div id="26" class="container2"></div>
 				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="a4" data-price="80" draggable="true">
-					<img src="modules/exec2.png" class="image-1">
-					<img src="modules/light/exec2_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Executive Actions Module (Groups)</strong>
-						<span style="font-size: 1.7vh;"><br>$80</br></span>
-						The Executive Actions (Groups) module combines the functions of the Executive Actions module with some of the features of the Action Groups module. Two buttons, activated by a safety key switch, control the Stage and Abort groups, with an LED indicator built into the Abort button and covered by a plastic safety cover. Five buttons control the Action Groups, each with an LED indicator. The Action Group mappings can be changed upon request.
-						<br></br>
-					</span>
+				<div id="delete-container"></div>
+				<div id="light-switch" style="font-size: 1.15vh;">
+					<p><strong style="font-size: 2.3vh;">Lights</strong></p>
 				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="a5" data-price="80" draggable="true">
-					<img src="modules/exec3.png" class="image-1">
-					<img src="modules/light/exec3_l.png" class="image-2 hidden">
+				<button id="add-2x4", class="buttonStart">
 					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Executive Actions Module (Control)</strong>
-						<span style="font-size: 1.7vh;"><br>$80</br></span>
-						The Executive Actions (Control) module combines the functions of the Executive Actions module with some of the features of the Control Systems module. Two buttons, activated by a safety key switch, control the Stage and Abort groups, with an LED indicator built into the Abort button and covered by a plastic safety cover. Two Action Group buttons with LED indicators control the Gear and Lights action groups, while two switches toggle the SAS and RCS. Another button reactivates the SAS Hold mode for quick refreshing of the SAS.			
-						<br></br>
+						<strong style="font-size: 1.8vh;">Mark V Container</strong>
+						<span style="font-size: 1.7vh;"><br>$120</br></span>
 					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="b1" data-price="80" draggable="true">
-					<img src="modules/time.png" class="image-1">
-					<img src="modules/light/time_l.png" class="image-2 hidden">
+				</button>
+				<button id="add-2x3", class="buttonStart">
 					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Time Module</strong>
-						<span style="font-size: 1.7vh;"><br>$80</br></span>
-						The Time module manages the timewarp functions of the game. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Another button allows you to warp directly to the next maneuver node. Three more buttons allow you to pause, quicksave, and load the last quicksave. Note: This module is only available for Windows.
-						<br></br>
+						<strong style="font-size: 1.8vh;">Mark IV Container</strong>
+						<span style="font-size: 1.7vh;"><br>$90</br></span>
 					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="b2" data-price="70" draggable="true">
-					<img src="modules/nav1.png" class="image-1">
-					<img src="modules/light/nav1_l.png" class="image-2 hidden">
+				</button>
+				<button id="add-2x2", class="buttonStart">
 					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Navigation Module</strong>
+						<strong style="font-size: 1.8vh;">Mark III Container</strong>
 						<span style="font-size: 1.7vh;"><br>$70</br></span>
-						The Navigation module manages the map and navball. Two large toggle switches activate/decativate the Map/Navball and light up slightly while on. The rest of the buttons allow you to change views while in map mode, change the navball mode (orbit/surface/target) or switch between nearby vessels. Note: This module is only available for Windows.
-						<br></br>
 					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="b3" data-price="80" draggable="true">
-					<img src="modules/nav2.png" class="image-1">
-					<img src="modules/light/nav2_l.png" class="image-2 hidden">
+				</button>
+				<button id="add-3x1", class="buttonStart">
 					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Navigation Module (Time)</strong>
-						<span style="font-size: 1.7vh;"><br>$80</br></span>
-						The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle Pause, Cycle Ship, and Reset Map Focus. Note: This module is only available for Windows.
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="c1" data-price="80" draggable="true">
-					<img src="modules/telem.png" class="image-1">
-					<img src="modules/light/telem_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Telemetry Module</strong>
-						<span style="font-size: 1.7vh;"><br>$80</br></span>
-						The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.
-						<br></br>
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<p class="draggable light" id="d1" data-price="80" draggable="true">
-					<img src="modules/eva.png" class="image-1">
-					<img src="modules/light/eva_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">EVA Module</strong>
-						<span style="font-size: 1.7vh;"><br>$80</br></span>
-						The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.
-						<br></br>
-					</span>
-				</p>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable" id="e1" data-price="70" draggable="true">
-					<img src="modules/camera.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Camera Module</strong>
-						<span style="font-size: 1.7vh;"><br>$70</br></span>
-						The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, toggle IVA view, and cycle the camera modes. Note: This module is only available for Windows.
-						<br></br>
-					</span>
-				</div>
-			</div>
-		</div>
-
-		<div class="container-wrapper3">
-			<div class="container" data-type="type2">
-				<div class="draggable" id="f1" data-price="90" draggable="true">
-					<img src="modules/analog2.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Analog Controls Module</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Analog Controls module roughly combines the functionality of the Rotation and Translation Controls modules. It is incompatible with those modules. It features a large 3-axis joystick that controls the pitch/yaw/roll or the x/y/z impulse of the craft depending on the state of a Mode toggle switch. Another Mode switch remaps the joystick control depending on the craft for more intuitive gameplay. The joystick button sets the trim, and the brakes can be held with the button. The brakes can also be locked on by pressing the brake button and then pressing the joystick button. Another toggle switch controls the Gear action group.
-						<br></br>
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable" id="f2" data-price="90" draggable="true">
-					<img src="modules/analog1.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Analog Controls Module (Throttle)</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Analog Controls module (Throttle) roughly combines the functionality of the Rotation and Translation Controls modules and Throttle module. It is incompatible with those modules. It features a large 3-axis joystick that controls the pitch/yaw/roll or the x/y/z impulse of the craft depending on the state of a Mode toggle switch. Another Mode switch remaps the joystick control depending on the craft for more intuitive gameplay. A dial controls the throttle. The joystick button sets the trim, and the brakes can be held with the button. The brakes can also be locked on by pressing the brake button and then pressing the joystick button.
-						<br></br>
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable" id="f3" data-price="90" draggable="true">
-					<img src="modules/rot2.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Rotation Controls Module</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Rotation Controls module is intended to be used together with the Translation Controls module. It features a large 3-axis joystick that controls the pitch/yaw/roll of the craft. A mode switch remaps the axes depending on the type of craft to lead to more intuitive gameplay. The joystick button and trim button allow you to set the trim per axis. Two other switches toggle the Light and Gear action groups.
-						<br></br>
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable" id="f4" data-price="90" draggable="true">
-					<img src="modules/rot1.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Rotation Controls Module (Throttle)</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Rotation Controls (Throttle) module is intended to be used together with the Translation Controls module. It features a large 3-axis joystick that controls the pitch/yaw/roll of the craft. A mode switch remaps the axes depending on the type of craft to lead to more intuitive gameplay. The joystick button and trim button allow you to set the trim per axis. It also features a dial for controlling the throttle, with an enable switch for quick on/off or for safety.
-						<br></br>
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable" id="f5" data-price="90" draggable="true">
-					<img src="modules/trans.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Translation Controls Module</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Translation Controls module is intended to be used together with the Rotation Controls module. It features a large 3-axis joystick that controls the x/y/z impulse of the craft, such as during docking. It also controls the wheels while in Rover mode. Also while in Rover mode, a cruise control function allows you to set a speed for the craft to maintain. Brakes and Brake Lock inputs allow you to press and hold or toggle on/off the brakes respectively. A toggle switch for Precision Control reduces the translation and rotation inputs by 80%, allowing you to more accurately insert into an orbit.
-						<br></br>
-					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable" id="f6" data-price="60" draggable="true">
-					<img src="modules/throt.png">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Throttle Module</strong>
+						<strong style="font-size: 1.8vh;">Mark II Container</strong>
 						<span style="font-size: 1.7vh;"><br>$60</br></span>
-						The Throttle module features a large rotating lever that smoothly controls the throttle. It also includes a toggle switch for enabling/disabling the throttle or choosing a throttle-specific precision mode, as well as buttons for quick max/min throttle.
-						<br></br>
 					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="g1" data-price="90" draggable="true">
-					<img src="modules/control.png" class="image-1">
-					<img src="modules/light/control_l.png" class="image-2 hidden">
+				</button>
+				<button id="add-1x2", class="buttonStart">
 					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Control Systems Module</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Control Systems module manages the SAS and RCS of the ship. Two toggle switches activate the SAS and RCS, and 10 buttons, each with an LED indicator, select the active SAS mode. The buttons come with stickers to denote which mode they activate.
-						<br></br>
+						<strong style="font-size: 1.8vh;">Mark I Container (Horizontal)</strong>
+						<span style="font-size: 1.7vh;"><br>$50</br></span>
 					</span>
-				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="h1" data-price="90" draggable="true">
-					<img src="modules/ag1.png" class="image-1">
-					<img src="modules/light/ag1_l.png" class="image-2 hidden">
+				</button>
+				<button id="add-2x1", class="buttonStart">
 					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Action Groups Module</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.
-						<br></br>
+						<strong style="font-size: 1.8vh;">Mark I Container (Vertical)</strong>
+						<span style="font-size: 1.7vh;"><br>$50</br></span>
 					</span>
+				</button>
+			</div>
+
+			<div class="container-wrapper2">
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="a1" data-price="60" draggable="true">
+						<img src="modules/abort.png" class="image-1">
+						<img src="modules/light/abort_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Abort Module</strong>
+							<span style="font-size: 1.7vh;"><br>$60</br></span>
+							The Abort module has a single button, an LED indicator, and an activation safety switch. The button remains inactive unless the safety switch is flipped on. The LED indicates the state of the safety switch. Pressing the button will activate the Abort action group.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="a2" data-price="60" draggable="true">
+						<img src="modules/stage.png" class="image-1">
+						<img src="modules/light/stage_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Stage Module</strong>
+							<span style="font-size: 1.7vh;"><br>$60</br></span>
+							The Stage module has a single button, an LED indicator, and an activation safety switch. The button remains inactive unless the safety switch is flipped on. The LED indicates the state of the safety switch. Pressing the button will activate the Stage action group.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="a3" data-price="60" draggable="true">
+						<img src="modules/exec1.png" class="image-1">
+						<img src="modules/light/exec1_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Executive Actions Module</strong>
+							<span style="font-size: 1.7vh;"><br>$60</br></span>
+							The Executive Actions module combines the functions of the Stage and Abort modules into one. It features two LED indicators (one built into the Abort button) and an arming switch that requires the user to insert and turn a key to activate. The Abort button is covered by a plastic safety cover.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="a4" data-price="80" draggable="true">
+						<img src="modules/exec2.png" class="image-1">
+						<img src="modules/light/exec2_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Executive Actions Module (Groups)</strong>
+							<span style="font-size: 1.7vh;"><br>$80</br></span>
+							The Executive Actions (Groups) module combines the functions of the Executive Actions module with some of the features of the Action Groups module. Two buttons, activated by a safety key switch, control the Stage and Abort groups, with an LED indicator built into the Abort button and covered by a plastic safety cover. Five buttons control the Action Groups, each with an LED indicator. The Action Group mappings can be changed upon request.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="a5" data-price="80" draggable="true">
+						<img src="modules/exec3.png" class="image-1">
+						<img src="modules/light/exec3_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Executive Actions Module (Control)</strong>
+							<span style="font-size: 1.7vh;"><br>$80</br></span>
+							The Executive Actions (Control) module combines the functions of the Executive Actions module with some of the features of the Control Systems module. Two buttons, activated by a safety key switch, control the Stage and Abort groups, with an LED indicator built into the Abort button and covered by a plastic safety cover. Two Action Group buttons with LED indicators control the Gear and Lights action groups, while two switches toggle the SAS and RCS. Another button reactivates the SAS Hold mode for quick refreshing of the SAS.			
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="b1" data-price="80" draggable="true">
+						<img src="modules/time.png" class="image-1">
+						<img src="modules/light/time_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Time Module</strong>
+							<span style="font-size: 1.7vh;"><br>$80</br></span>
+							The Time module manages the timewarp functions of the game. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Another button allows you to warp directly to the next maneuver node. Three more buttons allow you to pause, quicksave, and load the last quicksave. Note: This module is only available for Windows.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="b2" data-price="70" draggable="true">
+						<img src="modules/nav1.png" class="image-1">
+						<img src="modules/light/nav1_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Navigation Module</strong>
+							<span style="font-size: 1.7vh;"><br>$70</br></span>
+							The Navigation module manages the map and navball. Two large toggle switches activate/decativate the Map/Navball and light up slightly while on. The rest of the buttons allow you to change views while in map mode, change the navball mode (orbit/surface/target) or switch between nearby vessels. Note: This module is only available for Windows.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="b3" data-price="80" draggable="true">
+						<img src="modules/nav2.png" class="image-1">
+						<img src="modules/light/nav2_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Navigation Module (Time)</strong>
+							<span style="font-size: 1.7vh;"><br>$80</br></span>
+							The Navigation (Time) module combines some of the features of the Navigation module and the Time module. A large switch toggles the Map and lights up slightly while on. A large rocker switch allows you to step up/down timewarp speeds. A button with an LED indicator lights up if the game is in timewarp, and pressing it will cancel timewarp. Physical timewarp can be activated by holding a button and pressing the large rocker. Other buttons handle Pause, Cycle Ship, and Reset Map Focus. Note: This module is only available for Windows.
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="c1" data-price="80" draggable="true">
+						<img src="modules/telem.png" class="image-1">
+						<img src="modules/light/telem_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Telemetry Module</strong>
+							<span style="font-size: 1.7vh;"><br>$80</br></span>
+							The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<p class="draggable light" id="d1" data-price="80" draggable="true">
+						<img src="modules/eva.png" class="image-1">
+						<img src="modules/light/eva_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">EVA Module</strong>
+							<span style="font-size: 1.7vh;"><br>$80</br></span>
+							The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows.
+							<br></br>
+						</span>
+					</p>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable" id="e1" data-price="70" draggable="true">
+						<img src="modules/camera.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Camera Module</strong>
+							<span style="font-size: 1.7vh;"><br>$70</br></span>
+							The Camera module allows you to change the view and position of the camera. The white buttons control the camera angle, and the rest of the buttons toggle the UI, take a screenshot, toggle IVA view, and cycle the camera modes. Note: This module is only available for Windows.
+							<br></br>
+						</span>
+					</div>
 				</div>
 			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="h2" data-price="90" draggable="true">
-					<img src="modules/ag2.png" class="image-1">
-					<img src="modules/light/ag2_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Action Groups Module (11-20)</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Action Groups (11-20) module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 11-20, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups, though there are some bugs when switching between craft that do not have anything mapped to Groups 11-20. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.
-						<br></br>
-					</span>
+
+			<div class="container-wrapper3">
+				<div class="container" data-type="type2">
+					<div class="draggable" id="f1" data-price="90" draggable="true">
+						<img src="modules/analog2.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Analog Controls Module</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Analog Controls module roughly combines the functionality of the Rotation and Translation Controls modules. It is incompatible with those modules. It features a large 3-axis joystick that controls the pitch/yaw/roll or the x/y/z impulse of the craft depending on the state of a Mode toggle switch. Another Mode switch remaps the joystick control depending on the craft for more intuitive gameplay. The joystick button sets the trim, and the brakes can be held with the button. The brakes can also be locked on by pressing the brake button and then pressing the joystick button. Another toggle switch controls the Gear action group.
+							<br></br>
+						</span>
+					</div>
 				</div>
-			</div>
-			<div class="container" data-type="type2">
-				<div class="draggable light" id="h3" data-price="90" draggable="true">
-					<img src="modules/ag3.png" class="image-1">
-					<img src="modules/light/ag3_l.png" class="image-2 hidden">
-					<span class="tooltip">
-						<strong style="font-size: 1.8vh;">Action Groups Module (21-30)</strong>
-						<span style="font-size: 1.7vh;"><br>$90</br></span>
-						The Action Groups (21-30) module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 21-30, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups, though there are some bugs when switching between craft that do not have anything mapped to Groups 21-30. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.
-						<br></br>
-					</span>
+				<div class="container" data-type="type2">
+					<div class="draggable" id="f2" data-price="90" draggable="true">
+						<img src="modules/analog1.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Analog Controls Module (Throttle)</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Analog Controls module (Throttle) roughly combines the functionality of the Rotation and Translation Controls modules and Throttle module. It is incompatible with those modules. It features a large 3-axis joystick that controls the pitch/yaw/roll or the x/y/z impulse of the craft depending on the state of a Mode toggle switch. Another Mode switch remaps the joystick control depending on the craft for more intuitive gameplay. A dial controls the throttle. The joystick button sets the trim, and the brakes can be held with the button. The brakes can also be locked on by pressing the brake button and then pressing the joystick button.
+							<br></br>
+						</span>
+					</div>
 				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable" id="f3" data-price="90" draggable="true">
+						<img src="modules/rot2.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Rotation Controls Module</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Rotation Controls module is intended to be used together with the Translation Controls module. It features a large 3-axis joystick that controls the pitch/yaw/roll of the craft. A mode switch remaps the axes depending on the type of craft to lead to more intuitive gameplay. The joystick button and trim button allow you to set the trim per axis. Two other switches toggle the Light and Gear action groups.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable" id="f4" data-price="90" draggable="true">
+						<img src="modules/rot1.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Rotation Controls Module (Throttle)</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Rotation Controls (Throttle) module is intended to be used together with the Translation Controls module. It features a large 3-axis joystick that controls the pitch/yaw/roll of the craft. A mode switch remaps the axes depending on the type of craft to lead to more intuitive gameplay. The joystick button and trim button allow you to set the trim per axis. It also features a dial for controlling the throttle, with an enable switch for quick on/off or for safety.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable" id="f5" data-price="90" draggable="true">
+						<img src="modules/trans.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Translation Controls Module</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Translation Controls module is intended to be used together with the Rotation Controls module. It features a large 3-axis joystick that controls the x/y/z impulse of the craft, such as during docking. It also controls the wheels while in Rover mode. Also while in Rover mode, a cruise control function allows you to set a speed for the craft to maintain. Brakes and Brake Lock inputs allow you to press and hold or toggle on/off the brakes respectively. A toggle switch for Precision Control reduces the translation and rotation inputs by 80%, allowing you to more accurately insert into an orbit.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable" id="f6" data-price="60" draggable="true">
+						<img src="modules/throt.png">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Throttle Module</strong>
+							<span style="font-size: 1.7vh;"><br>$60</br></span>
+							The Throttle module features a large rotating lever that smoothly controls the throttle. It also includes a toggle switch for enabling/disabling the throttle or choosing a throttle-specific precision mode, as well as buttons for quick max/min throttle.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="g1" data-price="90" draggable="true">
+						<img src="modules/control.png" class="image-1">
+						<img src="modules/light/control_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Control Systems Module</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Control Systems module manages the SAS and RCS of the ship. Two toggle switches activate the SAS and RCS, and 10 buttons, each with an LED indicator, select the active SAS mode. The buttons come with stickers to denote which mode they activate.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="h1" data-price="90" draggable="true">
+						<img src="modules/ag1.png" class="image-1">
+						<img src="modules/light/ag1_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Action Groups Module</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Action Groups module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 1-10, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="h2" data-price="90" draggable="true">
+						<img src="modules/ag2.png" class="image-1">
+						<img src="modules/light/ag2_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Action Groups Module (11-20)</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Action Groups (11-20) module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 11-20, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups, though there are some bugs when switching between craft that do not have anything mapped to Groups 11-20. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				<div class="container" data-type="type2">
+					<div class="draggable light" id="h3" data-price="90" draggable="true">
+						<img src="modules/ag3.png" class="image-1">
+						<img src="modules/light/ag3_l.png" class="image-2 hidden">
+						<span class="tooltip">
+							<strong style="font-size: 1.8vh;">Action Groups Module (21-30)</strong>
+							<span style="font-size: 1.7vh;"><br>$90</br></span>
+							The Action Groups (21-30) module consists of 10 pushbuttons, each with an LED indicator. The buttons activate Action Groups 21-30, and the LED indicators determine the states of the action groups.  When switching between different crafts, the indicators will change depending on that craft's specific active action groups, though there are some bugs when switching between craft that do not have anything mapped to Groups 21-30. The empty space in the center leaves room for stickers or can be drawn on with a dry-erase marker for labeling.
+							<br></br>
+						</span>
+					</div>
+				</div>
+				
+				
 			</div>
-			
-			
 		</div>
 		<script src="script.js" defer></script>
 	</body>
