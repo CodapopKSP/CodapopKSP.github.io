@@ -1,7 +1,7 @@
 const deleteContainer = document.getElementById('delete-container')
 //const queryString = window.location.search.substring(1);
 const urlParams = new URLSearchParams(window.location.search);
-const importConfig = urlParams.get('config');
+const queryString = urlParams.get('config');
 
 
 //Function for updating the price to reflect the current canvas items
@@ -145,7 +145,7 @@ draggables.forEach(draggable => {
 });
 
 // Light Switch
-const lightSwitch = document.getElementById('light-switch')
+const lightSwitch = document.getElementById('lights')
 lightSwitch.addEventListener('click', function() {
   this.classList.toggle('light');
   const modules_with_lights = document.querySelectorAll('.draggable.light');

@@ -415,31 +415,6 @@ body {
     opacity: 1;
 }
 
-#light-switch {
-    content: "";
-    display: block;
-    background-image: url('switch-off.png');
-    background-size: cover;
-    width: 7.5vh;
-    height: 7.5vh;
-    position: absolute;
-    left: 1.5vh;
-    bottom: 1.5vh;
-}
-
-#light-switch.light {
-    background-image: url('switch-on.png');
-}
-
-#light-switch p {
-    position: absolute;
-    bottom: -0.5em; /* adjust this value as needed */
-    left: 0.35em;
-    width: 100%;
-    margin: 0;
-    font-size: 2em; /* adjust this value as needed */
-}
-
 #save {
     position: absolute;
     top: 0.5vh;
@@ -457,7 +432,7 @@ body {
     background-color: #555555;
 }
 
-#load {
+#lights {
     position: absolute;
     top: 0.5vh;
     color: rgb(255, 255, 255);
@@ -470,18 +445,7 @@ body {
     border-radius: 1.5vh;
 }
 
-#load:active {
-    background-color: #555555;
-}
-
-#input-box {
-    position: absolute;
-    top: 1.3vh;
-    color: black;
-    font-size: 1vh;
-    font-weight: bold;
-    padding: 0.75vh;
-    left: 19.1vh;
-    border: 0.4vh solid #3d3d3d;
-    border-radius: 2vh;
+#lights.light {
+    color: rgb(72, 72, 72);
+    background-color: #ffffff;
 }
