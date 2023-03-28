@@ -1,5 +1,4 @@
 const deleteContainer = document.getElementById('delete-container')
-//const queryString = window.location.search.substring(1);
 const urlParams = new URLSearchParams(window.location.search);
 const queryString = urlParams.get('config');
 
@@ -548,7 +547,9 @@ function loadController(inputData) {
 }
 
 window.onload = function() {
-  if (queryString.startsWith('z')) {
-    loadController(queryString);
+  if (queryString) {
+    if (queryString.startsWith('z')) {
+      loadController(queryString);
+    }
   }
 }
