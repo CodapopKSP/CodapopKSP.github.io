@@ -1,5 +1,7 @@
 const deleteContainer = document.getElementById('delete-container')
-const queryString = window.location.search.substring(1);
+//const queryString = window.location.search.substring(1);
+const urlParams = new URLSearchParams(window.location.search);
+const importConfig = urlParams.get('config');
 
 
 //Function for updating the price to reflect the current canvas items
@@ -21,119 +23,6 @@ function updateTotalPrice() {
   });
   priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
-
-// Load Button
-const load = document.getElementById('load')
-load.addEventListener('click', function() {
-  const inputBox = document.getElementById('input-box');
-  if (inputBox.value.startsWith('z')) {
-    const boxes = document.querySelectorAll('.box');
-    if (boxes.length===0) {
-      let importConfig = inputBox.value;
-      let startIndex = 0;
-      let objectArray = [];
-      // Extract all containers from the string
-      while (true) {
-        const nextZIndex = importConfig.indexOf('z', startIndex + 1);
-        if (nextZIndex === -1) {
-          objectArray.push(importConfig.substring(startIndex));
-          break;
-        }
-        objectArray.push(importConfig.substring(startIndex, nextZIndex));
-        startIndex = nextZIndex;
-      }
-      // Parse the data from the container strings and determine the container type
-      for (const object of objectArray) {
-        const first5Chars = object.substring(0, 5);
-        const containerAddress = first5Chars.substring(1);
-        const modules = [];
-        for (let i = 5; i < object.length; i += 2) {
-          modules.push(object.substring(i, i + 2));
-        }
-        let containerType = '';
-        if (containerAddress.startsWith('12')) {
-            containerType = '.one-two'
-            addContainer(MarkIhoriz, containerType);
-        }
-        if (containerAddress.startsWith('21')) {
-          containerType = '.two-one'
-          addContainer(MarkIvert, containerType);
-        }
-        if (containerAddress.startsWith('31')) {
-          containerType = '.three-one'
-          addContainer(MarkII, containerType);
-        }
-        if (containerAddress.startsWith('22')) {
-          containerType = '.two-two'
-          addContainer(MarkIII, containerType);
-        }
-        if (containerAddress.startsWith('23')) {
-          containerType = '.two-three'
-          addContainer(MarkIV, containerType);
-        }
-        if (containerAddress.startsWith('24')) {
-          containerType = '.two-four'
-          addContainer(MarkV, containerType);
-        }
-        const targetContainerId = containerAddress.slice(2);
-        const boxes = document.querySelectorAll(containerType);
-        // Determine the container address
-        boxes.forEach(box => {
-          let parentContainer = box.parentNode;
-          if (parentContainer.id.includes('canvas')) {
-            box.classList.add('dropped-box');
-            if (targetContainerId!=='00') {
-              const targetContainer = document.getElementById(targetContainerId);
-              targetContainer.insertAdjacentElement('beforeend', box);
-            }
-            const draggables = modules.map(pair => document.getElementById(pair));
-            const containers = box.querySelectorAll(`.module-dock[data-type="type1"]`);
-            // Get all modules and add them to the containers
-            for (let i = 0; i < modules.length; i++) {
-              const draggable = draggables[i];
-              const container = containers[i];
-              if (draggable) {
-                container.appendChild(draggable);
-              }
-            }
-          }
-        })
-        // Update the canvas elements as if someone dragged and dropped the containers and modules
-        const containers = document.querySelectorAll('.container2');
-        containers.forEach(container => {
-          const containerChildren = Array.from(container.children);
-          if (containerChildren) {
-            containerChildren.forEach(child => {
-              if (child.classList.contains('two-four')) {
-                container.classList.add('has-24child');
-              }
-              if (child.classList.contains('two-three')) {
-                container.classList.add('has-23child');
-              }
-              if (child.classList.contains('two-two')) {
-                container.classList.add('has-22child');
-              }
-              if (child.classList.contains('one-two')) {
-                container.classList.add('has-12child');
-              }
-              if (child.classList.contains('three-one')) {
-                container.classList.add('has-31child');
-              }
-              if (child.classList.contains('two-one')) {
-                container.classList.add('has-21child');
-              }
-            })
-          }
-        })
-      }
-      updateTotalPrice()
-    } else {
-      alert('Please clear the canvas by dragging all active containers to the trash.');
-    }
-  } else {
-    alert('Please enter a valid controller configuration into the text box.');
-  }
-});
 
 // Save Button
 const save = document.getElementById('save')
@@ -170,7 +59,7 @@ save.addEventListener('click', function() {
       draggableIds.push(draggable.id);
     });
   })
-  alert("Copy your configuration URL below: \n\nhttps://codapopksp.github.io/?" + draggableIds.join(''));
+  alert("Copy your configuration URL below: \n\nhttps://codapopksp.github.io/?config=" + draggableIds.join(''));
 });
 
 
@@ -556,109 +445,107 @@ const MarkV = `
         </div>
         `;
 
-
-
 // Load a controller from a valid URL
 function loadController(inputData) {
-          let importConfig = inputData;
-          let startIndex = 0;
-          let objectArray = [];
-          // Extract all containers from the string
-          while (true) {
-            const nextZIndex = importConfig.indexOf('z', startIndex + 1);
-            if (nextZIndex === -1) {
-              objectArray.push(importConfig.substring(startIndex));
-              break;
-            }
-            objectArray.push(importConfig.substring(startIndex, nextZIndex));
-            startIndex = nextZIndex;
-          }
-          // Parse the data from the container strings and determine the container type
-          for (const object of objectArray) {
-            const first5Chars = object.substring(0, 5);
-            const containerAddress = first5Chars.substring(1);
-            const modules = [];
-            for (let i = 5; i < object.length; i += 2) {
-              modules.push(object.substring(i, i + 2));
-            }
-            let containerType = '';
-            if (containerAddress.startsWith('12')) {
-                containerType = '.one-two'
-                addContainer(MarkIhoriz, containerType);
-            }
-            if (containerAddress.startsWith('21')) {
-              containerType = '.two-one'
-              addContainer(MarkIvert, containerType);
-            }
-            if (containerAddress.startsWith('31')) {
-              containerType = '.three-one'
-              addContainer(MarkII, containerType);
-            }
-            if (containerAddress.startsWith('22')) {
-              containerType = '.two-two'
-              addContainer(MarkIII, containerType);
-            }
-            if (containerAddress.startsWith('23')) {
-              containerType = '.two-three'
-              addContainer(MarkIV, containerType);
-            }
-            if (containerAddress.startsWith('24')) {
-              containerType = '.two-four'
-              addContainer(MarkV, containerType);
-            }
-            const targetContainerId = containerAddress.slice(2);
-            const boxes = document.querySelectorAll(containerType);
-            // Determine the container address
-            boxes.forEach(box => {
-              let parentContainer = box.parentNode;
-              if (parentContainer.id.includes('canvas')) {
-                box.classList.add('dropped-box');
-                if (targetContainerId!=='00') {
-                  const targetContainer = document.getElementById(targetContainerId);
-                  targetContainer.insertAdjacentElement('beforeend', box);
-                }
-                const draggables = modules.map(pair => document.getElementById(pair));
-                const containers = box.querySelectorAll(`.module-dock[data-type="type1"]`);
-                // Get all modules and add them to the containers
-                for (let i = 0; i < modules.length; i++) {
-                  const draggable = draggables[i];
-                  const container = containers[i];
-                  if (draggable) {
-                    container.appendChild(draggable);
-                  }
-                }
-              }
-            })
-            // Update the canvas elements as if someone dragged and dropped the containers and modules
-            const containers = document.querySelectorAll('.container2');
-            containers.forEach(container => {
-              const containerChildren = Array.from(container.children);
-              if (containerChildren) {
-                containerChildren.forEach(child => {
-                  if (child.classList.contains('two-four')) {
-                    container.classList.add('has-24child');
-                  }
-                  if (child.classList.contains('two-three')) {
-                    container.classList.add('has-23child');
-                  }
-                  if (child.classList.contains('two-two')) {
-                    container.classList.add('has-22child');
-                  }
-                  if (child.classList.contains('one-two')) {
-                    container.classList.add('has-12child');
-                  }
-                  if (child.classList.contains('three-one')) {
-                    container.classList.add('has-31child');
-                  }
-                  if (child.classList.contains('two-one')) {
-                    container.classList.add('has-21child');
-                  }
-                })
-              }
-            })
-          }
-          updateTotalPrice()
+  let importConfig = inputData;
+  let startIndex = 0;
+  let objectArray = [];
+  // Extract all containers from the string
+  while (true) {
+    const nextZIndex = importConfig.indexOf('z', startIndex + 1);
+    if (nextZIndex === -1) {
+      objectArray.push(importConfig.substring(startIndex));
+      break;
+    }
+    objectArray.push(importConfig.substring(startIndex, nextZIndex));
+    startIndex = nextZIndex;
+  }
+  // Parse the data from the container strings and determine the container type
+  for (const object of objectArray) {
+    const first5Chars = object.substring(0, 5);
+    const containerAddress = first5Chars.substring(1);
+    const modules = [];
+    for (let i = 5; i < object.length; i += 2) {
+      modules.push(object.substring(i, i + 2));
+    }
+    let containerType = '';
+    if (containerAddress.startsWith('12')) {
+        containerType = '.one-two'
+        addContainer(MarkIhoriz, containerType);
+    }
+    if (containerAddress.startsWith('21')) {
+      containerType = '.two-one'
+      addContainer(MarkIvert, containerType);
+    }
+    if (containerAddress.startsWith('31')) {
+      containerType = '.three-one'
+      addContainer(MarkII, containerType);
+    }
+    if (containerAddress.startsWith('22')) {
+      containerType = '.two-two'
+      addContainer(MarkIII, containerType);
+    }
+    if (containerAddress.startsWith('23')) {
+      containerType = '.two-three'
+      addContainer(MarkIV, containerType);
+    }
+    if (containerAddress.startsWith('24')) {
+      containerType = '.two-four'
+      addContainer(MarkV, containerType);
+    }
+    const targetContainerId = containerAddress.slice(2);
+    const boxes = document.querySelectorAll(containerType);
+    // Determine the container address
+    boxes.forEach(box => {
+      let parentContainer = box.parentNode;
+      if (parentContainer.id.includes('canvas')) {
+        box.classList.add('dropped-box');
+        if (targetContainerId!=='00') {
+          const targetContainer = document.getElementById(targetContainerId);
+          targetContainer.insertAdjacentElement('beforeend', box);
         }
+        const draggables = modules.map(pair => document.getElementById(pair));
+        const containers = box.querySelectorAll(`.module-dock[data-type="type1"]`);
+        // Get all modules and add them to the containers
+        for (let i = 0; i < modules.length; i++) {
+          const draggable = draggables[i];
+          const container = containers[i];
+          if (draggable) {
+            container.appendChild(draggable);
+          }
+        }
+      }
+    })
+    // Update the canvas elements as if someone dragged and dropped the containers and modules
+    const containers = document.querySelectorAll('.container2');
+    containers.forEach(container => {
+      const containerChildren = Array.from(container.children);
+      if (containerChildren) {
+        containerChildren.forEach(child => {
+          if (child.classList.contains('two-four')) {
+            container.classList.add('has-24child');
+          }
+          if (child.classList.contains('two-three')) {
+            container.classList.add('has-23child');
+          }
+          if (child.classList.contains('two-two')) {
+            container.classList.add('has-22child');
+          }
+          if (child.classList.contains('one-two')) {
+            container.classList.add('has-12child');
+          }
+          if (child.classList.contains('three-one')) {
+            container.classList.add('has-31child');
+          }
+          if (child.classList.contains('two-one')) {
+            container.classList.add('has-21child');
+          }
+        })
+      }
+    })
+  }
+  updateTotalPrice()
+}
 
 window.onload = function() {
   if (queryString.startsWith('z')) {
