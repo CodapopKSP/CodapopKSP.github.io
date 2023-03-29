@@ -142,7 +142,7 @@ draggables.forEach(draggable => {
     }
   });
 
-  draggable.addEventListener('touchend', function(event) {
+  draggable.addEventListener('touchstart', function(event) {
     activeDraggable = draggable;
   })
 });
@@ -373,7 +373,6 @@ function addContainer(containerData, type) {
               if (activeDraggable) {
                 container.appendChild(activeDraggable);
                 activeDraggable = null;
-                event.preventDefault();
               }
             })
         })
