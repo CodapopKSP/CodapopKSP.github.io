@@ -160,6 +160,12 @@ lightSwitch.addEventListener('click', function() {
   });
 });
 
+// Contact Button
+const contactButton = document.getElementById('contact')
+contactButton.addEventListener('click', function() {
+  alert("If you'd like to contact me, you may do so via reddit, discord, instagram, or email.\n\nReddit: u/CodapopKSP\nDiscord: Codapop#1469\nInstagram: untitled_space_craft\nemail: UntitledSpaceCraft.Controllers@gmail.com\n\nFor more information, please visit my subreddit: https://old.reddit.com/r/UntitledSpaceCraft/");
+});
+
 
 const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 containerGrids.forEach(containerGrid => {
