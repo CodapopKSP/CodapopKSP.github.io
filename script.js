@@ -144,6 +144,7 @@ draggables.forEach(draggable => {
 
   draggable.addEventListener('touchstart', function(event) {
     activeDraggable = draggable;
+    event.preventDefault();
   })
 });
 
@@ -163,7 +164,7 @@ lightSwitch.addEventListener('click', function() {
 // Contact Button
 const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
-  alert("If you'd like to contact me, you may do so via reddit, discord, instagram, or email.\n\nReddit: u/CodapopKSP\nDiscord: Codapop#1469\nInstagram: untitled_space_craft\nemail: UntitledSpaceCraft.Controllers@gmail.com\n\nFor more information, please visit my subreddit: https://old.reddit.com/r/UntitledSpaceCraft/");
+  alert("If you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit: u/CodapopKSP\nDiscord: Codapop#1469\nInstagram: untitled_space_craft\nemail: UntitledSpaceCraft.Controllers@gmail.com\n\nFor more information, please visit my subreddit: https://old.reddit.com/r/UntitledSpaceCraft/");
 });
 
 
@@ -373,6 +374,7 @@ function addContainer(containerData, type) {
               if (activeDraggable) {
                 container.appendChild(activeDraggable);
                 activeDraggable = null;
+                event.preventDefault();
               }
             })
         })
