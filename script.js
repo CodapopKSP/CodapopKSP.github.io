@@ -1,7 +1,7 @@
 const deleteContainer = document.getElementById('delete-container')
 const urlParams = new URLSearchParams(window.location.search);
 const queryString = urlParams.get('config');
-
+let activeDraggable = null;
 
 //Function for updating the price to reflect the current canvas items
 const priceDisplay = document.getElementById('price-display')
@@ -141,6 +141,10 @@ draggables.forEach(draggable => {
       parentContainer4.style.zIndex = '';
     }
   });
+
+  draggable.addEventListener('touchstart', function(event) {
+    activeDraggable = draggable;
+  })
 });
 
 // Light Switch
@@ -358,6 +362,12 @@ function addContainer(containerData, type) {
                 draggable.classList.remove('dragging');
               }
               updateTotalPrice();
+            })
+            container.addEventListener('touchend', function(event) {
+              if (activeDraggable) {
+                container.appendChild(activeDraggable);
+                activeDraggable = null;
+              }
             })
         })
 
