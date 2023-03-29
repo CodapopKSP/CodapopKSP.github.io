@@ -142,9 +142,8 @@ draggables.forEach(draggable => {
     }
   });
 
-  draggable.addEventListener('touchstart', function(event) {
+  draggable.addEventListener('touchend', function(event) {
     activeDraggable = draggable;
-    event.preventDefault();
   })
 });
 
