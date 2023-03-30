@@ -172,7 +172,24 @@ lightSwitch.addEventListener('click', function() {
 // Contact Button
 const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
-  alert("If you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit: u/CodapopKSP\nDiscord: Codapop#1469\nInstagram: untitled_space_craft\nemail: UntitledSpaceCraft.Controllers@gmail.com\n\nFor more information, please visit my subreddit: https://old.reddit.com/r/UntitledSpaceCraft/");
+  //alert("If you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit: u/CodapopKSP\nDiscord: Codapop#1469\nInstagram: untitled_space_craft\nemail: UntitledSpaceCraft.Controllers@gmail.com\n\nFor more information, please visit my subreddit: https://old.reddit.com/r/UntitledSpaceCraft/");
+  Swal.fire({
+    title: 'Welcome to My Site!',
+    text: 'Click <a href="https://www.example.com">here</a> to visit our website.',
+    icon: 'info',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancel',
+    html: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // User clicked the "OK" button
+      window.location.href = "https://www.example.com";
+    } else {
+      // User clicked the "Cancel" button
+      // Do nothing or display another message
+    }
+  });
 });
 
 
