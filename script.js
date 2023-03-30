@@ -64,7 +64,7 @@ save.addEventListener('click', function() {
 
 // Handle drag, drop, and mouse over for modules
 const draggables = document.querySelectorAll('.draggable')
-draggables.forEach(draggable => {
+draggables.forEach(draggable => {/*
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
@@ -140,8 +140,8 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
-  });
-
+  });*/
+  
   draggable.addEventListener('touchstart', function(event) {
     activeDraggable = draggable;
     event.preventDefault()
