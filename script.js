@@ -3,6 +3,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const queryString = urlParams.get('config');
 let activeDraggable = null;
 
+function isPhone() {
+  return /mobile/i.test(navigator.userAgent);
+}
+
 document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
@@ -98,7 +102,7 @@ draggables.forEach(draggable => {
       parentContainer4.style.zIndex = '';
     }
   });
-  /*
+
   // Show tooltip and determine where to display the tooltip
   draggable.addEventListener('mouseover', (event) => {
     const tooltip = draggable.querySelector(".tooltip");
@@ -144,7 +148,7 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
-  });*/
+  });
   
   draggable.addEventListener('touchstart', function(event) {
     activeDraggable = draggable;
