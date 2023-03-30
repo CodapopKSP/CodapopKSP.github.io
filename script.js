@@ -11,6 +11,30 @@ document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
 
+const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
+recommendedConfigsBtn.addEventListener('click', function() {
+  Swal.fire({
+    title: 'Recommended Configs',
+    html:
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z2400h1b1b2g1a3f3f5f6\', \'_blank\')">Jebediah\'s Command</button>' +
+    '<button id="btn2" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z2300b3a4g1f3f6f5\', \'_blank\')">USS Button Box</button>' +
+    '<button id="btn3" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z2300b1h1b2f2a5e1\', \'_blank\')">Keyboard\'s Lament</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z1200f2a5\', \'_blank\')">Keyboard Companion 1</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z1200f2g1\', \'_blank\')">Keyboard Companion 2</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z2200a5b3f4f5\', \'_blank\')">External Command Seat 1</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z2200g1b3f2a4\', \'_blank\')">External Command Seat 2</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z2313h1b1b2f1f6g1z2115c1a3\', \'_blank\')">Valentina\'s Command</button>' +
+    '<button id="btn1" class="btn btn-primary text-center" onclick="window.open(\'https://codapopksp.github.io/?config=z3111a1h3f3z2413g1b1h1h2d1f5a2e1z3116c1b2f6\', \'_blank\')">Mission Control</button>',
+    showCancelButton: true,
+    cancelButtonText: 'Cancel',
+    buttonsStyling: false,
+    showConfirmButton: false,
+    customClass: {
+      cancelButton: 'btn btn-danger',
+    },
+  });
+});
+
 //Function for updating the price to reflect the current canvas items
 const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
@@ -66,7 +90,12 @@ save.addEventListener('click', function() {
       draggableIds.push(draggable.id);
     });
   })
-  alert("Copy your configuration URL below: \n\nhttps://codapopksp.github.io/?config=" + draggableIds.join(''));
+  const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
+  navigator.clipboard.writeText(url).then(() => {
+    alert("This configuration URL has been copied to your clipboard! \n\n" + url);
+  }).catch(() => {
+    alert("Failed to copy the configuration URL to your clipboard. Please copy it manually: \n\n" + url);
+  });
 });
 
 

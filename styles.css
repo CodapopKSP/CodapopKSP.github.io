@@ -475,3 +475,57 @@ body {
     border: 0.4vh solid #3d3d3d;
     border-radius: 1.5vh;
 }
+
+#recommendedConfigs {
+    position: absolute;
+    top: 0.5vh;
+    color: rgb(255, 255, 255);
+    background-color: #686868;
+    font-size: 2.2vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    left: 29.3vh;
+    border: 0.4vh solid #3d3d3d;
+    border-radius: 1.5vh;
+}
+
+.btn {
+    display: flex !important;
+    font-size: 1.5vh;
+    font-weight: bold;
+    /*
+    background-color: #686868;
+    color: rgb(255, 255, 255);
+    border: 0.4vh solid #3d3d3d;*/
+
+    background-color: #cacecf;
+    color: rgb(0, 0, 0);
+    border: 0.4vh solid #000000;
+
+    border-radius: 1vh;
+    padding: 0.75vh;
+    margin: 0.5vh;
+    font-family: 'Orbitron', sans-serif !important;
+}
+  
+.swal2-popup {
+    align-items: left !important;
+    border: 0.4vh solid #000000 !important;
+    border-radius: 1.5vh !important;
+    background-color: #3d3d3d !important;
+    opacity: 0.9 !important;
+    width: 40vh !important;
+    /*height: 60vh !important;*/
+}
+
+#swal2-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.swal2-title {
+    color: #ffffff !important;
+    font-family: 'Orbitron', sans-serif !important;
+}
