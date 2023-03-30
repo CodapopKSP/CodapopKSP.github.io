@@ -174,7 +174,7 @@ const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
   //alert("If you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit: u/CodapopKSP\nDiscord: Codapop#1469\nInstagram: untitled_space_craft\nemail: UntitledSpaceCraft.Controllers@gmail.com\n\nFor more information, please visit my subreddit: https://old.reddit.com/r/UntitledSpaceCraft/");
   Swal.fire({
-    title: 'Welcome to My Site!',
+    title: "If you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.",
     text: 'Click <a href="https://www.example.com">here</a> to visit our website.',
     icon: 'info',
     showCancelButton: true,
