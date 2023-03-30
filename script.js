@@ -373,6 +373,7 @@ function addContainer(containerData, type) {
               if (activeDraggable) {
                 container.appendChild(activeDraggable);
                 activeDraggable = null;
+                event.preventDefault()
               }
             })
         })
