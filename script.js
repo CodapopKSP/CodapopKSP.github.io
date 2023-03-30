@@ -144,6 +144,7 @@ draggables.forEach(draggable => {
 
   draggable.addEventListener('touchstart', function(event) {
     activeDraggable = draggable;
+    event.preventDefault()
   })
 });
 
