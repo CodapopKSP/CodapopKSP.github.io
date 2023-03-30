@@ -3,6 +3,10 @@ const urlParams = new URLSearchParams(window.location.search);
 const queryString = urlParams.get('config');
 let activeDraggable = null;
 
+document.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+});
+
 //Function for updating the price to reflect the current canvas items
 const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
@@ -64,7 +68,7 @@ save.addEventListener('click', function() {
 
 // Handle drag, drop, and mouse over for modules
 const draggables = document.querySelectorAll('.draggable')
-draggables.forEach(draggable => {/*
+draggables.forEach(draggable => {
   draggable.addEventListener('dragstart', function(event) {
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
@@ -94,7 +98,7 @@ draggables.forEach(draggable => {/*
       parentContainer4.style.zIndex = '';
     }
   });
-
+  /*
   // Show tooltip and determine where to display the tooltip
   draggable.addEventListener('mouseover', (event) => {
     const tooltip = draggable.querySelector(".tooltip");
