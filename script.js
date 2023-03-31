@@ -209,7 +209,45 @@ lightSwitch.addEventListener('click', function() {
 // Contact Button
 const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
-  alert("===============================================\n\nIf you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit:          u/CodapopKSP\nDiscord:        Codapop#1469\nInstagram:    untitled_space_craft\nemail:            UntitledSpaceCraft.Controllers@gmail.com\n\n\nFor more information, please visit my subreddit:\n\nhttps://www.reddit.com/r/UntitledSpaceCraft/\n\n===============================================");
+  //alert("===============================================\n\nIf you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit:          u/CodapopKSP\nDiscord:        Codapop#1469\nInstagram:    untitled_space_craft\nemail:            UntitledSpaceCraft.Controllers@gmail.com\n\n\nFor more information, please visit my subreddit:\n\nhttps://www.reddit.com/r/UntitledSpaceCraft/\n\n===============================================");
+  Swal.fire({
+    title: 'Contact Information - Click a button to copy.',
+    html:
+    '<button class="btn btn-primary text-center" data-clipboard-text="u/CodapopKSP">Reddit: u/CodapopKSP</button>' +
+    '<button class="btn btn-primary text-center" data-clipboard-text="Codapop#1469">Discord: Codapop#1469</button>' +
+    '<button class="btn btn-primary text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
+    '<button class="btn btn-primary text-center" data-clipboard-text="untitledspacecraft.controllers@gmail.com">Email: untitledspacecraft.controllers@gmail.com</button>' +
+    '<div><br></br>You can also visit the Untitled Space Craft subreddit for more information.</div>' +
+    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/\', \'_blank\')">Click to visit r/UntitledSpaceCraft</button>',
+    showCancelButton: true,
+    cancelButtonText: 'Cancel',
+    buttonsStyling: false,
+    showConfirmButton: false,
+    customClass: {
+      cancelButton: 'btn btn-danger',
+    },
+    didOpen: () => {
+      const clipboard = new ClipboardJS('.btn', {
+        text: function(trigger) {
+          return trigger.getAttribute('data-clipboard-text');
+        }
+      });
+      clipboard.on('success', function(e) {
+        e.clearSelection();
+        Swal.fire({
+          title: 'Copied to clipboard!',
+          text: e.text,
+          icon: 'success',
+          buttonsStyling: false,
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            container: 'copy-to-clipboard'
+          }
+        });
+      });
+    }
+  });
 });
 
 

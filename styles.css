@@ -493,11 +493,6 @@ body {
     display: flex !important;
     font-size: 1.5vh;
     font-weight: bold;
-    /*
-    background-color: #686868;
-    color: rgb(255, 255, 255);
-    border: 0.4vh solid #3d3d3d;*/
-
     background-color: #cacecf;
     color: rgb(0, 0, 0);
     border: 0.4vh solid #000000;
@@ -519,10 +514,6 @@ body {
 }
 
 #swal2-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center !important;
-    align-items: center !important;
     color: rgb(255, 255, 255);
     font-size: 1.5vh;
 }
@@ -530,4 +521,12 @@ body {
 .swal2-title {
     color: #ffffff !important;
     font-family: 'Orbitron', sans-serif !important;
+}
+
+#contactinfobox {
+    position: relative;
+    top: -20vh;
+    left: 12vh !important;
+    width: 10vh;
+    align-items: left !important;
 }
