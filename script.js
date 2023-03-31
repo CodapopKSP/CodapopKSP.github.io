@@ -95,7 +95,7 @@ save.addEventListener('click', function() {
     //alert("This configuration URL has been copied to your clipboard! \n\n" + url);
     Swal.fire({
       title: 'Copied!',
-      html: 'This configuration URL has been copied to your clipboard!<br><br>' + url,
+      html: '<div>This configuration URL has been copied to your clipboard!<br><br>' + url + '</div>',
       icon: 'success',
       buttonsStyling: false,
       showConfirmButton: false,
@@ -211,13 +211,14 @@ const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
   //alert("===============================================\n\nIf you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit:          u/CodapopKSP\nDiscord:        Codapop#1469\nInstagram:    untitled_space_craft\nemail:            UntitledSpaceCraft.Controllers@gmail.com\n\n\nFor more information, please visit my subreddit:\n\nhttps://www.reddit.com/r/UntitledSpaceCraft/\n\n===============================================");
   Swal.fire({
-    title: 'Contact Information - Click a button to copy.',
+    title: 'Contact Information',
     html:
-    '<button class="btn btn-primary text-center" data-clipboard-text="u/CodapopKSP">Reddit: u/CodapopKSP</button>' +
-    '<button class="btn btn-primary text-center" data-clipboard-text="Codapop#1469">Discord: Codapop#1469</button>' +
-    '<button class="btn btn-primary text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
-    '<button class="btn btn-primary text-center" data-clipboard-text="untitledspacecraft.controllers@gmail.com">Email: untitledspacecraft.controllers@gmail.com</button>' +
-    '<div><br></br>You can also visit the Untitled Space Craft subreddit for more information.</div>' +
+    '<div class="contacttext" style="font-family: \'Orbitron\', sans-serif;">Click a button to copy.</div>' +
+    '<button class="btn btn-reddit text-center" data-clipboard-text="https://www.reddit.com/user/CodapopKSP">Reddit:   u/CodapopKSP</button>' +
+    '<button class="btn btn-discord text-center" data-clipboard-text="Codapop#1469">Discord:   Codapop#1469</button>' +
+    '<button class="btn btn-insta text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
+    '<button class="btn btn-email text-center" data-clipboard-text="untitledspacecraft.controllers@gmail.com">Email: untitledspacecraft\n.controllers@gmail.com</button>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>You can also visit the Untitled Space Craft subreddit for more information.</div>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/\', \'_blank\')">Click to visit r/UntitledSpaceCraft</button>',
     showCancelButton: true,
     cancelButtonText: 'Cancel',
