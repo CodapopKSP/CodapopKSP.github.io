@@ -118,7 +118,7 @@ body {
 
 .container-grid2 {
     position: absolute;
-    top: 50%;
+    top: 48%;
     left: 0;
     width: 100%;
     display: flex;
@@ -432,24 +432,6 @@ body {
     background-color: #555555;
 }
 
-#lights {
-    position: absolute;
-    top: 0.5vh;
-    color: rgb(255, 255, 255);
-    background-color: #686868;
-    font-size: 2.2vh;
-    font-weight: bold;
-    padding: 0.75vh;
-    left: 10vh;
-    border: 0.4vh solid #3d3d3d;
-    border-radius: 1.5vh;
-}
-
-#lights.light {
-    color: rgb(72, 72, 72);
-    background-color: #ffffff;
-}
-
 #reset {
     position: absolute;
     top: 0.5vh;
@@ -458,7 +440,7 @@ body {
     font-size: 2.2vh;
     font-weight: bold;
     padding: 0.75vh;
-    left: 19.1vh;
+    left: 9.9vh;
     border: 0.4vh solid #3d3d3d;
     border-radius: 1.5vh;
 }
@@ -484,9 +466,27 @@ body {
     font-size: 2.2vh;
     font-weight: bold;
     padding: 0.75vh;
-    left: 29.35vh;
+    left: 20.1vh;
     border: 0.4vh solid #3d3d3d;
     border-radius: 1.5vh;
+}
+
+#lights {
+    position: absolute;
+    top: 0.5vh;
+    color: rgb(255, 255, 255);
+    background-color: #686868;
+    font-size: 2.2vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    left: 51.65vh;
+    border: 0.4vh solid #3d3d3d;
+    border-radius: 1.5vh;
+}
+
+#lights.light {
+    color: rgb(72, 72, 72);
+    background-color: #ffffff;
 }
 
 .btn {
