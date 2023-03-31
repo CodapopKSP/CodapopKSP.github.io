@@ -286,7 +286,7 @@ body {
 }
 
 .tooltip.bottom {
-    top: -10vh;
+    top: -15vh;
 }
   
 .draggable:hover .tooltip {

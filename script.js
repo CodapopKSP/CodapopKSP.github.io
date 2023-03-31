@@ -155,7 +155,7 @@ draggables.forEach(draggable => {
       tooltip.classList.add('right');
     }
     const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
-    if (positionv < window.innerHeight / 2) {
+    if (positionv < window.innerHeight / 5) {
       tooltip.classList.remove('bottom');
       tooltip.classList.add('top');
     } else {
