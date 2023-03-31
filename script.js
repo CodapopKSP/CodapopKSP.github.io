@@ -92,7 +92,15 @@ save.addEventListener('click', function() {
   })
   const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
   navigator.clipboard.writeText(url).then(() => {
-    alert("This configuration URL has been copied to your clipboard! \n\n" + url);
+    //alert("This configuration URL has been copied to your clipboard! \n\n" + url);
+    Swal.fire({
+      title: 'Copied!',
+      html: 'This configuration URL has been copied to your clipboard!<br><br>' + url,
+      icon: 'success',
+      buttonsStyling: false,
+      showConfirmButton: false,
+      timer: 3000,
+    });
   }).catch(() => {
     alert("Failed to copy the configuration URL to your clipboard. Please copy it manually: \n\n" + url);
   });

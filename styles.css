@@ -523,6 +523,8 @@ body {
     flex-wrap: wrap;
     justify-content: center !important;
     align-items: center !important;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
 }
 
 .swal2-title {
