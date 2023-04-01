@@ -232,7 +232,7 @@ engineersReport.addEventListener('click', function() {
     title: 'Engineer\'s Report',
     html: report,
     showCancelButton: true,
-    cancelButtonText: 'Cancel',
+    cancelButtonText: 'Ok',
     buttonsStyling: false,
     showConfirmButton: false,
     customClass: {
