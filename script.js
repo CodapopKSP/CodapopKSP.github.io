@@ -180,6 +180,8 @@ engineersReport.addEventListener('click', function() {
   recommendation = ``;
   if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || executive_duplicate || nav_time_duplicate || controlsys_duplicate || telemetry_overload) {
     recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
+  } else {
+    recommendation += `<p>This controller has passed all checks.</p>`;
   }
   if (isSizeMismatch) {
     recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
