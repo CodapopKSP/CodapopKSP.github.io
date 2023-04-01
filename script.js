@@ -37,27 +37,200 @@ recommendedConfigsBtn.addEventListener('click', function() {
 
 const engineersReport = document.getElementById('report');
 engineersReport.addEventListener('click', function() {
-  let reportContent = '<div>';
-  let totalPrice = 0;
+  let reportContent = '';
+
   const boxes = document.querySelectorAll('.box');
-  boxes.forEach((box, index) => {
-    if (index > 0) {
-      reportContent += '<hr>';
-    }
-    const boxPrice = parseFloat(box.getAttribute('data-price'));
-    totalPrice += boxPrice;
-    reportContent += `<p style="color: #4d9de3;"><strong>${box.getAttribute('data-name')}</strong> - $${boxPrice.toFixed(2)}</p>`;
+  let totalPrice = 0;
+  let isSizeMismatch = false;
+
+  boxes.forEach(box => {
     const draggables = box.querySelectorAll('.draggable');
-    draggables.forEach(draggable => {
-      const draggablePrice = parseFloat(draggable.getAttribute('data-price'));
-      totalPrice += draggablePrice;
-      reportContent += `<p>${draggable.getAttribute('data-name')} - $${draggablePrice.toFixed(2)}</p>`;
-    });
-  })
-  reportContent += `<hr><p><strong>Total: $${totalPrice.toFixed(2)}</strong></p></div>`;
+    let boxPrice = parseFloat(box.getAttribute('data-price'));
+    totalPrice += boxPrice;
+    if (draggables.length !== parseInt(box.getAttribute('data-size'))) {
+      isSizeMismatch = true;
+    } else {
+
+      draggables.forEach(draggable => {
+        const price = parseFloat(draggable.getAttribute('data-price'));
+        totalPrice += price;
+      });
+    }
+
+    if (boxPrice > 0) {
+      reportContent += `<p style="color: #4d9de3;"><strong>${box.getAttribute('data-name')}</strong> - $${boxPrice.toFixed(2)}</p>`;
+      draggables.forEach(draggable => {
+        const price = parseFloat(draggable.getAttribute('data-price'));
+        reportContent += `<p>&emsp;${draggable.getAttribute('data-name')} - $${price.toFixed(2)}</p>`;
+      });
+      reportContent += `<hr>`;
+    } else {
+      reportContent += `<p style="color: #df7070;">${box.getAttribute('data-name')} - <em>No items selected</em></p>`;
+      reportContent += `<hr>`;
+    }
+
+    
+  });
+
+  // Add recommendation section
+  let recommendation = '';
+  let hasThrottle = false;
+  let controlsys_duplicate = false;
+  let executive_duplicate = false;
+  let hasRotation = false;
+  let hasTranslation = false;
+  let rotation_duplicate = false;
+  let translation_duplicate = false;
+  let throttle_duplicate = false;
+  let nav_time_duplicate = false;
+  let telemetry_overload = false;
+  boxes.forEach(box => {
+    const has_analog_throttle = box.querySelector('#f2');
+    const has_rotation_throttle = box.querySelector('#f4');
+    const has_throttle = box.querySelector('#f6');
+    const has_translation = box.querySelector('#f5');
+    const has_analog = box.querySelector('#f1');
+    const has_rotation = box.querySelector('#f3');
+
+    if (has_rotation_throttle || has_rotation || has_analog || has_analog_throttle) {
+      hasRotation = true;
+    }
+
+    if (has_translation || has_analog || has_analog_throttle) {
+      hasTranslation = true;
+    }
+
+    if (has_analog_throttle || has_rotation_throttle || has_throttle) {
+      hasThrottle = true;
+    }
+    
+    const has_control_sys = box.querySelector('#g1');
+    const has_executive_control = box.querySelector('#a5');
+    const has_stage = box.querySelector('#a2');
+    const has_executive_groups = box.querySelector('#a4');
+    const has_executive = box.querySelector('#a3');
+    if (has_control_sys && has_executive_control) {
+      controlsys_duplicate = true;
+    }
+    const exec_elements = [has_executive_control, has_stage, has_executive_groups, has_executive];
+    let numTrue = 0;
+    for (let i = 0; i < exec_elements.length; i++) {
+      if (exec_elements[i]) {
+        numTrue++;
+      }
+      if (numTrue === 2) {
+        executive_duplicate = true;
+        break;
+      }
+    }
+
+    const rot_elements = [has_rotation_throttle, has_rotation, has_analog, has_analog_throttle];
+    numTrue = 0;
+    for (let i = 0; i < rot_elements.length; i++) {
+      if (rot_elements[i]) {
+        numTrue++;
+      }
+      if (numTrue === 2) {
+        rotation_duplicate = true;
+        break;
+      }
+    }
+
+    const trans_elements = [has_translation, has_analog, has_analog_throttle];
+    numTrue = 0;
+    for (let i = 0; i < trans_elements.length; i++) {
+      if (trans_elements[i]) {
+        numTrue++;
+      }
+      if (numTrue === 2) {
+        translation_duplicate = true;
+        break;
+      }
+    }
+
+    const throt_elements = [has_rotation_throttle, has_throttle, has_analog_throttle];
+    numTrue = 0;
+    for (let i = 0; i < throt_elements.length; i++) {
+      if (throt_elements[i]) {
+        numTrue++;
+      }
+      if (numTrue === 2) {
+        throttle_duplicate = true;
+        break;
+      }
+    }
+
+    const has_nav = box.querySelector('#b2');
+    const has_time = box.querySelector('#b1');
+    const has_navTime = box.querySelector('#b3');
+    if ((has_nav && has_navTime) || (has_time && has_navTime)) {
+      nav_time_duplicate = true;
+    }
+
+    const has_ag = box.querySelector('#h1');
+    const has_ag2 = box.querySelector('#h2');
+    const has_ag3 = box.querySelector('#h3');
+    const has_eva = box.querySelector('#d1');
+    const has_telem = box.querySelector('#c1');
+    if (has_telem && (has_ag || has_ag2 || has_ag3 || has_eva || has_control_sys || has_executive_control || has_executive_groups || has_time || has_navTime)) {
+      telemetry_overload = true;
+    }
+
+  });
+  recommendation = ``;
+  if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || executive_duplicate || nav_time_duplicate || controlsys_duplicate || telemetry_overload) {
+    recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
+  }
+  if (isSizeMismatch) {
+    recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
+  }
+  if (hasRotation && !hasThrottle) {
+    recommendation += `<p style="color: #ffe600;">You are missing a way to control the throttle.</p>`;
+  }
+  if (hasRotation && !hasTranslation) {
+    recommendation += `<p style="color: #ffe600;">You are missing Translation controls.</p>`;
+  }
+  if (!hasRotation && hasTranslation) {
+    recommendation += `<p style="color: #ffe600;">You are missing Rotation controls.</p>`;
+  }
+  if (translation_duplicate) {
+    recommendation += `<p style="color: #ffe600;">You have too many ways to control Translation.</p>`;
+  }
+  if (rotation_duplicate) {
+    recommendation += `<p style="color: #ffe600;">You have too many ways to control Rotation.</p>`;
+  }
+  if (throttle_duplicate) {
+    recommendation += `<p style="color: #ffe600;">You have too many ways to control Throttle.</p>`;
+  }
+  if (executive_duplicate) {
+    recommendation += `<p style="color: #ffe600;">You have multiple ways to activate the Stage function.</p>`;
+  }
+  if (nav_time_duplicate) {
+    recommendation += `<p style="color: #ffe600;">You are using the combined Navigation (Time) module with either the Navigation or Time module.</p>`;
+  }
+  if (controlsys_duplicate) {
+    recommendation += `<p style="color: #ffe600;">You have two ways to control SAS and RCS.</p>`;
+  }
+  if (telemetry_overload) {
+    recommendation += `<p>You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly.</p>`;
+  }
+
+
+
+
+  recommendation += `<hr>`;
+
+  const report = `
+    <div>
+      ${reportContent}
+      <p><strong>Total Price: $${totalPrice.toFixed(2)}</strong></p>
+      ${recommendation}
+    </div>
+  `;
+
   Swal.fire({
     title: 'Engineer\'s Report',
-    html: reportContent,
+    html: report,
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,
@@ -508,7 +681,7 @@ function addContainer(containerData, type) {
 
 // Container Data
 const MarkIhoriz = `
-        class="one-two box" data-price="50" data-name="Mark I Container (Horizontal)" draggable="true">
+        class="one-two box" data-price="50" data-name="Mark I Container (Horizontal)" data-size="2" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -516,7 +689,7 @@ const MarkIhoriz = `
         </div>
         `;
 const MarkIvert = `
-        class="two-one box" data-price="50" data-name="Mark I Container (Vertical)" draggable="true">
+        class="two-one box" data-price="50" data-name="Mark I Container (Vertical)" data-size="2" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
@@ -526,7 +699,7 @@ const MarkIvert = `
         </div>
         `;
 const MarkII = `
-        class="three-one box" data-price="60" data-name="Mark II Container" draggable="true">
+        class="three-one box" data-price="60" data-name="Mark II Container" data-size="3" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
@@ -539,7 +712,7 @@ const MarkII = `
         </div>
         `;
 const MarkIII = `
-        class="two-two box" data-price="70" data-name="Mark III Container" draggable="true">
+        class="two-two box" data-price="70" data-name="Mark III Container" data-size="4" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -551,7 +724,7 @@ const MarkIII = `
         </div>
         `;
 const MarkIV = `
-        class="two-three box" data-price="90" data-name="Mark IV Container" draggable="true">
+        class="two-three box" data-price="90" data-name="Mark IV Container" data-size="6" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -565,7 +738,7 @@ const MarkIV = `
         </div>
         `;
 const MarkV = `
-        class="two-four box" data-price="120" data-name="Mark V Container" draggable="true">
+        class="two-four box" data-price="120" data-name="Mark V Container" data-size="8" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
