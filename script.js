@@ -124,6 +124,7 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
+    deleteContainer.classList.add('highlight');
   });
   
   draggable.addEventListener('dragend', () => {
@@ -138,6 +139,7 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
+    deleteContainer.classList.remove('highlight');
   });
 
   // Show tooltip and determine where to display the tooltip
