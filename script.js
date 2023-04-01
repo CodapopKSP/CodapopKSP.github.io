@@ -14,7 +14,7 @@ document.addEventListener('contextmenu', function(event) {
 const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
 recommendedConfigsBtn.addEventListener('click', function() {
   Swal.fire({
-    title: 'Recommended Configs',
+    title: 'Recommended Configurations',
     html:
     '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://codapopksp.github.io/?config=z2400h1b1b2g1a3f3f5f6\'">Jebediah\'s Command</button>' +
     '<button id="btn2" class="btn btn-primary text-center" onclick="window.location.href=\'https://codapopksp.github.io/?config=z2300b3a4g1f3f6f5\'">USS Button Box</button>' +
@@ -25,6 +25,39 @@ recommendedConfigsBtn.addEventListener('click', function() {
     '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://codapopksp.github.io/?config=z2200g1b3f2a4\'">External Command Seat 2</button>' +
     '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://codapopksp.github.io/?config=z2313h1b1b2f1f6g1z2115c1a3\'">Valentina\'s Command</button>' +
     '<button id="btn1" class="btn btn-primary text-center" onclick="window.location.href=\'https://codapopksp.github.io/?config=z3111a1h3f3z2413g1b1h1h2d1f5a2e1z3116c1b2f6\'">Mission Control</button>',
+    showCancelButton: true,
+    cancelButtonText: 'Cancel',
+    buttonsStyling: false,
+    showConfirmButton: false,
+    customClass: {
+      cancelButton: 'btn btn-danger',
+    },
+  });
+});
+
+const engineersReport = document.getElementById('report');
+engineersReport.addEventListener('click', function() {
+  let reportContent = '<div>';
+  let totalPrice = 0;
+  const boxes = document.querySelectorAll('.box');
+  boxes.forEach((box, index) => {
+    if (index > 0) {
+      reportContent += '<hr>';
+    }
+    const boxPrice = parseFloat(box.getAttribute('data-price'));
+    totalPrice += boxPrice;
+    reportContent += `<p style="color: #4d9de3;"><strong>${box.getAttribute('data-name')}</strong> - $${boxPrice.toFixed(2)}</p>`;
+    const draggables = box.querySelectorAll('.draggable');
+    draggables.forEach(draggable => {
+      const draggablePrice = parseFloat(draggable.getAttribute('data-price'));
+      totalPrice += draggablePrice;
+      reportContent += `<p>${draggable.getAttribute('data-name')} - $${draggablePrice.toFixed(2)}</p>`;
+    });
+  })
+  reportContent += `<hr><p><strong>Total: $${totalPrice.toFixed(2)}</strong></p></div>`;
+  Swal.fire({
+    title: 'Engineer\'s Report',
+    html: reportContent,
     showCancelButton: true,
     cancelButtonText: 'Cancel',
     buttonsStyling: false,
@@ -475,7 +508,7 @@ function addContainer(containerData, type) {
 
 // Container Data
 const MarkIhoriz = `
-        class="one-two box" data-price="50" draggable="true">
+        class="one-two box" data-price="50" data-name="Mark I Container (Horizontal)" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -483,7 +516,7 @@ const MarkIhoriz = `
         </div>
         `;
 const MarkIvert = `
-        class="two-one box" data-price="50" draggable="true">
+        class="two-one box" data-price="50" data-name="Mark I Container (Vertical)" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
@@ -493,7 +526,7 @@ const MarkIvert = `
         </div>
         `;
 const MarkII = `
-        class="three-one box" data-price="60" draggable="true">
+        class="three-one box" data-price="60" data-name="Mark II Container" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
           </div>
@@ -506,7 +539,7 @@ const MarkII = `
         </div>
         `;
 const MarkIII = `
-        class="two-two box" data-price="70" draggable="true">
+        class="two-two box" data-price="70" data-name="Mark III Container" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -518,7 +551,7 @@ const MarkIII = `
         </div>
         `;
 const MarkIV = `
-        class="two-three box" data-price="90" draggable="true">
+        class="two-three box" data-price="90" data-name="Mark IV Container" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
@@ -532,7 +565,7 @@ const MarkIV = `
         </div>
         `;
 const MarkV = `
-        class="two-four box" data-price="120" draggable="true">
+        class="two-four box" data-price="120" data-name="Mark V Container" draggable="true">
           <div class="container-slot-row">
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
             <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>

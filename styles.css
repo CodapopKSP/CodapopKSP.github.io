@@ -445,6 +445,10 @@ body {
     border-radius: 1.5vh;
 }
 
+#reset:active {
+    background-color: #555555;
+}
+
 #contact {
     position: absolute;
     bottom: 0.5vh;
@@ -458,6 +462,10 @@ body {
     border-radius: 1.5vh;
 }
 
+#contact:active {
+    background-color: #555555;
+}
+
 #recommendedConfigs {
     position: absolute;
     top: 0.5vh;
@@ -469,6 +477,10 @@ body {
     left: 20.1vh;
     border: 0.4vh solid #3d3d3d;
     border-radius: 1.5vh;
+}
+
+#recommendedConfigs:active {
+    background-color: #555555;
 }
 
 #lights {
@@ -489,6 +501,30 @@ body {
     background-color: #ffffff;
 }
 
+#report {
+    position: absolute;
+    top: 0.5vh;
+    color: rgb(255, 255, 255);
+    background-color: #686868;
+    font-size: 2.2vh;
+    font-weight: bold;
+    padding: 0.75vh;
+    left: 60.65vh;
+    border: 0.4vh solid #3d3d3d;
+    border-radius: 1.5vh;
+}
+
+#report:active {
+    background-color: #555555;
+}
+
+
+/*
+|==========|
+|  Popups  |
+|==========|
+*/
+
 .btn {
     display: flex !important;
     justify-content: center;
@@ -497,7 +533,6 @@ body {
     background-color: #cacecf;
     color: rgb(0, 0, 0);
     border: 0.4vh solid #000000;
-
     border-radius: 1vh;
     padding: 0.75vh;
     margin: 0.5vh;
@@ -540,4 +575,8 @@ body {
 
 .btn-email {
     background-color: #3bc14f !important;
+}
+
+.btn-email {
+    background-color: #4d9de3 !important;
 }
