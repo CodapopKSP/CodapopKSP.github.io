@@ -600,8 +600,8 @@ function loadController(inputData) {
     boxes.forEach(box => {
       let parentContainer = box.parentNode;
       if (parentContainer.id.includes('canvas')) {
-        box.classList.add('dropped-box');
         if (targetContainerId!=='00') {
+          box.classList.add('dropped-box');
           const targetContainer = document.getElementById(targetContainerId);
           targetContainer.insertAdjacentElement('beforeend', box);
         }
