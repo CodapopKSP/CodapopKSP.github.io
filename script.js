@@ -82,8 +82,9 @@ engineersReport.addEventListener('click', function() {
   let rotation_duplicate = false;
   let translation_duplicate = false;
   let throttle_duplicate = false;
-  let nav_time_duplicate = false;
   let telemetry_overload = false;
+  let nav_time = false;
+  let navTime = false;
   boxes.forEach(box => {
     const has_analog_throttle = box.querySelector('#f2');
     const has_rotation_throttle = box.querySelector('#f4');
@@ -163,8 +164,11 @@ engineersReport.addEventListener('click', function() {
     const has_nav = box.querySelector('#b2');
     const has_time = box.querySelector('#b1');
     const has_navTime = box.querySelector('#b3');
-    if ((has_nav && has_navTime) || (has_time && has_navTime)) {
-      nav_time_duplicate = true;
+    if ((has_nav || has_time)) {
+      nav_time = true;
+    }
+    if (has_navTime) {
+      navTime = true;
     }
 
     const has_ag = box.querySelector('#h1');
@@ -178,7 +182,7 @@ engineersReport.addEventListener('click', function() {
 
   });
   recommendation = ``;
-  if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || executive_duplicate || nav_time_duplicate || controlsys_duplicate || telemetry_overload) {
+  if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || executive_duplicate || (nav_time && navTime) || controlsys_duplicate || telemetry_overload) {
     recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
   } else {
     recommendation += `<p>This controller has passed all checks.</p>`;
@@ -207,7 +211,7 @@ engineersReport.addEventListener('click', function() {
   if (executive_duplicate) {
     recommendation += `<p style="color: #ffe600;">You have multiple ways to activate the Stage function.</p>`;
   }
-  if (nav_time_duplicate) {
+  if (nav_time && navTime) {
     recommendation += `<p style="color: #ffe600;">You are using the combined Navigation (Time) module with either the Navigation or Time module.</p>`;
   }
   if (controlsys_duplicate) {
