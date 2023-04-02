@@ -723,7 +723,18 @@ function addContainer(containerData, type) {
         let messageElement = document.getElementById("welcome-message");
         messageElement.style.display = "none";
   } else {
-    alert("Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.");
+    Swal.fire({
+      title: 'Error',
+      text: 'Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.',
+      icon: 'error',
+      showCancelButton: true,
+      cancelButtonText: 'Ok',
+      buttonsStyling: false,
+      showConfirmButton: false,
+      customClass: {
+        cancelButton: 'btn btn-danger',
+      },
+    });
   }
 }
 
