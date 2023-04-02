@@ -230,7 +230,7 @@ engineersReport.addEventListener('click', function() {
   if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || executive_duplicate || (nav_time && navTime) || controlsys_duplicate || telemetry_overload) {
     recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
   } else if (totalPrice > 0){
-    recommendation += `<p>This controller has passed all checks.</p>`;
+    recommendation += `<p style="color: #22aa37;">This controller has passed all checks.</p>`;
   }
   if (isSizeMismatch) {
     recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
