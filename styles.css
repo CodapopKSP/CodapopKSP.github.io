@@ -73,35 +73,63 @@ body {
     justify-content: space-between;;
     align-items: center;
     flex-shrink: 0;
+
 }
 
 .container2.has-drag {
-    border: 1px solid black;
+    border: 0.2vh solid rgb(42, 130, 47);
+    z-index: 999;
 }
+
+.container2.has-drag.has-24child {
+    z-index: 0;
+}
+.container2.has-drag.has-23child {
+    z-index: 0;
+}
+.container2.has-drag.has-22child {
+    z-index: 0;
+}
+.container2.has-drag.has-21child {
+    z-index: 0;
+}
+.container2.has-drag.has-12child {
+    z-index: 0;
+}
+.container2.has-drag.has-31child {
+    z-index: 0;
+}
+
 
 .container2.has-24child {
     transform: translate(-15vh, 7.5vh);
     margin: 0.75vh;
+
 }
 .container2.has-23child {
     transform: translate(-15vh, 7.5vh);
     margin: 0.75vh;
+
 }
 .container2.has-22child {
     transform: translateY(7.5vh);
     margin: 0.75vh;
+
 }
 .container2.has-21child {
     transform: translateY(7.5vh);
     margin: 0.75vh;
+
 }
 .container2.has-12child {
     transform: translateY(0vh);
     margin: 0.75vh;
+
 }
 .container2.has-31child {
     transform: translateY(15vh);
     margin: 0.75vh;
+
 }
 
 .container-grid {
@@ -114,7 +142,6 @@ body {
     flex-direction: row;
     overflow: visible;
     justify-content: center;
-    z-index: 1;
 }
 
 .container-grid2 {
@@ -128,7 +155,6 @@ body {
     overflow: visible;
     margin-top: 1.5vh;
     justify-content: center;
-    z-index: 0;
 }
 
 
