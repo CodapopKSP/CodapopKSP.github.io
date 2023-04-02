@@ -114,6 +114,7 @@ body {
     flex-direction: row;
     overflow: visible;
     justify-content: center;
+    z-index: 1;
 }
 
 .container-grid2 {
@@ -127,6 +128,7 @@ body {
     overflow: visible;
     margin-top: 1.5vh;
     justify-content: center;
+    z-index: 0;
 }
 
 
