@@ -709,6 +709,8 @@ function addContainer(containerData, type) {
             container.addEventListener('touchstart', function(event) {
               if (activeDraggable) {
                 container.appendChild(activeDraggable);
+                let tooltip = activeDraggable.querySelector(".tooltip");
+                tooltip.style.display = 'none';
                 activeDraggable = null;
                 event.preventDefault()
               }
