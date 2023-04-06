@@ -337,7 +337,7 @@ body {
     font-size: 1.6vh;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 812px) {
     .tooltip {
         display: none;
     }

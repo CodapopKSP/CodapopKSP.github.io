@@ -701,18 +701,24 @@ function addContainer(containerData, type) {
             container.addEventListener('drop', () => {
               const draggable = document.querySelector('.dragging')
               if (draggable) {
-                container.appendChild(draggable);
-                draggable.classList.remove('dragging');
+                let childElements = container.querySelectorAll('*');
+                if (childElements.length === 0) {
+                  container.appendChild(draggable);
+                  draggable.classList.remove('dragging');
+                }
               }
               updateTotalPrice();
             })
             container.addEventListener('touchstart', function(event) {
               if (activeDraggable) {
-                container.appendChild(activeDraggable);
-                let tooltip = activeDraggable.querySelector(".tooltip");
-                tooltip.style.display = 'none';
-                activeDraggable = null;
-                event.preventDefault()
+                let childElements = container.querySelectorAll('*');
+                if (childElements.length === 0) {
+                  container.appendChild(activeDraggable);
+                  let tooltip = activeDraggable.querySelector(".tooltip");
+                  tooltip.style.display = 'none';
+                  activeDraggable = null;
+                  event.preventDefault()
+                }
               }
             })
         })
