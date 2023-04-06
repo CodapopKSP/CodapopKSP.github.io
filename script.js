@@ -706,7 +706,7 @@ function addContainer(containerData, type) {
               }
               updateTotalPrice();
             })
-            container.addEventListener('touchend', function(event) {
+            container.addEventListener('touchstart', function(event) {
               if (activeDraggable) {
                 container.appendChild(activeDraggable);
                 activeDraggable = null;
