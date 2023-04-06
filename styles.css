@@ -615,4 +615,15 @@ body {
         width: 40vh !important;
         font-size: 1.5vh !important;
     }
+    .btn {
+        width: 40vh !important;
+        font-size: 1vh !important;
+    }
+    .swal2-popup {
+        width: 40vh !important;
+    }
+    
+    #swal2-content {
+        width: 40vh !important;
+    }
 }

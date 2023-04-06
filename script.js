@@ -610,15 +610,17 @@ deleteContainer.addEventListener('touchstart', function(event) {
             elementToDelete.classList.remove("mouseover");
             let tooltip = activeDraggable.querySelector(".tooltip");
             tooltip.style.display = 'none';
-            activeDraggable = null;
             break;
         }
     }
   }
+  activeDraggable = null;
+  updateTotalPrice()
 })
 deleteContainer.addEventListener('drop', (event) => {
     const id = event.dataTransfer.getData('text/plain');
     const elementToDelete = document.getElementById(id);
+    activeDraggable = null;
   
     if (elementToDelete && (elementToDelete.classList.contains('box'))) {
         elementToDelete.remove();
