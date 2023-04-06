@@ -7,6 +7,21 @@ function isPhone() {
   return /mobile/i.test(navigator.userAgent);
 }
 
+document.addEventListener('touchstart', function(event) {
+  const touch = event.touches[0];
+  const touchX = touch.clientX;
+  const touchY = touch.clientY;
+
+  const draggables = document.querySelectorAll('.draggable');
+  for (const draggable of draggables) {
+    const rect = draggable.getBoundingClientRect();
+    if (touchX >= rect.left && touchX <= rect.right && touchY >= rect.top && touchY <= rect.bottom) {
+      activeDraggable = draggable;
+      break;
+    }
+  }
+});
+
 document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
@@ -442,11 +457,6 @@ draggables.forEach(draggable => {
       parentContainer4.style.zIndex = '';
     }
   });
-  
-  draggable.addEventListener('touchstart', function(event) {
-    activeDraggable = draggable;
-    event.preventDefault()
-  })
 });
 
 // Light Switch
