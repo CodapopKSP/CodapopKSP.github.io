@@ -597,6 +597,25 @@ document.addEventListener('DOMContentLoaded', () => {
 deleteContainer.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
+deleteContainer.addEventListener('touchstart', function(event) {
+  if (activeDraggable) {
+    let tooltip = activeDraggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
+    event.preventDefault()
+    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+    for (const container of containers) {
+      const emptySlots = container.querySelectorAll('.draggable').length < 1;
+        if (emptySlots) {
+            container.appendChild(elementToDelete);
+            elementToDelete.classList.remove("mouseover");
+            let tooltip = elementToDelete.querySelector(".tooltip");
+            tooltip.style.display = 'none';
+            break;
+        }
+    }
+    activeDraggable = null;
+  }
+})
 deleteContainer.addEventListener('drop', (event) => {
     const id = event.dataTransfer.getData('text/plain');
     const elementToDelete = document.getElementById(id);
@@ -615,7 +634,7 @@ deleteContainer.addEventListener('drop', (event) => {
             }
         }
         elementToDelete.remove();
-    // Move modules back to 
+    // Move modules back to sides
     } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
         const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
         let droppedIntoContainer = false;
