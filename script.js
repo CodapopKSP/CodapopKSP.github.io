@@ -610,10 +610,10 @@ deleteContainer.addEventListener('touchstart', function(event) {
             elementToDelete.classList.remove("mouseover");
             let tooltip = activeDraggable.querySelector(".tooltip");
             tooltip.style.display = 'none';
+            activeDraggable = null;
             break;
         }
     }
-    activeDraggable = null;
   }
 })
 deleteContainer.addEventListener('drop', (event) => {
