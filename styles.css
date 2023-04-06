@@ -337,12 +337,6 @@ body {
     font-size: 1.6vh;
 }
 
-@media only screen and (max-width: 812px) {
-    .tooltip {
-        display: none;
-    }
-}
-
 
 /*
 |======================|
@@ -609,4 +603,15 @@ body {
 
 .btn-email {
     background-color: #3bc14f !important;
+}
+
+@media only screen and (max-width: 812px) {
+    .tooltip {
+        display: none;
+    }
+    .swal2-title {
+        color: #ffffff !important;
+        font-family: 'Orbitron', sans-serif !important;
+        width: 40vh !important;
+    }
 }

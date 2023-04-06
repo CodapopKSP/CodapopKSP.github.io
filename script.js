@@ -606,9 +606,9 @@ deleteContainer.addEventListener('touchstart', function(event) {
     for (const container of containers) {
       const emptySlots = container.querySelectorAll('.draggable').length < 1;
         if (emptySlots) {
-            container.appendChild(elementToDelete);
+            container.appendChild(activeDraggable);
             elementToDelete.classList.remove("mouseover");
-            let tooltip = elementToDelete.querySelector(".tooltip");
+            let tooltip = activeDraggable.querySelector(".tooltip");
             tooltip.style.display = 'none';
             break;
         }
