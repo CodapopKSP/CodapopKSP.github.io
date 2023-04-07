@@ -608,8 +608,9 @@ deleteContainer.addEventListener('touchstart', function(event) {
         if (emptySlots) {
             container.appendChild(activeDraggable);
             elementToDelete.classList.remove("mouseover");
+            /*
             let tooltip = activeDraggable.querySelector(".tooltip");
-            tooltip.style.display = 'none';
+            tooltip.style.display = 'none';*/
             activeDraggable = null;
             break;
         }
@@ -735,9 +736,8 @@ function addContainer(containerData, type) {
                 let childElements = container.querySelectorAll('*');
                 if (childElements.length === 0) {
                   container.appendChild(activeDraggable);
-                  /*
                   let tooltip = activeDraggable.querySelector(".tooltip");
-                  tooltip.style.display = 'none';*/
+                  tooltip.style.display = 'none';
                   activeDraggable = null;
                   event.preventDefault()
                   updateTotalPrice()
