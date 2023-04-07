@@ -619,14 +619,12 @@ body {
         width: 40vh !important;
         font-size: 1vh !important;
     }
-    .swal2-popup {
+    /*.swal2-popup {
         width: 50vh !important;
-        position: relative;
-        left: -10vw;
-    }
+    }*/
     
     .swal2-content {
-        width: 40vh !important;
+        /*width: 40vh !important;*/
         display: block !important;
         left: 0vh !important;
     }
