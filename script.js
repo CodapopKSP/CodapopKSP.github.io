@@ -735,8 +735,9 @@ function addContainer(containerData, type) {
                 let childElements = container.querySelectorAll('*');
                 if (childElements.length === 0) {
                   container.appendChild(activeDraggable);
+                  /*
                   let tooltip = activeDraggable.querySelector(".tooltip");
-                  tooltip.style.display = 'none';
+                  tooltip.style.display = 'none';*/
                   activeDraggable = null;
                   event.preventDefault()
                   updateTotalPrice()
