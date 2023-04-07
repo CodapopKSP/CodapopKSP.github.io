@@ -621,10 +621,11 @@ body {
     }
     .swal2-popup {
         width: 50vh !important;
+        position: relative;
+        left: -10vw;
     }
     
     .swal2-content {
-        position: relative;
         width: 40vh !important;
         display: block !important;
         left: 0vh !important;
