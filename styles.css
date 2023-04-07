@@ -624,8 +624,7 @@ body {
     }
     
     .swal2-content {
-        position: absolute;
         width: 40vh !important;
-        left: 0vh !important;
+        display: block !important;
     }
 }
