@@ -612,11 +612,11 @@ body {
     .swal2-title {
         color: #ffffff !important;
         font-family: 'Orbitron', sans-serif !important;
-        width: 40vh !important;
+        width: 50vh !important;
         font-size: 1.5vh !important;
     }
     .btn {
-        /*width: 40vh !important;*/
+        width: 40vh !important;
         font-size: 1vh !important;
     }
     .swal2-popup {
@@ -624,7 +624,7 @@ body {
     }
     
     .swal2-content {
-        /*width: 40vh !important;*/
+        width: 40vh !important;
         display: block !important;
         left: 0vh !important;
     }
