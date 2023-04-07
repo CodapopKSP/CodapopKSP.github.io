@@ -739,6 +739,7 @@ function addContainer(containerData, type) {
                   tooltip.style.display = 'none';
                   activeDraggable = null;
                   event.preventDefault()
+                  updateTotalPrice()
                 }
               }
             })
