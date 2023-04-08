@@ -624,8 +624,10 @@ body {
     }
     
     .swal2-content {
-        /*width: 40vh !important;*/
+        width: 40vh !important;
         display: block !important;
+        margin: 0 auto;
+        text-align: center;
         left: 0vh !important;
     }
 }
