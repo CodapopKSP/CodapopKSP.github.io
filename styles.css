@@ -628,9 +628,9 @@ body {
         display: block !important;
         left: 0vh !important;
     }
-    #swal2-content {
-        /*width: 40vh !important;*/
+    /*#swal2-content {
+        width: 40vh !important;
         display: block !important;
         left: 0vh !important;
-    }
+    }*/
 }
