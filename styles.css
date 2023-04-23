@@ -677,3 +677,89 @@ body {
         margin-left:-430px;
     }
 }
+
+
+
+.box .ruler {
+    display: none;
+}
+
+.box:hover .ruler {
+    display: block;
+}
+
+.ruler {
+    position: absolute;
+    background-color: black;
+    z-index: 1;
+}
+
+.horizontal-ruler {
+    height: 0.4vh;
+    width: calc(100% + 1.125vh + 1.125vh);
+    top: -5vh;
+    left: -1.125vh;
+}
+
+.vertical-ruler {
+    width: 0.4vh;
+    height: calc(100% + 1.875vh + 1.125vh);
+    top: -1.875vh;
+    left: -5vh;
+}
+
+.ruler:before,
+.ruler:after {
+  content: "";
+  position: absolute;
+  background-color: black;
+  z-index: 1;
+}
+
+.horizontal-ruler:before,
+.horizontal-ruler:after {
+  height: 1vh;
+  width: 0.4vh;
+  top: 0vh;
+}
+
+.horizontal-ruler:before {
+  left: 0vh;
+}
+
+.horizontal-ruler:after {
+  right: 0vh;
+}
+
+.vertical-ruler:before,
+.vertical-ruler:after {
+  height: .4vh;
+  width: 1vh;
+  left: 0vh;
+}
+
+.vertical-ruler:before {
+  top: 0vh;
+}
+
+.vertical-ruler:after {
+  bottom: 0vh;
+}
+
+.horizontal-ruler-label {
+    font-size: 2.5vh;
+    position: absolute;
+    top: -3vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial;
+}
+
+.vertical-ruler-label {
+    font-size: 2.5vh;
+    position: absolute;
+    left: -3vh;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    font-family: Arial;
+}
