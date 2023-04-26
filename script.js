@@ -967,7 +967,6 @@ function loadController(inputData, color) {
         }
       }
       if (color) {
-        console.log(color);
         box.style.borderColor = color;
       }
     })
@@ -1003,11 +1002,8 @@ function loadController(inputData, color) {
 }
 
 window.onload = function() {
-  console.log('1');
   if (queryString) {
-    console.log('2');
     if (queryString.startsWith('z')) {
-      console.log('3');
       loadController(queryString, colorString);
     }
   }
