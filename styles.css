@@ -711,12 +711,14 @@ body {
     position: absolute;
     background-color: black;
     z-index: 1;
+    color:white;
+    text-shadow: 2px 2px black;
 }
 
 .horizontal-ruler {
     height: 0.4vh;
     width: calc(100% + 1.125vh + 1.125vh);
-    top: -5vh;
+    top: -4vh;
     left: -1.125vh;
 }
 
@@ -724,7 +726,7 @@ body {
     width: 0.4vh;
     height: calc(100% + 1.875vh + 1.125vh);
     top: -1.875vh;
-    left: -5vh;
+    left: -3vh;
 }
 
 .ruler:before,
