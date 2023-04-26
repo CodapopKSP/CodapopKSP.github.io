@@ -964,13 +964,12 @@ function loadController(inputData) {
             container.appendChild(draggable);
           }
         }
-        // Set the border color of the container
-        const colorParamIndex = importConfig.indexOf('Color=', startIndex);
-        if (colorParamIndex !== -1) {
-          const nextParamIndex = importConfig.indexOf('&', colorParamIndex + 1);
-          const colorValue = importConfig.substring(colorParamIndex + 6, nextParamIndex !== -1 ? nextParamIndex : undefined);
-          box.style.borderColor = colorValue;
-        }
+      }
+      const colorParamIndex = importConfig.indexOf('Color=', startIndex);
+      if (colorParamIndex !== -1) {
+        const nextParamIndex = importConfig.indexOf('&', colorParamIndex + 1);
+        const colorValue = importConfig.substring(colorParamIndex + 6, nextParamIndex !== -1 ? nextParamIndex : undefined);
+        box.style.borderColor = colorValue;
       }
     })
     // Update the canvas elements as if someone dragged and dropped the containers and modules
