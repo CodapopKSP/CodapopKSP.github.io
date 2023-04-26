@@ -965,7 +965,7 @@ function loadController(inputData) {
           }
         }
       }
-      const colorParamIndex = importConfig.indexOf('Color=', startIndex);
+      const colorParamIndex = importConfig.indexOf('&Color=', startIndex);
       console.log('4');
       console.log(colorParamIndex);
       if (colorParamIndex !== -1) {
