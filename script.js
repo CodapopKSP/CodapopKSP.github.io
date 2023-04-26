@@ -967,6 +967,7 @@ function loadController(inputData, color) {
         }
       }
       if (color) {
+        console.log(color);
         box.style.borderColor = color;
       }
     })
