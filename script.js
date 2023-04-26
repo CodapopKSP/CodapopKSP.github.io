@@ -967,12 +967,16 @@ function loadController(inputData) {
       }
       const colorParamIndex = importConfig.indexOf('Color=', startIndex);
       console.log('4');
+      console.log(colorParamIndex);
       if (colorParamIndex !== -1) {
+        console.log('5');
         const nextParamIndex = importConfig.indexOf('&', colorParamIndex + 1);
+        console.log(nextParamIndex);
         const colorValue = importConfig.substring(colorParamIndex + 6, nextParamIndex !== -1 ? nextParamIndex : undefined);
         console.log(colorValue);
         box.style.borderColor = colorValue;
       }
+      console.log('6');
     })
     // Update the canvas elements as if someone dragged and dropped the containers and modules
     const containers = document.querySelectorAll('.container2');
