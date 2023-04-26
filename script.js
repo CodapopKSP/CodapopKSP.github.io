@@ -965,6 +965,7 @@ function loadController(inputData) {
           }
         }
       }
+      importConfig = decodeURIComponent(importConfig);
       const colorParamIndex = importConfig.indexOf('&Color=', startIndex);
       console.log('4');
       console.log(colorParamIndex);
