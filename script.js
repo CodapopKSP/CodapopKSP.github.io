@@ -360,9 +360,9 @@ save.addEventListener('click', function() {
   const color = boxes[0].style.borderColor;
   // Add the color information to the end of the draggableIds array
   if (color) {
-    draggableIds.push(`Color=${color}`);
+    draggableIds.push(`&Color=${color}`);
   } else {
-    draggableIds.push(`Color=rgb(0, 0, 0)`);
+    draggableIds.push(`&Color=rgb(0, 0, 0)`);
   }
   const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
   navigator.clipboard.writeText(url).then(() => {
