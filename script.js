@@ -966,9 +966,11 @@ function loadController(inputData) {
         }
       }
       const colorParamIndex = importConfig.indexOf('Color=', startIndex);
+      console.log('4');
       if (colorParamIndex !== -1) {
         const nextParamIndex = importConfig.indexOf('&', colorParamIndex + 1);
         const colorValue = importConfig.substring(colorParamIndex + 6, nextParamIndex !== -1 ? nextParamIndex : undefined);
+        console.log(colorValue);
         box.style.borderColor = colorValue;
       }
     })
@@ -1004,8 +1006,11 @@ function loadController(inputData) {
 }
 
 window.onload = function() {
+  console.log('1');
   if (queryString) {
+    console.log('2');
     if (queryString.startsWith('z')) {
+      console.log('3');
       loadController(queryString);
     }
   }
