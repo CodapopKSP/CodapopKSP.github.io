@@ -11,6 +11,19 @@ document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
 
+const colorButtons = document.querySelectorAll('.color-button');
+const box = document.querySelector('.box');
+
+colorButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const color = button.style.backgroundColor;
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+      box.style.borderColor = color;
+    })
+  });
+});
+
 const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
 recommendedConfigsBtn.addEventListener('click', function() {
   Swal.fire({
@@ -344,6 +357,13 @@ save.addEventListener('click', function() {
       draggableIds.push(draggable.id);
     });
   })
+  const color = boxes[0].style.borderColor;
+  // Add the color information to the end of the draggableIds array
+  if (color) {
+    draggableIds.push(`Color=${color}`);
+  } else {
+    draggableIds.push(`Color=rgb(0, 0, 0)`);
+  }
   const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
   navigator.clipboard.writeText(url).then(() => {
     //alert("This configuration URL has been copied to your clipboard! \n\n" + url);
@@ -943,6 +963,13 @@ function loadController(inputData) {
           if (draggable) {
             container.appendChild(draggable);
           }
+        }
+        // Set the border color of the container
+        const colorParamIndex = importConfig.indexOf('Color=', startIndex);
+        if (colorParamIndex !== -1) {
+          const nextParamIndex = importConfig.indexOf('&', colorParamIndex + 1);
+          const colorValue = importConfig.substring(colorParamIndex + 6, nextParamIndex !== -1 ? nextParamIndex : undefined);
+          box.style.borderColor = colorValue;
         }
       }
     })

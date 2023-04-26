@@ -178,11 +178,12 @@ body {
 .box {
     position: absolute;
     z-index: 50;
+    border: 1.125vh solid black;
+    border-top: 1.875vh solid black;
 }
 
 .two-four {
-    border: 1.125vh solid black;
-    border-top: 1.875vh solid black;
+
     width: 60vh;
     height: 30vh;
     overflow: visible;
@@ -194,8 +195,7 @@ body {
 }
 
 .two-three {
-    border: 1.125vh solid black;
-    border-top: 1.875vh solid black;
+
     width: 45vh;
     height: 30vh;
     overflow: visible;
@@ -207,8 +207,7 @@ body {
 }
 
 .two-two {
-    border: 1.125vh solid black;
-    border-top: 1.875vh solid black;
+
     width: 30vh;
     height: 30vh;
     overflow: visible;
@@ -220,8 +219,7 @@ body {
 }
 
 .one-two {
-    border: 1.125vh solid black;
-    border-top: 1.875vh solid black;
+
     width: 30vh;
     height: 15vh;
     overflow: visible;
@@ -233,8 +231,7 @@ body {
 }
 
 .two-one {
-    border: 1.125vh solid black;
-    border-top: 1.875vh solid black;
+
     width: 15vh;
     height: 30vh;
     overflow: visible;
@@ -246,8 +243,7 @@ body {
 }
 
 .three-one {
-    border: 1.125vh solid black;
-    border-top: 1.875vh solid black;
+
     width: 15vh;
     height: 45vh;
     overflow: visible;
@@ -544,6 +540,29 @@ body {
 
 #report:active {
     background-color: #555555;
+}
+  
+.color-options {
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.color-button {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: none;
+    margin: 0.5em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-button:not(:first-child) {
+    margin-top: 0.5em;
 }
 
 
