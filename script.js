@@ -1,6 +1,7 @@
 const deleteContainer = document.getElementById('delete-container')
 const urlParams = new URLSearchParams(window.location.search);
 const queryString = urlParams.get('config');
+const colorString = urlParams.get('color');
 let activeDraggable = null;
 
 function isPhone() {
@@ -360,9 +361,9 @@ save.addEventListener('click', function() {
   const color = boxes[0].style.borderColor;
   // Add the color information to the end of the draggableIds array
   if (color) {
-    draggableIds.push(`&Color=${color.replace(/\s/g, '')}`);
+    draggableIds.push(`&color=${color.replace(/\s/g, '')}`);
   } else {
-    draggableIds.push(`&Color=rgb(0,0,0)`);
+    draggableIds.push(`&color=rgb(0,0,0)`);
   }
   const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
   navigator.clipboard.writeText(url).then(() => {
@@ -896,7 +897,7 @@ const MarkV = `
         `;
 
 // Load a controller from a valid URL
-function loadController(inputData) {
+function loadController(inputData, color) {
   let importConfig = inputData;
   let startIndex = 0;
   let objectArray = [];
@@ -965,19 +966,9 @@ function loadController(inputData) {
           }
         }
       }
-      importConfig = decodeURIComponent(importConfig);
-      const colorParamIndex = importConfig.indexOf('&Color=', startIndex);
-      console.log('4');
-      console.log(colorParamIndex);
-      if (colorParamIndex !== -1) {
-        console.log('5');
-        const nextParamIndex = importConfig.indexOf('&', colorParamIndex + 1);
-        console.log(nextParamIndex);
-        const colorValue = importConfig.substring(colorParamIndex + 6, nextParamIndex !== -1 ? nextParamIndex : undefined);
-        console.log(colorValue);
-        box.style.borderColor = colorValue;
+      if (color) {
+        box.style.borderColor = color;
       }
-      console.log('6');
     })
     // Update the canvas elements as if someone dragged and dropped the containers and modules
     const containers = document.querySelectorAll('.container2');
@@ -1016,7 +1007,7 @@ window.onload = function() {
     console.log('2');
     if (queryString.startsWith('z')) {
       console.log('3');
-      loadController(queryString);
+      loadController(queryString, colorString);
     }
   }
 }
