@@ -486,7 +486,7 @@ contactButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Contact Information',
     html:
-    '<div class="contacttext" style="font-family: \'Orbitron\', sans-serif;">Click a button to copy.</div>' +
+    '<div style="font-family: \'Roboto\', sans-serif;">Click a button to copy.</div>' +
     '<button class="btn btn-reddit text-center" data-clipboard-text="https://www.reddit.com/user/CodapopKSP">Reddit:   u/CodapopKSP</button>' +
     '<button class="btn btn-discord text-center" data-clipboard-text="Codapop#1469">Discord:   Codapop#1469</button>' +
     '<button class="btn btn-insta text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
@@ -521,6 +521,29 @@ contactButton.addEventListener('click', function() {
         });
       });
     }
+  });
+});
+
+// Contact Button
+const infoButton = document.getElementById('info')
+infoButton.addEventListener('click', function() {
+  Swal.fire({
+    title: 'Information',
+    html:
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>It is recommended to read the full guide.</div>' +
+    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/12hjtms/start_here_a_guide_to_untitled_space_craft/\', \'_blank\')">Starter Guide</button>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>Useful Documents</div>' +
+    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12sq3nn\', \'_blank\')">Full Catalog</button>' +
+    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12hjaoy\', \'_blank\')">Recommended Configs</button>' +
+    '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/xvm0tw/untitled_space_craft_how_to_orderwhat_to_expect/\', \'_blank\')">Ordering and Shipping</button>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>These controllers only work with KSP1. KSP2 compatibility is not yet available.</div>',
+    showCancelButton: true,
+    cancelButtonText: 'Cancel',
+    buttonsStyling: false,
+    showConfirmButton: false,
+    customClass: {
+      cancelButton: 'btn btn-danger',
+    },
   });
 });
 
