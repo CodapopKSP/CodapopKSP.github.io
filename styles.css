@@ -567,11 +567,11 @@ body {
 }
 
 .color-button {
-    width: 2em;
-    height: 2em;
+    width: 2vh;
+    height: 2vh;
     border-radius: 50%;
     border: none;
-    margin: 0.5em;
+    margin: 0.5vh;
     cursor: pointer;
     display: flex;
     align-items: center;
