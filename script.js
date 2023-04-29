@@ -256,7 +256,7 @@ engineersReport.addEventListener('click', function() {
 
   // Construct the warning message based on conflicting modules
   recommendation = '';
-  if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || executive_duplicate || (nav_time && navTime) || controlsys_duplicate || telemetry_overload) {
+  if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || separated_analog || executive_duplicate || (nav_time && navTime) || controlsys_duplicate || telemetry_overload) {
     recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
   } else if (totalPrice > 0){
     recommendation += `<p style="color: #22aa37;">This controller has passed all checks.</p>`;
@@ -282,6 +282,9 @@ engineersReport.addEventListener('click', function() {
   if (throttle_duplicate) {
     recommendation += `<p style="color: #ffe600;">You have too many ways to control Throttle.</p>`;
   }
+  if (separated_analog) {
+    recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
+  }
   if (executive_duplicate) {
     recommendation += `<p style="color: #ffe600;">You have multiple ways to activate the Stage function.</p>`;
   }
@@ -293,9 +296,6 @@ engineersReport.addEventListener('click', function() {
   }
   if (telemetry_overload) {
     recommendation += `<p style="color: #ffe600;">You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly. Please use multiple containers instead.</p>`;
-  }
-  if (separated_analog) {
-    recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
   }
   recommendation += `<hr>`;
 
