@@ -110,6 +110,7 @@ engineersReport.addEventListener('click', function() {
   var has_nav = false;
   var has_time = false;
   var has_navTime = false;
+  var separated_analog = false;
 
   // Check all modules
   boxes.forEach(box => {
@@ -169,6 +170,20 @@ engineersReport.addEventListener('click', function() {
     const has_telem_thisbox = box.querySelector('#c1');
     if (has_telem_thisbox && (has_ag_thisbox || has_ag2_thisbox || has_ag3_thisbox || has_eva_thisbox || has_control_sys_thisbox || has_executive_control_thisbox || has_executive_groups_thisbox || has_time_thisbox || has_navTime_thisbox)) {
       telemetry_overload = true;
+    }
+
+    if (!separated_analog) {
+      const has_rotation1_thisbox = box.querySelector('#f3');
+      const has_rotation2_thisbox = box.querySelector('#f4');
+      const has_rotation_thisbox = (has_rotation1_thisbox || has_rotation2_thisbox);
+      const has_translation_thisbox = box.querySelector('#f5');
+      console.log(has_rotation_thisbox);
+      console.log(has_translation_thisbox);
+      if ((has_rotation_thisbox && !has_translation_thisbox) || (!has_rotation_thisbox && has_translation_thisbox)) {
+        console.log('5');
+        separated_analog = true;
+        console.log(separated_analog);
+      }
     }
   });
   // Check if there are any rotation/translation/throttle controls
@@ -277,7 +292,10 @@ engineersReport.addEventListener('click', function() {
     recommendation += `<p style="color: #ffe600;">You have two ways to control SAS and RCS.</p>`;
   }
   if (telemetry_overload) {
-    recommendation += `<p>You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly.</p>`;
+    recommendation += `<p style="color: #ffe600;">You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly. Please use multiple containers instead.</p>`;
+  }
+  if (separated_analog) {
+    recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
   }
   recommendation += `<hr>`;
 
@@ -530,7 +548,7 @@ infoButton.addEventListener('click', function() {
   Swal.fire({
     title: 'Information',
     html:
-    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>It is recommended to read the full guide.</div>' +
+    '<div style="font-family: \'Roboto\', sans-serif;"><br></br>For information about kits or further customization, please read the full guide.</div>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/r/UntitledSpaceCraft/comments/12hjtms/start_here_a_guide_to_untitled_space_craft/\', \'_blank\')">Starter Guide</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>Useful Documents</div>' +
     '<button class="btn btn-primary text-center" onclick="window.open(\'https://www.reddit.com/gallery/12sq3nn\', \'_blank\')">Full Catalog</button>' +
