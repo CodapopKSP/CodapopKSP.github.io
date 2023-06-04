@@ -1,32 +1,47 @@
 <!DOCTYPE html>
-<html lang="eng">
+	<html lang="eng">
 	<head>
+		<!-- Metadata -->
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, orientation=landscape">
 		<meta http-equiv="X-UACompatible" content="ie=edge">
+
 		<!-- Search Engine -->
 		<meta name="description" content="A site for building custom Kerbal controllers for playing Kerbal Space Program">
+
 		<!-- Schema.org for Google -->
 		<meta itemprop="name" content="Untitled Spacecraft Controller Assembly Building">
 		<meta itemprop="description" content="A site for building custom Kerbal controllers for playing Kerbal Space Program">
+
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary">
 		<meta name="twitter:title" content="Untitled Spacecraft Controller Assembly Building">
 		<meta name="twitter:description" content="A site for building custom Kerbal controllers for playing Kerbal Space Program">
+
 		<!-- Open Graph general (Facebook, Pinterest & Google+) -->
 		<meta name="og:title" content="Untitled Spacecraft Controller Assembly Building">
 		<meta name="og:description" content="A site for building custom Kerbal controllers for playing Kerbal Space Program">
 		<meta name="og:url" content="https://codapopksp.github.io/">
 		<meta name="og:site_name" content="Untitled Spacecraft Controller Assembly Building">
 		<meta name="og:type" content="website">
+
+		<!-- Stylesheets -->
 		<link rel="stylesheet" href="styles.css">
+
+		<!-- Page Title -->
 		<title>Untitled Space Craft | CAB</title>
+
+		<!-- Favicon -->
 		<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+
+		<!-- Page Default Background -->
 		<style>
 			body {
 				background: #3d3d3d;
 			}
 		</style>
+
+		<!-- External Fonts and Libraries-->
 		<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.3/sweetalert2.min.css" />
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -34,12 +49,16 @@
 
 	</head>
 	<header>
+		<!-- Page Header -->
 		<div style="text-align: center;">
 			<h1 style="font-size: 2.7vh; color: rgb(255, 255, 255); font-family: 'Orbitron', sans-serif;">Untitled Space Craft | Controller Assembly Building</h1>
 		</div>
 	</header>
 	<body>
+		<!-- Wrapper for containing page elements -->
 		<div id="page-wrapper">
+
+			<!-- Controller Design Canvas -->
 			<div id="canvas">
 				<button style="font-family: 'Orbitron', sans-serif;" id="save", class="buttonStart">Save</button>
 				<button style="font-family: 'Orbitron', sans-serif;" id="lights", class="buttonStart">Light</button>
@@ -53,6 +72,8 @@
 					
 				<div style="font-family: 'Orbitron', sans-serif;" id="price-display">Total: $0</div>
 				</h1>
+
+				<!-- Top Container Grid -->
 				<div class="container-grid">
 					<div id="11" class="container2"></div>
 					<div id="12" class="container2"></div>
@@ -61,12 +82,16 @@
 					<div id="15" class="container2"></div>
 					<div id="16" class="container2"></div>
 				</div>
+
+				<!-- Welcome Message and Directions -->
 				<div id="welcome-message" style="text-align: center; font-size: 1vh;">
 					<h1 style="font-family: Arial;">Click a container on the bottom to begin.<br></br></h1>
 					<h1 style="font-family: Arial;">To add more than one container, drag the container to a spot on the canvas grid.</h1>
 					<h1 style="font-family: Arial;">To remove a container, drag it to the trash.</h1>
 					<h1 style="font-family: Arial;">This site was made for desktop. Please forgive the buggy mobile experience.</h1>
 				</div>
+
+				<!-- Bottom Container Grid -->
 				<div class="container-grid2">
 					<div id="21" class="container2"></div>
 					<div id="22" class="container2"></div>
@@ -75,7 +100,11 @@
 					<div id="25" class="container2"></div>
 					<div id="26" class="container2"></div>
 				</div>
+
+				<!-- Delete Bin -->
 				<div id="delete-container"></div>
+
+				<!-- Color Picker -->
 				<div class="color-options">
 					<button class="color-button" id="ColorA" style="background-color: rgb(207,199,163);"></button>
 					<button class="color-button" id="ColorB" style="background-color: rgb(227,158,160);"></button>
@@ -91,6 +120,8 @@
 					<button class="color-button" id="ColorL" style="background-color: rgb(254,212,3);"></button>
 					<button class="color-button" id="ColorL" style="background-color: rgb(255,255,255);"></button>
 				</div>
+
+				<!-- Container Creation Buttons -->
 				<button id="add-2x4", class="buttonStart">
 					<span style="font-family: 'Roboto', sans-serif;" class="tooltip">
 						<strong style="font-size: 1.8vh;">Mark V Container</strong>
@@ -129,7 +160,10 @@
 				</button>
 			</div>
 
+			<!-- Left Module Array -->
 			<div class="left-module-array">
+
+				<!-- Abort Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a1" data-price="60" data-name="Abort Module" draggable="true">
 						<img src="modules/abort.png" class="image-1">
@@ -142,6 +176,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Stage Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a2" data-price="60" data-name="Stage Module" draggable="true">
 						<img src="modules/stage.png" class="image-1">
@@ -154,6 +190,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Executive Actions Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a3" data-price="60" data-name="Executive Actions Module" draggable="true">
 						<img src="modules/exec1.png" class="image-1">
@@ -166,6 +204,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Executive Actions Module (Groups) -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a4" data-price="80" data-name="Executive Actions Module (Groups)" draggable="true">
 						<img src="modules/exec2.png" class="image-1">
@@ -178,6 +218,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Executive Actions Module (Control) -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="a5" data-price="80" data-name="Executive Actions Module (Control)" draggable="true">
 						<img src="modules/exec3.png" class="image-1">
@@ -190,6 +232,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Time Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="b1" data-price="80" data-name="Time Module" draggable="true">
 						<img src="modules/time.png" class="image-1">
@@ -202,6 +246,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Navigation Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="b2" data-price="70" data-name="Navigation Module" draggable="true">
 						<img src="modules/nav1.png" class="image-1">
@@ -214,6 +260,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Navigation Module (Time) -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="b3" data-price="80" data-name="Navigation Module (Time)" draggable="true">
 						<img src="modules/nav2.png" class="image-1">
@@ -226,6 +274,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Telemetry Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="c1" data-price="80" data-name="Telemetry Module" draggable="true">
 						<img src="modules/telem.png" class="image-1">
@@ -238,6 +288,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Blank Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="i1" data-price="0" data-name="Blank Module Cover" draggable="true">
 						<img src="modules/blank.png">
@@ -249,6 +301,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Blank Module 2 -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="i2" data-price="0" data-name="Blank Module Cover" draggable="true">
 						<img src="modules/blank-agency.png">
@@ -260,6 +314,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Blank Module 3 -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="i3" data-price="0" data-name="Blank Module Cover" draggable="true">
 						<img src="modules/blank-logo.png">
@@ -273,7 +329,10 @@
 				</div>
 			</div>
 
+			<!-- Right Module Array -->
 			<div class="right-module-array">
+
+				<!-- Analog Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f1" data-price="90" data-name="Analog Controls Module" draggable="true">
 						<img src="modules/analog2.png">
@@ -285,6 +344,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Analog Module (Throttle)-->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f2" data-price="90" data-name="Analog Controls Module (Throttle)" draggable="true">
 						<img src="modules/analog1.png">
@@ -296,6 +357,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Rotation Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f3" data-price="90" data-name="Rotation Controls Module" draggable="true">
 						<img src="modules/rot2.png">
@@ -307,6 +370,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Rotation Module (Throttle)-->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f4" data-price="90" data-name="Analog Controls Module (Throttle)" draggable="true">
 						<img src="modules/rot1.png">
@@ -318,6 +383,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Translation Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f5" data-price="90" data-name="Translation Controls Module" draggable="true">
 						<img src="modules/trans.png">
@@ -329,6 +396,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Throttle Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="f6" data-price="60" data-name="Throttle Module" draggable="true">
 						<img src="modules/throt.png">
@@ -340,6 +409,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Control Systems Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="g1" data-price="90" data-name="Control Systems Module" draggable="true">
 						<img src="modules/control.png" class="image-1">
@@ -352,6 +423,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Action Groups Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="h1" data-price="90" data-name="Action Groups Module" draggable="true">
 						<img src="modules/ag1.png" class="image-1">
@@ -364,6 +437,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Action Groups Module 2 -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="h2" data-price="90" data-name="Action Groups Module (11-20)" draggable="true">
 						<img src="modules/ag2.png" class="image-1">
@@ -376,6 +451,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Action Groups Module 3 -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable light" id="h3" data-price="90" data-name="Action Groups Module (21-30)" draggable="true">
 						<img src="modules/ag3.png" class="image-1">
@@ -388,6 +465,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- Camera Module -->
 				<div class="module-dock" data-type="type2">
 					<div class="draggable" id="e1" data-price="70" data-name="Camera Module" draggable="true">
 						<img src="modules/camera.png">
@@ -399,6 +478,8 @@
 						</span>
 					</div>
 				</div>
+
+				<!-- EVA Module -->
 				<div class="module-dock" data-type="type2">
 					<p class="draggable light" id="d1" data-price="80" data-name="EVA Module" draggable="true">
 						<img src="modules/eva.png" class="image-1">
@@ -413,6 +494,8 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Scripts -->
 		<script src="script.js" defer></script>
 	</body>
 </html>

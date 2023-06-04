@@ -1,20 +1,34 @@
+//|================|
+//|     Script     |
+//|================|
+
+// Delete Container
 const deleteContainer = document.getElementById('delete-container')
+
+// URL Parameters
 const urlParams = new URLSearchParams(window.location.search);
 const queryString = urlParams.get('config');
 const colorString = urlParams.get('color');
-let activeDraggable = null;
 
+// Mobile-specific Variables
+let activeDraggable = null;
 function isPhone() {
   return /mobile/i.test(navigator.userAgent);
 }
 
+// Prevent users from right clicking
 document.addEventListener('contextmenu', function(event) {
   event.preventDefault();
 });
 
+
+//|-------------------------|
+//|     Sidebar Buttons     |
+//|-------------------------|
+
+// Color Picker Buttons
 const colorButtons = document.querySelectorAll('.color-button');
 const box = document.querySelector('.box');
-
 colorButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const color = button.style.backgroundColor;
@@ -25,6 +39,12 @@ colorButtons.forEach((button) => {
   });
 });
 
+
+//|------------------------|
+//|     Header Buttons     |
+//|------------------------|
+
+// Recommended Configurations Button
 const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
 recommendedConfigsBtn.addEventListener('click', function() {
   Swal.fire({
@@ -49,27 +69,34 @@ recommendedConfigsBtn.addEventListener('click', function() {
   });
 });
 
+// Engineer's Report Button
 const engineersReport = document.getElementById('report');
+
+// Build a report showing controller stats and errors
 engineersReport.addEventListener('click', function() {
   let reportContent = '';
   const boxes = document.querySelectorAll('.box');
   let totalPrice = 0;
   let isSizeMismatch = false;
 
+  // Check to make sure each container is filled and display price breakdown
   boxes.forEach(box => {
     const draggables = box.querySelectorAll('.draggable');
     let boxPrice = parseFloat(box.getAttribute('data-price'));
     totalPrice += boxPrice;
-    // Make sure all module docks are filled.
+
+    // Make sure all module docks are filled
     if (draggables.length !== parseInt(box.getAttribute('data-size'))) {
       isSizeMismatch = true;
     }
+
     // Add the price of each draggable
     draggables.forEach(draggable => {
       const price = parseFloat(draggable.getAttribute('data-price'));
       totalPrice += price;
     });
-    // Show price.
+
+    // Show price
     if (boxPrice > 0) {
       reportContent += `<p style="color: #4d9de3;"><strong>${box.getAttribute('data-name')}</strong> - $${boxPrice.toFixed(2)}</p>`;
       draggables.forEach(draggable => {
@@ -112,8 +139,10 @@ engineersReport.addEventListener('click', function() {
   var has_navTime = false;
   var separated_analog = false;
 
-  // Check all modules
+  // Check all modules for conflicts
   boxes.forEach(box => {
+
+    // Check each container to see if specific modules are present
     if (!has_analog_throttle) {
       has_analog_throttle = box.querySelector('#f2');
     }
@@ -172,6 +201,7 @@ engineersReport.addEventListener('click', function() {
       telemetry_overload = true;
     }
 
+    // Check to make sure combined analog modules are on the same container if present
     if (!separated_analog) {
       const has_rotation1_thisbox = box.querySelector('#f3');
       const has_rotation2_thisbox = box.querySelector('#f4');
@@ -186,6 +216,7 @@ engineersReport.addEventListener('click', function() {
       }
     }
   });
+
   // Check if there are any rotation/translation/throttle controls
   if (has_rotation_throttle || has_rotation || has_analog || has_analog_throttle) {
     hasRotation = true;
@@ -197,7 +228,7 @@ engineersReport.addEventListener('click', function() {
     hasThrottle = true;
   }
   
-  // Check if there are any SAS/Executive Actions/NavTime conflicts
+  // Check if there are any SAS/Executive conflicts
   if (has_control_sys && has_executive_control) {
     controlsys_duplicate = true;
   }
@@ -212,14 +243,18 @@ engineersReport.addEventListener('click', function() {
       break;
     }
   }
+
+  // Check if config has Nav AND/OR Time modules
   if ((has_nav || has_time)) {
     nav_time = true;
   }
+
+  // Check if config has the Nav/Time module
   if (has_navTime) {
     navTime = true;
   }
 
-  // Check if there are any analog conflicts
+  // Check if there are any Rotation conflicts
   const rot_elements = [has_rotation_throttle, has_rotation, has_analog, has_analog_throttle];
   numTrue = 0;
   for (let i = 0; i < rot_elements.length; i++) {
@@ -231,6 +266,8 @@ engineersReport.addEventListener('click', function() {
       break;
     }
   }
+
+  // Check if there are any Translation conflicts
   const trans_elements = [has_translation, has_analog, has_analog_throttle];
   numTrue = 0;
   for (let i = 0; i < trans_elements.length; i++) {
@@ -242,6 +279,8 @@ engineersReport.addEventListener('click', function() {
       break;
     }
   }
+
+  // Check if there are any Throttle conflicts
   const throt_elements = [has_rotation_throttle, has_throttle, has_analog_throttle];
   numTrue = 0;
   for (let i = 0; i < throt_elements.length; i++) {
@@ -308,6 +347,7 @@ engineersReport.addEventListener('click', function() {
     </div>
   `;
 
+  // Activate the button
   Swal.fire({
     title: 'Engineer\'s Report',
     html: report,
@@ -321,15 +361,19 @@ engineersReport.addEventListener('click', function() {
   });
 });
 
-//Function for updating the price to reflect the current canvas items
+// Main Price Display
 const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
   let totalPrice = 0
+
+  // Calculate price for containers
   const containerBoxes = document.querySelectorAll('.box');
   containerBoxes.forEach(containerBox => {
     const price = parseFloat(containerBox.dataset.price);
     totalPrice += price;
   });
+
+  // Calculate price for modules
   const type1Containers = document.querySelectorAll('.module-dock[data-type="type1"]');
   type1Containers.forEach(container => {
     const draggablesInContainer = container.querySelectorAll('.draggable');
@@ -338,6 +382,8 @@ function updateTotalPrice() {
       totalPrice += price;
     });
   });
+
+  // Display price
   priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
 
@@ -345,6 +391,8 @@ function updateTotalPrice() {
 const save = document.getElementById('save')
 save.addEventListener('click', function() {
   const draggableIds = [];
+
+  // Add container info to the URL
   const boxes = document.querySelectorAll('.box');
   boxes.forEach(box => {
     if (box.id.includes('one-two')) {
@@ -365,27 +413,35 @@ save.addEventListener('click', function() {
     if (box.id.includes('two-four')) {
       draggableIds.push('z24');
     }
+
+    // Add container location data
     let parentContainer = box.parentNode;
     if (parentContainer.id.includes('canvas')) {
       draggableIds.push('00');
     } else {
       draggableIds.push(parentContainer.id);
     }
+
+    // Add module info to the URL
     const draggables = box.querySelectorAll('.draggable');
     draggables.forEach(draggable => {
       draggableIds.push(draggable.id);
     });
   })
-  const color = boxes[0].style.borderColor;
+
   // Add the color information to the end of the draggableIds array
+  const color = boxes[0].style.borderColor;
   if (color) {
     draggableIds.push(`&color=${color.replace(/\s/g, '')}`);
   } else {
     draggableIds.push(`&color=rgb(0,0,0)`);
   }
   const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
+
+  // Copy the URL to the clipboard
   navigator.clipboard.writeText(url).then(() => {
-    //alert("This configuration URL has been copied to your clipboard! \n\n" + url);
+
+    // Activate the button
     Swal.fire({
       title: 'Copied!',
       html: '<div>This configuration URL has been copied to your clipboard!<br><br>' + url + '</div>',
@@ -396,91 +452,6 @@ save.addEventListener('click', function() {
     });
   }).catch(() => {
     alert("Failed to copy the configuration URL to your clipboard. Please copy it manually: \n\n" + url);
-  });
-});
-
-
-// Handle drag, drop, and mouse over for modules
-const draggables = document.querySelectorAll('.draggable')
-draggables.forEach(draggable => {
-  draggable.addEventListener('dragstart', function(event) {
-    draggable.classList.add('dragging');
-    event.dataTransfer.setData('text/plain', this.id);
-    let tooltip = draggable.querySelector(".tooltip");
-    tooltip.style.display = 'none';
-    let parentContainer = draggable.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
-    // Release container slot from forcing the tooltip to be on top
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = '';
-    }
-    deleteContainer.classList.add('highlight');
-  });
-  
-  draggable.addEventListener('dragend', () => {
-    draggable.classList.remove('dragging');
-    updateTotalPrice();
-    let parentContainer = draggable.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
-    // Release container slot from forcing the tooltip to be on top
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = '';
-    }
-    deleteContainer.classList.remove('highlight');
-  });
-
-  // Show tooltip and determine where to display the tooltip
-  draggable.addEventListener('mouseover', (event) => {
-    const tooltip = draggable.querySelector(".tooltip");
-    draggable.classList.add("mouseover");
-    tooltip.style.display = 'block';
-    const rect = event.target.getBoundingClientRect();
-    const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
-    if (position < window.innerWidth / 2) {
-      tooltip.classList.remove('right');
-      tooltip.classList.add('left');
-    } else {
-      tooltip.classList.remove('left');
-      tooltip.classList.add('right');
-    }
-    const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
-    if (positionv < window.innerHeight / 5) {
-      tooltip.classList.remove('bottom');
-      tooltip.classList.add('top');
-    } else {
-      tooltip.classList.remove('top');
-      tooltip.classList.add('bottom');
-    }
-    let parentContainer = draggable.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = 70;
-    }
-    activeDraggable = draggable;
-  });
-  
-  draggable.addEventListener('mouseout', () => {
-    let tooltip = draggable.querySelector(".tooltip");
-    tooltip.style.display = 'none';
-    draggable.classList.remove("mouseover");
-    let parentContainer = draggable.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
-    // Release container slot from forcing the tooltip to be on top
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = '';
-    }
   });
 });
 
@@ -497,10 +468,14 @@ lightSwitch.addEventListener('click', function() {
   });
 });
 
+
+//|------------------------|
+//|     Footer Buttons     |
+//|------------------------|
+
 // Contact Button
 const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
-  //alert("===============================================\n\nIf you'd like to contact me, you may do so via Reddit, Discord, Instagram, or email.\n\nReddit:          u/CodapopKSP\nDiscord:        Codapop#1469\nInstagram:    untitled_space_craft\nemail:            UntitledSpaceCraft.Controllers@gmail.com\n\n\nFor more information, please visit my subreddit:\n\nhttps://www.reddit.com/r/UntitledSpaceCraft/\n\n===============================================");
   Swal.fire({
     title: 'Contact Information',
     html:
@@ -518,6 +493,8 @@ contactButton.addEventListener('click', function() {
     customClass: {
       cancelButton: 'btn btn-danger',
     },
+
+    // Copy contact info to the clipboard
     didOpen: () => {
       const clipboard = new ClipboardJS('.btn', {
         text: function(trigger) {
@@ -542,7 +519,7 @@ contactButton.addEventListener('click', function() {
   });
 });
 
-// Contact Button
+// Info Button
 const infoButton = document.getElementById('info')
 infoButton.addEventListener('click', function() {
   Swal.fire({
@@ -566,13 +543,258 @@ infoButton.addEventListener('click', function() {
 });
 
 
+//|-------------------------------|
+//|     Add Container Buttons     |
+//|-------------------------------|
+
+// Add Mark V container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x4');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkV, '.two-four');
+  });
+});
+
+// Add Mark IV container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x3');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIV, '.two-three');
+  });
+});
+
+// Add Mark III container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x2');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIII, '.two-two');
+  });
+});
+
+// Add Mark II container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-1x2');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIhoriz, '.one-two');
+  });
+});
+
+// Add Mark I container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-3x1');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkII, '.three-one');
+  });
+});
+
+// Add Mark I Vertical container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x1');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIvert, '.two-one');
+  });
+});
+
+
+//|--------------------|
+//|     Delete Bin     |
+//|--------------------|
+
+// Delete Bin drag over
+deleteContainer.addEventListener('dragover', (event) => {
+  event.preventDefault();
+});
+
+// Delete Bin touch start for mobile
+deleteContainer.addEventListener('touchstart', function(event) {
+  if (activeDraggable) {
+    let tooltip = activeDraggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
+    event.preventDefault()
+    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+    for (const container of containers) {
+      const emptySlots = container.querySelectorAll('.draggable').length < 1;
+        if (emptySlots) {
+          container.appendChild(activeDraggable);
+          /*elementToDelete.classList.remove("mouseover");
+          let tooltip = activeDraggable.querySelector(".tooltip");
+          tooltip.style.display = 'none';*/
+          activeDraggable = null;
+          break;
+        }
+    }
+  }
+  updateTotalPrice()
+})
+
+// Delete Bin drop
+deleteContainer.addEventListener('drop', (event) => {
+    const id = event.dataTransfer.getData('text/plain');
+    const elementToDelete = document.getElementById(id);
+    activeDraggable = null;
+  
+    // 
+    if (elementToDelete && (elementToDelete.classList.contains('box'))) {
+      elementToDelete.remove();
+      const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+      const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
+      for (const module of droppedModules) {
+        for (const container of containers) {
+          const emptySlots = container.querySelectorAll('.draggable').length < 1;
+          if (emptySlots) {
+            container.appendChild(module);
+            break;
+          }
+        }
+      }
+      elementToDelete.remove();
+
+    // Move modules back to sides
+    } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
+      const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+      let droppedIntoContainer = false;
+      for (const container of containers) {
+        const emptySlots = container.querySelectorAll('.draggable').length < 1;
+          if (emptySlots) {
+            container.appendChild(elementToDelete);
+            elementToDelete.classList.remove("mouseover");
+            let tooltip = elementToDelete.querySelector(".tooltip");
+            tooltip.style.display = 'none';
+            droppedIntoContainer = true;
+            break;
+          }
+      }
+    }
+
+    // Reset grids
+    const containers = document.querySelectorAll('.container2');
+    containers.forEach(container => {
+      const containerChildren = container.children;
+      if (containerChildren.length === 0) {
+        container.classList.remove('has-24child');
+        container.classList.remove('has-23child');
+        container.classList.remove('has-22child');
+        container.classList.remove('has-12child');
+        container.classList.remove('has-31child');
+        container.classList.remove('has-21child');
+      }
+    });
+    updateTotalPrice()
+});
+
+
+
+
+//|-----------------|
+//|     Modules     |
+//|-----------------|
+
+const draggables = document.querySelectorAll('.draggable')
+draggables.forEach(draggable => {
+
+  // Module Drag Start
+  draggable.addEventListener('dragstart', function(event) {
+    draggable.classList.add('dragging');
+    event.dataTransfer.setData('text/plain', this.id);
+    let tooltip = draggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
+
+    // Release container slot from forcing the tooltip to be on top
+    if (parentContainerType === "type1") {
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
+    deleteContainer.classList.add('highlight');
+  });
+  
+  // Module Drag End
+  draggable.addEventListener('dragend', () => {
+    draggable.classList.remove('dragging');
+    updateTotalPrice();
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
+
+    // Release container slot from forcing the tooltip to be on top
+    if (parentContainerType === "type1") {
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
+    deleteContainer.classList.remove('highlight');
+  });
+
+  // Show tooltip
+  draggable.addEventListener('mouseover', (event) => {
+    const tooltip = draggable.querySelector(".tooltip");
+    draggable.classList.add("mouseover");
+    tooltip.style.display = 'block';
+
+    // Determine location based on coordinates of the module
+    const rect = event.target.getBoundingClientRect();
+    const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
+    if (position < window.innerWidth / 2) {
+      tooltip.classList.remove('right');
+      tooltip.classList.add('left');
+    } else {
+      tooltip.classList.remove('left');
+      tooltip.classList.add('right');
+    }
+    const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
+    if (positionv < window.innerHeight / 5) {
+      tooltip.classList.remove('bottom');
+      tooltip.classList.add('top');
+    } else {
+      tooltip.classList.remove('top');
+      tooltip.classList.add('bottom');
+    }
+
+    // Update zIndex so the tooltip will stay on top of everything
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
+    if (parentContainerType === "type1") {
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = 70;
+    }
+    activeDraggable = draggable;
+  });
+  
+  // Hide tooltip
+  draggable.addEventListener('mouseout', () => {
+    let tooltip = draggable.querySelector(".tooltip");
+    tooltip.style.display = 'none';
+    draggable.classList.remove("mouseover");
+    let parentContainer = draggable.parentNode;
+    let parentContainerType = parentContainer.getAttribute("data-type");
+
+    // Release container slot from forcing the tooltip to be on top
+    if (parentContainerType === "type1") {
+      let parentContainer2 = parentContainer.parentNode;
+      let parentContainer3 = parentContainer2.parentNode;
+      let parentContainer4 = parentContainer3.parentNode;
+      parentContainer4.style.zIndex = '';
+    }
+  });
+});
+
+
+//|-------------------------|
+//|     Container Grids     |
+//|-------------------------|
+
 const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 containerGrids.forEach(containerGrid => {
   containerGrid.addEventListener('dragover', (event) => {
     event.preventDefault();
   });
 
-  // Determine the type of container and prepare the grid for resizing
+  // Determine the type of container and update the class for resizing of the grid
   containerGrid.addEventListener('drop', (event) => {
     event.preventDefault();
     const draggable = document.querySelector('.dragging2');
@@ -616,215 +838,105 @@ containerGrids.forEach(containerGrid => {
   });
 });
 
-// Buttons for adding new containers
-document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.getElementById('add-2x4');
-    addButton.addEventListener('click', () => {
-      addContainer(MarkV, '.two-four');
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.getElementById('add-2x3');
-    addButton.addEventListener('click', () => {
-      addContainer(MarkIV, '.two-three');
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.getElementById('add-2x2');
-    addButton.addEventListener('click', () => {
-      addContainer(MarkIII, '.two-two');
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.getElementById('add-1x2');
-    addButton.addEventListener('click', () => {
-      addContainer(MarkIhoriz, '.one-two');
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const addButton = document.getElementById('add-3x1');
-    addButton.addEventListener('click', () => {
-      addContainer(MarkII, '.three-one');
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x1');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIvert, '.two-one');
-  });
-});
-
-
-// Delete Box
-deleteContainer.addEventListener('dragover', (event) => {
-  event.preventDefault();
-});
-deleteContainer.addEventListener('touchstart', function(event) {
-  if (activeDraggable) {
-    let tooltip = activeDraggable.querySelector(".tooltip");
-    tooltip.style.display = 'none';
-    event.preventDefault()
-    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
-    for (const container of containers) {
-      const emptySlots = container.querySelectorAll('.draggable').length < 1;
-        if (emptySlots) {
-            container.appendChild(activeDraggable);
-            /*elementToDelete.classList.remove("mouseover");
-            let tooltip = activeDraggable.querySelector(".tooltip");
-            tooltip.style.display = 'none';*/
-            activeDraggable = null;
-            break;
-        }
-    }
-  }
-  updateTotalPrice()
-})
-deleteContainer.addEventListener('drop', (event) => {
-    const id = event.dataTransfer.getData('text/plain');
-    const elementToDelete = document.getElementById(id);
-    activeDraggable = null;
-  
-    if (elementToDelete && (elementToDelete.classList.contains('box'))) {
-        elementToDelete.remove();
-        const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
-        const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
-        for (const module of droppedModules) {
-            for (const container of containers) {
-                const emptySlots = container.querySelectorAll('.draggable').length < 1;
-                if (emptySlots) {
-                    container.appendChild(module);
-                    break;
-                }
-            }
-        }
-        elementToDelete.remove();
-    // Move modules back to sides
-    } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
-        const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
-        let droppedIntoContainer = false;
-        for (const container of containers) {
-          const emptySlots = container.querySelectorAll('.draggable').length < 1;
-            if (emptySlots) {
-                container.appendChild(elementToDelete);
-                elementToDelete.classList.remove("mouseover");
-                let tooltip = elementToDelete.querySelector(".tooltip");
-                tooltip.style.display = 'none';
-                droppedIntoContainer = true;
-                break;
-            }
-        }
-    }
-    // Reset grids
-    const containers = document.querySelectorAll('.container2');
-    containers.forEach(container => {
-      const containerChildren = container.children;
-      if (containerChildren.length === 0) {
-        container.classList.remove('has-24child');
-        container.classList.remove('has-23child');
-        container.classList.remove('has-22child');
-        container.classList.remove('has-12child');
-        container.classList.remove('has-31child');
-        container.classList.remove('has-21child');
-      }
-    });
-    updateTotalPrice()
-});
-
 // Add a container of a specific size
 function addContainer(containerData, type) {
-    const existingBoxes = document.querySelectorAll('.dropped-box');
-    const requiredBoxes = document.querySelectorAll('.box');
-      if (existingBoxes.length === requiredBoxes.length) {
-        const counter = Math.floor(Math.random() * 10000).toString() + type;
-        // Choose a random ID
-        const containerBoxHTML = `<div id="${counter}" ${containerData}`;
-        const containerBoxElement = document.createElement('div');
-        containerBoxElement.innerHTML = containerBoxHTML.trim();
-        const containerBox = containerBoxElement.firstChild;
-        const pageWrapper = document.getElementById('canvas');
-        pageWrapper.appendChild(containerBox);
-        updateTotalPrice()
+  const existingBoxes = document.querySelectorAll('.dropped-box');
+  const requiredBoxes = document.querySelectorAll('.box');
+    if (existingBoxes.length === requiredBoxes.length) {
+      const counter = Math.floor(Math.random() * 10000).toString() + type;
+      // Choose a random ID
+      const containerBoxHTML = `<div id="${counter}" ${containerData}`;
+      const containerBoxElement = document.createElement('div');
+      containerBoxElement.innerHTML = containerBoxHTML.trim();
+      const containerBox = containerBoxElement.firstChild;
+      const pageWrapper = document.getElementById('canvas');
+      pageWrapper.appendChild(containerBox);
+      updateTotalPrice()
 
-        // Handle picking up the container
-        const containerBoxes = document.querySelectorAll(type);
-        containerBoxes.forEach(containerBox => {
-          containerBox.addEventListener('dragstart', (event) => {
-              if (event.target.id === counter) {
-                  event.dataTransfer.setData('dragged', event.target.id);
-                  event.target.classList.add('dragging2');
-                  const id = event.target.id;
-                  event.dataTransfer.setData('text/plain', id);
-                  const containers = document.querySelectorAll('.container2')
-                  containers.forEach(container => {
-                      container.classList.add('has-drag');
-                  })
-                  deleteContainer.classList.add('highlight');
-              }
-          });
-
-          // Drop the container
-          containerBox.addEventListener('dragend', (event) => {
+      // Handle picking up the container
+      const containerBoxes = document.querySelectorAll(type);
+      containerBoxes.forEach(containerBox => {
+        containerBox.addEventListener('dragstart', (event) => {
             if (event.target.id === counter) {
-              event.target.classList.remove('dragging2');
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.remove('has-drag');
-              })
-              deleteContainer.classList.remove('highlight');
+                event.dataTransfer.setData('dragged', event.target.id);
+                event.target.classList.add('dragging2');
+                const id = event.target.id;
+                event.dataTransfer.setData('text/plain', id);
+                const containers = document.querySelectorAll('.container2')
+                containers.forEach(container => {
+                    container.classList.add('has-drag');
+                })
+                deleteContainer.classList.add('highlight');
             }
-          });
         });
 
-        // Handle module docks on containers
-        const containers = document.querySelectorAll('.module-dock')
-        containers.forEach(container => {
-            container.addEventListener('dragover', e => {
-              e.preventDefault()
+        // Drop the container
+        containerBox.addEventListener('dragend', (event) => {
+          if (event.target.id === counter) {
+            event.target.classList.remove('dragging2');
+            const containers = document.querySelectorAll('.container2')
+            containers.forEach(container => {
+                container.classList.remove('has-drag');
             })
-            container.addEventListener('drop', () => {
-              const draggable = document.querySelector('.dragging')
-              if (draggable) {
-                let childElements = container.querySelectorAll('*');
-                if (childElements.length === 0) {
-                  container.appendChild(draggable);
-                  draggable.classList.remove('dragging');
-                }
-              }
-              updateTotalPrice();
-            })
-            container.addEventListener('touchstart', function(event) {
-              if (activeDraggable) {
-                let childElements = container.querySelectorAll('*');
-                if (childElements.length === 0) {
-                  container.appendChild(activeDraggable);
-                  let tooltip = activeDraggable.querySelector(".tooltip");
-                  tooltip.style.display = 'none';
-                  activeDraggable = null;
-                  event.preventDefault()
-                  updateTotalPrice()
-                }
-              }
-            })
-        })
+            deleteContainer.classList.remove('highlight');
+          }
+        });
+      });
 
-        // Remove welcome message
-        let messageElement = document.getElementById("welcome-message");
-        messageElement.style.display = "none";
-  } else {
-    Swal.fire({
-      title: 'Error',
-      text: 'Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.',
-      icon: 'error',
-      showCancelButton: true,
-      cancelButtonText: 'Ok',
-      buttonsStyling: false,
-      showConfirmButton: false,
-      customClass: {
-        cancelButton: 'btn btn-danger',
-      },
-    });
-  }
+      // Handle module docks on containers
+      const containers = document.querySelectorAll('.module-dock')
+      containers.forEach(container => {
+          container.addEventListener('dragover', e => {
+            e.preventDefault()
+          })
+          container.addEventListener('drop', () => {
+            const draggable = document.querySelector('.dragging')
+            if (draggable) {
+              let childElements = container.querySelectorAll('*');
+              if (childElements.length === 0) {
+                container.appendChild(draggable);
+                draggable.classList.remove('dragging');
+              }
+            }
+            updateTotalPrice();
+          })
+          container.addEventListener('touchstart', function(event) {
+            if (activeDraggable) {
+              let childElements = container.querySelectorAll('*');
+              if (childElements.length === 0) {
+                container.appendChild(activeDraggable);
+                let tooltip = activeDraggable.querySelector(".tooltip");
+                tooltip.style.display = 'none';
+                activeDraggable = null;
+                event.preventDefault()
+                updateTotalPrice()
+              }
+            }
+          })
+      })
+
+      // Remove welcome message
+      let messageElement = document.getElementById("welcome-message");
+      messageElement.style.display = "none";
+} else {
+  Swal.fire({
+    title: 'Error',
+    text: 'Please drag and drop the current container either to a canvas grid or to the trash before adding a new container.',
+    icon: 'error',
+    showCancelButton: true,
+    cancelButtonText: 'Ok',
+    buttonsStyling: false,
+    showConfirmButton: false,
+    customClass: {
+      cancelButton: 'btn btn-danger',
+    },
+  });
 }
+}
+
+
+
+
 
 // Container Data
 const MarkIhoriz = `
