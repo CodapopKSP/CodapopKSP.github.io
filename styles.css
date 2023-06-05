@@ -747,40 +747,40 @@ body {
 
 .ruler:before,
 .ruler:after {
-  content: "";
-  position: absolute;
-  background-color: black;
-  z-index: 1;
+    content: "";
+    position: absolute;
+    background-color: black;
+    z-index: 1;
 }
 
 .horizontal-ruler:before,
 .horizontal-ruler:after {
-  height: 1vh;
-  width: 0.4vh;
-  top: 0vh;
+    height: 1vh;
+    width: 0.4vh;
+    top: 0vh;
 }
 
 .horizontal-ruler:before {
-  left: 0vh;
+    left: 0vh;
 }
 
 .horizontal-ruler:after {
-  right: 0vh;
+    right: 0vh;
 }
 
 .vertical-ruler:before,
 .vertical-ruler:after {
-  height: .4vh;
-  width: 1vh;
-  left: 0vh;
+    height: .4vh;
+    width: 1vh;
+    left: 0vh;
 }
 
 .vertical-ruler:before {
-  top: 0vh;
+    top: 0vh;
 }
 
 .vertical-ruler:after {
-  bottom: 0vh;
+    bottom: 0vh;
 }
 
 .horizontal-ruler-label {
