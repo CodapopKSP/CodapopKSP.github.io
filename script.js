@@ -482,7 +482,7 @@ contactButton.addEventListener('click', function() {
     html:
     '<div style="font-family: \'Roboto\', sans-serif;">Click a button to copy.</div>' +
     '<button class="btn btn-reddit text-center" data-clipboard-text="https://www.reddit.com/user/CodapopKSP">Reddit:   u/CodapopKSP</button>' +
-    '<button class="btn btn-discord text-center" data-clipboard-text="Codapop#1469">Discord:   Codapop#1469</button>' +
+    '<button class="btn btn-discord text-center" data-clipboard-text="Codapop#1469">Discord:   codapopksp</button>' +
     '<button class="btn btn-insta text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
     '<button class="btn btn-email text-center" data-clipboard-text="untitledspacecraft.controllers@gmail.com">Email: untitledspacecraft\n.controllers@gmail.com</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>You can also visit the Untitled Space Craft subreddit for more information.</div>' +
