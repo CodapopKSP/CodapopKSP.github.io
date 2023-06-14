@@ -32,6 +32,9 @@ This is a webtool for streamlining several aspects of Untitled Space Craft contr
 ## Contact
 
 Reddit: u/CodapopKSP
+
 Discord: codapopksp
+
 Email: UntitledSpaceCraft.Controllers@gmail.com
+
 Instagram: untitled_space_craft
