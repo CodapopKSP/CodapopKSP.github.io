@@ -112,33 +112,33 @@ engineersReport.addEventListener('click', function() {
   });
 
   // Add booleanas for modules and calculate if there are any conflicts
-  var hasThrottle = false;
-  var controlsys_duplicate = false;
-  var executive_duplicate = false;
-  var hasRotation = false;
-  var hasTranslation = false;
-  var rotation_duplicate = false;
-  var translation_duplicate = false;
-  var throttle_duplicate = false;
-  var telemetry_overload = false;
-  var nav_time = false;
-  var navTime = false;
+  let hasThrottle = false;
+  let controlsys_duplicate = false;
+  let executive_duplicate = false;
+  let hasRotation = false;
+  let hasTranslation = false;
+  let rotation_duplicate = false;
+  let translation_duplicate = false;
+  let throttle_duplicate = false;
+  let telemetry_overload = false;
+  let nav_time = false;
+  let navTime = false;
 
-  var has_analog_throttle = false;
-  var has_rotation_throttle = false;
-  var has_throttle = false;
-  var has_translation = false;
-  var has_analog = false;
-  var has_rotation = false;
-  var has_control_sys = false;
-  var has_executive_control = false;
-  var has_stage = false;
-  var has_executive_groups = false;
-  var has_executive = false;
-  var has_nav = false;
-  var has_time = false;
-  var has_navTime = false;
-  var separated_analog = false;
+  let has_analog_throttle = false;
+  let has_rotation_throttle = false;
+  let has_throttle = false;
+  let has_translation = false;
+  let has_analog = false;
+  let has_rotation = false;
+  let has_control_sys = false;
+  let has_executive_control = false;
+  let has_stage = false;
+  let has_executive_groups = false;
+  let has_executive = false;
+  let has_nav = false;
+  let has_time = false;
+  let has_navTime = false;
+  let separated_analog = false;
 
   // Check all modules for conflicts
   boxes.forEach(box => {
