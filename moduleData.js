@@ -182,3 +182,63 @@ var moduleData = [
         tooltip: "The EVA module controls Kerbals while on EVA. It provides dedicated inputs for walking/flying, and it includes buttons for the other EVA functions. Parachute deployment can be achieved by pressing both the Jump and Light buttons at the same time. It also features a Monopropellant fuel gauge to show the current fuel level of the kerbal's jetpack. Note: This module is only available for Windows."
     }
 ];
+
+// Get the container element where the modules will be added
+const moduleContainer_left = document.querySelector('.left-module-array');
+const moduleContainer_right = document.querySelector('.right-module-array');
+let moduleCounter = 0;
+
+// Iterate over the moduleData array
+moduleData.forEach(module => {
+    // Create the module element
+    const moduleDock = document.createElement('div');
+    moduleDock.classList.add('module-dock');
+    moduleDock.setAttribute('data-type', 'type2');
+    
+    const moduleElement = document.createElement('div');
+    moduleElement.classList.add('draggable');
+    moduleElement.setAttribute('draggable', 'true');
+
+    // Set the module ID, price, and name
+    moduleElement.setAttribute('id', module.id);
+    moduleElement.setAttribute('data-price', module.price);
+    moduleElement.setAttribute('data-name', module.name);
+
+    // Create the module image element
+    const moduleImage = document.createElement('img');
+    moduleImage.src = module.image;
+    moduleImage.classList.add('image-1');
+    moduleElement.appendChild(moduleImage);
+
+    // Create the module tooltip element
+    const moduleTooltip = document.createElement('span');
+    moduleTooltip.style.fontFamily = "Roboto, sans-serif";
+    moduleTooltip.classList.add('tooltip');
+
+    // Create the module tooltip content
+    const moduleTooltipContent = document.createElement('strong');
+    moduleTooltipContent.style.fontSize = '1.8vh';
+    moduleTooltipContent.textContent = module.name;
+
+    const modulePrice = document.createElement('span');
+    modulePrice.style.fontSize = '1.7vh';
+    modulePrice.innerHTML = `<br>$${module.price}</br>`;
+
+    const moduleDescription = document.createElement('span');
+    moduleDescription.innerHTML = module.tooltip;
+
+    moduleTooltip.appendChild(moduleTooltipContent);
+    moduleTooltip.appendChild(modulePrice);
+    moduleTooltip.appendChild(moduleDescription);
+    
+    moduleElement.appendChild(moduleTooltip);
+    moduleDock.appendChild(moduleElement);
+
+    // Append the module element to the container
+    if (moduleCounter < 12) {
+        moduleContainer_left.appendChild(moduleDock);
+    } else {
+        moduleContainer_right.appendChild(moduleDock);
+    }
+    moduleCounter += 1;
+});
