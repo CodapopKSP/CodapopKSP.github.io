@@ -23,6 +23,77 @@ document.addEventListener('contextmenu', function(event) {
 });
 
 
+// Add modules to Left and Right module arrays
+const moduleContainer_left = document.querySelector('.left-module-array');
+const moduleContainer_right = document.querySelector('.right-module-array');
+let moduleCounter = 0;
+
+// Iterate over the moduleData array
+moduleData.forEach(module => {
+    // Create the module element
+    const moduleDock = document.createElement('div');
+    moduleDock.classList.add('module-dock');
+    moduleDock.setAttribute('data-type', 'type2');
+    
+    const moduleElement = document.createElement('div');
+    moduleElement.classList.add('draggable');
+    moduleElement.setAttribute('draggable', 'true');
+
+    // Set the module ID, price, and name
+    moduleElement.setAttribute('id', module.id);
+    moduleElement.setAttribute('data-price', module.price);
+    moduleElement.setAttribute('data-name', module.name);
+
+    // Create the module image element
+    const moduleImage = document.createElement('img');
+    moduleImage.src = module.image;
+    moduleImage.classList.add('image-1');
+    moduleElement.appendChild(moduleImage);
+
+    // Check if the module has the image_light property
+    if (module.image_light) {
+        const moduleImageLight = document.createElement('img');
+        moduleImageLight.src = module.image_light;
+        moduleImageLight.classList.add('image-2');
+        moduleImageLight.classList.add('hidden');
+        moduleElement.appendChild(moduleImageLight);
+        moduleElement.classList.add('light');
+    }
+
+    // Create the module tooltip element
+    const moduleTooltip = document.createElement('span');
+    moduleTooltip.style.fontFamily = "Roboto, sans-serif";
+    moduleTooltip.classList.add('tooltip');
+
+    // Create the module tooltip content
+    const moduleTooltipContent = document.createElement('strong');
+    moduleTooltipContent.style.fontSize = '1.8vh';
+    moduleTooltipContent.textContent = module.name;
+
+    const modulePrice = document.createElement('span');
+    modulePrice.style.fontSize = '1.7vh';
+    modulePrice.innerHTML = `<br>$${module.price}</br>`;
+
+    const moduleDescription = document.createElement('span');
+    moduleDescription.innerHTML = module.tooltip;
+
+    moduleTooltip.appendChild(moduleTooltipContent);
+    moduleTooltip.appendChild(modulePrice);
+    moduleTooltip.appendChild(moduleDescription);
+
+    moduleElement.appendChild(moduleTooltip);
+    moduleDock.appendChild(moduleElement);
+
+    // Append the module element to the container
+    if (moduleCounter < 12) {
+        moduleContainer_left.appendChild(moduleDock);
+    } else {
+        moduleContainer_right.appendChild(moduleDock);
+    }
+    moduleCounter += 1;
+});
+
+
 //|-------------------------|
 //|     Sidebar Buttons     |
 //|-------------------------|
@@ -654,132 +725,6 @@ function addContainer(containerData, type) {
     });
   }
 }
-
-
-//|------------------------|
-//|     Container Data     |
-//|------------------------|
-
-// Mark I
-const MarkIhoriz = `
-  class="one-two box" data-price="50" data-name="Mark I Container (Horizontal)" data-size="2" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">24cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">12.5cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
-
-// Mark I Vertical
-const MarkIvert = `
-  class="two-one box" data-price="50" data-name="Mark I Container (Vertical)" data-size="2" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">12.5cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
-
-// Mark II
-const MarkII = `
-  class="three-one box" data-price="60" data-name="Mark II Container" data-size="3" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">12.5cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">35.5cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
-
-// Mark III
-const MarkIII = `
-  class="two-two box" data-price="70" data-name="Mark III Container" data-size="4" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">24cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
-
-// Mark IV
-const MarkIV = `
-  class="two-three box" data-price="90" data-name="Mark IV Container" data-size="6" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">35.5cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
-
-// Mark V
-const MarkV = `
-  class="two-four box" data-price="120" data-name="Mark V Container" data-size="8" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">47cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
 
 
 //|------------------------|
