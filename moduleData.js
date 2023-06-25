@@ -210,6 +210,16 @@ moduleData.forEach(module => {
     moduleImage.classList.add('image-1');
     moduleElement.appendChild(moduleImage);
 
+    // Check if the module has the image_light property
+    if (module.image_light) {
+        const moduleImageLight = document.createElement('img');
+        moduleImageLight.src = module.image_light;
+        moduleImageLight.classList.add('image-2');
+        moduleImageLight.classList.add('hidden');
+        moduleElement.appendChild(moduleImageLight);
+        moduleElement.classList.add('light');
+    }
+
     // Create the module tooltip element
     const moduleTooltip = document.createElement('span');
     moduleTooltip.style.fontFamily = "Roboto, sans-serif";
@@ -227,10 +237,12 @@ moduleData.forEach(module => {
     const moduleDescription = document.createElement('span');
     moduleDescription.innerHTML = module.tooltip;
 
+    
+
     moduleTooltip.appendChild(moduleTooltipContent);
     moduleTooltip.appendChild(modulePrice);
     moduleTooltip.appendChild(moduleDescription);
-    
+
     moduleElement.appendChild(moduleTooltip);
     moduleDock.appendChild(moduleElement);
 
