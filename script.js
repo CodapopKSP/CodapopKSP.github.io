@@ -327,22 +327,52 @@ infoButton.addEventListener('click', function() {
 //|-------------------------------|
 
 // Map of container data
-const containerMap = {
-  'add-2x4': MarkV,
-  'add-2x3': MarkIV,
-  'add-2x2': MarkIII,
-  'add-1x2': MarkIhoriz,
-  'add-3x1': MarkII,
-  'add-2x1': MarkIvert
-};
-
+// Add Mark V container
 document.addEventListener('DOMContentLoaded', () => {
-  for (const buttonId in containerMap) {
-    const addButton = document.getElementById(buttonId);
-    addButton.addEventListener('click', () => {
-      addContainer(containerMap[buttonId], containerMap[buttonId].class);
-    });
-  }
+  const addButton = document.getElementById('add-2x4');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkV, '.two-four');
+  });
+});
+
+// Add Mark IV container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x3');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIV, '.two-three');
+  });
+});
+
+// Add Mark III container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x2');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIII, '.two-two');
+  });
+});
+
+// Add Mark II container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-1x2');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIhoriz, '.one-two');
+  });
+});
+
+// Add Mark I container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-3x1');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkII, '.three-one');
+  });
+});
+
+// Add Mark I Vertical container
+document.addEventListener('DOMContentLoaded', () => {
+  const addButton = document.getElementById('add-2x1');
+  addButton.addEventListener('click', () => {
+    addContainer(MarkIvert, '.two-one');
+  });
 });
 
 
@@ -608,7 +638,7 @@ function addContainer(containerData, type) {
     container.classList.add(containerData.class);
     container.setAttribute('data-name', containerData.name);
     container.setAttribute('data-price', containerData.price);
-    container.setAttribute('data-size', containerData.size);
+    container.setAttribute('data-size', containerData.num_modules);
     container.setAttribute('draggable', "true");
 
     // Add rulers
