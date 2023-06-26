@@ -588,23 +588,21 @@ containerGrids.forEach(containerGrid => {
     if (dropContainer && draggable) {
       dropContainer.appendChild(draggable);
       draggable.classList.add('dropped-box');
-      if (draggable.classList.contains('two-four')) {
-          dropContainer.classList.add('has-24child');
-      }
-      if (draggable.classList.contains('two-three')) {
-          dropContainer.classList.add('has-23child');
-      }
-      if (draggable.classList.contains('two-two')) {
-          dropContainer.classList.add('has-22child');
-      }
-      if (draggable.classList.contains('one-two')) {
-          dropContainer.classList.add('has-12child');
-      }
-      if (draggable.classList.contains('three-one')) {
-          dropContainer.classList.add('has-31child');
-      }
-      if (draggable.classList.contains('two-one')) {
-        dropContainer.classList.add('has-21child');
+      
+      const classMap = {
+        'two-four': 'has-24child',
+        'two-three': 'has-23child',
+        'two-two': 'has-22child',
+        'one-two': 'has-12child',
+        'three-one': 'has-31child',
+        'two-one': 'has-21child'
+      };
+      
+      for (const className in classMap) {
+        if (draggable.classList.contains(className)) {
+          dropContainer.classList.add(classMap[className]);
+          break;
+        }
       }
     }
 

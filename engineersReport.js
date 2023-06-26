@@ -136,12 +136,8 @@ engineersReport.addEventListener('click', function() {
       const has_rotation2_thisbox = box.querySelector('#f4');
       const has_rotation_thisbox = (has_rotation1_thisbox || has_rotation2_thisbox);
       const has_translation_thisbox = box.querySelector('#f5');
-      console.log(has_rotation_thisbox);
-      console.log(has_translation_thisbox);
       if ((has_rotation_thisbox && !has_translation_thisbox) || (!has_rotation_thisbox && has_translation_thisbox)) {
-        console.log('5');
         separated_analog = true;
-        console.log(separated_analog);
       }
     }
   });
