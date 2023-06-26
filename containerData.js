@@ -2,123 +2,75 @@
 //|     Container Data     |
 //|------------------------|
 
-// Mark I
-const MarkIhoriz = `
-  class="one-two box" data-price="50" data-name="Mark I Container (Horizontal)" data-size="2" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">24cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">12.5cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
+// Mark I Horizontal
+const MarkIhoriz = {
+    name: "Mark I Container (Horizontal)",
+    class: "one-two",
+    price: 50,
+    num_modules: 2,
+    num_angled: 2,
+    num_level: 0,
+    horizontal_ruler: "24cm",
+    vertical_ruler: "12.5cm"
+}
 
 // Mark I Vertical
-const MarkIvert = `
-  class="two-one box" data-price="50" data-name="Mark I Container (Vertical)" data-size="2" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">12.5cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
+const MarkIvert = {
+    name: "Mark I Container (Vertical)",
+    class: "two-one",
+    price: 50,
+    num_modules: 2,
+    num_angled: 1,
+    num_level: 1,
+    horizontal_ruler: "12.5cm",
+    vertical_ruler: "24cm"
+}
 
 // Mark II
-const MarkII = `
-  class="three-one box" data-price="60" data-name="Mark II Container" data-size="3" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">12.5cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">35.5cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
+const MarkII = {
+    name: "Mark II Container",
+    class: "three-one",
+    price: 60,
+    num_modules: 3,
+    num_angled: 1,
+    num_level: 1,
+    num_level_2: 1,
+    horizontal_ruler: "12.5cm",
+    vertical_ruler: "35.5cm"
+}
 
 // Mark III
-const MarkIII = `
-  class="two-two box" data-price="70" data-name="Mark III Container" data-size="4" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">24cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
+const MarkIII = {
+    name: "Mark III Container",
+    class: "two-two",
+    price: 70,
+    num_modules: 4,
+    num_angled: 2,
+    num_level: 2,
+    horizontal_ruler: "24cm",
+    vertical_ruler: "24cm"
+}
 
 // Mark IV
-const MarkIV = `
-  class="two-three box" data-price="90" data-name="Mark IV Container" data-size="6" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">35.5cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
+const MarkIV = {
+    name: "Mark IV Container",
+    class: "two-three",
+    price: 90,
+    num_modules: 6,
+    num_angled: 3,
+    num_level: 3,
+    horizontal_ruler: "35.5cm",
+    vertical_ruler: "24cm"
+}
 
 // Mark V
-const MarkV = `
-  class="two-four box" data-price="120" data-name="Mark V Container" data-size="8" draggable="true">
-    <div class="ruler horizontal-ruler">
-      <div class="horizontal-ruler-label">47cm</div>
-    </div>
-    <div class="ruler vertical-ruler">
-      <div class="vertical-ruler-label">24cm</div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/angled.png'); background-size: cover;"></div>
-    </div>
-    <div class="container-slot-row">
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-      <div class="module-dock" data-type="type1" style="background-image: url('containers/level.png'); background-size: cover;"></div>
-    </div>
-  </div>
-  `;
+const MarkV = {
+    name: "Mark V Container",
+    class: "two-four",
+    price: 120,
+    num_modules: 8,
+    num_angled: 4,
+    num_level: 4,
+    horizontal_ruler: "47cm",
+    vertical_ruler: "24cm"
+}

@@ -629,14 +629,49 @@ function addContainer(containerData, type) {
   const existingBoxes = document.querySelectorAll('.dropped-box');
   const requiredBoxes = document.querySelectorAll('.box');
   if (existingBoxes.length === requiredBoxes.length) {
-    const counter = Math.floor(Math.random() * 10000).toString() + type;
+
+    // Create container
+    const container = document.createElement('div');
+    container.classList.add('box');
+
     // Choose a random ID
-    const containerBoxHTML = `<div id="${counter}" ${containerData}`;
-    const containerBoxElement = document.createElement('div');
-    containerBoxElement.innerHTML = containerBoxHTML.trim();
-    const containerBox = containerBoxElement.firstChild;
+    const counter = Math.floor(Math.random() * 10000).toString() + type;
+    container.setAttribute('id', counter);
+
+    // Add container Data
+    container.classList.add(containerData.class);
+    container.setAttribute('data-name', containerData.name);
+    container.setAttribute('data-price', containerData.price);
+    container.setAttribute('data-size', containerData.size);
+    container.setAttribute('draggable', "true");
+
+    // Add module docks based on parameters from containerData
+    function addModuleDockRow(num_modules, img_type) {
+      const moduleDockRow = document.createElement('div');
+      for (let i = 0; i < num_modules; i++) {
+        moduleDockRow.classList.add('container-slot-row');
+
+        const moduleDock = document.createElement('div');
+        moduleDock.classList.add('module-dock');
+        moduleDock.setAttribute('data-type', "type1");
+        moduleDock.setAttribute('style', `background-image: url('containers/${img_type}.png'); background-size: cover;`);
+        moduleDockRow.appendChild(moduleDock);
+      }
+      container.appendChild(moduleDockRow);
+    };
+
+    // Add module docks
+    addModuleDockRow(containerData.num_angled, "angled");
+    if (containerData.num_level) {
+      addModuleDockRow(containerData.num_level, "level");
+    }
+    if (containerData.num_level_2) {
+      addModuleDockRow(containerData.num_level_2, "level");
+    }
+
+    // Add container to canvas
     const pageWrapper = document.getElementById('canvas');
-    pageWrapper.appendChild(containerBox);
+    pageWrapper.appendChild(container);
     updateTotalPrice()
 
     // Handle picking up the container

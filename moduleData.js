@@ -1,4 +1,4 @@
-var moduleData = [
+let moduleData = [
     {
         name: "Abort Module",
         id: "a1",
