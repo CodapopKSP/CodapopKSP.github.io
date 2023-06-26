@@ -1,3 +1,9 @@
+//|---------------------------|
+//|     Engineer's Report     |
+//|---------------------------|
+
+// Engineer's Report checks for module compatibility and gives a price breakdown of the current configuration.
+
 // Engineer's Report Button
 const engineersReport = document.getElementById('report');
 

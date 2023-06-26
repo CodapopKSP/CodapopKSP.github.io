@@ -177,25 +177,22 @@ save.addEventListener('click', function() {
   // Add container info to the URL
   const boxes = document.querySelectorAll('.box');
   boxes.forEach(box => {
-    if (box.id.includes('one-two')) {
-      draggableIds.push('z12');
+    const idMap = {
+      'one-two': 'z12',
+      'two-one': 'z21',
+      'three-one': 'z31',
+      'two-two': 'z22',
+      'two-three': 'z23',
+      'two-four': 'z24'
+    };
+    
+    for (const className in idMap) {
+      if (box.id.includes(className)) {
+        draggableIds.push(idMap[className]);
+        break;
+      }
     }
-    if (box.id.includes('two-one')) {
-      draggableIds.push('z21');
-    }
-    if (box.id.includes('three-one')) {
-      draggableIds.push('z31');
-    }
-    if (box.id.includes('two-two')) {
-      draggableIds.push('z22');
-    }
-    if (box.id.includes('two-three')) {
-      draggableIds.push('z23');
-    }
-    if (box.id.includes('two-four')) {
-      draggableIds.push('z24');
-    }
-
+    
     // Add container location data
     let parentContainer = box.parentNode;
     if (parentContainer.id.includes('canvas')) {
@@ -329,52 +326,23 @@ infoButton.addEventListener('click', function() {
 //|     Add Container Buttons     |
 //|-------------------------------|
 
-// Add Mark V container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x4');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkV, '.two-four');
-  });
-});
+// Map of container data
+const containerMap = {
+  'add-2x4': MarkV,
+  'add-2x3': MarkIV,
+  'add-2x2': MarkIII,
+  'add-1x2': MarkIhoriz,
+  'add-3x1': MarkII,
+  'add-2x1': MarkIvert
+};
 
-// Add Mark IV container
 document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x3');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIV, '.two-three');
-  });
-});
-
-// Add Mark III container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x2');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIII, '.two-two');
-  });
-});
-
-// Add Mark II container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-1x2');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIhoriz, '.one-two');
-  });
-});
-
-// Add Mark I container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-3x1');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkII, '.three-one');
-  });
-});
-
-// Add Mark I Vertical container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x1');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIvert, '.two-one');
-  });
+  for (const buttonId in containerMap) {
+    const addButton = document.getElementById(buttonId);
+    addButton.addEventListener('click', () => {
+      addContainer(containerMap[buttonId], containerMap[buttonId].class);
+    });
+  }
 });
 
 
@@ -588,7 +556,7 @@ containerGrids.forEach(containerGrid => {
     if (dropContainer && draggable) {
       dropContainer.appendChild(draggable);
       draggable.classList.add('dropped-box');
-      
+
       const classMap = {
         'two-four': 'has-24child',
         'two-three': 'has-23child',
