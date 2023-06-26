@@ -645,6 +645,20 @@ function addContainer(containerData, type) {
     container.setAttribute('data-size', containerData.size);
     container.setAttribute('draggable', "true");
 
+    // Add rulers
+    function addRuler(ruler_class, ruler_value) {
+      const ruler = document.createElement('div');
+      ruler.classList.add("ruler");
+      ruler.classList.add(ruler_class);
+      const rulerLabel = document.createElement('div');
+      rulerLabel.classList.add(ruler_class + "-label");
+      rulerLabel.textContent = ruler_value;
+      ruler.appendChild(rulerLabel);
+      container.appendChild(ruler);
+    };
+    addRuler("horizontal-ruler", containerData.horizontal_ruler);
+    addRuler("vertical-ruler", containerData.vertical_ruler);
+
     // Add module docks based on parameters from containerData
     function addModuleDockRow(num_modules, img_type) {
       const moduleDockRow = document.createElement('div');

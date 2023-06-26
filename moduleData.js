@@ -1,3 +1,17 @@
+//|---------------------|
+//|     Module Data     |
+//|---------------------|
+
+/*
+moduleData is an array that contains all of the data for each module.
+    name:           The name of the module.
+    id:             The letter code for the module for things such as generating the URL code on save.
+    price:          The price for the module in USD.
+    image:          The graphical image of the module.
+    image_light:    The image used when the lights are switched on.
+    tooltip:        The tooltip text.
+*/
+
 let moduleData = [
     {
         name: "Abort Module",

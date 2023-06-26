@@ -2,6 +2,19 @@
 //|     Container Data     |
 //|------------------------|
 
+/*
+moduleData is an array that contains all of the data for each module.
+    name:               The name of the container.
+    class:              The class for CSS reasons.
+    price:              The price in USD.
+    num_modules:        Total number of module docks.
+    num_angled:         Number of angled module docks.
+    num_level:          [Optional] Number of level module docks.
+    num_level_2:        [Optional] Number of level module docks in the third row.
+    horizontal_ruler:   The dimensions to be displayed on the horizontal ruler.
+    vertical_ruler:     The dimensions to be displayed on the vertical ruler.
+*/
+
 // Mark I Horizontal
 const MarkIhoriz = {
     name: "Mark I Container (Horizontal)",
