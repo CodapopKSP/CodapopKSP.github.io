@@ -806,29 +806,24 @@ function loadController(inputData, color) {
       modules.push(object.substring(i, i + 2));
     }
     let containerType = '';
-    if (containerAddress.startsWith('12')) {
-        containerType = '.one-two'
-        addContainer(MarkIhoriz, containerType);
-    }
-    if (containerAddress.startsWith('21')) {
-      containerType = '.two-one'
-      addContainer(MarkIvert, containerType);
-    }
-    if (containerAddress.startsWith('31')) {
-      containerType = '.three-one'
-      addContainer(MarkII, containerType);
-    }
-    if (containerAddress.startsWith('22')) {
-      containerType = '.two-two'
-      addContainer(MarkIII, containerType);
-    }
-    if (containerAddress.startsWith('23')) {
-      containerType = '.two-three'
-      addContainer(MarkIV, containerType);
-    }
-    if (containerAddress.startsWith('24')) {
-      containerType = '.two-four'
-      addContainer(MarkV, containerType);
+
+    // Add containers based on type and address
+    const containerMap = {
+      '12': { type: '.one-two', template: MarkIhoriz },
+      '21': { type: '.two-one', template: MarkIvert },
+      '31': { type: '.three-one', template: MarkII },
+      '22': { type: '.two-two', template: MarkIII },
+      '23': { type: '.two-three', template: MarkIV },
+      '24': { type: '.two-four', template: MarkV }
+    };
+    
+    for (const prefix in containerMap) {
+      if (containerAddress.startsWith(prefix)) {
+        const { type, template } = containerMap[prefix];
+        addContainer(template, type);
+        containerType = type;
+        break;
+      }
     }
 
     // Determine the container address
@@ -867,23 +862,20 @@ function loadController(inputData, color) {
       const containerChildren = Array.from(container.children);
       if (containerChildren) {
         containerChildren.forEach(child => {
-          if (child.classList.contains('two-four')) {
-            container.classList.add('has-24child');
-          }
-          if (child.classList.contains('two-three')) {
-            container.classList.add('has-23child');
-          }
-          if (child.classList.contains('two-two')) {
-            container.classList.add('has-22child');
-          }
-          if (child.classList.contains('one-two')) {
-            container.classList.add('has-12child');
-          }
-          if (child.classList.contains('three-one')) {
-            container.classList.add('has-31child');
-          }
-          if (child.classList.contains('two-one')) {
-            container.classList.add('has-21child');
+          
+          const classMap = {
+            'two-four': 'has-24child',
+            'two-three': 'has-23child',
+            'two-two': 'has-22child',
+            'one-two': 'has-12child',
+            'three-one': 'has-31child',
+            'two-one': 'has-21child'
+          };
+          
+          for (const className in classMap) {
+            if (child.classList.contains(className)) {
+              container.classList.add(classMap[className]);
+            }
           }
         })
       }
