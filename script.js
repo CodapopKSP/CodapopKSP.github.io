@@ -27,9 +27,21 @@ document.addEventListener('contextmenu', function(event) {
 const moduleContainer_left = document.querySelector('.left-module-array');
 const moduleContainer_right = document.querySelector('.right-module-array');
 let moduleCounter = 0;
-
-// Iterate over the moduleData array
 moduleData.forEach(module => {
+  /*
+    Populate the left and right module docks with modules using data from moduleData.js
+    moduleData is an array that contains all of the data for each module.
+      name:               The name of the container.
+      class:              The class for CSS reasons.
+      price:              The price in USD.
+      num_modules:        Total number of module docks.
+      num_angled:         Number of angled module docks.
+      num_level:          [Optional] Number of level module docks.
+      num_level_2:        [Optional] Number of level module docks in the third row.
+      horizontal_ruler:   The dimensions to be displayed on the horizontal ruler.
+      vertical_ruler:     The dimensions to be displayed on the vertical ruler.
+  */
+
   // Create the module element
   const moduleDock = document.createElement('div');
   moduleDock.classList.add('module-dock');
@@ -50,7 +62,7 @@ moduleData.forEach(module => {
   moduleImage.classList.add('image-1');
   moduleElement.appendChild(moduleImage);
 
-  // Check if the module has the image_light property
+  // Check if the module has the image_light property for turning the lights on and off
   if (module.image_light) {
     const moduleImageLight = document.createElement('img');
     moduleImageLight.src = module.image_light;
@@ -70,17 +82,19 @@ moduleData.forEach(module => {
   moduleTooltipContent.style.fontSize = '1.8vh';
   moduleTooltipContent.textContent = module.name;
 
+  // Construct price and tooltip message
   const modulePrice = document.createElement('span');
   modulePrice.style.fontSize = '1.7vh';
   modulePrice.innerHTML = `<br>$${module.price}</br>`;
-
   const moduleDescription = document.createElement('span');
   moduleDescription.innerHTML = module.tooltip;
 
+  // Add them together to form the tooltip
   moduleTooltip.appendChild(moduleTooltipContent);
   moduleTooltip.appendChild(modulePrice);
   moduleTooltip.appendChild(moduleDescription);
 
+  // Add everything together
   moduleElement.appendChild(moduleTooltip);
   moduleDock.appendChild(moduleElement);
 
@@ -102,6 +116,10 @@ moduleData.forEach(module => {
 const colorButtons = document.querySelectorAll('.color-button');
 const box = document.querySelector('.box');
 colorButtons.forEach((button) => {
+  /*
+    Add buttons on the side that allow the user to change the color of the current containers.
+    Uses .color-button to change the color of .box
+  */
   button.addEventListener('click', () => {
     const color = button.style.backgroundColor;
     const boxes = document.querySelectorAll('.box');
@@ -119,6 +137,9 @@ colorButtons.forEach((button) => {
 // Recommended Configurations Button
 const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
 recommendedConfigsBtn.addEventListener('click', function() {
+  /*
+    Add a popup that displays a list of buttons that populate the canvas with pre-designed configurations
+  */
   Swal.fire({
     title: 'Recommended Configurations',
     html:
@@ -146,6 +167,11 @@ recommendedConfigsBtn.addEventListener('click', function() {
 // Main Price Display
 const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
+  /*
+    Show the price in big, bold text near the top right of the canvas.
+    Uses .box and .draggable within .module-dock[data-type="type1"] to acquire data
+      from containers and placed modules respectively.
+  */
   let totalPrice = 0
 
   // Calculate price for containers
@@ -172,12 +198,19 @@ function updateTotalPrice() {
 // Save Button
 const save = document.getElementById('save')
 save.addEventListener('click', function() {
+  /*
+    Create a popup to save the current config to a url and copy it to the clipboard
+    Uses .box to get current containers and then locates all .draggables inside.
+  */
   const draggableIds = [];
 
   // Add container info to the URL
   const boxes = document.querySelectorAll('.box');
   boxes.forEach(box => {
     const idMap = {
+      /*
+        class name: URL config code
+      */
       'one-two': 'z12',
       'two-one': 'z21',
       'three-one': 'z31',
@@ -195,6 +228,12 @@ save.addEventListener('click', function() {
     
     // Add container location data
     let parentContainer = box.parentNode;
+    /*
+      Add container address to the URL.
+        00 - Unplaced
+        1X - Top row of container grids, left to right.
+        2X - Bottom row of container grids, left to right.
+    */
     if (parentContainer.id.includes('canvas')) {
       draggableIds.push('00');
     } else {
@@ -237,6 +276,10 @@ save.addEventListener('click', function() {
 // Light Switch
 const lightSwitch = document.getElementById('lights')
 lightSwitch.addEventListener('click', function() {
+  /*
+    Button that toggles all modules with the light class
+      between .image-1 and .image-2.
+  */
   this.classList.toggle('light');
   const modules_with_lights = document.querySelectorAll('.draggable.light');
   modules_with_lights.forEach(module => {
@@ -255,6 +298,10 @@ lightSwitch.addEventListener('click', function() {
 // Contact Button
 const contactButton = document.getElementById('contact')
 contactButton.addEventListener('click', function() {
+  /*
+    Display contact information as a list of buttons that save
+      respective contact information to the clipboard.
+  */
   Swal.fire({
     title: 'Contact Information',
     html:
@@ -301,6 +348,9 @@ contactButton.addEventListener('click', function() {
 // Info Button
 const infoButton = document.getElementById('info')
 infoButton.addEventListener('click', function() {
+  /*
+    Display information such as guides and other important info.
+  */
   Swal.fire({
     title: 'Information',
     html:
@@ -387,6 +437,11 @@ deleteContainer.addEventListener('dragover', (event) => {
 
 // Delete Bin touch start for mobile
 deleteContainer.addEventListener('touchstart', function(event) {
+  /*
+    Move currently selected module to any open module dock on the left or right.
+    Kills active .tooltip and locates a .module-dock[data-type="type2"]
+      that is empty of all .draggable objects to append the current module.
+  */
   if (activeDraggable) {
     let tooltip = activeDraggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
@@ -396,9 +451,6 @@ deleteContainer.addEventListener('touchstart', function(event) {
       const emptySlots = container.querySelectorAll('.draggable').length < 1;
         if (emptySlots) {
           container.appendChild(activeDraggable);
-          /*elementToDelete.classList.remove("mouseover");
-          let tooltip = activeDraggable.querySelector(".tooltip");
-          tooltip.style.display = 'none';*/
           activeDraggable = null;
           break;
         }
@@ -409,6 +461,12 @@ deleteContainer.addEventListener('touchstart', function(event) {
 
 // Delete Bin drop
 deleteContainer.addEventListener('drop', (event) => {
+  /*
+    Move currently dragged module to any open module dock on the left or right
+      or remove currently dragged container.
+    Deletes objects with class box.
+    Resets all .draggable to empty .module-dock[data-type="type2"]
+  */
   const id = event.dataTransfer.getData('text/plain');
   const elementToDelete = document.getElementById(id);
   activeDraggable = null;
@@ -478,6 +536,10 @@ draggables.forEach(draggable => {
 
   // Module Drag Start
   draggable.addEventListener('dragstart', function(event) {
+    /*
+      Update module class to dragging.
+      
+    */
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
     let tooltip = draggable.querySelector(".tooltip");
