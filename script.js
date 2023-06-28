@@ -30,67 +30,67 @@ let moduleCounter = 0;
 
 // Iterate over the moduleData array
 moduleData.forEach(module => {
-    // Create the module element
-    const moduleDock = document.createElement('div');
-    moduleDock.classList.add('module-dock');
-    moduleDock.setAttribute('data-type', 'type2');
-    
-    const moduleElement = document.createElement('div');
-    moduleElement.classList.add('draggable');
-    moduleElement.setAttribute('draggable', 'true');
+  // Create the module element
+  const moduleDock = document.createElement('div');
+  moduleDock.classList.add('module-dock');
+  moduleDock.setAttribute('data-type', 'type2');
+  
+  const moduleElement = document.createElement('div');
+  moduleElement.classList.add('draggable');
+  moduleElement.setAttribute('draggable', 'true');
 
-    // Set the module ID, price, and name
-    moduleElement.setAttribute('id', module.id);
-    moduleElement.setAttribute('data-price', module.price);
-    moduleElement.setAttribute('data-name', module.name);
+  // Set the module ID, price, and name
+  moduleElement.setAttribute('id', module.id);
+  moduleElement.setAttribute('data-price', module.price);
+  moduleElement.setAttribute('data-name', module.name);
 
-    // Create the module image element
-    const moduleImage = document.createElement('img');
-    moduleImage.src = module.image;
-    moduleImage.classList.add('image-1');
-    moduleElement.appendChild(moduleImage);
+  // Create the module image element
+  const moduleImage = document.createElement('img');
+  moduleImage.src = module.image;
+  moduleImage.classList.add('image-1');
+  moduleElement.appendChild(moduleImage);
 
-    // Check if the module has the image_light property
-    if (module.image_light) {
-        const moduleImageLight = document.createElement('img');
-        moduleImageLight.src = module.image_light;
-        moduleImageLight.classList.add('image-2');
-        moduleImageLight.classList.add('hidden');
-        moduleElement.appendChild(moduleImageLight);
-        moduleElement.classList.add('light');
-    }
+  // Check if the module has the image_light property
+  if (module.image_light) {
+    const moduleImageLight = document.createElement('img');
+    moduleImageLight.src = module.image_light;
+    moduleImageLight.classList.add('image-2');
+    moduleImageLight.classList.add('hidden');
+    moduleElement.appendChild(moduleImageLight);
+    moduleElement.classList.add('light');
+  }
 
-    // Create the module tooltip element
-    const moduleTooltip = document.createElement('span');
-    moduleTooltip.style.fontFamily = "Roboto, sans-serif";
-    moduleTooltip.classList.add('tooltip');
+  // Create the module tooltip element
+  const moduleTooltip = document.createElement('span');
+  moduleTooltip.style.fontFamily = "Roboto, sans-serif";
+  moduleTooltip.classList.add('tooltip');
 
-    // Create the module tooltip content
-    const moduleTooltipContent = document.createElement('strong');
-    moduleTooltipContent.style.fontSize = '1.8vh';
-    moduleTooltipContent.textContent = module.name;
+  // Create the module tooltip content
+  const moduleTooltipContent = document.createElement('strong');
+  moduleTooltipContent.style.fontSize = '1.8vh';
+  moduleTooltipContent.textContent = module.name;
 
-    const modulePrice = document.createElement('span');
-    modulePrice.style.fontSize = '1.7vh';
-    modulePrice.innerHTML = `<br>$${module.price}</br>`;
+  const modulePrice = document.createElement('span');
+  modulePrice.style.fontSize = '1.7vh';
+  modulePrice.innerHTML = `<br>$${module.price}</br>`;
 
-    const moduleDescription = document.createElement('span');
-    moduleDescription.innerHTML = module.tooltip;
+  const moduleDescription = document.createElement('span');
+  moduleDescription.innerHTML = module.tooltip;
 
-    moduleTooltip.appendChild(moduleTooltipContent);
-    moduleTooltip.appendChild(modulePrice);
-    moduleTooltip.appendChild(moduleDescription);
+  moduleTooltip.appendChild(moduleTooltipContent);
+  moduleTooltip.appendChild(modulePrice);
+  moduleTooltip.appendChild(moduleDescription);
 
-    moduleElement.appendChild(moduleTooltip);
-    moduleDock.appendChild(moduleElement);
+  moduleElement.appendChild(moduleTooltip);
+  moduleDock.appendChild(moduleElement);
 
-    // Append the module element to the container
-    if (moduleCounter < 12) {
-        moduleContainer_left.appendChild(moduleDock);
-    } else {
-        moduleContainer_right.appendChild(moduleDock);
-    }
-    moduleCounter += 1;
+  // Append the module element to the container
+  if (moduleCounter < 12) {
+    moduleContainer_left.appendChild(moduleDock);
+  } else {
+    moduleContainer_right.appendChild(moduleDock);
+  }
+  moduleCounter += 1;
 });
 
 
@@ -260,7 +260,7 @@ contactButton.addEventListener('click', function() {
     html:
     '<div style="font-family: \'Roboto\', sans-serif;">Click a button to copy.</div>' +
     '<button class="btn btn-reddit text-center" data-clipboard-text="https://www.reddit.com/user/CodapopKSP">Reddit:   u/CodapopKSP</button>' +
-    '<button class="btn btn-discord text-center" data-clipboard-text="Codapop#1469">Discord:   codapopksp</button>' +
+    '<button class="btn btn-discord text-center" data-clipboard-text="codapopksp">Discord:   codapopksp</button>' +
     '<button class="btn btn-insta text-center" data-clipboard-text="untitled_space_craft">Instagram: untitled_space_craft</button>' +
     '<button class="btn btn-email text-center" data-clipboard-text="untitledspacecraft.controllers@gmail.com">Email: untitledspacecraft\n.controllers@gmail.com</button>' +
     '<div style="font-family: \'Roboto\', sans-serif;"><br></br>You can also visit the Untitled Space Craft subreddit for more information.</div>' +
@@ -409,63 +409,63 @@ deleteContainer.addEventListener('touchstart', function(event) {
 
 // Delete Bin drop
 deleteContainer.addEventListener('drop', (event) => {
-    const id = event.dataTransfer.getData('text/plain');
-    const elementToDelete = document.getElementById(id);
-    activeDraggable = null;
-  
-    // Dropped item is a container
-    if (elementToDelete && (elementToDelete.classList.contains('box'))) {
-      elementToDelete.remove();
-      const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+  const id = event.dataTransfer.getData('text/plain');
+  const elementToDelete = document.getElementById(id);
+  activeDraggable = null;
 
-      // Move modules in deleted container back to the sides
-      const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
-      for (const module of droppedModules) {
-        for (const container of containers) {
-          const emptySlots = container.querySelectorAll('.draggable').length < 1;
-          if (emptySlots) {
-            container.appendChild(module);
-            break;
-          }
-        }
-      }
-      elementToDelete.remove();
+  // Dropped item is a container
+  if (elementToDelete && (elementToDelete.classList.contains('box'))) {
+    elementToDelete.remove();
+    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
 
-    // Dropped item is a module
-    } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
-      const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
-      let droppedIntoContainer = false;
-
-      // Move module back to the sides
+    // Move modules in deleted container back to the sides
+    const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
+    for (const module of droppedModules) {
       for (const container of containers) {
         const emptySlots = container.querySelectorAll('.draggable').length < 1;
         if (emptySlots) {
-          container.appendChild(elementToDelete);
-          elementToDelete.classList.remove("mouseover");
-          let tooltip = elementToDelete.querySelector(".tooltip");
-          tooltip.style.display = 'none';
-          droppedIntoContainer = true;
+          container.appendChild(module);
           break;
         }
       }
     }
+    elementToDelete.remove();
 
-    // Reset grid sizing
-    const containers = document.querySelectorAll('.container2');
-    containers.forEach(container => {
-      const containerChildren = container.children;
-      if (containerChildren.length === 0) {
-        container.classList.remove('has-24child');
-        container.classList.remove('has-23child');
-        container.classList.remove('has-22child');
-        container.classList.remove('has-12child');
-        container.classList.remove('has-31child');
-        container.classList.remove('has-21child');
+  // Dropped item is a module
+  } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
+    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+    let droppedIntoContainer = false;
+
+    // Move module back to the sides
+    for (const container of containers) {
+      const emptySlots = container.querySelectorAll('.draggable').length < 1;
+      if (emptySlots) {
+        container.appendChild(elementToDelete);
+        elementToDelete.classList.remove("mouseover");
+        let tooltip = elementToDelete.querySelector(".tooltip");
+        tooltip.style.display = 'none';
+        droppedIntoContainer = true;
+        break;
       }
-    });
+    }
+  }
 
-    // Update price
-    updateTotalPrice()
+  // Reset grid sizing
+  const containers = document.querySelectorAll('.container2');
+  containers.forEach(container => {
+    const containerChildren = container.children;
+    if (containerChildren.length === 0) {
+      container.classList.remove('has-24child');
+      container.classList.remove('has-23child');
+      container.classList.remove('has-22child');
+      container.classList.remove('has-12child');
+      container.classList.remove('has-31child');
+      container.classList.remove('has-21child');
+    }
+  });
+
+  // Update price
+  updateTotalPrice()
 });
 
 
