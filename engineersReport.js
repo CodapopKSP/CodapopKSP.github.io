@@ -10,37 +10,37 @@ const engineersReport = document.getElementById('report');
 // Build a report showing controller stats and errors
 engineersReport.addEventListener('click', function() {
   let reportContent = '';
-  const boxes = document.querySelectorAll('.box');
+  const containerBoxes = document.querySelectorAll('.container-box');
   let totalPrice = 0;
   let isSizeMismatch = false;
 
   // Check to make sure each container is filled and display price breakdown
-  boxes.forEach(box => {
-    const draggables = box.querySelectorAll('.draggable');
-    let boxPrice = parseFloat(box.getAttribute('data-price'));
-    totalPrice += boxPrice;
+  containerBoxes.forEach(containerBox => {
+    const modules = containerBox.querySelectorAll('.module');
+    let containerPrice = parseFloat(containerBox.getAttribute('data-price'));
+    totalPrice += containerPrice;
 
     // Make sure all module docks are filled
-    if (draggables.length !== parseInt(box.getAttribute('data-size'))) {
+    if (modules.length !== parseInt(containerBox.getAttribute('data-size'))) {
       isSizeMismatch = true;
     }
 
-    // Add the price of each draggable
-    draggables.forEach(draggable => {
-      const price = parseFloat(draggable.getAttribute('data-price'));
+    // Add the price of each module
+    modules.forEach(module => {
+      const price = parseFloat(module.getAttribute('data-price'));
       totalPrice += price;
     });
 
     // Show price
-    if (boxPrice > 0) {
-      reportContent += `<p style="color: #4d9de3;"><strong>${box.getAttribute('data-name')}</strong> - $${boxPrice.toFixed(2)}</p>`;
-      draggables.forEach(draggable => {
-        const price = parseFloat(draggable.getAttribute('data-price'));
-        reportContent += `<p>&emsp;${draggable.getAttribute('data-name')} - $${price.toFixed(2)}</p>`;
+    if (containerPrice > 0) {
+      reportContent += `<p style="color: #4d9de3;"><strong>${containerBox.getAttribute('data-name')}</strong> - $${containerPrice.toFixed(2)}</p>`;
+      modules.forEach(module => {
+        const price = parseFloat(module.getAttribute('data-price'));
+        reportContent += `<p>&emsp;${module.getAttribute('data-name')} - $${price.toFixed(2)}</p>`;
       });
       reportContent += `<hr>`;
     } else {
-      reportContent += `<p style="color: #df7070;">${box.getAttribute('data-name')} - <em>No items selected</em></p>`;
+      reportContent += `<p style="color: #df7070;">${containerBox.getAttribute('data-name')} - <em>No items selected</em></p>`;
       reportContent += `<hr>`;
     }
   });
@@ -75,73 +75,73 @@ engineersReport.addEventListener('click', function() {
   let separated_analog = false;
 
   // Check all modules for conflicts
-  boxes.forEach(box => {
+  containerBoxes.forEach(containerBox => {
 
     // Check each container to see if specific modules are present
     if (!has_analog_throttle) {
-      has_analog_throttle = box.querySelector('#f2');
+      has_analog_throttle = containerBox.querySelector('#f2');
     }
     if (!has_rotation_throttle) {
-      has_rotation_throttle = box.querySelector('#f4');
+      has_rotation_throttle = containerBox.querySelector('#f4');
     }
     if (!has_throttle) {
-      has_throttle = box.querySelector('#f6');
+      has_throttle = containerBox.querySelector('#f6');
     }
     if (!has_translation) {
-      has_translation = box.querySelector('#f5');
+      has_translation = containerBox.querySelector('#f5');
     }
     if (!has_analog) {
-      has_analog = box.querySelector('#f1');
+      has_analog = containerBox.querySelector('#f1');
     }
     if (!has_rotation) {
-      has_rotation = box.querySelector('#f3');
+      has_rotation = containerBox.querySelector('#f3');
     }
     if (!has_control_sys) {
-      has_control_sys = box.querySelector('#g1');
+      has_control_sys = containerBox.querySelector('#g1');
     }
     if (!has_executive_control) {
-      has_executive_control = box.querySelector('#a5');
+      has_executive_control = containerBox.querySelector('#a5');
     }
     if (!has_stage) {
-      has_stage = box.querySelector('#a2');
+      has_stage = containerBox.querySelector('#a2');
     }
     if (!has_executive_groups) {
-      has_executive_groups = box.querySelector('#a4');
+      has_executive_groups = containerBox.querySelector('#a4');
     }
     if (!has_executive) {
-      has_executive = box.querySelector('#a3');
+      has_executive = containerBox.querySelector('#a3');
     }
     if (!has_nav) {
-      has_nav = box.querySelector('#b2');
+      has_nav = containerBox.querySelector('#b2');
     }
     if (!has_time) {
-      has_time = box.querySelector('#b1');
+      has_time = containerBox.querySelector('#b1');
     }
     if (!has_navTime) {
-      has_navTime = box.querySelector('#b3');
+      has_navTime = containerBox.querySelector('#b3');
     }
 
     // Check for modules that conflict with the Telemetry module
-    const has_time_thisbox = box.querySelector('#b1');
-    const has_navTime_thisbox = box.querySelector('#b3');
-    const has_executive_groups_thisbox = box.querySelector('#a4');
-    const has_executive_control_thisbox = box.querySelector('#a5');
-    const has_control_sys_thisbox = box.querySelector('#g1');
-    const has_ag_thisbox = box.querySelector('#h1');
-    const has_ag2_thisbox = box.querySelector('#h2');
-    const has_ag3_thisbox = box.querySelector('#h3');
-    const has_eva_thisbox = box.querySelector('#d1');
-    const has_telem_thisbox = box.querySelector('#c1');
+    const has_time_thisbox = containerBox.querySelector('#b1');
+    const has_navTime_thisbox = containerBox.querySelector('#b3');
+    const has_executive_groups_thisbox = containerBox.querySelector('#a4');
+    const has_executive_control_thisbox = containerBox.querySelector('#a5');
+    const has_control_sys_thisbox = containerBox.querySelector('#g1');
+    const has_ag_thisbox = containerBox.querySelector('#h1');
+    const has_ag2_thisbox = containerBox.querySelector('#h2');
+    const has_ag3_thisbox = containerBox.querySelector('#h3');
+    const has_eva_thisbox = containerBox.querySelector('#d1');
+    const has_telem_thisbox = containerBox.querySelector('#c1');
     if (has_telem_thisbox && (has_ag_thisbox || has_ag2_thisbox || has_ag3_thisbox || has_eva_thisbox || has_control_sys_thisbox || has_executive_control_thisbox || has_executive_groups_thisbox || has_time_thisbox || has_navTime_thisbox)) {
       telemetry_overload = true;
     }
 
     // Check to make sure combined analog modules are on the same container if present
     if (!separated_analog) {
-      const has_rotation1_thisbox = box.querySelector('#f3');
-      const has_rotation2_thisbox = box.querySelector('#f4');
+      const has_rotation1_thisbox = containerBox.querySelector('#f3');
+      const has_rotation2_thisbox = containerBox.querySelector('#f4');
       const has_rotation_thisbox = (has_rotation1_thisbox || has_rotation2_thisbox);
-      const has_translation_thisbox = box.querySelector('#f5');
+      const has_translation_thisbox = containerBox.querySelector('#f5');
       if ((has_rotation_thisbox && !has_translation_thisbox) || (!has_rotation_thisbox && has_translation_thisbox)) {
         separated_analog = true;
       }

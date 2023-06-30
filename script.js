@@ -2,9 +2,8 @@
 //|     Script     |
 //|================|
 
-
 // Delete Bin
-const deleteBin = document.getElementById('delete-container')
+const deleteBin = document.getElementById('delete-bin')
 
 // URL Parameters
 const urlParameters = new URLSearchParams(window.location.search);
@@ -53,8 +52,8 @@ moduleData.forEach(module => {
   moduleDock.setAttribute('data-type', 'type2');
   
   const moduleElement = document.createElement('div');
-  moduleElement.classList.add('draggable');
-  moduleElement.setAttribute('draggable', 'true');
+  moduleElement.classList.add('module');
+  moduleElement.setAttribute('module', 'true');
 
   // Set the module ID, price, and name
   moduleElement.setAttribute('id', module.id);
@@ -123,11 +122,11 @@ const colorButtons = document.querySelectorAll('.color-button');
 colorButtons.forEach((button) => {
   /*
     Add buttons on the side that allow the user to change the color of the current containers.
-    Uses .color-button to change the color of .box
+    Uses .color-button to change the color of .container-box
   */
   button.addEventListener('click', () => {
     const color = button.style.backgroundColor;
-    const containerBoxes = document.querySelectorAll('.box');
+    const containerBoxes = document.querySelectorAll('.container-box');
     containerBoxes.forEach(containerBox => {
       containerBox.style.borderColor = color;
     })
@@ -174,13 +173,12 @@ const priceDisplay = document.getElementById('price-display')
 function updateTotalPrice() {
   /*
     Show the price in big, bold text near the top right of the canvas.
-    Uses .box and .draggable within .module-dock[data-type="type1"] to acquire data
-      from containers and placed modules respectively.
+    Uses .container-box and .module within .module-dock[data-type="type1"] to acquire data.
   */
   let totalPrice = 0
 
   // Calculate price for containers
-  const containerBoxes = document.querySelectorAll('.box');
+  const containerBoxes = document.querySelectorAll('.container-box');
   containerBoxes.forEach(containerBox => {
     const priceOfContainer = parseFloat(containerBox.dataset.price);
     totalPrice += priceOfContainer;
@@ -189,7 +187,7 @@ function updateTotalPrice() {
   // Calculate price for modules
   const containerModuleDocks = document.querySelectorAll('.module-dock[data-type="type1"]');
   containerModuleDocks.forEach(containerModuleDock => {
-    const dockedModules = containerModuleDock.querySelectorAll('.draggable');
+    const dockedModules = containerModuleDock.querySelectorAll('.module');
     dockedModules.forEach(dockedModule => {
       const priceOfModule = parseFloat(dockedModule.dataset.price);
       totalPrice += priceOfModule;
@@ -206,12 +204,12 @@ const saveButton = document.getElementById('save')
 saveButton.addEventListener('click', function() {
   /*
     Create a popup to save the current config to a url and copy it to the clipboard
-    Uses .box to get current containers and then locates all .draggables inside.
+    Uses .container-box to get current containers and then locates all .modules inside.
   */
   const urlConfigCode = [];
 
   // Add container info to the URL
-  const containerBoxes = document.querySelectorAll('.box');
+  const containerBoxes = document.querySelectorAll('.container-box');
   containerBoxes.forEach(containerBox => {
     const containerSizeMap = {
       /*
@@ -247,7 +245,7 @@ saveButton.addEventListener('click', function() {
     }
 
     // Add module info to the URL
-    const modules = containerBox.querySelectorAll('.draggable');
+    const modules = containerBox.querySelectorAll('.module');
     modules.forEach(module => {
       urlConfigCode.push(module.id);
     });
@@ -288,7 +286,7 @@ lightSwitch.addEventListener('click', function() {
       between .image-1 and .image-2.
   */
   this.classList.toggle('light');
-  const modules_with_lights = document.querySelectorAll('.draggable.light');
+  const modules_with_lights = document.querySelectorAll('.module.light');
   modules_with_lights.forEach(module => {
     const image1 = module.querySelector('.image-1');
     const image2 = module.querySelector('.image-2');
@@ -452,7 +450,7 @@ deleteBin.addEventListener('touchstart', function(event) {
   /*
     Move currently selected module to any open module dock on the left or right.
     Kills active .tooltip and locates a .module-dock[data-type="type2"]
-      that is empty of all .draggable objects to append the current module.
+      that is empty of all .modules to append the current module.
   */
   if (activeModule_mobile) {
     let tooltip = activeModule_mobile.querySelector(".tooltip");
@@ -460,7 +458,7 @@ deleteBin.addEventListener('touchstart', function(event) {
     event.preventDefault()
     const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
     for (const moduleDock of moduleDocks) {
-      const emptySlot = moduleDock.querySelectorAll('.draggable').length < 1;
+      const emptySlot = moduleDock.querySelectorAll('.module').length < 1;
         if (emptySlot) {
           moduleDock.appendChild(activeModule_mobile);
           activeModule_mobile = null;
@@ -478,7 +476,7 @@ deleteBin.addEventListener('drop', (event) => {
     Move currently dragged module to any open module dock on the left or right
       or remove currently dragged container.
     Deletes objects with class box.
-    Resets all .draggable to empty .module-dock[data-type="type2"]
+    Resets all .module to empty .module-dock[data-type="type2"]
   */
   const event_id = event.dataTransfer.getData('text/plain');
   const elementToDelete = document.getElementById(event_id);
@@ -490,10 +488,10 @@ deleteBin.addEventListener('drop', (event) => {
     const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
 
     // Move modules in deleted container back to the sides
-    const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
+    const droppedModules = elementToDelete.querySelectorAll('[module="true"]');
     for (const module of droppedModules) {
       for (const moduleDock of moduleDocks) {
-        const emptySlot = moduleDock.querySelectorAll('.draggable').length < 1;
+        const emptySlot = moduleDock.querySelectorAll('.module').length < 1;
         if (emptySlot) {
           moduleDock.appendChild(module);
           break;
@@ -503,13 +501,13 @@ deleteBin.addEventListener('drop', (event) => {
     elementToDelete.remove();
 
   // Dropped item is a module
-  } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
+  } else if (elementToDelete && elementToDelete.classList.contains('module')) {
     const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
     let droppedIntoContainer = false;
 
     // Move module back to the sides
     for (const moduleDock of moduleDocks) {
-      const emptySlot = moduleDock.querySelectorAll('.draggable').length < 1;
+      const emptySlot = moduleDock.querySelectorAll('.module').length < 1;
       if (emptySlot) {
         moduleDock.appendChild(elementToDelete);
         elementToDelete.classList.remove("mouseover");
@@ -522,7 +520,7 @@ deleteBin.addEventListener('drop', (event) => {
   }
 
   // Reset grid sizing
-  const containerGrids = document.querySelectorAll('.container2');
+  const containerGrids = document.querySelectorAll('.container-grid');
   containerGrids.forEach(containerGrid => {
     const containerGridChildren = containerGrid.children;
     if (containerGridChildren.length === 0) {
@@ -543,7 +541,7 @@ deleteBin.addEventListener('drop', (event) => {
 //|     Modules     |
 //|-----------------|
 
-const modules = document.querySelectorAll('.draggable')
+const modules = document.querySelectorAll('.module')
 modules.forEach(module => {
 
 
@@ -555,6 +553,7 @@ modules.forEach(module => {
       Highlight the Delete Bin.
     */
     module.classList.add('dragging');
+    console.log('Dragging class added');
     event.dataTransfer.setData('text/plain', this.id);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
@@ -670,7 +669,7 @@ modules.forEach(module => {
 //|     Container Grids     |
 //|-------------------------|
 
-const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
+const containerGrids = document.querySelectorAll('.container-grid-array, .container-grid-array2');
 containerGrids.forEach(containerGrid => {
   containerGrid.addEventListener('dragover', (event) => {
     event.preventDefault();
@@ -680,14 +679,14 @@ containerGrids.forEach(containerGrid => {
   // Determine the type of container and update the class for resizing of the grid
   containerGrid.addEventListener('drop', (event) => {
     /*
-      Add .dragging2 container to .container2 container grid.
+      Add .dragging2 container to .container-grid.
       Add class dropped-box to container grid to hide it.
       Resize container grid depending on which container is in it.
       Check all containers for resizing and double check class removal.
     */
     event.preventDefault();
-    const containerBox = document.querySelector('.dragging2');
-    const containerGrid = event.target.closest('.container2');
+    const containerBox = document.querySelector('.container-box');
+    const containerGrid = event.target.closest('.container-grid');
     if (containerGrid && containerBox) {
       containerGrid.appendChild(containerBox);
       containerBox.classList.add('dropped-box');
@@ -713,7 +712,7 @@ containerGrids.forEach(containerGrid => {
     }
 
     // Reset grid sizing
-    const containerGrids = document.querySelectorAll('.container2');
+    const containerGrids = document.querySelectorAll('.container-grid');
     containerGrids.forEach(containerGrid => {
       const containerGridChildren = containerGrid.children;
       if (containerGridChildren.length === 0) {
@@ -729,21 +728,26 @@ containerGrids.forEach(containerGrid => {
 });
 
 
+
+//|--------------------|
+//|     Containers     |
+//|--------------------|
+
 // Add a container of a specific size
 function addContainer(containerData, type) {
   /*
-    Check to make sure there are no unplaced containers by comparing .dropped-box to .box.
+    Check to make sure there are no unplaced containers by comparing .dropped-box to .container-box.
     Create a new box container element using data from containerData.
     Add all event listeners for the container.
     Show a popup if there is an unplaced container.
   */
   const existingBoxes = document.querySelectorAll('.dropped-box');
-  const requiredBoxes = document.querySelectorAll('.box');
+  const requiredBoxes = document.querySelectorAll('.container-box');
   if (existingBoxes.length === requiredBoxes.length) {
 
     // Create container
     const containerElement = document.createElement('div');
-    containerElement.classList.add('box');
+    containerElement.classList.add('container-box');
 
     // Choose a random ID
     const counter = Math.floor(Math.random() * 10000).toString() + type;
@@ -806,29 +810,31 @@ function addContainer(containerData, type) {
     pageWrapper.appendChild(containerElement);
     updateTotalPrice()
 
-
+    
     // Handle picking up the container
     const containerBoxes = document.querySelectorAll(type);
     containerBoxes.forEach(containerBox => {
-      /*
-        Ensure the ID of the dragstart element matches the same counter from creating the container.
-        Store ID for some reason that seems important.
-        Add class dragging2 to the element.
-        Add class has-drag to containerGrids for visibility.
-        Highlight the Delete Container.
-      */
+
+      
       containerBox.addEventListener('dragstart', (event) => {
-          if (event.target.id === counter) {
-              event.dataTransfer.setData('dragged', event.target.id);
-              event.target.classList.add('dragging2');
-              const id = event.target.id;
-              event.dataTransfer.setData('text/plain', id);
-              const containerGrids = document.querySelectorAll('.container2')
-              containerGrids.forEach(containerGrid => {
-                containerGrid.classList.add('has-drag');
-              })
-              deleteBin.classList.add('highlight');
-          }
+        /*
+          Ensure the ID of the dragstart element matches the same counter from creating the container.
+          Store ID for some reason that seems important.
+          Add class dragging2 to the element.
+          Add class has-drag to containerGrids for visibility.
+          Highlight the Delete Container.
+        */
+        if (event.target.id === counter) {
+            event.dataTransfer.setData('dragged', event.target.id);
+            event.target.classList.add('dragging2');
+            const id = event.target.id;
+            event.dataTransfer.setData('text/plain', id);
+            const containerGrids = document.querySelectorAll('.container-grid')
+            containerGrids.forEach(containerGrid => {
+              containerGrid.classList.add('has-drag');
+            })
+            deleteBin.classList.add('highlight');
+        }
       });
 
 
@@ -842,7 +848,7 @@ function addContainer(containerData, type) {
         */
         if (event.target.id === counter) {
           event.target.classList.remove('dragging2');
-          const containerGrids = document.querySelectorAll('.container2')
+          const containerGrids = document.querySelectorAll('.container-grid')
           containerGrids.forEach(containerGrid => {
             containerGrid.classList.remove('has-drag');
           })
@@ -1022,7 +1028,7 @@ function loadController(inputData, color) {
 
 
     // Update the canvas elements as if someone dragged and dropped the containers and modules
-    const containerGrids = document.querySelectorAll('.container2');
+    const containerGrids = document.querySelectorAll('.container-grid');
     containerGrids.forEach(containerGrid => {
       /*
         Check container grids for present containers.
