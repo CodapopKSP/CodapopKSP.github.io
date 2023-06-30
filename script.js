@@ -483,12 +483,12 @@ deleteBin.addEventListener('drop', (event) => {
   activeModule_mobile = null;
 
   // Dropped item is a container
-  if (elementToDelete && (elementToDelete.classList.contains('box'))) {
+  if (elementToDelete && (elementToDelete.classList.contains('container-box'))) {
     elementToDelete.remove();
     const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
 
     // Move modules in deleted container back to the sides
-    const droppedModules = elementToDelete.querySelectorAll('[module="true"]');
+    const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
     for (const module of droppedModules) {
       for (const moduleDock of moduleDocks) {
         const emptySlot = moduleDock.querySelectorAll('.module').length < 1;
@@ -544,7 +544,6 @@ deleteBin.addEventListener('drop', (event) => {
 const modules = document.querySelectorAll('.module')
 modules.forEach(module => {
 
-
   // Module Drag Start
   module.addEventListener('dragstart', function(event) {
     /*
@@ -553,7 +552,6 @@ modules.forEach(module => {
       Highlight the Delete Bin.
     */
     module.classList.add('dragging');
-    console.log('Dragging class added');
     event.dataTransfer.setData('text/plain', this.id);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
@@ -578,7 +576,7 @@ modules.forEach(module => {
       Reset the zIndex of parent container by backing through nodes.
       Remove highlight from the Delete Bin.
     */
-      module.classList.remove('dragging');
+    module.classList.remove('dragging');
     updateTotalPrice();
     let parentContainer = module.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
