@@ -108,6 +108,7 @@ moduleData.forEach(module => {
 });
 
 
+
 //|-------------------------|
 //|     Sidebar Buttons     |
 //|-------------------------|
@@ -130,9 +131,11 @@ colorButtons.forEach((button) => {
 });
 
 
+
 //|------------------------|
 //|     Header Buttons     |
 //|------------------------|
+
 
 // Recommended Configurations Button
 const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
@@ -161,7 +164,6 @@ recommendedConfigsBtn.addEventListener('click', function() {
     },
   });
 });
-
 
 
 // Main Price Display
@@ -194,6 +196,7 @@ function updateTotalPrice() {
   // Display price
   priceDisplay.innerText = `Total: $${parseInt(totalPrice.toFixed(2))}`;
 };
+
 
 // Save Button
 const save = document.getElementById('save')
@@ -273,6 +276,7 @@ save.addEventListener('click', function() {
   });
 });
 
+
 // Light Switch
 const lightSwitch = document.getElementById('lights')
 lightSwitch.addEventListener('click', function() {
@@ -291,9 +295,11 @@ lightSwitch.addEventListener('click', function() {
 });
 
 
+
 //|------------------------|
 //|     Footer Buttons     |
 //|------------------------|
+
 
 // Contact Button
 const contactButton = document.getElementById('contact')
@@ -345,6 +351,7 @@ contactButton.addEventListener('click', function() {
   });
 });
 
+
 // Info Button
 const infoButton = document.getElementById('info')
 infoButton.addEventListener('click', function() {
@@ -372,9 +379,11 @@ infoButton.addEventListener('click', function() {
 });
 
 
+
 //|-------------------------------|
 //|     Add Container Buttons     |
 //|-------------------------------|
+
 
 // Map of container data
 // Add Mark V container
@@ -426,14 +435,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
 //|--------------------|
 //|     Delete Bin     |
 //|--------------------|
+
 
 // Delete Bin drag over
 deleteContainer.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
+
 
 // Delete Bin touch start for mobile
 deleteContainer.addEventListener('touchstart', function(event) {
@@ -458,6 +470,7 @@ deleteContainer.addEventListener('touchstart', function(event) {
   }
   updateTotalPrice()
 })
+
 
 // Delete Bin drop
 deleteContainer.addEventListener('drop', (event) => {
@@ -527,18 +540,22 @@ deleteContainer.addEventListener('drop', (event) => {
 });
 
 
+
 //|-----------------|
 //|     Modules     |
 //|-----------------|
 
+
 const draggables = document.querySelectorAll('.draggable')
 draggables.forEach(draggable => {
+
 
   // Module Drag Start
   draggable.addEventListener('dragstart', function(event) {
     /*
-      Update module class to dragging.
-      
+      Update module class to dragging and hide tooltip.
+      Reset the zIndex of parent container by backing through nodes.
+      Highlight the Delete Bin.
     */
     draggable.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
@@ -557,8 +574,14 @@ draggables.forEach(draggable => {
     deleteContainer.classList.add('highlight');
   });
   
+
   // Module Drag End
   draggable.addEventListener('dragend', () => {
+    /*
+      Update module class to remove dragging.
+      Reset the zIndex of parent container by backing through nodes.
+      Remove highlight from the Delete Bin.
+    */
     draggable.classList.remove('dragging');
     updateTotalPrice();
     let parentContainer = draggable.parentNode;
@@ -574,8 +597,17 @@ draggables.forEach(draggable => {
     deleteContainer.classList.remove('highlight');
   });
 
+
   // Show tooltip
   draggable.addEventListener('mouseover', (event) => {
+    /*
+      Show tooltip for objects with class mouseover.
+      Get the vert/horiz position of the tooltip in the window and
+        draw the tooltip depending on the nearest screen edge.
+      Set the zIndex of parent container by backing through nodes
+        so that the tooltip will always be on top.
+      Set active draggable for mobile.
+    */
     const tooltip = draggable.querySelector(".tooltip");
     draggable.classList.add("mouseover");
     tooltip.style.display = 'block';
@@ -611,8 +643,14 @@ draggables.forEach(draggable => {
     activeDraggable = draggable;
   });
   
+
   // Hide tooltip
   draggable.addEventListener('mouseout', () => {
+    /*
+      Hide the tooltip using .tooltip from draggable.
+      Reset the zIndex of parent container by backing through nodes.
+      Remove class mouseover.
+    */
     let tooltip = draggable.querySelector(".tooltip");
     tooltip.style.display = 'none';
     draggable.classList.remove("mouseover");
@@ -630,9 +668,11 @@ draggables.forEach(draggable => {
 });
 
 
+
 //|-------------------------|
 //|     Container Grids     |
 //|-------------------------|
+
 
 const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 containerGrids.forEach(containerGrid => {
@@ -640,8 +680,15 @@ containerGrids.forEach(containerGrid => {
     event.preventDefault();
   });
 
+
   // Determine the type of container and update the class for resizing of the grid
   containerGrid.addEventListener('drop', (event) => {
+    /*
+      Add .dragging2 container to .container2 container grid.
+      Add class dropped-box to container grid to hide it.
+      Resize container grid depending on which container is in it.
+      Check all containers for resizing and double check class removal.
+    */
     event.preventDefault();
     const draggable = document.querySelector('.dragging2');
     const dropContainer = event.target.closest('.container2');
@@ -650,6 +697,9 @@ containerGrids.forEach(containerGrid => {
       draggable.classList.add('dropped-box');
 
       const classMap = {
+        /*
+          container class: grid size class
+        */
         'two-four': 'has-24child',
         'two-three': 'has-23child',
         'two-two': 'has-22child',
@@ -682,8 +732,14 @@ containerGrids.forEach(containerGrid => {
   });
 });
 
+
 // Add a container of a specific size
 function addContainer(containerData, type) {
+  /*
+    Check to make sure there are no unplaced containers by comparing .dropped-box to .box.
+    Create a new box container element using data from containerData.
+    Add all event listeners for the container.
+  */
   const existingBoxes = document.querySelectorAll('.dropped-box');
   const requiredBoxes = document.querySelectorAll('.box');
   if (existingBoxes.length === requiredBoxes.length) {
@@ -717,8 +773,15 @@ function addContainer(containerData, type) {
     addRuler("horizontal-ruler", containerData.horizontal_ruler);
     addRuler("vertical-ruler", containerData.vertical_ruler);
 
+
     // Add module docks based on parameters from containerData
     function addModuleDockRow(num_modules, img_type) {
+      /*
+        Add a row of module docks to the current container.
+        Takes 2 parameters:
+          num_modules:  Total number of module slots to create.
+          img_type:     The image to use, either 'angled' or 'level'.
+      */
       const moduleDockRow = document.createElement('div');
       for (let i = 0; i < num_modules; i++) {
         moduleDockRow.classList.add('container-slot-row');
@@ -746,30 +809,45 @@ function addContainer(containerData, type) {
     pageWrapper.appendChild(container);
     updateTotalPrice()
 
+
     // Handle picking up the container
     const containerBoxes = document.querySelectorAll(type);
     containerBoxes.forEach(containerBox => {
+      /*
+        Ensure the ID of the dragstart element matches the same counter from creating the container.
+        Store ID for some reason that seems important.
+        Add class dragging2 to the element.
+        Add class has-drag to containerGrids for visibility.
+        Highlight the Delete Container.
+      */
       containerBox.addEventListener('dragstart', (event) => {
           if (event.target.id === counter) {
               event.dataTransfer.setData('dragged', event.target.id);
               event.target.classList.add('dragging2');
               const id = event.target.id;
               event.dataTransfer.setData('text/plain', id);
-              const containers = document.querySelectorAll('.container2')
-              containers.forEach(container => {
-                  container.classList.add('has-drag');
+              const containerGrids = document.querySelectorAll('.container2')
+              containerGrids.forEach(containerGrid => {
+                containerGrid.classList.add('has-drag');
               })
               deleteContainer.classList.add('highlight');
           }
       });
 
+
       // Drop the container
       containerBox.addEventListener('dragend', (event) => {
+        /*
+          Ensure the ID of the dragstart element matches the same counter from creating the container.
+          Remove class dragging2 from the element.
+          Add class has-drag to containerGrids for visibility.
+          Highlight the Delete Container.
+        */
         if (event.target.id === counter) {
           event.target.classList.remove('dragging2');
-          const containers = document.querySelectorAll('.container2')
-          containers.forEach(container => {
-              container.classList.remove('has-drag');
+          const containerGrids = document.querySelectorAll('.container2')
+          containerGrids.forEach(containerGrid => {
+            containerGrid.classList.remove('has-drag');
           })
           deleteContainer.classList.remove('highlight');
         }
