@@ -739,6 +739,7 @@ function addContainer(containerData, type) {
     Check to make sure there are no unplaced containers by comparing .dropped-box to .box.
     Create a new box container element using data from containerData.
     Add all event listeners for the container.
+    Show a popup if there is an unplaced container.
   */
   const existingBoxes = document.querySelectorAll('.dropped-box');
   const requiredBoxes = document.querySelectorAll('.box');
@@ -854,6 +855,7 @@ function addContainer(containerData, type) {
       });
     });
 
+
     // Handle module docks on containers
     const containers = document.querySelectorAll('.module-dock')
     containers.forEach(container => {
@@ -862,7 +864,13 @@ function addContainer(containerData, type) {
       container.addEventListener('dragover', e => {
         e.preventDefault()
       })
+
+
       container.addEventListener('drop', () => {
+        /*
+          Check if holding a module and add it to the module dock.
+          Update the price display.
+        */
         const draggable = document.querySelector('.dragging')
         if (draggable) {
           let childElements = container.querySelectorAll('*');
@@ -874,8 +882,14 @@ function addContainer(containerData, type) {
         updateTotalPrice();
       })
 
+
       // Touch controls for mobile
       container.addEventListener('touchstart', function(event) {
+        /*
+          Check if there is a selected module and add it to the module dock.
+          Hide the tooltip.
+          Update the price.
+        */
         if (activeDraggable) {
           let childElements = container.querySelectorAll('*');
           if (childElements.length === 0) {
@@ -918,6 +932,15 @@ function addContainer(containerData, type) {
 
 // Load a controller from a valid URL
 function loadController(inputData, color) {
+  /*
+    Load a controller from URL config.
+    Takes two parameters:
+      inputData:    The URL code for the controller configuration.
+      color:        The color of the container.
+    Add a container to the canvas based on numerical address.
+      z[size][address] - Size and Address are both two digits.
+    Update price.
+  */
   let importConfig = inputData;
   let startIndex = 0;
   let objectArray = [];
@@ -933,6 +956,7 @@ function loadController(inputData, color) {
     startIndex = nextZIndex;
   }
 
+
   // Parse the data from the container strings and determine the container type
   for (const object of objectArray) {
     const first5Chars = object.substring(0, 5);
@@ -945,6 +969,9 @@ function loadController(inputData, color) {
 
     // Add containers based on type and address
     const containerMap = {
+      /*
+        container code: {container type, container data}
+      */
       '12': { type: '.one-two', template: MarkIhoriz },
       '21': { type: '.two-one', template: MarkIvert },
       '31': { type: '.three-one', template: MarkII },
@@ -962,10 +989,15 @@ function loadController(inputData, color) {
       }
     }
 
+
     // Determine the container address
     const targetContainerId = containerAddress.slice(2);
     const boxes = document.querySelectorAll(containerType);
     boxes.forEach(box => {
+      /*
+        Add container to container grid address.
+        Add all modules to the container from left to right, top to bottom.
+      */
       let parentContainer = box.parentNode;
       if (parentContainer.id.includes('canvas')) {
         if (targetContainerId!=='00') {
@@ -992,9 +1024,14 @@ function loadController(inputData, color) {
       }
     })
 
+
     // Update the canvas elements as if someone dragged and dropped the containers and modules
     const containers = document.querySelectorAll('.container2');
     containers.forEach(container => {
+      /*
+        Check container grids for present containers.
+        Update container grid class to reflect child container for resizing.
+      */
       const containerChildren = Array.from(container.children);
       if (containerChildren) {
         containerChildren.forEach(child => {
