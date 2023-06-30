@@ -22,7 +22,6 @@ const MarkIhoriz = {
     price: 50,
     num_modules: 2,
     num_angled: 2,
-    num_level: 0,
     horizontal_ruler: "24cm",
     vertical_ruler: "12.5cm"
 }

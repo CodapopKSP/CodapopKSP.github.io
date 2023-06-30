@@ -3,16 +3,16 @@
 //|================|
 
 
-// Delete Container
-const deleteContainer = document.getElementById('delete-container')
+// Delete Bin
+const deleteBin = document.getElementById('delete-container')
 
 // URL Parameters
-const urlParams = new URLSearchParams(window.location.search);
-const queryString = urlParams.get('config');
-const colorString = urlParams.get('color');
+const urlParameters = new URLSearchParams(window.location.search);
+const controllerConfigString = urlParameters.get('config');
+const colorConfigString = urlParameters.get('color');
 
 // Mobile-specific Variables
-let activeDraggable = null;
+let activeModule_mobile = null;
 function isPhone() {
   return /mobile/i.test(navigator.userAgent);
 }
@@ -23,9 +23,14 @@ document.addEventListener('contextmenu', function(event) {
 });
 
 
+
+//|----------------------|
+//|     Load Modules     |
+//|----------------------|
+
 // Add modules to Left and Right module arrays
-const moduleContainer_left = document.querySelector('.left-module-array');
-const moduleContainer_right = document.querySelector('.right-module-array');
+const moduleArray_left = document.querySelector('.left-module-array');
+const moduleArray_right = document.querySelector('.right-module-array');
 let moduleCounter = 0;
 moduleData.forEach(module => {
   /*
@@ -100,9 +105,9 @@ moduleData.forEach(module => {
 
   // Append the module element to the container
   if (moduleCounter < 12) {
-    moduleContainer_left.appendChild(moduleDock);
+    moduleArray_left.appendChild(moduleDock);
   } else {
-    moduleContainer_right.appendChild(moduleDock);
+    moduleArray_right.appendChild(moduleDock);
   }
   moduleCounter += 1;
 });
@@ -115,7 +120,6 @@ moduleData.forEach(module => {
 
 // Color Picker Buttons
 const colorButtons = document.querySelectorAll('.color-button');
-const box = document.querySelector('.box');
 colorButtons.forEach((button) => {
   /*
     Add buttons on the side that allow the user to change the color of the current containers.
@@ -123,9 +127,9 @@ colorButtons.forEach((button) => {
   */
   button.addEventListener('click', () => {
     const color = button.style.backgroundColor;
-    const boxes = document.querySelectorAll('.box');
-    boxes.forEach(box => {
-      box.style.borderColor = color;
+    const containerBoxes = document.querySelectorAll('.box');
+    containerBoxes.forEach(containerBox => {
+      containerBox.style.borderColor = color;
     })
   });
 });
@@ -136,10 +140,9 @@ colorButtons.forEach((button) => {
 //|     Header Buttons     |
 //|------------------------|
 
-
 // Recommended Configurations Button
-const recommendedConfigsBtn = document.getElementById('recommendedConfigs');
-recommendedConfigsBtn.addEventListener('click', function() {
+const recommendedConfigsButton = document.getElementById('recommendedConfigs');
+recommendedConfigsButton.addEventListener('click', function() {
   /*
     Add a popup that displays a list of buttons that populate the canvas with pre-designed configurations
   */
@@ -179,17 +182,17 @@ function updateTotalPrice() {
   // Calculate price for containers
   const containerBoxes = document.querySelectorAll('.box');
   containerBoxes.forEach(containerBox => {
-    const price = parseFloat(containerBox.dataset.price);
-    totalPrice += price;
+    const priceOfContainer = parseFloat(containerBox.dataset.price);
+    totalPrice += priceOfContainer;
   });
 
   // Calculate price for modules
-  const type1Containers = document.querySelectorAll('.module-dock[data-type="type1"]');
-  type1Containers.forEach(container => {
-    const draggablesInContainer = container.querySelectorAll('.draggable');
-    draggablesInContainer.forEach(draggable => {
-      const price = parseFloat(draggable.dataset.price);
-      totalPrice += price;
+  const containerModuleDocks = document.querySelectorAll('.module-dock[data-type="type1"]');
+  containerModuleDocks.forEach(containerModuleDock => {
+    const dockedModules = containerModuleDock.querySelectorAll('.draggable');
+    dockedModules.forEach(dockedModule => {
+      const priceOfModule = parseFloat(dockedModule.dataset.price);
+      totalPrice += priceOfModule;
     });
   });
 
@@ -199,20 +202,20 @@ function updateTotalPrice() {
 
 
 // Save Button
-const save = document.getElementById('save')
-save.addEventListener('click', function() {
+const saveButton = document.getElementById('save')
+saveButton.addEventListener('click', function() {
   /*
     Create a popup to save the current config to a url and copy it to the clipboard
     Uses .box to get current containers and then locates all .draggables inside.
   */
-  const draggableIds = [];
+  const urlConfigCode = [];
 
   // Add container info to the URL
-  const boxes = document.querySelectorAll('.box');
-  boxes.forEach(box => {
-    const idMap = {
+  const containerBoxes = document.querySelectorAll('.box');
+  containerBoxes.forEach(containerBox => {
+    const containerSizeMap = {
       /*
-        class name: URL config code
+        class name: container size code
       */
       'one-two': 'z12',
       'two-one': 'z21',
@@ -222,42 +225,42 @@ save.addEventListener('click', function() {
       'two-four': 'z24'
     };
     
-    for (const className in idMap) {
-      if (box.id.includes(className)) {
-        draggableIds.push(idMap[className]);
+    for (const className in containerSizeMap) {
+      if (containerBox.id.includes(className)) {
+        urlConfigCode.push(containerSizeMap[className]);
         break;
       }
     }
     
     // Add container location data
-    let parentContainer = box.parentNode;
+    let containerLocation = containerBox.parentNode;
     /*
       Add container address to the URL.
         00 - Unplaced
         1X - Top row of container grids, left to right.
         2X - Bottom row of container grids, left to right.
     */
-    if (parentContainer.id.includes('canvas')) {
-      draggableIds.push('00');
+    if (containerLocation.id.includes('canvas')) {
+      urlConfigCode.push('00');
     } else {
-      draggableIds.push(parentContainer.id);
+      urlConfigCode.push(containerLocation.id);
     }
 
     // Add module info to the URL
-    const draggables = box.querySelectorAll('.draggable');
-    draggables.forEach(draggable => {
-      draggableIds.push(draggable.id);
+    const modules = containerBox.querySelectorAll('.draggable');
+    modules.forEach(module => {
+      urlConfigCode.push(module.id);
     });
   })
 
-  // Add the color information to the end of the draggableIds array
-  const color = boxes[0].style.borderColor;
+  // Add the color information to the end of the urlConfigCode array
+  const color = containerBoxes[0].style.borderColor;
   if (color) {
-    draggableIds.push(`&color=${color.replace(/\s/g, '')}`);
+    urlConfigCode.push(`&color=${color.replace(/\s/g, '')}`);
   } else {
-    draggableIds.push(`&color=rgb(0,0,0)`);
+    urlConfigCode.push(`&color=rgb(0,0,0)`);
   }
-  const url = "https://codapopksp.github.io/?config=" + draggableIds.join('');
+  const url = "https://codapopksp.github.io/?config=" + urlConfigCode.join('');
 
   // Copy the URL to the clipboard
   navigator.clipboard.writeText(url).then(() => {
@@ -299,7 +302,6 @@ lightSwitch.addEventListener('click', function() {
 //|------------------------|
 //|     Footer Buttons     |
 //|------------------------|
-
 
 // Contact Button
 const contactButton = document.getElementById('contact')
@@ -384,7 +386,6 @@ infoButton.addEventListener('click', function() {
 //|     Add Container Buttons     |
 //|-------------------------------|
 
-
 // Map of container data
 // Add Mark V container
 document.addEventListener('DOMContentLoaded', () => {
@@ -440,30 +441,29 @@ document.addEventListener('DOMContentLoaded', () => {
 //|     Delete Bin     |
 //|--------------------|
 
-
 // Delete Bin drag over
-deleteContainer.addEventListener('dragover', (event) => {
+deleteBin.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
 
 
 // Delete Bin touch start for mobile
-deleteContainer.addEventListener('touchstart', function(event) {
+deleteBin.addEventListener('touchstart', function(event) {
   /*
     Move currently selected module to any open module dock on the left or right.
     Kills active .tooltip and locates a .module-dock[data-type="type2"]
       that is empty of all .draggable objects to append the current module.
   */
-  if (activeDraggable) {
-    let tooltip = activeDraggable.querySelector(".tooltip");
+  if (activeModule_mobile) {
+    let tooltip = activeModule_mobile.querySelector(".tooltip");
     tooltip.style.display = 'none';
     event.preventDefault()
-    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
-    for (const container of containers) {
-      const emptySlots = container.querySelectorAll('.draggable').length < 1;
-        if (emptySlots) {
-          container.appendChild(activeDraggable);
-          activeDraggable = null;
+    const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
+    for (const moduleDock of moduleDocks) {
+      const emptySlot = moduleDock.querySelectorAll('.draggable').length < 1;
+        if (emptySlot) {
+          moduleDock.appendChild(activeModule_mobile);
+          activeModule_mobile = null;
           break;
         }
     }
@@ -473,29 +473,29 @@ deleteContainer.addEventListener('touchstart', function(event) {
 
 
 // Delete Bin drop
-deleteContainer.addEventListener('drop', (event) => {
+deleteBin.addEventListener('drop', (event) => {
   /*
     Move currently dragged module to any open module dock on the left or right
       or remove currently dragged container.
     Deletes objects with class box.
     Resets all .draggable to empty .module-dock[data-type="type2"]
   */
-  const id = event.dataTransfer.getData('text/plain');
-  const elementToDelete = document.getElementById(id);
-  activeDraggable = null;
+  const event_id = event.dataTransfer.getData('text/plain');
+  const elementToDelete = document.getElementById(event_id);
+  activeModule_mobile = null;
 
   // Dropped item is a container
   if (elementToDelete && (elementToDelete.classList.contains('box'))) {
     elementToDelete.remove();
-    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+    const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
 
     // Move modules in deleted container back to the sides
     const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
     for (const module of droppedModules) {
-      for (const container of containers) {
-        const emptySlots = container.querySelectorAll('.draggable').length < 1;
-        if (emptySlots) {
-          container.appendChild(module);
+      for (const moduleDock of moduleDocks) {
+        const emptySlot = moduleDock.querySelectorAll('.draggable').length < 1;
+        if (emptySlot) {
+          moduleDock.appendChild(module);
           break;
         }
       }
@@ -504,14 +504,14 @@ deleteContainer.addEventListener('drop', (event) => {
 
   // Dropped item is a module
   } else if (elementToDelete && elementToDelete.classList.contains('draggable')) {
-    const containers = document.querySelectorAll('.module-dock[data-type="type2"]');
+    const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
     let droppedIntoContainer = false;
 
     // Move module back to the sides
-    for (const container of containers) {
-      const emptySlots = container.querySelectorAll('.draggable').length < 1;
-      if (emptySlots) {
-        container.appendChild(elementToDelete);
+    for (const moduleDock of moduleDocks) {
+      const emptySlot = moduleDock.querySelectorAll('.draggable').length < 1;
+      if (emptySlot) {
+        moduleDock.appendChild(elementToDelete);
         elementToDelete.classList.remove("mouseover");
         let tooltip = elementToDelete.querySelector(".tooltip");
         tooltip.style.display = 'none';
@@ -522,20 +522,18 @@ deleteContainer.addEventListener('drop', (event) => {
   }
 
   // Reset grid sizing
-  const containers = document.querySelectorAll('.container2');
-  containers.forEach(container => {
-    const containerChildren = container.children;
-    if (containerChildren.length === 0) {
-      container.classList.remove('has-24child');
-      container.classList.remove('has-23child');
-      container.classList.remove('has-22child');
-      container.classList.remove('has-12child');
-      container.classList.remove('has-31child');
-      container.classList.remove('has-21child');
+  const containerGrids = document.querySelectorAll('.container2');
+  containerGrids.forEach(containerGrid => {
+    const containerGridChildren = containerGrid.children;
+    if (containerGridChildren.length === 0) {
+      containerGrid.classList.remove('has-24child');
+      containerGrid.classList.remove('has-23child');
+      containerGrid.classList.remove('has-22child');
+      containerGrid.classList.remove('has-12child');
+      containerGrid.classList.remove('has-31child');
+      containerGrid.classList.remove('has-21child');
     }
   });
-
-  // Update price
   updateTotalPrice()
 });
 
@@ -545,23 +543,22 @@ deleteContainer.addEventListener('drop', (event) => {
 //|     Modules     |
 //|-----------------|
 
-
-const draggables = document.querySelectorAll('.draggable')
-draggables.forEach(draggable => {
+const modules = document.querySelectorAll('.draggable')
+modules.forEach(module => {
 
 
   // Module Drag Start
-  draggable.addEventListener('dragstart', function(event) {
+  module.addEventListener('dragstart', function(event) {
     /*
       Update module class to dragging and hide tooltip.
       Reset the zIndex of parent container by backing through nodes.
       Highlight the Delete Bin.
     */
-    draggable.classList.add('dragging');
+    module.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
-    let tooltip = draggable.querySelector(".tooltip");
+    let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
-    let parentContainer = draggable.parentNode;
+    let parentContainer = module.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
 
     // Release container slot from forcing the tooltip to be on top
@@ -571,20 +568,20 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
-    deleteContainer.classList.add('highlight');
+    deleteBin.classList.add('highlight');
   });
   
 
   // Module Drag End
-  draggable.addEventListener('dragend', () => {
+  module.addEventListener('dragend', () => {
     /*
       Update module class to remove dragging.
       Reset the zIndex of parent container by backing through nodes.
       Remove highlight from the Delete Bin.
     */
-    draggable.classList.remove('dragging');
+      module.classList.remove('dragging');
     updateTotalPrice();
-    let parentContainer = draggable.parentNode;
+    let parentContainer = module.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
 
     // Release container slot from forcing the tooltip to be on top
@@ -594,22 +591,22 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = '';
     }
-    deleteContainer.classList.remove('highlight');
+    deleteBin.classList.remove('highlight');
   });
 
 
   // Show tooltip
-  draggable.addEventListener('mouseover', (event) => {
+  module.addEventListener('mouseover', (event) => {
     /*
       Show tooltip for objects with class mouseover.
       Get the vert/horiz position of the tooltip in the window and
         draw the tooltip depending on the nearest screen edge.
       Set the zIndex of parent container by backing through nodes
         so that the tooltip will always be on top.
-      Set active draggable for mobile.
+      Set active module for mobile.
     */
-    const tooltip = draggable.querySelector(".tooltip");
-    draggable.classList.add("mouseover");
+    const tooltip = module.querySelector(".tooltip");
+    module.classList.add("mouseover");
     tooltip.style.display = 'block';
 
     // Determine location based on coordinates of the module
@@ -632,7 +629,7 @@ draggables.forEach(draggable => {
     }
 
     // Update zIndex so the tooltip will stay on top of everything
-    let parentContainer = draggable.parentNode;
+    let parentContainer = module.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
     if (parentContainerType === "type1") {
       let parentContainer2 = parentContainer.parentNode;
@@ -640,21 +637,21 @@ draggables.forEach(draggable => {
       let parentContainer4 = parentContainer3.parentNode;
       parentContainer4.style.zIndex = 70;
     }
-    activeDraggable = draggable;
+    activeModule_mobile = module;
   });
   
 
   // Hide tooltip
-  draggable.addEventListener('mouseout', () => {
+  module.addEventListener('mouseout', () => {
     /*
-      Hide the tooltip using .tooltip from draggable.
+      Hide the tooltip using .tooltip from module.
       Reset the zIndex of parent container by backing through nodes.
       Remove class mouseover.
     */
-    let tooltip = draggable.querySelector(".tooltip");
+    let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
-    draggable.classList.remove("mouseover");
-    let parentContainer = draggable.parentNode;
+    module.classList.remove("mouseover");
+    let parentContainer = module.parentNode;
     let parentContainerType = parentContainer.getAttribute("data-type");
 
     // Release container slot from forcing the tooltip to be on top
@@ -673,7 +670,6 @@ draggables.forEach(draggable => {
 //|     Container Grids     |
 //|-------------------------|
 
-
 const containerGrids = document.querySelectorAll('.container-grid, .container-grid2');
 containerGrids.forEach(containerGrid => {
   containerGrid.addEventListener('dragover', (event) => {
@@ -690,11 +686,11 @@ containerGrids.forEach(containerGrid => {
       Check all containers for resizing and double check class removal.
     */
     event.preventDefault();
-    const draggable = document.querySelector('.dragging2');
-    const dropContainer = event.target.closest('.container2');
-    if (dropContainer && draggable) {
-      dropContainer.appendChild(draggable);
-      draggable.classList.add('dropped-box');
+    const containerBox = document.querySelector('.dragging2');
+    const containerGrid = event.target.closest('.container2');
+    if (containerGrid && containerBox) {
+      containerGrid.appendChild(containerBox);
+      containerBox.classList.add('dropped-box');
 
       const classMap = {
         /*
@@ -709,24 +705,24 @@ containerGrids.forEach(containerGrid => {
       };
       
       for (const className in classMap) {
-        if (draggable.classList.contains(className)) {
-          dropContainer.classList.add(classMap[className]);
+        if (containerBox.classList.contains(className)) {
+          containerGrid.classList.add(classMap[className]);
           break;
         }
       }
     }
 
     // Reset grid sizing
-    const containers = document.querySelectorAll('.container2');
-    containers.forEach(container => {
-      const containerChildren = container.children;
-      if (containerChildren.length === 0) {
-        container.classList.remove('has-24child');
-        container.classList.remove('has-23child');
-        container.classList.remove('has-22child');
-        container.classList.remove('has-12child');
-        container.classList.remove('has-31child');
-        container.classList.remove('has-21child');
+    const containerGrids = document.querySelectorAll('.container2');
+    containerGrids.forEach(containerGrid => {
+      const containerGridChildren = containerGrid.children;
+      if (containerGridChildren.length === 0) {
+        containerGrid.classList.remove('has-24child');
+        containerGrid.classList.remove('has-23child');
+        containerGrid.classList.remove('has-22child');
+        containerGrid.classList.remove('has-12child');
+        containerGrid.classList.remove('has-31child');
+        containerGrid.classList.remove('has-21child');
       }
     });
   });
@@ -746,19 +742,19 @@ function addContainer(containerData, type) {
   if (existingBoxes.length === requiredBoxes.length) {
 
     // Create container
-    const container = document.createElement('div');
-    container.classList.add('box');
+    const containerElement = document.createElement('div');
+    containerElement.classList.add('box');
 
     // Choose a random ID
     const counter = Math.floor(Math.random() * 10000).toString() + type;
-    container.setAttribute('id', counter);
+    containerElement.setAttribute('id', counter);
 
     // Add container Data
-    container.classList.add(containerData.class);
-    container.setAttribute('data-name', containerData.name);
-    container.setAttribute('data-price', containerData.price);
-    container.setAttribute('data-size', containerData.num_modules);
-    container.setAttribute('draggable', "true");
+    containerElement.classList.add(containerData.class);
+    containerElement.setAttribute('data-name', containerData.name);
+    containerElement.setAttribute('data-price', containerData.price);
+    containerElement.setAttribute('data-size', containerData.num_modules);
+    containerElement.setAttribute('draggable', "true");
 
     // Add rulers
     function addRuler(ruler_class, ruler_value) {
@@ -769,7 +765,7 @@ function addContainer(containerData, type) {
       rulerLabel.classList.add(ruler_class + "-label");
       rulerLabel.textContent = ruler_value;
       ruler.appendChild(rulerLabel);
-      container.appendChild(ruler);
+      containerElement.appendChild(ruler);
     };
     addRuler("horizontal-ruler", containerData.horizontal_ruler);
     addRuler("vertical-ruler", containerData.vertical_ruler);
@@ -793,7 +789,7 @@ function addContainer(containerData, type) {
         moduleDock.setAttribute('style', `background-image: url('containers/${img_type}.png'); background-size: cover;`);
         moduleDockRow.appendChild(moduleDock);
       }
-      container.appendChild(moduleDockRow);
+      containerElement.appendChild(moduleDockRow);
     };
 
     // Add module docks
@@ -807,7 +803,7 @@ function addContainer(containerData, type) {
 
     // Add container to canvas
     const pageWrapper = document.getElementById('canvas');
-    pageWrapper.appendChild(container);
+    pageWrapper.appendChild(containerElement);
     updateTotalPrice()
 
 
@@ -831,7 +827,7 @@ function addContainer(containerData, type) {
               containerGrids.forEach(containerGrid => {
                 containerGrid.classList.add('has-drag');
               })
-              deleteContainer.classList.add('highlight');
+              deleteBin.classList.add('highlight');
           }
       });
 
@@ -850,33 +846,33 @@ function addContainer(containerData, type) {
           containerGrids.forEach(containerGrid => {
             containerGrid.classList.remove('has-drag');
           })
-          deleteContainer.classList.remove('highlight');
+          deleteBin.classList.remove('highlight');
         }
       });
     });
 
 
     // Handle module docks on containers
-    const containers = document.querySelectorAll('.module-dock')
-    containers.forEach(container => {
+    const moduleDocks = document.querySelectorAll('.module-dock')
+    moduleDocks.forEach(moduleDock => {
 
       // Drag and drop controls
-      container.addEventListener('dragover', e => {
+      moduleDock.addEventListener('dragover', e => {
         e.preventDefault()
       })
 
 
-      container.addEventListener('drop', () => {
+      moduleDock.addEventListener('drop', () => {
         /*
           Check if holding a module and add it to the module dock.
           Update the price display.
         */
-        const draggable = document.querySelector('.dragging')
-        if (draggable) {
-          let childElements = container.querySelectorAll('*');
-          if (childElements.length === 0) {
-            container.appendChild(draggable);
-            draggable.classList.remove('dragging');
+        const draggingModule = document.querySelector('.dragging')
+        if (draggingModule) {
+          let childModules = moduleDock.querySelectorAll('*');
+          if (childModules.length === 0) {
+            moduleDock.appendChild(draggingModule);
+            draggingModule.classList.remove('dragging');
           }
         }
         updateTotalPrice();
@@ -884,19 +880,19 @@ function addContainer(containerData, type) {
 
 
       // Touch controls for mobile
-      container.addEventListener('touchstart', function(event) {
+      moduleDock.addEventListener('touchstart', function(event) {
         /*
           Check if there is a selected module and add it to the module dock.
           Hide the tooltip.
           Update the price.
         */
-        if (activeDraggable) {
+        if (activeModule_mobile) {
           let childElements = container.querySelectorAll('*');
           if (childElements.length === 0) {
-            container.appendChild(activeDraggable);
-            let tooltip = activeDraggable.querySelector(".tooltip");
+            moduleDock.appendChild(activeModule_mobile);
+            let tooltip = activeModule_mobile.querySelector(".tooltip");
             tooltip.style.display = 'none';
-            activeDraggable = null;
+            activeModule_mobile = null;
             event.preventDefault()
             updateTotalPrice()
           }
@@ -943,27 +939,27 @@ function loadController(inputData, color) {
   */
   let importConfig = inputData;
   let startIndex = 0;
-  let objectArray = [];
+  let configArray = [];
 
   // Extract all containers from the string
   while (true) {
     const nextZIndex = importConfig.indexOf('z', startIndex + 1);
     if (nextZIndex === -1) {
-      objectArray.push(importConfig.substring(startIndex));
+      configArray.push(importConfig.substring(startIndex));
       break;
     }
-    objectArray.push(importConfig.substring(startIndex, nextZIndex));
+    configArray.push(importConfig.substring(startIndex, nextZIndex));
     startIndex = nextZIndex;
   }
 
 
   // Parse the data from the container strings and determine the container type
-  for (const object of objectArray) {
-    const first5Chars = object.substring(0, 5);
+  for (const config of configArray) {
+    const first5Chars = config.substring(0, 5);
     const containerAddress = first5Chars.substring(1);
-    const modules = [];
-    for (let i = 5; i < object.length; i += 2) {
-      modules.push(object.substring(i, i + 2));
+    const moduleArray = [];
+    for (let i = 5; i < config.length; i += 2) {
+      modules.push(config.substring(i, i + 2));
     }
     let containerType = '';
 
@@ -992,49 +988,49 @@ function loadController(inputData, color) {
 
     // Determine the container address
     const targetContainerId = containerAddress.slice(2);
-    const boxes = document.querySelectorAll(containerType);
-    boxes.forEach(box => {
+    const containers = document.querySelectorAll(containerType);
+    containers.forEach(container => {
       /*
         Add container to container grid address.
         Add all modules to the container from left to right, top to bottom.
       */
-      let parentContainer = box.parentNode;
+      let parentContainer = container.parentNode;
       if (parentContainer.id.includes('canvas')) {
         if (targetContainerId!=='00') {
-          box.classList.add('dropped-box');
+          container.classList.add('dropped-box');
           const targetContainer = document.getElementById(targetContainerId);
-          targetContainer.insertAdjacentElement('beforeend', box);
+          targetContainer.insertAdjacentElement('beforeend', container);
         }
 
         // Get all modules and add them to the containers
-        const draggables = modules.map(pair => document.getElementById(pair));
-        const containers = box.querySelectorAll(`.module-dock[data-type="type1"]`);
-        for (let i = 0; i < modules.length; i++) {
-          const draggable = draggables[i];
-          const container = containers[i];
-          if (draggable) {
-            container.appendChild(draggable);
+        const modules = moduleArray.map(pair => document.getElementById(pair));
+        const moduleDocks = container.querySelectorAll(`.module-dock[data-type="type1"]`);
+        for (let i = 0; i < moduleArray.length; i++) {
+          const module = modules[i];
+          const moduleDock = moduleDocks[i];
+          if (module) {
+            moduleDock.appendChild(module);
           }
         }
       }
 
       // Set container color
       if (color) {
-        box.style.borderColor = color;
+        container.style.borderColor = color;
       }
     })
 
 
     // Update the canvas elements as if someone dragged and dropped the containers and modules
-    const containers = document.querySelectorAll('.container2');
-    containers.forEach(container => {
+    const containerGrids = document.querySelectorAll('.container2');
+    containerGrids.forEach(containerGrid => {
       /*
         Check container grids for present containers.
         Update container grid class to reflect child container for resizing.
       */
-      const containerChildren = Array.from(container.children);
-      if (containerChildren) {
-        containerChildren.forEach(child => {
+      const containerGridChildren = Array.from(containerGrid.children);
+      if (containerGridChildren) {
+        containerGridChildren.forEach(child => {
           
           const classMap = {
             'two-four': 'has-24child',
@@ -1047,7 +1043,7 @@ function loadController(inputData, color) {
           
           for (const className in classMap) {
             if (child.classList.contains(className)) {
-              container.classList.add(classMap[className]);
+              containerGrid.classList.add(classMap[className]);
             }
           }
         })
@@ -1057,11 +1053,12 @@ function loadController(inputData, color) {
   updateTotalPrice()
 }
 
+
 // Load URL parameters
 window.onload = function() {
-  if (queryString) {
-    if (queryString.startsWith('z')) {
-      loadController(queryString, colorString);
+  if (controllerConfigString) {
+    if (controllerConfigString.startsWith('z')) {
+      loadController(controllerConfigString, colorConfigString);
     }
   }
 }
