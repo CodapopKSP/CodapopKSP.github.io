@@ -488,7 +488,7 @@ deleteBin.addEventListener('drop', (event) => {
     const moduleDocks = document.querySelectorAll('.module-dock[data-type="type2"]');
 
     // Move modules in deleted container back to the sides
-    const droppedModules = elementToDelete.querySelectorAll('[draggable="true"]');
+    const droppedModules = elementToDelete.querySelectorAll('[module="true"]');
     for (const module of droppedModules) {
       for (const moduleDock of moduleDocks) {
         const emptySlot = moduleDock.querySelectorAll('.module').length < 1;
