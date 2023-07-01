@@ -71,13 +71,13 @@ body {
     .left-module-array {
         grid-template-columns: repeat(6, 1fr) !important;
         align-self: flex-end;
-        transform: translate(109.6%, -185%);
+        transform: translate(109.6%, -190%);
     }
     
     .right-module-array {
         grid-template-columns: repeat(6, 1fr) !important;
         align-self: flex-end;
-        transform: translate(-109.6%, -82.5%);
+        transform: translate(-109.6%, -87.5%);
     }
 }
 
