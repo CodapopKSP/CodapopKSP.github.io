@@ -963,7 +963,7 @@ function loadController(inputData, color) {
     const containerAddress = first5Chars.substring(1);
     const moduleArray = [];
     for (let i = 5; i < config.length; i += 2) {
-      modules.push(config.substring(i, i + 2));
+      moduleArray.push(config.substring(i, i + 2));
     }
     let containerType = '';
 
