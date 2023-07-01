@@ -891,7 +891,7 @@ function addContainer(containerData, type) {
           Update the price.
         */
         if (activeModule_mobile) {
-          let childElements = container.querySelectorAll('*');
+          let childElements = moduleDock.querySelectorAll('*');
           if (childElements.length === 0) {
             moduleDock.appendChild(activeModule_mobile);
             let tooltip = activeModule_mobile.querySelector(".tooltip");
@@ -1072,11 +1072,21 @@ function updateScaling() {
   var screenHeight = window.innerHeight;
   var aspectRatio = screenWidth / screenHeight;
   var scaleValue;
+  var horizontalOffset;
 
   if (aspectRatio > 2 / 1.1) {
     scaleValue = 1;
+    horizontalOffset = 0;
+    document.getElementById('left-array').style.position = 'relative';
+    document.getElementById('left-array').style.left = '';
+    document.getElementById('right-array').style.position = 'relative';
+    document.getElementById('right-array').style.right = '';
   } else {
     scaleValue = aspectRatio / (2 / 1.1);
+    document.getElementById('left-array').style.position = 'fixed';
+    document.getElementById('left-array').style.left = '0';
+    document.getElementById('right-array').style.position = 'fixed';
+    document.getElementById('right-array').style.right = '0';
   }
 
   
@@ -1089,6 +1099,7 @@ function updateScaling() {
   document.getElementById('canvas').style.transform = 'scale(' + scaleValue + ')';
   document.getElementById('left-array').style.transform = 'scale(' + scaleValue + ')';
   document.getElementById('right-array').style.transform = 'scale(' + scaleValue + ')';
+  
 }
 
 window.addEventListener('resize', updateScaling);

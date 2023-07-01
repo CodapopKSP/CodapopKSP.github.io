@@ -30,14 +30,15 @@ body {
     height: 100%;
     width: 100%;
     max-width: 180vh;
-    max-height: 100vw;
+    /*max-height: 100vw;*/
     transform: translateY(-4%) !important;
     overflow-x: hidden;
     overflow-y: hidden;
+    flex-shrink: 0;
 }
 
 #canvas {
-    position: absolute;
+    position: relative;
     border: 1vh solid black;
     width: 110vh;
     margin: 0 auto;
@@ -49,12 +50,13 @@ body {
     border-radius: 2vh;
     background: #d4d4d4;
     z-index: 0;
+    flex-shrink: 0;
 }
 
 .left-module-array {
-    position: absolute;
-    top: 2%;
-    left: 1%;
+    position: relative;
+    top: -2%;
+    /*left: 1%;*/
     /*transform: translateX(-290%);*/
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -64,9 +66,9 @@ body {
 }
 
 .right-module-array {
-    position: absolute;
-    top: 2%;
-    right: 1%;
+    position: relative;
+    top: -2%;
+    /*right: 1%;*/
     /*transform: translateX(290%);*/
     display: grid;
     grid-template-columns: repeat(2, 1fr);
