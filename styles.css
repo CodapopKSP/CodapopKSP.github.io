@@ -65,19 +65,19 @@ body {
     }
 
     #canvas {
-        transform: translateY(-45%) !important;
+        transform: translateY(-50%) !important;
     }
 
     .left-module-array {
         grid-template-columns: repeat(6, 1fr) !important;
         align-self: flex-end;
-        transform: translate(109.6%, -175%);
+        transform: translate(109.6%, -185%);
     }
     
     .right-module-array {
         grid-template-columns: repeat(6, 1fr) !important;
         align-self: flex-end;
-        transform: translate(-109.6%, -72.5%);
+        transform: translate(-109.6%, -82.5%);
     }
 }
 
