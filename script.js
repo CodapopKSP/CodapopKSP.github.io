@@ -1102,5 +1102,5 @@ function updateScaling() {
   
 }
 
-window.addEventListener('resize', updateScaling);
-window.addEventListener('load', updateScaling);
+//window.addEventListener('resize', updateScaling);
+//window.addEventListener('load', updateScaling);
