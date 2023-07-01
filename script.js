@@ -783,7 +783,7 @@ function addContainer(containerData, type) {
       */
       const moduleDockRow = document.createElement('div');
       for (let i = 0; i < num_modules; i++) {
-        moduleDockRow.classList.add('container-slot-row');
+        moduleDockRow.classList.add('module-dock-row');
 
         const moduleDock = document.createElement('div');
         moduleDock.classList.add('module-dock');
@@ -1066,3 +1066,30 @@ window.onload = function() {
     }
   }
 }
+
+function updateScaling() {
+  var screenWidth = window.innerWidth;
+  var screenHeight = window.innerHeight;
+  var aspectRatio = screenWidth / screenHeight;
+  var scaleValue;
+
+  if (aspectRatio > 2 / 1.1) {
+    scaleValue = 1;
+  } else {
+    scaleValue = aspectRatio / (2 / 1.1);
+  }
+
+  
+  const elements = document.querySelectorAll('module');
+  elements.forEach(element => {
+    element.style.transform = 'scale(' + scaleValue + ')';
+  });
+
+  document.getElementById('page-wrapper').style.transform = 'scale(' + scaleValue + ')';
+  document.getElementById('canvas').style.transform = 'scale(' + scaleValue + ')';
+  document.getElementById('left-array').style.transform = 'scale(' + scaleValue + ')';
+  document.getElementById('right-array').style.transform = 'scale(' + scaleValue + ')';
+}
+
+window.addEventListener('resize', updateScaling);
+window.addEventListener('load', updateScaling);

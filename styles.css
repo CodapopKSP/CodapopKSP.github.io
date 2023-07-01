@@ -6,39 +6,38 @@
 
 body {
     margin: 0;
+    overflow-y: hidden;
 }
 
 .hidden {
     display: none;
 }
 
-#page-wrapper {
+#wrapper-wrapper {
     position: relative;
-    width: 100vw;
-    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+}
+
+#page-wrapper {
+    position: absolute;
+    /*margin: 0 auto;*/
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 92vh;
-    overflow: visible;
+    height: 100%;
+    width: 100%;
+    max-width: 180vh;
+    max-height: 100vw;
+    transform: translateY(-4%) !important;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-/*
-@media (aspect-ratio: 2/1) {
-    .left-module-array,
-    .right-module-array {
-        position: static;
-        top: auto;
-        left: auto;
-        right: auto;
-        transform: none;
-        margin: 0 auto;
-        display: block;
-    }
-}*/
-
 #canvas {
-    position: relative;
+    position: absolute;
     border: 1vh solid black;
     width: 110vh;
     margin: 0 auto;
@@ -49,28 +48,31 @@ body {
     overflow: hidden;
     border-radius: 2vh;
     background: #d4d4d4;
+    z-index: 0;
 }
 
 .left-module-array {
     position: absolute;
-    top: -2.5%;
-    right: 50%;
-    transform: translateX(-190%);
+    top: 2%;
+    left: 1%;
+    /*transform: translateX(-290%);*/
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.75vh;
     justify-items: end;
+    z-index: 100;
 }
 
 .right-module-array {
     position: absolute;
-    top: -2.5%;
-    left: 50%;
-    transform: translateX(190%);
+    top: 2%;
+    right: 1%;
+    /*transform: translateX(290%);*/
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.75vh;
     justify-items: end;
+    z-index: 100;
 }
 
 .module-dock {
@@ -166,15 +168,10 @@ body {
 |======================|
 */
 
-.container-slot-row {
+.module-dock-row {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-}
-
-.container img {
-    width: 100%;
-    height: 100%;
 }
 
 .container-box {
