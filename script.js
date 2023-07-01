@@ -683,7 +683,7 @@ containerGrids.forEach(containerGrid => {
       Check all containers for resizing and double check class removal.
     */
     event.preventDefault();
-    const containerBox = document.querySelector('.container-box');
+    const containerBox = document.querySelector('.dragging2');
     const containerGrid = event.target.closest('.container-grid');
     if (containerGrid && containerBox) {
       containerGrid.appendChild(containerBox);
