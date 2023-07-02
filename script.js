@@ -676,7 +676,7 @@ modules.forEach(module => {
 //|     Container Grids     |
 //|-------------------------|
 
-const containerGrids = document.querySelectorAll('.container-grid-array, .container-grid-array2');
+const containerGrids = document.querySelectorAll('.container-grid-array');
 containerGrids.forEach(containerGrid => {
   containerGrid.addEventListener('dragover', (event) => {
     event.preventDefault();
@@ -718,7 +718,7 @@ containerGrids.forEach(containerGrid => {
       }
     }
 
-    
+
     // Reset grid sizing
     const containerGrids = document.querySelectorAll('.container-grid');
     containerGrids.forEach(containerGrid => {
@@ -775,6 +775,7 @@ function addContainer(containerData, type) {
       ruler.classList.add(ruler_class);
       const rulerLabel = document.createElement('div');
       rulerLabel.classList.add(ruler_class + "-label");
+      rulerLabel.classList.add("ruler-label");
       rulerLabel.textContent = ruler_value;
       ruler.appendChild(rulerLabel);
       containerElement.appendChild(ruler);
@@ -829,7 +830,7 @@ function addContainer(containerData, type) {
           Ensure the ID of the dragstart element matches the same counter from creating the container.
           Store ID for some reason that seems important.
           Add class dragging2 to the element.
-          Add class has-drag to containerGrids for visibility.
+          Add class dragging-container to containerGrids for visibility.
           Highlight the Delete Container.
         */
         if (event.target.id === counter) {
@@ -839,7 +840,7 @@ function addContainer(containerData, type) {
             event.dataTransfer.setData('text/plain', id);
             const containerGrids = document.querySelectorAll('.container-grid')
             containerGrids.forEach(containerGrid => {
-              containerGrid.classList.add('has-drag');
+              containerGrid.classList.add('dragging-container');
             })
             deleteBin.classList.add('highlight');
         }
@@ -851,14 +852,14 @@ function addContainer(containerData, type) {
         /*
           Ensure the ID of the dragstart element matches the same counter from creating the container.
           Remove class dragging2 from the element.
-          Add class has-drag to containerGrids for visibility.
+          Add class dragging-container to containerGrids for visibility.
           Highlight the Delete Container.
         */
         if (event.target.id === counter) {
           event.target.classList.remove('dragging2');
           const containerGrids = document.querySelectorAll('.container-grid')
           containerGrids.forEach(containerGrid => {
-            containerGrid.classList.remove('has-drag');
+            containerGrid.classList.remove('dragging-container');
           })
           deleteBin.classList.remove('highlight');
         }
