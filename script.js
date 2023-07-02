@@ -10,19 +10,18 @@ const urlParameters = new URLSearchParams(window.location.search);
 const controllerConfigString = urlParameters.get('config');
 const colorConfigString = urlParameters.get('color');
 
+// Prevent users from right clicking
+document.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+});
+
 // Mobile-specific Variables
 let activeModule_mobile = null;
 function isPhone() {
   return /mobile/i.test(navigator.userAgent);
 }
 
-// Prevent users from right clicking
-document.addEventListener('contextmenu', function(event) {
-  event.preventDefault();
-});
-
-
-
+// Check Left Array for mouseover for zIndex changes on mobile
 const leftArray = document.getElementById('left-array');
 leftArray.addEventListener('mouseover', function() {
   leftArray.classList.add('mouseover');
@@ -30,11 +29,7 @@ leftArray.addEventListener('mouseover', function() {
 leftArray.addEventListener('mouseout', function() {
   leftArray.classList.remove('mouseover');
 });
-/*
-const canvasClearActiveModule = document.getElementById('canvas');
-canvasClearActiveModule.addEventListener('mouseover', function() {
-  activeModule_mobile = null;
-});*/
+
 
 
 //|----------------------|
