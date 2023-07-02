@@ -244,7 +244,7 @@ body {
 }
 
 .container-box {
-    cursor: move;
+    cursor: grab;
     position: absolute;
     z-index: 50;
     border: 1.125vh solid black;
