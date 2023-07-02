@@ -750,10 +750,17 @@ body {
 
 .ruler {
     position: absolute;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     z-index: 1;
-    color:white;
-    text-shadow: 2px 2px black;
+    color:rgb(0, 0, 0);
+    box-shadow: 1px 1px 0px #d4d4d4, 
+                 -1px -1px 0px #d4d4d4, 
+                 1px -1px 0px #d4d4d4, 
+                 -1px 1px 0px #d4d4d4;
+    text-shadow: 1px 1px 0px #d4d4d4, 
+                 -1px -1px 0px #d4d4d4, 
+                 1px -1px 0px #d4d4d4, 
+                 -1px 1px 0px #d4d4d4;
 }
 
 .horizontal-ruler {
