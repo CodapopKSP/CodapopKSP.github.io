@@ -615,7 +615,7 @@ body {
     background-color: #3bc14f !important;
 }
 
-@media only screen and (max-width: 812px) {
+@media only screen and (max-width: 700px) {
     .tooltip {
         display: none;
     }
