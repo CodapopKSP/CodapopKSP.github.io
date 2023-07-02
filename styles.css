@@ -615,30 +615,6 @@ body {
     background-color: #3bc14f !important;
 }
 
-@media only screen and (max-width: 700px) {
-    .tooltip {
-        display: none;
-    }
-    .swal2-title {
-        color: #ffffff !important;
-        font-family: 'Orbitron', sans-serif !important;
-        width: 40vh !important;
-        font-size: 1.5vh !important;
-    }
-    .btn {
-        width: 20vh !important;
-        font-size: 1vh !important;
-    }
-    .swal2-popup {
-        width: 50vh !important;
-    }
-    
-    .swal2-content {
-        display: block !important;
-        left: 0vh !important;
-    }
-}
-
 
 /*
 |==========|
