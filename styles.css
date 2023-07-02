@@ -52,6 +52,9 @@ body {
         left: 50%;
         margin-left: calc(-50vw / 0.6);
     }
+    .tooltip {
+        transform: scale(1.2);
+    }
 }
 
 @media (max-aspect-ratio: 2/1.85) {
@@ -66,18 +69,34 @@ body {
 
     #canvas {
         transform: translateY(-50%) !important;
+        max-width: calc(99vw / 0.5) !important;
     }
 
     .left-module-array {
         grid-template-columns: repeat(6, 1fr) !important;
         align-self: flex-end;
-        transform: translate(109.6%, -195%);
+        transform: translate(calc(55% / 0.5), -200%);
+        z-index: 50 !important;
     }
     
     .right-module-array {
         grid-template-columns: repeat(6, 1fr) !important;
         align-self: flex-end;
-        transform: translate(-109.6%, -92.5%);
+        transform: translate(calc(-55% / 0.5), -97.5%);
+        z-index: 50 !important;
+    }
+
+    .tooltip {
+        transform: scale(1.5);
+        z-index: 1000 !important;
+    }
+
+    .tooltip.bottom {
+        top: -30vh !important;
+    }
+
+    .left-module-array.mouseover {
+        z-index: 999 !important;
     }
 }
 

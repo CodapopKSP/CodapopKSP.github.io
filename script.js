@@ -23,6 +23,20 @@ document.addEventListener('contextmenu', function(event) {
 
 
 
+const leftArray = document.getElementById('left-array');
+leftArray.addEventListener('mouseover', function() {
+  leftArray.classList.add('mouseover');
+});
+leftArray.addEventListener('mouseout', function() {
+  leftArray.classList.remove('mouseover');
+});
+/*
+const canvasClearActiveModule = document.getElementById('canvas');
+canvasClearActiveModule.addEventListener('mouseover', function() {
+  activeModule_mobile = null;
+});*/
+
+
 //|----------------------|
 //|     Load Modules     |
 //|----------------------|
@@ -609,7 +623,7 @@ modules.forEach(module => {
     // Determine location based on coordinates of the module
     const rect = event.target.getBoundingClientRect();
     const position = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
-    if (position < window.innerWidth / 2) {
+    if (position < window.innerWidth / 3) {
       tooltip.classList.remove('right');
       tooltip.classList.add('left');
     } else {
@@ -617,7 +631,7 @@ modules.forEach(module => {
       tooltip.classList.add('right');
     }
     const positionv = rect.top + (rect.height / 2) - (tooltip.offsetHeight / 2);
-    if (positionv < window.innerHeight / 5) {
+    if (positionv < window.innerHeight / 3.4) {
       tooltip.classList.remove('bottom');
       tooltip.classList.add('top');
     } else {
@@ -804,8 +818,8 @@ function addContainer(containerData, type) {
     }
 
     // Add container to canvas
-    const pageWrapper = document.getElementById('canvas');
-    pageWrapper.appendChild(containerElement);
+    const canvas = document.getElementById('canvas');
+    canvas.appendChild(containerElement);
     updateTotalPrice()
 
     
@@ -1066,41 +1080,3 @@ window.onload = function() {
     }
   }
 }
-
-function updateScaling() {
-  var screenWidth = window.innerWidth;
-  var screenHeight = window.innerHeight;
-  var aspectRatio = screenWidth / screenHeight;
-  var scaleValue;
-  var horizontalOffset;
-
-  if (aspectRatio > 2 / 1.1) {
-    scaleValue = 1;
-    horizontalOffset = 0;
-    document.getElementById('left-array').style.position = 'relative';
-    document.getElementById('left-array').style.left = '';
-    document.getElementById('right-array').style.position = 'relative';
-    document.getElementById('right-array').style.right = '';
-  } else {
-    scaleValue = aspectRatio / (2 / 1.1);
-    document.getElementById('left-array').style.position = 'fixed';
-    document.getElementById('left-array').style.left = '0';
-    document.getElementById('right-array').style.position = 'fixed';
-    document.getElementById('right-array').style.right = '0';
-  }
-
-  
-  const elements = document.querySelectorAll('module');
-  elements.forEach(element => {
-    element.style.transform = 'scale(' + scaleValue + ')';
-  });
-
-  document.getElementById('page-wrapper').style.transform = 'scale(' + scaleValue + ')';
-  document.getElementById('canvas').style.transform = 'scale(' + scaleValue + ')';
-  document.getElementById('left-array').style.transform = 'scale(' + scaleValue + ')';
-  document.getElementById('right-array').style.transform = 'scale(' + scaleValue + ')';
-  
-}
-
-//window.addEventListener('resize', updateScaling);
-//window.addEventListener('load', updateScaling);
