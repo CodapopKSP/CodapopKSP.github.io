@@ -718,6 +718,7 @@ containerGrids.forEach(containerGrid => {
       }
     }
 
+    
     // Reset grid sizing
     const containerGrids = document.querySelectorAll('.container-grid');
     containerGrids.forEach(containerGrid => {
@@ -933,6 +934,7 @@ function addContainer(containerData, type) {
     });
   }
 }
+
 
 
 //|------------------------|
