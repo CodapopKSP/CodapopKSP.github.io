@@ -190,6 +190,8 @@ body {
 }
 
 @media (max-aspect-ratio: 2/1.85) {
+
+    
     #wrapper-wrapper {
         transform: scale(0.49);
         width: calc(100vw / 0.49) !important;
@@ -229,6 +231,10 @@ body {
 
     .left-module-array.mouseover {
         z-index: 999 !important;
+    }
+
+    .swal2-popup {
+        transform: scale(0.8);
     }
 }
 

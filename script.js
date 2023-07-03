@@ -388,57 +388,30 @@ infoButton.addEventListener('click', function() {
 });
 
 
-
-//|-------------------------------|
-//|     Add Container Buttons     |
-//|-------------------------------|
-
-// Map of container data
-// Add Mark V container
+// Add Container buttons
 document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x4');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkV, '.two-four');
-  });
-});
+  /*
+    Create multiple buttons using a map of container types and classes
+      for adding new containers to the canvas.
+    Pulls from containerData.js.
+  */
+  const containerTypes = [
+    /*
+      addButtonId, containerData, containerClass
+    */
+    { addButtonId: 'add-2x4', containerType: MarkV, containerClass: '.two-four' },
+    { addButtonId: 'add-2x3', containerType: MarkIV, containerClass: '.two-three' },
+    { addButtonId: 'add-2x2', containerType: MarkIII, containerClass: '.two-two' },
+    { addButtonId: 'add-1x2', containerType: MarkIhoriz, containerClass: '.one-two' },
+    { addButtonId: 'add-3x1', containerType: MarkII, containerClass: '.three-one' },
+    { addButtonId: 'add-2x1', containerType: MarkIvert, containerClass: '.two-one' }
+  ];
 
-// Add Mark IV container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x3');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIV, '.two-three');
-  });
-});
-
-// Add Mark III container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x2');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIII, '.two-two');
-  });
-});
-
-// Add Mark II container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-1x2');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIhoriz, '.one-two');
-  });
-});
-
-// Add Mark I container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-3x1');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkII, '.three-one');
-  });
-});
-
-// Add Mark I Vertical container
-document.addEventListener('DOMContentLoaded', () => {
-  const addButton = document.getElementById('add-2x1');
-  addButton.addEventListener('click', () => {
-    addContainer(MarkIvert, '.two-one');
+  containerTypes.forEach(container => {
+    const addButton = document.getElementById(container.addButtonId);
+    addButton.addEventListener('click', () => {
+      addContainer(container.containerType, container.containerClass);
+    });
   });
 });
 
