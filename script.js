@@ -550,6 +550,37 @@ deleteBin.addEventListener('drop', (event) => {
 //|     Modules     |
 //|-----------------|
 
+function setContainerStackZIndex(module, setOrReset) {
+  /*
+    Set or reset the zIndex of the container and its relatives so that
+      tooltips are on top and modules can be dragged and dropped properly.
+    Takes 2 parameters:
+      module:       the module being dragged or moused over
+      setOrReset:   String, to determine whether to raise or lower the zIndex
+  */
+  let moduleDock = module.parentNode;
+  let moduleDockType = moduleDock.getAttribute("data-type");
+
+  // Release container slot from forcing the tooltip to be on top
+  if (moduleDockType === "type1") {
+    let moduleDockArray = moduleDock.parentNode;
+    let moduleDockArrayWrapper = moduleDockArray.parentNode;
+    let containerBox = moduleDockArrayWrapper.parentNode;
+    let containerGridOrCanvas = containerBox.parentNode;
+    containerBox.style.zIndex = '';
+    if (setOrReset == 'set') {
+      containerBox.style.zIndex = 70;
+      containerGridOrCanvas.style.zIndex = 70;
+    } else {
+      if (containerGridOrCanvas.querySelector('.container-grid-array-top')) {
+        containerGridOrCanvas.style.zIndex = '10';
+      } else {
+        containerGridOrCanvas.style.zIndex = '';
+      }
+    }
+  }
+};
+
 const modules = document.querySelectorAll('.module')
 modules.forEach(module => {
 
@@ -557,23 +588,14 @@ modules.forEach(module => {
   module.addEventListener('dragstart', function(event) {
     /*
       Update module class to dragging and hide tooltip.
-      Reset the zIndex of parent container by backing through nodes.
+      Reset the zIndex of the container stack.
       Highlight the Delete Bin.
     */
     module.classList.add('dragging');
     event.dataTransfer.setData('text/plain', this.id);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
-    let moduleDock = module.parentNode;
-    let moduleDockType = moduleDock.getAttribute("data-type");
-
-    // Release container slot from forcing the tooltip to be on top
-    if (moduleDockType === "type1") {
-      let moduleDockArray = moduleDock.parentNode;
-      let moduleDockArrayWrapper = moduleDockArray.parentNode;
-      let containerBox = moduleDockArrayWrapper.parentNode;
-      containerBox.style.zIndex = '';
-    }
+    setContainerStackZIndex(module, 'reset');
     deleteBin.classList.add('highlight');
   });
   
@@ -582,21 +604,12 @@ modules.forEach(module => {
   module.addEventListener('dragend', () => {
     /*
       Update module class to remove dragging.
-      Reset the zIndex of parent container by backing through nodes.
+      Reset the zIndex of the container stack.
       Remove highlight from the Delete Bin.
     */
     module.classList.remove('dragging');
     updateTotalPrice();
-    let moduleDock = module.parentNode;
-    let moduleDockType = moduleDock.getAttribute("data-type");
-
-    // Release container slot from forcing the tooltip to be on top
-    if (moduleDockType === "type1") {
-      let moduleDockArray = moduleDock.parentNode;
-      let moduleDockArrayWrapper = moduleDockArray.parentNode;
-      let containerBox = moduleDockArrayWrapper.parentNode;
-      containerBox.style.zIndex = '';
-    }
+    setContainerStackZIndex(module, 'reset');
     deleteBin.classList.remove('highlight');
   });
 
@@ -607,8 +620,7 @@ modules.forEach(module => {
       Show tooltip for objects with class mouseover.
       Get the vert/horiz position of the tooltip in the window and
         draw the tooltip depending on the nearest screen edge.
-      Set the zIndex of parent container by backing through nodes
-        so that the tooltip will always be on top.
+      Set the zIndex of the container stack.
       Set active module for mobile.
     */
     const tooltip = module.querySelector(".tooltip");
@@ -634,17 +646,7 @@ modules.forEach(module => {
       tooltip.classList.add('bottom');
     }
 
-    // Update zIndex so the tooltip will stay on top of everything
-    let moduleDock = module.parentNode;
-    let moduleDockType = moduleDock.getAttribute("data-type");
-    if (moduleDockType === "type1") {
-      let moduleDockArray = moduleDock.parentNode;
-      let moduleDockArrayWrapper = moduleDockArray.parentNode;
-      let containerBox = moduleDockArrayWrapper.parentNode;
-      let containerGridOrCanvas = containerBox.parentNode;
-      containerBox.style.zIndex = 70;
-      containerGridOrCanvas.style.zIndex = 70;
-    }
+    setContainerStackZIndex(module, 'set');
     activeModule_mobile = module;
   });
   
@@ -653,28 +655,13 @@ modules.forEach(module => {
   module.addEventListener('mouseout', () => {
     /*
       Hide the tooltip using .tooltip from module.
-      Reset the zIndex of parent container by backing through nodes.
+      Reset the zIndex of the container stack.
       Remove class mouseover.
     */
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
     module.classList.remove("mouseover");
-    let moduleDock = module.parentNode;
-    let moduleDockType = moduleDock.getAttribute("data-type");
-
-    // Release container slot from forcing the tooltip to be on top
-    if (moduleDockType === "type1") {
-      let moduleDockArray = moduleDock.parentNode;
-      let moduleDockArrayWrapper = moduleDockArray.parentNode;
-      let containerBox = moduleDockArrayWrapper.parentNode;
-      let containerGridOrCanvas = containerBox.parentNode;
-      containerBox.style.zIndex = '';
-      if (containerGridOrCanvas.querySelector('.container-grid-array-top')) {
-        containerGridOrCanvas.style.zIndex = '10';
-      } else {
-        containerGridOrCanvas.style.zIndex = '';
-      }
-    }
+    setContainerStackZIndex(module, 'reset');
   });
 });
 
