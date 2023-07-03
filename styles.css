@@ -233,12 +233,12 @@ body {
         z-index: 999 !important;
     }
 
-    .swal2-title {
+    .swal2-popup {
         transform: scale(0.8);
     }
     
-    #swal2-content {
-        transform: scale(0.8);
+    #swal2-title {
+        transform: scale(0.5);
     }
 }
 
