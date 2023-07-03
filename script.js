@@ -641,7 +641,9 @@ modules.forEach(module => {
       let parentContainer2 = parentContainer.parentNode;
       let parentContainer3 = parentContainer2.parentNode;
       let parentContainer4 = parentContainer3.parentNode;
+      let parentContainer5 = parentContainer4.parentNode;
       parentContainer4.style.zIndex = 70;
+      parentContainer5.style.zIndex = 70;
     }
     activeModule_mobile = module;
   });
@@ -665,7 +667,13 @@ modules.forEach(module => {
       let parentContainer2 = parentContainer.parentNode;
       let parentContainer3 = parentContainer2.parentNode;
       let parentContainer4 = parentContainer3.parentNode;
+      let parentContainer5 = parentContainer4.parentNode;
       parentContainer4.style.zIndex = '';
+      if (parentContainer5.querySelector('.container-grid-array-top')) {
+        parentContainer5.style.zIndex = '10';
+      } else {
+        parentContainer5.style.zIndex = '';
+      }
     }
   });
 });
