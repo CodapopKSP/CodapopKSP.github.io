@@ -564,15 +564,15 @@ modules.forEach(module => {
     event.dataTransfer.setData('text/plain', this.id);
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
-    let parentContainer = module.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
+    let moduleDock = module.parentNode;
+    let moduleDockType = moduleDock.getAttribute("data-type");
 
     // Release container slot from forcing the tooltip to be on top
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = '';
+    if (moduleDockType === "type1") {
+      let moduleDockArray = moduleDock.parentNode;
+      let moduleDockArrayWrapper = moduleDockArray.parentNode;
+      let containerBox = moduleDockArrayWrapper.parentNode;
+      containerBox.style.zIndex = '';
     }
     deleteBin.classList.add('highlight');
   });
@@ -587,15 +587,15 @@ modules.forEach(module => {
     */
     module.classList.remove('dragging');
     updateTotalPrice();
-    let parentContainer = module.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
+    let moduleDock = module.parentNode;
+    let moduleDockType = moduleDock.getAttribute("data-type");
 
     // Release container slot from forcing the tooltip to be on top
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      parentContainer4.style.zIndex = '';
+    if (moduleDockType === "type1") {
+      let moduleDockArray = moduleDock.parentNode;
+      let moduleDockArrayWrapper = moduleDockArray.parentNode;
+      let containerBox = moduleDockArrayWrapper.parentNode;
+      containerBox.style.zIndex = '';
     }
     deleteBin.classList.remove('highlight');
   });
@@ -635,15 +635,15 @@ modules.forEach(module => {
     }
 
     // Update zIndex so the tooltip will stay on top of everything
-    let parentContainer = module.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      let parentContainer5 = parentContainer4.parentNode;
-      parentContainer4.style.zIndex = 70;
-      parentContainer5.style.zIndex = 70;
+    let moduleDock = module.parentNode;
+    let moduleDockType = moduleDock.getAttribute("data-type");
+    if (moduleDockType === "type1") {
+      let moduleDockArray = moduleDock.parentNode;
+      let moduleDockArrayWrapper = moduleDockArray.parentNode;
+      let containerBox = moduleDockArrayWrapper.parentNode;
+      let containerGridOrCanvas = containerBox.parentNode;
+      containerBox.style.zIndex = 70;
+      containerGridOrCanvas.style.zIndex = 70;
     }
     activeModule_mobile = module;
   });
@@ -659,20 +659,20 @@ modules.forEach(module => {
     let tooltip = module.querySelector(".tooltip");
     tooltip.style.display = 'none';
     module.classList.remove("mouseover");
-    let parentContainer = module.parentNode;
-    let parentContainerType = parentContainer.getAttribute("data-type");
+    let moduleDock = module.parentNode;
+    let moduleDockType = moduleDock.getAttribute("data-type");
 
     // Release container slot from forcing the tooltip to be on top
-    if (parentContainerType === "type1") {
-      let parentContainer2 = parentContainer.parentNode;
-      let parentContainer3 = parentContainer2.parentNode;
-      let parentContainer4 = parentContainer3.parentNode;
-      let parentContainer5 = parentContainer4.parentNode;
-      parentContainer4.style.zIndex = '';
-      if (parentContainer5.querySelector('.container-grid-array-top')) {
-        parentContainer5.style.zIndex = '10';
+    if (moduleDockType === "type1") {
+      let moduleDockArray = moduleDock.parentNode;
+      let moduleDockArrayWrapper = moduleDockArray.parentNode;
+      let containerBox = moduleDockArrayWrapper.parentNode;
+      let containerGridOrCanvas = containerBox.parentNode;
+      containerBox.style.zIndex = '';
+      if (containerGridOrCanvas.querySelector('.container-grid-array-top')) {
+        containerGridOrCanvas.style.zIndex = '10';
       } else {
-        parentContainer5.style.zIndex = '';
+        containerGridOrCanvas.style.zIndex = '';
       }
     }
   });
