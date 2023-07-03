@@ -44,15 +44,15 @@ moduleData.forEach(module => {
   /*
     Populate the left and right module docks with modules using data from moduleData.js
     moduleData is an array that contains all of the data for each module.
-      name:               The name of the container.
-      class:              The class for CSS reasons.
-      price:              The price in USD.
-      num_modules:        Total number of module docks.
-      num_angled:         Number of angled module docks.
-      num_level:          [Optional] Number of level module docks.
-      num_level_2:        [Optional] Number of level module docks in the third row.
-      horizontal_ruler:   The dimensions to be displayed on the horizontal ruler.
-      vertical_ruler:     The dimensions to be displayed on the vertical ruler.
+      name:           The name of the module.
+      id:             The letter code for the module for things such as generating the URL code on save.
+      price:          The price for the module in USD.
+      image:          The graphical image of the module.
+      image_light:    The image used when the lights are switched on.
+      tooltip:        The tooltip text.
+      has:            Functions that the module provides.
+      needs:          Missing functions that the module needs.
+      needs_data:     Boolean for if the module requests data from Simpit.
   */
 
   // Create the module element
@@ -68,6 +68,16 @@ moduleData.forEach(module => {
   moduleElement.setAttribute('id', module.id);
   moduleElement.setAttribute('data-price', module.price);
   moduleElement.setAttribute('data-name', module.name);
+
+  if (module.has) {
+    moduleElement.setAttribute('has', module.has);
+  }
+  if (module.needs) {
+    moduleElement.setAttribute('needs', module.needs);
+  }
+  if (module.needs_data) {
+    moduleElement.setAttribute('needs_data', module.needs_data);
+  }
 
   // Create the module image element
   const moduleImage = document.createElement('img');
@@ -716,6 +726,16 @@ function addContainer(containerData, type) {
     Create a new box container element using data from containerData.
     Add all event listeners for the container.
     Show a popup if there is an unplaced container.
+    containerData is an array that contains all of the data for each container.
+      name:               The name of the container.
+      class:              The class for CSS reasons.
+      price:              The price in USD.
+      num_modules:        Total number of module docks.
+      num_angled:         Number of angled module docks.
+      num_level:          [Optional] Number of level module docks.
+      num_level_2:        [Optional] Number of level module docks in the third row.
+      horizontal_ruler:   The dimensions to be displayed on the horizontal ruler.
+      vertical_ruler:     The dimensions to be displayed on the vertical ruler.
   */
   const existingBoxes = document.querySelectorAll('.dropped-box');
   const requiredBoxes = document.querySelectorAll('.container-box');

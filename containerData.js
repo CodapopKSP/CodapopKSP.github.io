@@ -3,7 +3,7 @@
 //|------------------------|
 
 /*
-moduleData is an array that contains all of the data for each module.
+containerData is an array that contains all of the data for each container.
     name:               The name of the container.
     class:              The class for CSS reasons.
     price:              The price in USD.
