@@ -99,6 +99,7 @@ let moduleData = [
         image: "modules/telem.png",
         image_light: "modules/light/telem_l.png",
         tooltip: "The Telemetry module features a large LCD screen that provides a ton of data regarding the status of the current vessel. Four buttons allow the user to select which display mode is currently active. Please note that the large amounts of data being sent to the controller have a tendency to overload controllers that use this module with other display modules (currently Control Systems, Action Groups, and the Stop Timewarp button LED). The buttons on these modules should still work as intended, but the LED indicators might not always update properly.",
+        has: ['Telemetry']
     },
     {
         name: "Blank Module Cover",

@@ -7,12 +7,16 @@
 // Engineer's Report Button
 const engineersReport = document.getElementById('report');
 
-// Build a report showing controller stats and errors
+// Engineer's Report
 engineersReport.addEventListener('click', function() {
+  /*
+    Build a report popup that gives a price breakdown of all objects on the canvas.
+    Provide warnings for conflicts between modules.
+  */
   let reportContent = '';
   const containerBoxes = document.querySelectorAll('.container-box');
   let totalPrice = 0;
-  let isSizeMismatch = false;
+  let isSizeMismatch = true;
 
   // Check to make sure each container is filled and display price breakdown
   containerBoxes.forEach(containerBox => {
@@ -21,8 +25,8 @@ engineersReport.addEventListener('click', function() {
     totalPrice += containerPrice;
 
     // Make sure all module docks are filled
-    if (modules.length !== parseInt(containerBox.getAttribute('data-size'))) {
-      isSizeMismatch = true;
+    if (modules.length != parseInt(containerBox.getAttribute('data-size'))) {
+      isSizeMismatch = false;
     }
 
     // Add the price of each module
@@ -45,227 +49,138 @@ engineersReport.addEventListener('click', function() {
     }
   });
 
-  // Add booleanas for modules and calculate if there are any conflicts
-  let hasThrottle = false;
-  let controlsys_duplicate = false;
-  let executive_duplicate = false;
-  let hasRotation = false;
-  let hasTranslation = false;
-  let rotation_duplicate = false;
-  let translation_duplicate = false;
-  let throttle_duplicate = false;
-  let telemetry_overload = false;
-  let nav_time = false;
-  let navTime = false;
+  /*
+    Check for conflicts across all containers.
+      allHasFunctions:      Array of all functions on the controller.
+      allNeedsFunctions:    Array of all needed functions on the controller.
+      telemetryConflict:    True if a Telemetry module exists in a container that also has another data-hungry module.
+      hasRotOrTrans:        True if any container has Translation or Rotation functions.
+      rotTransSeparated:    True if Translation and Rotation are found on separate containers.
+  */
+  const allHasFunctions = [];
+  const allNeedsFunctions = [];
+  let telemetryConflict;
+  let hasRotOrTrans;
+  let rotTransSeparated;
 
-  let has_analog_throttle = false;
-  let has_rotation_throttle = false;
-  let has_throttle = false;
-  let has_translation = false;
-  let has_analog = false;
-  let has_rotation = false;
-  let has_control_sys = false;
-  let has_executive_control = false;
-  let has_stage = false;
-  let has_executive_groups = false;
-  let has_executive = false;
-  let has_nav = false;
-  let has_time = false;
-  let has_navTime = false;
-  let separated_analog = false;
-
-  // Check all modules for conflicts
+  // Iterate through each container box
   containerBoxes.forEach(containerBox => {
+    /*
+      Compile data from each container.
+        needsData:                      The container has a module that needs data.
+        hasTelemetry:                   The container has a Telemetry module.
+        checkedRotTransThisContainer:   The container has gone through a check for Translation or Rotation.
+    */
+    let needsData;
+    let hasTelemetry;
+    let checkedRotTransThisContainer;
+    const modules = containerBox.querySelectorAll('.module');
 
-    // Check each container to see if specific modules are present
-    if (!has_analog_throttle) {
-      has_analog_throttle = containerBox.querySelector('#f2');
-    }
-    if (!has_rotation_throttle) {
-      has_rotation_throttle = containerBox.querySelector('#f4');
-    }
-    if (!has_throttle) {
-      has_throttle = containerBox.querySelector('#f6');
-    }
-    if (!has_translation) {
-      has_translation = containerBox.querySelector('#f5');
-    }
-    if (!has_analog) {
-      has_analog = containerBox.querySelector('#f1');
-    }
-    if (!has_rotation) {
-      has_rotation = containerBox.querySelector('#f3');
-    }
-    if (!has_control_sys) {
-      has_control_sys = containerBox.querySelector('#g1');
-    }
-    if (!has_executive_control) {
-      has_executive_control = containerBox.querySelector('#a5');
-    }
-    if (!has_stage) {
-      has_stage = containerBox.querySelector('#a2');
-    }
-    if (!has_executive_groups) {
-      has_executive_groups = containerBox.querySelector('#a4');
-    }
-    if (!has_executive) {
-      has_executive = containerBox.querySelector('#a3');
-    }
-    if (!has_nav) {
-      has_nav = containerBox.querySelector('#b2');
-    }
-    if (!has_time) {
-      has_time = containerBox.querySelector('#b1');
-    }
-    if (!has_navTime) {
-      has_navTime = containerBox.querySelector('#b3');
-    }
+    // Iterate through each module
+    modules.forEach(module => {
+      /*
+      Compile data from each module by iterating through and comparing has, needs, and needs_data.
+        has:        The functions that the module has.
+        needs:      The functions that the module needs from other modules.
+        needs_data: True if the module requires data from Simpit.
+      */
+      const matchingModuleData = moduleData.find(data => data.name === module.getAttribute('data-name'));
+      if (matchingModuleData) {
+        const hasValues = matchingModuleData.has;
+        const needsValues = matchingModuleData.needs;
 
-    // Check for modules that conflict with the Telemetry module
-    const has_time_thisbox = containerBox.querySelector('#b1');
-    const has_navTime_thisbox = containerBox.querySelector('#b3');
-    const has_executive_groups_thisbox = containerBox.querySelector('#a4');
-    const has_executive_control_thisbox = containerBox.querySelector('#a5');
-    const has_control_sys_thisbox = containerBox.querySelector('#g1');
-    const has_ag_thisbox = containerBox.querySelector('#h1');
-    const has_ag2_thisbox = containerBox.querySelector('#h2');
-    const has_ag3_thisbox = containerBox.querySelector('#h3');
-    const has_eva_thisbox = containerBox.querySelector('#d1');
-    const has_telem_thisbox = containerBox.querySelector('#c1');
-    if (has_telem_thisbox && (has_ag_thisbox || has_ag2_thisbox || has_ag3_thisbox || has_eva_thisbox || has_control_sys_thisbox || has_executive_control_thisbox || has_executive_groups_thisbox || has_time_thisbox || has_navTime_thisbox)) {
-      telemetry_overload = true;
-    }
+        // Compile a list of functions on the container and set relevant flags
+        if (hasValues) {
+          allHasFunctions.push(...hasValues);
+          if ((hasValues.includes("Rotation") || hasValues.includes("Translation")) && !checkedRotTransThisContainer) {
+            checkedRotTransThisContainer = true;
+            if (!hasRotOrTrans) {
+              hasRotOrTrans = true;
+            } else {
+              rotTransSeparated = true;
+            }
+          }
+          if (hasValues.includes("Telemetry")) {
+            hasTelemetry = true;
+          }
+        }
 
-    // Check to make sure combined analog modules are on the same container if present
-    if (!separated_analog) {
-      const has_rotation1_thisbox = containerBox.querySelector('#f3');
-      const has_rotation2_thisbox = containerBox.querySelector('#f4');
-      const has_rotation_thisbox = (has_rotation1_thisbox || has_rotation2_thisbox);
-      const has_translation_thisbox = containerBox.querySelector('#f5');
-      if ((has_rotation_thisbox && !has_translation_thisbox) || (!has_rotation_thisbox && has_translation_thisbox)) {
-        separated_analog = true;
+        // Compile a list of functions missing from the container
+        if (needsValues) {
+          allNeedsFunctions.push(...needsValues);
+        }
+
+        // Mark true if any module requires data from Simpit
+        if (matchingModuleData.needs_data) {
+          needsData = true;
+        }
       }
+    });
+
+    // Mark true if a Telemetry module exists in a container with another data-hungry module
+    if (needsData && hasTelemetry) {
+        telemetryConflict = true;
     }
   });
 
-  // Check if there are any rotation/translation/throttle controls
-  if (has_rotation_throttle || has_rotation || has_analog || has_analog_throttle) {
-    hasRotation = true;
-  }
-  if (has_translation || has_analog || has_analog_throttle) {
-    hasTranslation = true;
-  }
-  if (has_analog_throttle || has_rotation_throttle || has_throttle) {
-    hasThrottle = true;
-  }
-  
-  // Check if there are any SAS/Executive conflicts
-  if (has_control_sys && has_executive_control) {
-    controlsys_duplicate = true;
-  }
-  const exec_elements = [has_executive_control, has_stage, has_executive_groups, has_executive];
-  let numTrue = 0;
-  for (let i = 0; i < exec_elements.length; i++) {
-    if (exec_elements[i]) {
-      numTrue++;
-    }
-    if (numTrue === 2) {
-      executive_duplicate = true;
-      break;
-    }
-  }
+  console.log(allHasFunctions);
 
-  // Check if config has Nav AND/OR Time modules
-  if ((has_nav || has_time)) {
-    nav_time = true;
-  }
+  // Check if there are any duplicate hasFunctions
+  const hasFunctionDuplicates = [];
+  const encounteredItems = [];
+  allHasFunctions.forEach(item => {
+    if (encounteredItems.includes(item)) {
+      if (!hasFunctionDuplicates.includes(item)) {
+        hasFunctionDuplicates.push(item);
+      }
+    } else {
+      encounteredItems.push(item);
+    }
+  });
 
-  // Check if config has the Nav/Time module
-  if (has_navTime) {
-    navTime = true;
-  }
+  // Check if there are any missing needsFunctions
+  const missingFunctions = [];
+  allNeedsFunctions.forEach(item => {
+    if (!allHasFunctions.includes(item)) {
+      if (!missingFunctions.includes(item)) {
+        missingFunctions.push(item);
+      }
+    }
+  })
 
-  // Check if there are any Rotation conflicts
-  const rot_elements = [has_rotation_throttle, has_rotation, has_analog, has_analog_throttle];
-  numTrue = 0;
-  for (let i = 0; i < rot_elements.length; i++) {
-    if (rot_elements[i]) {
-      numTrue++;
-    }
-    if (numTrue === 2) {
-      rotation_duplicate = true;
-      break;
-    }
-  }
-
-  // Check if there are any Translation conflicts
-  const trans_elements = [has_translation, has_analog, has_analog_throttle];
-  numTrue = 0;
-  for (let i = 0; i < trans_elements.length; i++) {
-    if (trans_elements[i]) {
-      numTrue++;
-    }
-    if (numTrue === 2) {
-      translation_duplicate = true;
-      break;
-    }
-  }
-
-  // Check if there are any Throttle conflicts
-  const throt_elements = [has_rotation_throttle, has_throttle, has_analog_throttle];
-  numTrue = 0;
-  for (let i = 0; i < throt_elements.length; i++) {
-    if (throt_elements[i]) {
-      numTrue++;
-    }
-    if (numTrue === 2) {
-      throttle_duplicate = true;
-      break;
-    }
-  }
-
-  // Construct the warning message based on conflicting modules
+  // Give a recommendation based on conflicts if canvas is populated
   recommendation = '';
-  if (isSizeMismatch || (hasRotation && !hasThrottle) || (hasRotation && !hasTranslation) || (!hasRotation && hasTranslation) || translation_duplicate || rotation_duplicate || throttle_duplicate || separated_analog || executive_duplicate || (nav_time && navTime) || controlsys_duplicate || telemetry_overload) {
-    recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
-  } else if (totalPrice > 0){
-    recommendation += `<p style="color: #22aa37;">This controller has passed all checks.</p>`;
-  }
-  if (isSizeMismatch) {
-    recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
-  }
-  if (hasRotation && !hasThrottle) {
-    recommendation += `<p style="color: #ffe600;">You are missing a way to control the throttle.</p>`;
-  }
-  if (hasRotation && !hasTranslation) {
-    recommendation += `<p style="color: #ffe600;">You are missing Translation controls.</p>`;
-  }
-  if (!hasRotation && hasTranslation) {
-    recommendation += `<p style="color: #ffe600;">You are missing Rotation controls.</p>`;
-  }
-  if (translation_duplicate) {
-    recommendation += `<p style="color: #ffe600;">You have too many ways to control Translation.</p>`;
-  }
-  if (rotation_duplicate) {
-    recommendation += `<p style="color: #ffe600;">You have too many ways to control Rotation.</p>`;
-  }
-  if (throttle_duplicate) {
-    recommendation += `<p style="color: #ffe600;">You have too many ways to control Throttle.</p>`;
-  }
-  if (separated_analog) {
-    recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
-  }
-  if (executive_duplicate) {
-    recommendation += `<p style="color: #ffe600;">You have multiple ways to activate the Stage function.</p>`;
-  }
-  if (nav_time && navTime) {
-    recommendation += `<p style="color: #ffe600;">You are using the combined Navigation (Time) module with either the Navigation or Time module.</p>`;
-  }
-  if (controlsys_duplicate) {
-    recommendation += `<p style="color: #ffe600;">You have two ways to control SAS and RCS.</p>`;
-  }
-  if (telemetry_overload) {
-    recommendation += `<p style="color: #ffe600;">You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly. Please use multiple containers instead.</p>`;
+  if (totalPrice > 0){
+    /*
+      Create recommendation text with colors given the following criteria.
+        isSizeMismatch:                   True if all module docks are filled.
+        hasFunctionDuplicates.length:     Zero if there are no duplicate functions.
+        missingFunctions.length:          Zero if there are no missing functions.
+        telemetryConflict:                True if Telemetry Module exists with other data-hungry modules.
+        rotTransSeparated:                True if Translation and Rotation modules are on separate containers.
+    */
+    if ((!isSizeMismatch) || (hasFunctionDuplicates.length > 0) || (missingFunctions.length > 0) || (telemetryConflict) || (rotTransSeparated)) {
+        recommendation += `<hr><p style="color: #afe06b;"><strong>Warning:</strong></p>`;
+      if (!isSizeMismatch) {
+        recommendation += `<p style="color: #ee2828;">One or more of your containers does not have the correct number of modules.</p>`;
+      }
+      if (hasFunctionDuplicates.length > 0) {
+        recommendation += `<p style="color: #ffe600;">You have too many ways to control ${hasFunctionDuplicates.join(', ')}.</p>`;
+      }
+      if (missingFunctions.length > 0) {
+        recommendation += `<p style="color: #ffe600;">You are missing a way to control ${missingFunctions.join(', ')}.</p>`;
+      }
+      if (telemetryConflict) {
+        recommendation += `<p style="color: #ffe600;">You are using the Telemetry module with another module that needs data from Simpit. This will result in the second module's displays not updating properly. Please use multiple containers instead.</p>`;
+      }
+      if (rotTransSeparated) {
+        recommendation += `<p style="color: #ffe600;">The Rotation and Translation modules must be in the same container.</p>`;
+      }
+
+    // No conflicts found
+    } else {
+      recommendation += `<p style="color: #22aa37;">This controller has passed all checks.</p>`;
+    }
   }
   recommendation += `<hr>`;
 

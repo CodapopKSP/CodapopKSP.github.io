@@ -69,16 +69,6 @@ moduleData.forEach(module => {
   moduleElement.setAttribute('data-price', module.price);
   moduleElement.setAttribute('data-name', module.name);
 
-  if (module.has) {
-    moduleElement.setAttribute('has', module.has);
-  }
-  if (module.needs) {
-    moduleElement.setAttribute('needs', module.needs);
-  }
-  if (module.needs_data) {
-    moduleElement.setAttribute('needs_data', module.needs_data);
-  }
-
   // Create the module image element
   const moduleImage = document.createElement('img');
   moduleImage.src = module.image;
