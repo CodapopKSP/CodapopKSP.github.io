@@ -241,14 +241,12 @@ body {
         font-size: 1.5vh;
     }
 }
+
 /*
-.apple-device #wrapper-wrapper {
-    transform: scale(0.49);
-    width: calc(100vw / 0.49) !important;
-    height: calc(100vh / 0.49) !important;
-    transform-origin: top !important;
-    margin-left: calc(-50vw / 0.49) !important;
-}*/
+|=========================|
+|  Apple Device Elements  |
+|=========================|
+*/
 
 .apple-device #wrapper-wrapper {
     transform: scale(0.49);
@@ -453,6 +451,7 @@ body {
     font-weight: bold;
     padding: 0.75vh;
     right: 0;
+    user-select: text;
 }
 
 .add-container-button {
@@ -653,6 +652,7 @@ body {
     background-color: #3d3d3d !important;
     opacity: 0.9 !important;
     width: 40vh !important;
+    user-select: text;
 }
 
 #swal2-content {
