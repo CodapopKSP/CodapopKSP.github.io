@@ -241,6 +241,11 @@ body {
     }
 }
 
+.apple-device #wrapper-wrapper {
+    height: 10vh !important;
+    width: 10vw !important;
+}
+
 
 /*
 |======================|

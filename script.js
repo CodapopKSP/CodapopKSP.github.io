@@ -20,6 +20,10 @@ let activeModule_mobile = null;
 function isPhone() {
   return /mobile/i.test(navigator.userAgent);
 }
+var isAppleDevice = /Mac|iPhone|iPod|iPad/.test(navigator.platform);
+if (isAppleDevice) {
+  document.body.classList.add('apple-device');
+}
 
 // Check Left Array for mouseover for zIndex changes on mobile
 const leftArray = document.getElementById('left-array');
