@@ -161,7 +161,7 @@ body {
         margin-left: calc(-50vw / 0.9);
     }
 }
-
+/*
 @media (max-aspect-ratio: 2/1.2) {
     #wrapper-wrapper {
         transform: scale(0.8);
@@ -189,8 +189,8 @@ body {
     }
 }
 
-@media (max-aspect-ratio: 2/1.85) {
-
+@media (max-aspect-ratio: 2/1.85) {*/
+@media (max-aspect-ratio: 2/1.2) {
     
     #wrapper-wrapper {
         transform: scale(0.49);
