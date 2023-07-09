@@ -242,8 +242,52 @@ body {
 }
 
 .apple-device #wrapper-wrapper {
-    height: 10vh !important;
-    width: 10vw !important;
+    transform: scale(0.49);
+    width: calc(100vw / 0.49) !important;
+    height: calc(100vh / 0.49) !important;
+    transform-origin: top;
+    margin-left: calc(-50vw / 0.49);
+}
+
+.apple-device #canvas {
+    transform: translateY(-50%) !important;
+    max-width: calc(99vw / 0.49) !important;
+}
+
+.apple-device .module-array {
+    grid-template-columns: repeat(6, 1fr) !important;
+    align-self: flex-end;
+    left: 0 !important;
+    z-index: 50 !important;
+}
+
+.apple-device .left-module-array {
+    transform: translate(calc(53.75% / 0.49), -205%);
+}
+    
+.apple-device .right-module-array {
+    transform: translate(calc(-53.75% / 0.49), -102.5%);
+}
+
+.apple-device .tooltip {
+    transform: scale(1.5);
+    z-index: 1000 !important;
+}
+
+.apple-device .tooltip.bottom {
+    top: -30vh !important;
+}
+
+.apple-device .left-module-array.mouseover {
+    z-index: 999 !important;
+}
+
+.apple-device .swal2-popup {
+    transform: scale(0.8);
+}
+    
+.apple-device #swal2-title {
+    font-size: 1.5vh;
 }
 
 
