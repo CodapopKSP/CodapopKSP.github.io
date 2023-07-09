@@ -254,7 +254,6 @@ body {
     width: calc(100vw / 0.49) !important;
     height: calc(100vh / 0.49) !important;
     transform-origin: top;
-    margin-left: calc(-100vw / 0.49);
 }
 
 .apple-device #canvas {
