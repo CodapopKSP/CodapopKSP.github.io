@@ -251,14 +251,10 @@ body {
 
 .apple-device #wrapper-wrapper {
     transform: scale(0.49);
-    width: calc(200vw / 0.49) !important;
-    height: calc(200vh / 0.49) !important;
+    width: calc(100vw / 0.49) !important;
+    height: calc(100vh / 0.49) !important;
     transform-origin: top;
-    margin-left: calc(-50vw / 0.49);
-    margin-right: calc(-50vw / 0.49);
-    left: 50% !important;
-    top: 50% !important;
-    position: fixed;
+    margin-left: calc(-100vw / 0.49);
 }
 
 .apple-device #canvas {
