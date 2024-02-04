@@ -228,6 +228,7 @@ saveButton.addEventListener('click', function() {
       /*
         class name: container size code
       */
+      'one-one': 'z11',
       'one-two': 'z12',
       'two-one': 'z21',
       'three-one': 'z31',
@@ -408,7 +409,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { addButtonId: 'add-2x2', containerType: MarkIII, containerClass: '.two-two' },
     { addButtonId: 'add-1x2', containerType: MarkIhoriz, containerClass: '.one-two' },
     { addButtonId: 'add-3x1', containerType: MarkII, containerClass: '.three-one' },
-    { addButtonId: 'add-2x1', containerType: MarkIvert, containerClass: '.two-one' }
+    { addButtonId: 'add-2x1', containerType: MarkIvert, containerClass: '.two-one' },
+    { addButtonId: 'add-1x1', containerType: Mark0, containerClass: '.one-one' }
   ];
 
   containerTypes.forEach(container => {
@@ -516,6 +518,7 @@ deleteBin.addEventListener('drop', (event) => {
       containerGrid.classList.remove('has-12child');
       containerGrid.classList.remove('has-31child');
       containerGrid.classList.remove('has-21child');
+      containerGrid.classList.remove('has-11child');
     }
   });
   updateTotalPrice()
@@ -679,7 +682,8 @@ containerGrids.forEach(containerGrid => {
         'two-two': 'has-22child',
         'one-two': 'has-12child',
         'three-one': 'has-31child',
-        'two-one': 'has-21child'
+        'two-one': 'has-21child',
+        'one-one': 'has-11child'
       };
       
       for (const className in classMap) {
@@ -702,6 +706,7 @@ containerGrids.forEach(containerGrid => {
         containerGrid.classList.remove('has-12child');
         containerGrid.classList.remove('has-31child');
         containerGrid.classList.remove('has-21child');
+        containerGrid.classList.remove('has-11child');
       }
     });
   });
@@ -966,6 +971,7 @@ function loadController(inputData, color) {
       /*
         container code: {container type, container data}
       */
+      '11': { type: '.one-one', template: Mark0 },
       '12': { type: '.one-two', template: MarkIhoriz },
       '21': { type: '.two-one', template: MarkIvert },
       '31': { type: '.three-one', template: MarkII },
@@ -1036,7 +1042,8 @@ function loadController(inputData, color) {
             'two-two': 'has-22child',
             'one-two': 'has-12child',
             'three-one': 'has-31child',
-            'two-one': 'has-21child'
+            'two-one': 'has-21child',
+            'one-one': 'has-11child'
           };
           
           for (const className in classMap) {
